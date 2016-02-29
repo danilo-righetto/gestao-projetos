@@ -14,7 +14,10 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 	    		  || request.getSession().getAttribute("usuario") != null) {
 	        return true;
 	      }
-	      response.sendRedirect("/gestao-projetos/painel/");
+	      else if(request.getRequestURI().equals("/gestao-projetos/logout")){
+	    	  request.getSession().invalidate();
+	      }
+	      	response.sendRedirect("/gestao-projetos/painel");
 	      return false;
 	  }
 

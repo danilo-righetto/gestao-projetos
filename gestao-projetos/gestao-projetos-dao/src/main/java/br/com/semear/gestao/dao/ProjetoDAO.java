@@ -10,4 +10,8 @@ public interface ProjetoDAO {
 	List<ProjetoEntity> listarTodosProjetos();
 
 	ProjetoEntity buscarProjetoPorNome(String nome);
+
+	public ProjetoEntity buscarProjetoPorId(long idProjeto);
+
+	public void editarProjeto(ProjetoEntity entity);
 }

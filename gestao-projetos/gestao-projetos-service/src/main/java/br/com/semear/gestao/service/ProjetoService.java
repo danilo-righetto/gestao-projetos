@@ -10,4 +10,9 @@ public interface ProjetoService {
 	List<Projeto> listarTodosProjetos();
 
 	Projeto buscarProjetoPorNome(String nome);
+
+	public Projeto buscarProjetoPorId(long idProjeto);
+
+	public void editarProjeto(Projeto projeto);
+
 }

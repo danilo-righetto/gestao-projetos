@@ -38,6 +38,16 @@
 		<put-attribute name="conteudo" value="/pages/painel/projetos/cadastroProjeto.jsp" />
 	</definition>
 	
+	<!-- Semear - Lista de Projetos -->
+	<definition name="listar-projetos" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/projetos/listarProjeto.jsp" />
+	</definition>
+	
+	<!-- Semear - Editar Usuario -->
+	<definition name="editarProjeto" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/projetos/editarProjeto.jsp" />
+	</definition>
+	
 	<!-- Semear - Cadastro de Ações -->
 	<definition name="cadastroAcao" extends="main">
 		<put-attribute name="conteudo" value="/pages/painel/ações/cadastroAcao.jsp" />

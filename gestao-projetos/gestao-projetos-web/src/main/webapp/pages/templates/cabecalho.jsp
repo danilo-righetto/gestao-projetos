@@ -53,7 +53,7 @@
          </div>
           <ul id="menu" class="nav navbar-nav navbar-right">
             <li id="menu-projetos">
-              <a href='<c:url value="/painel/projetos/cadastro" />'>Projetos</a>
+              <a href='<c:url value="/painel/projetos/" />'>Projetos</a>
             </li>
             <li id="menu-acoes">
               <a href='<c:url value="/painel/acoes/cadastro" />'>Ações</a>

@@ -37,4 +37,17 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 		query.setParameter("nome", nome);
 		return (ProjetoEntity) query.getSingleResult();
 	}
+
+	@Override
+	public ProjetoEntity buscarProjetoPorId(long idProjeto) {
+		Query query = em.createQuery("select p from ProjetoEntity p where p.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		return (ProjetoEntity) query.getSingleResult();
+	}
+
+	@Override
+	public void editarProjeto(ProjetoEntity entity) {
+		ProjetoEntity projeto = entity;
+		em.merge(projeto);
+	}
 }

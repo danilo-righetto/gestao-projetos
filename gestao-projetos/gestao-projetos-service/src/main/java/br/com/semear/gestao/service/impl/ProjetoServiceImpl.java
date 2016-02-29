@@ -48,4 +48,20 @@ public class ProjetoServiceImpl implements ProjetoService {
 		return parseService.parseToModel(projetoDAO.buscarProjetoPorNome(nome));
 	}
 
+	@Override
+	public Projeto buscarProjetoPorId(long idProjeto) {
+		return parseService.parseToModel(projetoDAO.buscarProjetoPorId(idProjeto));
+	}
+
+	@Override
+	public void editarProjeto(Projeto projeto) {
+		ProjetoEntity entity = projetoDAO.buscarProjetoPorId(projeto.getId());
+		entity.setDataInicio(projeto.getDataInicio());
+		entity.setDataTermino(projeto.getDataTermino());
+		entity.setDescricao(projeto.getDescricao());
+		entity.setNome(projeto.getNome());
+		entity.setStatus(projeto.getStatus());
+		projetoDAO.editarProjeto(entity);
+	}
+
 }

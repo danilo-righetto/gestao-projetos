@@ -44,6 +44,6 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/painel/**").excludePathPatterns("/");
+	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/painel/**").addPathPatterns("/logout").excludePathPatterns("/");
 	}
 }
