@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -37,9 +37,9 @@
 				<div class="row" style="padding-top: 20px">
 					
 						<div class="form-group col-md-offset-4 col-md-4">
-							<label for="inputEmail">Endere√ßo de Email</label> <input
+							<label for="inputEmail">EndereÁo de Email</label> <input
 								type="email" id="inputEmail" class="form-control" name="username"
-								placeholder="Endere√ßo de Email" required autofocus>
+								placeholder="EndereÁo de Email" required autofocus>
 						</div>
 						<div class="form-group col-md-offset-4 col-md-4">
 							<label for="inputPassword">Senha</label> <input type="password"
@@ -67,7 +67,7 @@
 			style="background-color: #4DC1FF; color: #fff; padding: 20px; margin-top: 68px">
 			<div class="text-center" style="margin-top: 10px">
 				<p>
-					Gest√£o de Projetos | Desenvolvido por <b><a
+					Gest„o de Projetos | Desenvolvido por <b><a
 						target="_blank" style="color: #fff; text-decoration: none"
 						href="http://www.fornax.com.br">FORNAX TECNOLOGIA</a></b> | 2016
 				</p>
@@ -77,7 +77,7 @@
 			style="background-color: #4DC1FF; color: #fff; padding: 20px;margin-top:32px">
 			<div class="text-center" style="margin-top: 10px">
 				<p>
-					Gest√£o de Projetos | Desenvolvido por <b><a
+					Gest„o de Projetos | Desenvolvido por <b><a
 						target="_blank" style="color: #fff; text-decoration: none"
 						href="http://www.fornax.com.br">FORNAX TECNOLOGIA</a></b> | 2016
 				</p>

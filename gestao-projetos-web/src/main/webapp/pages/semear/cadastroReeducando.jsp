@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
+
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -55,7 +56,7 @@
 	// 		    	$("#alertadocdiv").remove();
 	// 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 	// 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-	// 				"O CPF informado  √© inv√°lido.</span></div>";
+	// 				"O CPF informado  È inv·lido.</span></div>";
 	// 				$("#alertas" ).append( alerta );
 	// 				$("#cpf").val("");
 	// 				$("#cpf").focus();
@@ -72,7 +73,7 @@
 	// 	        	$("#alertadocdiv").remove();
 	// 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 	// 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-	// 				"O CPF informado  √© inv√°lido.</span></div>";
+	// 				"O CPF informado  È inv·lido.</span></div>";
 	// 				$("#alertas" ).append( alerta );
 	// 				$("#documento").val("");
 	// 				$("#documento").focus();
@@ -89,7 +90,7 @@
 	// 	    	$("#alertadocdiv").remove();
 	// 			var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 	// 			"<span style='color: #000000'><strong>Alerta!</strong>"+
-	// 			"O CPF informado  √© inv√°lido.</span></div>";
+	// 			"O CPF informado  È inv·lido.</span></div>";
 	// 			$("#alertas" ).append( alerta );
 	// 			$("#documento").val("");
 	// 			$("#documento").focus();
@@ -111,9 +112,9 @@
 		<form action="salvarReeducando" method="POST">
 			<div class="row">
 				<div class="form-group col-md-4">
-					<label for="matricula">N√∫mero da Matr√≠cula:</label><input
+					<label for="matricula">N˙mero da MatrÌcula:</label><input
 						type="text" class="form-control" id="matricula" name="matricula"
-						placeholder="Digite a matr√≠cula" required autofocus />
+						placeholder="Digite a matrÌcula" required autofocus />
 				</div>
 			</div>
 			<div class="row">
