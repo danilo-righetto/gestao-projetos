@@ -13,6 +13,14 @@
 	<definition name="login" template="/pages/login.jsp" >
 	</definition>
 	
+	<!-- ESQUECEU A SENHA -->
+    <definition name="esqueceu-senha" template="/pages/esqueceu-senha.jsp" >
+    </definition>
+    
+    <!-- REDEFINIR SENHA -->
+    <definition name="redefinir-senha" template="/pages/redefinir-senha.jsp" >
+	</definition>
+	
 	<!-- Semear - Painel -->
 	<definition name="painel" extends="main">
 		<put-attribute name="conteudo" value="/pages/painel/painel.jsp" />
@@ -54,13 +62,11 @@
 	</definition>
 
 	<!-- Semear - 403 -->
-	<definition name="403" extends="main">
-		<put-attribute name="conteudo" value="/pages/erro/403.jsp" />
+	<definition name="403" template="/pages/erro/403.jsp">
 	</definition>
 	
 	<!-- Semear 404 -->
-	<definition name="404" extends="main">
-    	<put-attribute name="conteudo" value="/pages/erro/404.jsp"/>
+	<definition name="404" template="/pages/erro/404.jsp">
     </definition>
 
 	<!-- Semear - Cadastro de Perfil -->
@@ -87,5 +93,10 @@
 		<put-attribute name="conteudo"
 			value="/pages/semear/cadastroParticipacaoProjeto.jsp" />
 	</definition>
-
+	
+	<!-- Semear - Cadastro de Unidade Prisional -->
+	<definition name="cadastroUnidadePrisional" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/unidade-prisional/cadastroUnidadePrisional" />
+	</definition>
 </tiles-definitions>
