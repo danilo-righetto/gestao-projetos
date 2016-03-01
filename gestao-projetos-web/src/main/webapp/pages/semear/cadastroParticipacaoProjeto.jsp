@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,7 +11,7 @@
 	href="/gestao-projetos/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="/gestao-projetos/bootstrap/css/jquery-ui.min.css" />
-<title>Cadastro de ParticipaÃ§Ã£o Projeto</title>
+<title>Cadastro de Participação Projeto</title>
 <style type="text/css">
 #main {
 	margin-top: 60px;
@@ -23,7 +23,7 @@
 	$(function() {
 		var teste;
 		var avaliableTags = [];
-		$.post("/gestao-projetos/listarProjetos", function(resultados) {
+		$.post("/gestao-projetos/painel/projetos/listarProjetos", function(resultados) {
 			$.each(resultados, function(i, r) {
 				  avaliableTags.push(r.nome);
 				});
@@ -42,7 +42,7 @@
 	<!-- Formulario de Cadastro - INICIO -->
 	<div id="main" class="container-fluid">
 
-		<h3 class="page-header">Cadastro de ParticipaÃ§Ã£o Projeto</h3>
+		<h3 class="page-header">Cadastro de Participação Projeto</h3>
 
 		<form action="salvarParticipacaoProjeto" method="POST">
 			<div>
@@ -63,7 +63,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-md-3">
-					<label for="funcao">FunÃ§Ã£o:</label> <select class="form-control"
+					<label for="funcao">Função:</label> <select class="form-control"
 						id="funcao" name="funcao" required>
 						<option value="Reeducando Monitor" label="Reeducando Monitor" />
 						<option value="Reeducando Participante"

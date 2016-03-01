@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html>
@@ -147,6 +146,10 @@
 				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
 						name="tipoDocumento" id="tipoDocumento" required>
 					</select>
+			  </div>
+			  <div class="form-group col-md-4">
+				<label for="documento">Documento:</label> 
+					<input onblur="validarDocumento();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="documento">Número do Documento:</label> 

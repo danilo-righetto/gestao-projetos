@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -16,7 +15,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">EdiÃ§Ã£o de Projeto</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Edição de Projeto</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
@@ -71,7 +70,7 @@
 							</div>
 							<div class="form-group col-md-3">
 								<label for="dataInicio">Data Inicio:</label> <input type="text"
-									class="form-control" id="dataInicio" name="dataInicio"
+									class="form-control data" id="dataInicio" name="dataInicio"
 									value="<fmt:formatDate value="${projeto.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
 									placeholder="Selecione a Data" required autofocus>
 							</div>
@@ -79,13 +78,13 @@
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text"
 									value="<fmt:formatDate value="${projeto.dataTermino.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
-									class="form-control" id="dataTermino" name="dataTermino"
+									class="form-control data" id="dataTermino" name="dataTermino"
 									placeholder="Selecione a Data" required autofocus>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="descricao">DescriÃ§Ã£o</label> <textarea
+								<label for="descricao">Descrição</label> <textarea
 									class="form-control" cols="10" rows="5"
-									id="descricao" placeholder="Digite uma DescriÃ§Ã£o"
+									id="descricao" placeholder="Digite uma Descrição"
 									name="descricao" required>${projeto.descricao}</textarea>
 							</div>
 						</div>

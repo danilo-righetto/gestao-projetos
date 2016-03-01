@@ -14,4 +14,10 @@ public interface UsuarioDAO {
 	public UsuarioEntity buscarUsuarioPorId(long idUsuario);
 
 	public void editarUsuario(UsuarioEntity entity);
+
+	public boolean verificaExistenciaUsuario(String email);
+
+	public void alterarSenha(UsuarioEntity usuario, String encode);
+
+	public UsuarioEntity buscarDadosDoUsuarioAtivo(String email);
 }
