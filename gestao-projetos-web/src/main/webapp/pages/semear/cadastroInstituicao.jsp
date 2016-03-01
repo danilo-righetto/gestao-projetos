@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -43,7 +42,7 @@
 		    	$("#alertadocdiv").remove();
 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  √© inv√°lido.</span></div>";
+				"O CPF informado  È inv·lido.</span></div>";
 				$("#alertas" ).append( alerta );
 				$("#cpf").val("");
 				$("#cpf").focus();
@@ -60,7 +59,7 @@
 	        	$("#alertadocdiv").remove();
 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  √© inv√°lido.</span></div>";
+				"O CPF informado  È inv·lido.</span></div>";
 				$("#alertas" ).append( alerta );
 				$("#documento").val("");
 				$("#documento").focus();
@@ -77,7 +76,7 @@
 	    	$("#alertadocdiv").remove();
 			var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 			"<span style='color: #000000'><strong>Alerta!</strong>"+
-			"O CPF informado  √© inv√°lido.</span></div>";
+			"O CPF informado  È inv·lido.</span></div>";
 			$("#alertas" ).append( alerta );
 			$("#documento").val("");
 			$("#documento").focus();
@@ -106,13 +105,13 @@
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active">
-              <a href="#">Institui√ß√£o</a>
+              <a href="#">InstituiÁ„o</a>
             </li>
             <li>
               <a href="#">Projeto</a>
             </li>
 			<li>
-              <a href="#">Usu√°rio</a>
+              <a href="#">Usu·rio</a>
             </li>
 			<li>
               <a href="#">Perfil</a>
@@ -124,7 +123,7 @@
               <a href="#">Resposta</a>
             </li>
 			<li>
-              <a href="#">Question√°rio</a>
+              <a href="#">Question·rio</a>
             </li>
           </ul>
         </div>
@@ -134,7 +133,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center text-success">Cadastro de Institui√ß√£o</h1>
+            <h1 class="text-center text-success">Cadastro de InstituiÁ„o</h1>
           </div>
         </div>
       </div>
@@ -157,7 +156,7 @@
 					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="razaosocial">Raz√£o Social:</label> <input type="text"
+				<label for="razaosocial">Raz„o Social:</label> <input type="text"
 						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
@@ -177,7 +176,7 @@
 						class="form-control" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="numero">N√∫mero:</label> <input type="text"
+				<label for="numero">N˙mero:</label> <input type="text"
 						class="form-control" id="numero" name="numero" placeholder="Digite o numero" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
@@ -209,7 +208,7 @@
 						class="form-control" id="contato" name="contato" placeholder="Digite o contato" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="responsavel">Respons√°vel:</label> <input type="text"
+				<label for="responsavel">Respons·vel:</label> <input type="text"
 						class="form-control" id="responsavel" name="responsavel" placeholder="Digite o nome do responsavel" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">

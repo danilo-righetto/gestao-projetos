@@ -56,4 +56,31 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 		UsuarioEntity usuario = entity;
 		em.merge(usuario);		
 	}
+
+	@Override
+	public boolean verificaExistenciaUsuario(String email) {
+		Query query = em.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramEmail");
+		query.setParameter("paramEmail", email);
+			if(!query.getResultList().isEmpty()){
+				return true;
+			}
+		return false;
+	}
+
+	@Override
+	public void alterarSenha(UsuarioEntity usuario, String novaSenha) {
+		usuario.setSenha(novaSenha);
+		em.merge(usuario);
+	}
+
+	@Override
+	public UsuarioEntity buscarDadosDoUsuarioAtivo(String email) {
+		UsuarioEntity usuario = null;
+		Query query = em.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramLogin");
+		query.setParameter("paramLogin", email);
+			if(!query.getResultList().isEmpty()){
+				usuario = (UsuarioEntity) query.getResultList().get(0);
+			}
+		return usuario;
+	}
 }

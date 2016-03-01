@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 
 <html>
@@ -44,7 +43,7 @@
 		    	$("#alertadocdiv").remove();
 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  √© inv√°lido.</span></div>";
+				"O CPF informado  È inv·lido.</span></div>";
 				$("#alertas" ).append( alerta );
 				$("#cpf").val("");
 				$("#cpf").focus();
@@ -61,7 +60,7 @@
 	        	$("#alertadocdiv").remove();
 				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  √© inv√°lido.</span></div>";
+				"O CPF informado  È inv·lido.</span></div>";
 				$("#alertas" ).append( alerta );
 				$("#documento").val("");
 				$("#documento").focus();
@@ -78,7 +77,7 @@
 	    	$("#alertadocdiv").remove();
 			var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 			"<span style='color: #000000'><strong>Alerta!</strong>"+
-			"O CPF informado  √© inv√°lido.</span></div>";
+			"O CPF informado  È inv·lido.</span></div>";
 			$("#alertas" ).append( alerta );
 			$("#documento").val("");
 			$("#documento").focus();
@@ -107,13 +106,13 @@
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">Institui√ß√£o</a>
+              <a href="#">InstituiÁ„o</a>
             </li>
             <li>
               <a href="#">Projeto</a>
             </li>
 			<li>
-              <a href="#">Usu√°rio</a>
+              <a href="#">Usu·rio</a>
             </li>
 			<li class="active">
               <a href="#">Perfil</a>
@@ -125,7 +124,7 @@
               <a href="#">Resposta</a>
             </li>
 			<li>
-              <a href="#">Question√°rio</a>
+              <a href="#">Question·rio</a>
             </li>
           </ul>
         </div>
@@ -146,8 +145,8 @@
           <div class="col-md-12">
             <form action="salvarPerfil" method="POST" role="form">
               <div class="form-group col-md-4">
-					<label for="descricao">Descri√ß√£o do Perfil:</label> <input type="text"
-						class="form-control" id="descricao" name="descricao" placeholder="Digite a descri√ß√£o" required autofocus>
+					<label for="descricao">DescriÁ„o do Perfil:</label> <input type="text"
+						class="form-control" id="descricao" name="descricao" placeholder="Digite a descriÁ„o" required autofocus>
 			  </div>
 			  
 			  <div class="form-group">

@@ -51,23 +51,75 @@
 					width="120px" style="margin-top: -8px;"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse"
-				style="margin-top: 10px"></div>
+				style="margin-top: 10px">
+			</div>
 		</div>
 	</div>
 	<div class="section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center text-success">Erro 403 - Você não
-						possui acesso para acssar esse conteúdo!</h1>
+			<c:if test="${mensagem != null && mensagem ne ''}">
+				<c:if test="${mensagem eq 'OK'}">
+					<div class="alert alert-success">
+						<span style="color: #000000"><strong>Sucesso!</strong> Sua
+							senha foi alterada com sucesso.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO_NOVA_SENHA'}">
+					<div class="alert alert-warning">
+						<span style="color: #000000"><strong>Alerta!</strong> Campo
+							nova senha não corresponde com o campo confirmação de senha.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO'}">
+					<div class="alert alert-danger">
+						<span style="color: #000000"><strong>Erro!</strong>Erro ao
+							alterar a senha, tente novamente mais tarde!</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO_SENHA_ATUAL'}">
+					<div class="alert alert-warning">
+						<span style="color: #000000"><strong>Alerta!</strong>Campo
+							senha atual não confere.</span>
+					</div>
+				</c:if>
+			</c:if>
+			<c:if test="${(mensagem == null || mensagem ne 'OK')}">
+				<div class="row">
+					<div class="col-md-12">
+						<h4>Redefinir Senha</h4>
+						<p>Olá ${user.nome}, preencha abaixo os
+							campos para redefinir a sua senha.</p>
+						<form role="form" action='<c:url value="/salvar-nova-senha" />' method="post">
+							<div class="form-group">
+								<label class="control-label" for="novaSenha">Nova Senha</label>
+								<input required="required" name="novaSenha" class="form-control"
+									id="novaSenha" placeholder="Digite  a nova senha"
+									type="password">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="confirmaNovaSenha">Confirme
+									a Nova Senha</label> <input required="required"
+									name="confirmaNovaSenha" class="form-control"
+									id="confirmaNovaSenha" placeholder="Confirme a nova senha"
+									type="password">
+							</div>
+							<input required="required" name="email" class="form-control"
+								id="email" value="${user.usuario}" type="hidden">
+							<input required="required" name="hash" class="form-control"
+								id="hash" value="${hash}" type="hidden">
+							<div class="form-group">
+								<button type="submit" class="btn btn-default" style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF">Salvar</button>
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 	</div>
 	<footer>
 		<div
 			class="navbar navbar-default navbar-static-top hidden-xs hidden-sm"
-			style="background-color: #4DC1FF; color: #fff; padding: 5px; margin-top: 175px">
+			style="background-color: #4DC1FF; color: #fff; padding: 5px;margin-top: 175px">
 			<div class="text-center" style="margin-top: 10px">
 				<p>
 					Gestão de Projetos | Desenvolvido por <b><a target="_blank"
@@ -88,6 +140,4 @@
 			</div>
 		</div>
 	</footer>
-
 </body>
-</html>
