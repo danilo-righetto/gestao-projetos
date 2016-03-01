@@ -3,14 +3,14 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-	<!-- TEMPLATE PÚBLICO -->
+	<!-- TEMPLATE PRIVADO (PARA QUEM ESTÁ AUTENTICADO) -->
 	<definition name="main" template="/pages/templates/conteudo.jsp">
 		<put-attribute name="cabecalho" value="/pages/templates/cabecalho.jsp" />
 		<put-attribute name="rodape" value="/pages/templates/rodape.jsp" />
 	</definition>
 	
 	<!-- Semear - Login -->
-	<definition name="login" template="/pages/semear/login.jsp" >
+	<definition name="login" template="/pages/login.jsp" >
 	</definition>
 	
 	<!-- Semear - Painel -->
@@ -53,12 +53,15 @@
 		<put-attribute name="conteudo" value="/pages/painel/ações/cadastroAcao.jsp" />
 	</definition>
 
-	
-
 	<!-- Semear - 403 -->
 	<definition name="403" extends="main">
-		<put-attribute name="conteudo" value="/pages/403.jsp" />
+		<put-attribute name="conteudo" value="/pages/erro/403.jsp" />
 	</definition>
+	
+	<!-- Semear 404 -->
+	<definition name="404" extends="main">
+    	<put-attribute name="conteudo" value="/pages/erro/404.jsp"/>
+    </definition>
 
 	<!-- Semear - Cadastro de Perfil -->
 	<definition name="cadastroPerfil" extends="main">
