@@ -11,17 +11,25 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<!-- JS -->
 <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript"
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src='<c:url value="/bootstrap/js/jquery.mask.min.js" />'></script>
+<script type="text/javascript"
+	src="/gestao-projetos/bootstrap/js/jquery-ui.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css"
+	href="/gestao-projetos/bootstrap/css/jquery-ui.min.css" />
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
+
 <style type="text/css">
 #menu li a {
 	color: #fff;
@@ -31,8 +39,8 @@
 	color: #000;
 	background-color: #fff;
 }
+.data{ }
 </style>
-
 
 <title>Sistema Gestão de Projetos</title>
 </head>
@@ -79,7 +87,8 @@
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
 				</ul>
-				<div class="hidden-xs hidden-sm" style="float:right;margin-top:-40px;margin-left:150px">
+				<div class="hidden-xs hidden-sm"
+					style="float: right; margin-top: -40px; margin-left: 150px">
 					<c:out value="${usuario.nome}" />
 					<a href='<c:url value="/logout/"></c:url>' class="btn btn-default">Logout</a>
 				</div>

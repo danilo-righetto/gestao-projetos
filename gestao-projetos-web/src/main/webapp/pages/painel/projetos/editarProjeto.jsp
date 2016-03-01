@@ -70,7 +70,7 @@
 							</div>
 							<div class="form-group col-md-3">
 								<label for="dataInicio">Data Inicio:</label> <input type="text"
-									class="form-control" id="dataInicio" name="dataInicio"
+									class="form-control data" id="dataInicio" name="dataInicio"
 									value="<fmt:formatDate value="${projeto.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
 									placeholder="Selecione a Data" required autofocus>
 							</div>
@@ -78,7 +78,7 @@
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text"
 									value="<fmt:formatDate value="${projeto.dataTermino.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
-									class="form-control" id="dataTermino" name="dataTermino"
+									class="form-control data" id="dataTermino" name="dataTermino"
 									placeholder="Selecione a Data" required autofocus>
 							</div>
 							<div class="form-group col-md-12">

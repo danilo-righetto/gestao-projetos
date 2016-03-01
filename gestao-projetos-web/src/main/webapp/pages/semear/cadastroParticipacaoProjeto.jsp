@@ -23,7 +23,7 @@
 	$(function() {
 		var teste;
 		var avaliableTags = [];
-		$.post("/gestao-projetos/listarProjetos", function(resultados) {
+		$.post("/gestao-projetos/painel/projetos/listarProjetos", function(resultados) {
 			$.each(resultados, function(i, r) {
 				  avaliableTags.push(r.nome);
 				});
