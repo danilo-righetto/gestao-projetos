@@ -13,11 +13,11 @@
 	<definition name="login" template="/pages/login.jsp" >
 	</definition>
 	
-	<!-- ESQUECEU A SENHA -->
+	<!-- Semear -  Esqueceu a senha-->
     <definition name="esqueceu-senha" template="/pages/esqueceu-senha.jsp" >
     </definition>
     
-    <!-- REDEFINIR SENHA -->
+    <!-- Semear - Redefinir Senha-->
     <definition name="redefinir-senha" template="/pages/redefinir-senha.jsp" >
 	</definition>
 	
@@ -56,6 +56,11 @@
 		<put-attribute name="conteudo" value="/pages/painel/projetos/editarProjeto.jsp" />
 	</definition>
 	
+	<!-- Semear - Cadastro de Questionario -->
+	<definition name="cadastroQuestionario" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/questionarios/cadastroQuestionario.jsp" />
+	</definition>
+	
 	<!-- Semear - Cadastro de Ações -->
 	<definition name="cadastroAcao" extends="main">
 		<put-attribute name="conteudo" value="/pages/painel/ações/cadastroAcao.jsp" />
@@ -83,7 +88,7 @@
 	<!-- Semear - Cadastro de Instituicao -->
 	<definition name="cadastroInstituicao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/semear/cadastroInstituicao.jsp" />
+			value="/pages/painel/instituições/cadastroInstituicao.jsp" />
 	</definition>
 
 	

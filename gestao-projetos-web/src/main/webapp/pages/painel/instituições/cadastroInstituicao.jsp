@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,20 +11,42 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/gestao-projetos/bootstrap/js/jquery.mask.js"></script>
   </head>
   
   <script type="text/javascript">
 	$(function() {
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
-		$('#cpf').mask('000.000.000-00');
+		//$('#cpf').mask('000.000.000-00');
 		$('#cep').mask('00000-000');
 		$('#telefoneFixo').mask('(00) 0000-0000');
-		$('#telefoneCelular').mask('(00) 0000-00009');
+		$('#telefone').mask('(00) 0000-00009');
 	});
+	
+	function ocultarCNPJ(){
+		var escolha = document.getElementById("tipopessoa").value;
+		if(escolha == "fisica"){
+			$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
+			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
+			document.getElementById("jurudico1").style.display = "none";
+			document.getElementById("jurudico2").style.display = "none";
+			$('#documento').mask('000.000.000-00');
+			$('#cnpj').remove();
+		} else if(escolha == "juridica"){
+			$('#tipoDocumento').append('<option value="cnpj" id="cnpj">CNPJ</option>');
+			document.getElementById("jurudico1").style.display = "block";
+			document.getElementById("jurudico2").style.display = "block";
+			$('#documento').mask('00.000.000/0000-00');
+			$('#cpf').remove();
+			$('#rg').remove();
+		}
+	}
 
 
 	function validarCPF() { 
-		var cpf = $('#cpf').val();
+		var escolhapessoa = document.getElementById("tipopessoa").value;
+		if(escolhapessoa == "fisica"){
+		var cpf = $('#documento').val();
 	    cpf = cpf.replace(/[^\d]+/g,'');    
 	    if(cpf == '') return false; 
 	    // Elimina CPFs invalidos conhecidos    
@@ -84,51 +106,12 @@
 		    }
 	    $("#alertadocdiv").remove();
 	    return true;   
+		}
 	}
 
 </script>
   
   <body>
-    <div class="navbar navbar-default navbar-static-top" style="background-color: #4DC1FF;color:#ffffff;">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand hidden-md hidden-lg" href="#"><span>Projeto Semear</span></a>
-		  <a class="navbar-brand hidden-xs hidden-sm" style="color:#ffffff; height: 80px;" href="#">
-		  <img src="/gestao-projetos/img/logo.jpg" class="center-block img-responsive img-rounded" height="120px" width="120px" style="margin-top: -8px;"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">Instituição</a>
-            </li>
-            <li>
-              <a href="#">Projeto</a>
-            </li>
-			<li>
-              <a href="#">Usuário</a>
-            </li>
-			<li>
-              <a href="#">Perfil</a>
-            </li>
-			<li>
-              <a href="#">Pergunta</a>
-            </li>
-			<li>
-              <a href="#">Resposta</a>
-            </li>
-			<li>
-              <a href="#">Questionário</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <div class="section">
       <div class="container">
         <div class="row">
@@ -144,32 +127,33 @@
           <div class="col-md-12">
             <form action="salvarInstituicao" method="POST" role="form">
               <div class="form-group col-md-4">
-				<label for="tipoDocumento">Tipo de Pessoa:</label> <select class="form-control"
-						name="tipoDocumento" required>
+				<label for="tipopessoa">Tipo de Pessoa:</label> <select class="form-control"
+						name="tipopessoa" id=tipopessoa onchange="ocultarCNPJ();" required>
 						<option value="">Selecione ...</option>
 						<option value="fisica">Pessoa Fisica</option>
 						<option value="juridica">Pessoa Juridica</option>
 					</select>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-4" id="jurudico1">
 				<label for="nomefantasia">Nome Fantasia:</label> 
-					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" required autofocus>
+					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" autofocus>
+			  </div>
+			  <div class="form-group col-md-4" id="jurudico2">
+				<label for="razaosocial">Razão Social:</label> <input type="text"
+						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="razaosocial">Razão Social:</label> <input type="text"
-						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" required autofocus>
+				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
+						name="tipoDocumento" id="tipoDocumento" required>
+					</select>
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="documento">Documento:</label> 
 					<input onblur="validarDocumento();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
-						name="tipoDocumento" required>
-						<option value="0">Selecione ...</option>
-						<option value="rg">RG</option>
-						<option value="cpf">CPF</option>
-					</select>
+				<label for="documento">Número do Documento:</label> 
+					<input onblur="validarDocumento();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="logradouro">Logradouro:</label> <input type="text"
@@ -204,19 +188,20 @@
 						class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="contato">Contato:</label> <input type="text"
-						class="form-control" id="contato" name="contato" placeholder="Digite o contato" required autofocus>
+				<label for="email">Email:</label> <input type="email"
+						class="form-control" id="email" name="email" placeholder="Digite o E-mail" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="responsavel">Responsável:</label> <input type="text"
 						class="form-control" id="responsavel" name="responsavel" placeholder="Digite o nome do responsavel" required autofocus>
 			  </div>
 			  <div class="form-group col-md-4">
-				<label for="projeto">Selecione o projeto:</label> <select class="form-control"
-						name="projeto" required>
-						<option value="0">Selecione ...</option>
-						<option value="projeto1">Projeto - Semear</option>
-						<option value="projeto2">Projeto - Plantar</option>
+				<label for="projeto">Selecione o projeto:</label> <select class="form-control" id="projeto"
+						name="projetoInstituicao.id" required>
+						<option value="">Selecione ...</option>
+						<c:forEach items="${listaprojetos}" var="projeto">
+								<option value="${projeto.id}">${projeto.nome}</option>
+						</c:forEach>
 					</select>
 			  </div>
 			  <div class="form-group">

@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#menu-projetos").attr('class', 'active');
+		$("#menu-questionarios").attr('class', 'active');
 		$(".data").datepicker(
 				{
 					dateFormat : 'dd/mm/yy',
@@ -31,8 +31,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Projeto</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de Questionário</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">

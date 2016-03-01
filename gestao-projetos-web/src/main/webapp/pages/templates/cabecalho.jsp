@@ -39,7 +39,11 @@
 	color: #000;
 	background-color: #fff;
 }
-.data{ }
+
+.data {
+	
+}
+
 </style>
 
 <title>Sistema Gestão de Projetos</title>
