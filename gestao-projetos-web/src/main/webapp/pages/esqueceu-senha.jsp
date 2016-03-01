@@ -49,15 +49,55 @@
 					width="120px" style="margin-top: -8px;"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse"
-				style="margin-top: 10px"></div>
+				style="margin-top: 10px">
+			</div>
 		</div>
 	</div>
 	<div class="section">
 		<div class="container">
+			<c:if test="${mensagem != null && mensagem ne ''}">
+				<c:if test="${mensagem eq 'OK'}">
+					<div class="alert alert-success">
+						<span style="color: #000000"><strong>E-mail
+								Enviado!</strong> Verifique sua caixa de entrada.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'NOK'}">
+					<div class="alert alert-warning">
+						<span style="color: #000000"><strong>Email não
+								enviado!</strong> Você já solicitou o envio de senha recentemente.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO'}">
+					<div class="alert alert-danger">
+						<span style="color: #000000"><strong>Erro!</strong>Erro ao
+							enviar e-mail, tente novamente mais tarde!</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'NE'}">
+					<div class="alert alert-warning">
+						<span style="color: #000000"><strong>E-mail não
+								encontrado!</strong>E-mail informado não foi encontrado em nossa base de
+							dados!</span>
+					</div>
+				</c:if>
+			</c:if>
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center text-success">Erro 403 - Você não
-						possui acesso para acssar esse conteúdo!</h1>
+					<h4>Esqueci Minha Senha</h4>
+					<p>Prezado cliente, se você esqueceu sua senha preencha o campo
+						e-mail para podermos enviá-la novamente para você.</p>
+					<form role="form" action="enviar-senha" method="post">
+						<div class="form-group">
+							<label class="control-label" for="email">Endereço de
+								E-mail</label> <input required="required" name="email"
+								class="form-control" id="email" placeholder="Digite o e-mail"
+								type="email">
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-default" style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF">Enviar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -65,7 +105,7 @@
 	<footer>
 		<div
 			class="navbar navbar-default navbar-static-top hidden-xs hidden-sm"
-			style="background-color: #4DC1FF; color: #fff; padding: 5px; margin-top: 175px">
+			style="background-color: #4DC1FF; color: #fff; padding: 5px;margin-top: 175px">
 			<div class="text-center" style="margin-top: 10px">
 				<p>
 					Gestão de Projetos | Desenvolvido por <b><a target="_blank"
@@ -86,6 +126,4 @@
 			</div>
 		</div>
 	</footer>
-
 </body>
-</html>

@@ -1,5 +1,7 @@
 package br.com.semear.gestao.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -11,10 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.semear.gestao.dao.RecuperaSenhaDAO;
 import br.com.semear.gestao.dao.UsuarioDAO;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
+import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Usuario;
+import br.com.semear.gestao.service.MailService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
 
@@ -24,6 +29,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Inject
 	private ParseService parseService;
+	
+	@Inject
+	private MailService mailService;
+	
+	@Inject
+	private RecuperaSenhaDAO recuperaSenhaDAO;
 	
 	@Inject
 	private PasswordEncoder passwordEncoder;
@@ -80,5 +91,101 @@ public class UsuarioServiceImpl implements UsuarioService {
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
 		}		
+	}
+
+	@Override
+	public String enviarEmailNovaSenha(String email) {
+		String mensagem = "ERRO";
+		try {
+			boolean existe = usuarioDAO.verificaExistenciaUsuario(email);
+			if (existe) {
+				boolean jaEnviado = recuperaSenhaDAO
+						.possuiRequisicaoNovaSenha(email);
+				if (!jaEnviado) {
+					String hash = inserirRequisicaoDeSenha(email);
+					mailService.enviarEmailNovaSenha(email, hash);
+
+					mensagem = "OK";
+				} else {
+					mensagem = "NOK";
+				}
+			} else {
+				mensagem = "NE";
+			}
+		} catch (Exception e) {
+			mensagem = "ERRO";
+		}
+
+		return mensagem;
+	}
+
+	@Override
+	public Usuario buscarUsuarioRedefinirSenha(String hash) {
+		RequisicaoSenhaEntity requisicao = recuperaSenhaDAO
+				.buscarUsuarioRedefinirSenha(hash);
+		Usuario usuario = null;
+		if (requisicao != null) {
+			usuario = buscarDadosDoUsuarioAtivo(requisicao.getEmail());
+		}
+		return usuario;
+	}
+
+	@Override
+	public String redefinirSenha(String novaSenha, String confirmaNovaSenha,String email, String hash) {
+		String mensagem = "ERRO";
+		Usuario usuario = buscarDadosDoUsuarioAtivo(email);
+		if (usuario != null) {
+			if (novaSenha.equals(confirmaNovaSenha)) {
+				usuarioDAO.alterarSenha(parseService.parseToEntity(usuario),
+						passwordEncoder.encode(novaSenha));
+				RequisicaoSenhaEntity requisicao = recuperaSenhaDAO
+						.buscarUsuarioRedefinirSenha(hash);
+				recuperaSenhaDAO.removerSolicitacao(requisicao);
+				mensagem = "OK";
+			} else {
+				mensagem = "ERRO_NOVA_SENHA";
+			}
+		}
+		return mensagem;
+	}
+	
+	private String inserirRequisicaoDeSenha(String email) {
+		RequisicaoSenhaEntity nova = new RequisicaoSenhaEntity();
+		nova.setDataCadastro(Calendar.getInstance());
+		nova.setEmail(email);
+		nova.setHashUrl(geraHash(email));
+		recuperaSenhaDAO.inserirRequisicao(nova);
+		return nova.getHashUrl();
+	}
+	
+	@Override
+	public Usuario buscarDadosDoUsuarioAtivo(String email) {
+		
+		Usuario usuario = parseService.parseToModel(usuarioDAO.buscarDadosDoUsuarioAtivo(email));
+
+		return usuario;
+	}
+	
+	@Override
+	public String geraHash(String valor) {
+		String result = valor + Calendar.getInstance().getTimeInMillis();
+		MessageDigest md;
+		StringBuilder s = new StringBuilder();
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(result.getBytes());
+			byte[] hashMd5 = md.digest();
+
+			for (int i = 0; i < hashMd5.length; i++) {
+				int parteAlta = ((hashMd5[i] >> 4) & 0xf) << 4;
+				int parteBaixa = hashMd5[i] & 0xf;
+				if (parteAlta == 0)
+					s.append('0');
+				s.append(Integer.toHexString(parteAlta | parteBaixa));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return s.toString();
 	}
 }

@@ -53,6 +53,9 @@
 							value="${_csrf.token}" />
 						<button type="submit" class="btn btn-default" style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF">Acessar o
 							sistema</button>
+						<br />
+						<br >
+						<a href="esqueceu-senha">Esqueci minha senha</a>
 					</div>
 				</div>
 			</form>
@@ -61,7 +64,7 @@
 	<!-- Footer -->
 	<footer>
 		<div class="navbar navbar-default navbar-static-top hidden-xs hidden-sm"
-			style="background-color: #4DC1FF; color: #fff; padding: 20px; margin-top: 108px">
+			style="background-color: #4DC1FF; color: #fff; padding: 20px; margin-top: 68px">
 			<div class="text-center" style="margin-top: 10px">
 				<p>
 					Gestão de Projetos | Desenvolvido por <b><a
