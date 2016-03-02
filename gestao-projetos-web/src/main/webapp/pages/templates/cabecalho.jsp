@@ -32,6 +32,8 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
+	<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
+	type="text/css">
 
 <link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
 	rel="stylesheet" type="text/css">
