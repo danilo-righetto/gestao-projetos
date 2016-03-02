@@ -18,6 +18,7 @@ public class Instituicao {
 	private String telefone;
 	private String email;
 	private String responsavel;
+	private Projeto projetoInstituicao;
 	private Calendar dataCadastro;
 	
 	public String getNomefantasia() {
@@ -112,6 +113,12 @@ public class Instituicao {
 	}
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	public Projeto getProjetoInstituicao() {
+		return projetoInstituicao;
+	}
+	public void setProjetoInstituicao(Projeto projetoInstituicao) {
+		this.projetoInstituicao = projetoInstituicao;
 	}
 	
 	

@@ -3,6 +3,7 @@ package br.com.semear.gestao.service.impl;
 import org.springframework.stereotype.Service;
 
 import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
@@ -11,6 +12,7 @@ import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
+import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
 import br.com.semear.gestao.model.Perfil;
@@ -38,6 +40,32 @@ public class ParseServiceImpl implements ParseService {
 			projetoEn.setUsuarioEntity(parseToEntity(projeto.getUsuario()));
 		}
 		return projetoEn;
+	}
+	
+	//Instituicao
+	
+	@Override
+	public InstituicaoEntity parseToEntity(Instituicao instituicao) {
+		InstituicaoEntity instituicaoEn = null;
+		if(instituicao != null){
+			instituicaoEn = new InstituicaoEntity();
+			instituicaoEn.setNomefantasia(instituicao.getNomefantasia());
+			instituicaoEn.setRazaosocial(instituicao.getRazaosocial());
+			instituicaoEn.setDocumento(instituicao.getDocumento());
+			instituicaoEn.setTipoDocumento(instituicao.getTipoDocumento());
+			instituicaoEn.setLogradouro(instituicao.getLogradouro());
+			instituicaoEn.setNumero(instituicao.getNumero());
+			instituicaoEn.setComplemento(instituicao.getComplemento());
+			instituicaoEn.setBairro(instituicao.getBairro());
+			instituicaoEn.setCep(instituicao.getCep());
+			instituicaoEn.setUf(instituicao.getUf());
+			instituicaoEn.setCidade(instituicao.getCidade());
+			instituicaoEn.setTelefone(instituicao.getTelefone());
+			instituicaoEn.setEmail(instituicao.getEmail());
+			instituicaoEn.setResponsavel(instituicao.getResponsavel());
+			instituicaoEn.setProjetoInstituicao(parseToEntity(instituicao.getProjetoInstituicao()));
+		}
+		return instituicaoEn;
 	}
 
 	@Override

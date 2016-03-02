@@ -9,24 +9,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
+import br.com.semear.gestao.service.ProjetoService;
 
 @Controller
+@RequestMapping("/painel/instituicoes")
 public class InstituicaoController {
 	private ModelAndView mav = new ModelAndView();
 	
 	@Inject
 	private InstituicaoService instituicaoService;
 	
-	@RequestMapping("/cadastroInstituicao")
+	@Inject
+	private ProjetoService projetoService;
+	
+	@RequestMapping("cadastro")
 	public ModelAndView index(){
 		mav.clear();
 		mav.setViewName("cadastroInstituicao");
+		mav.addObject("listaprojetos", projetoService.listarTodosProjetos());
 		return mav;
 	}
 	
 	@RequestMapping(value="salvarInstituicao", method=RequestMethod.POST)
 	public String salvarInstituicao(Instituicao instituicao){
 		instituicaoService.cadastrarInstituicao(instituicao);
-		return "redirect:/cadastroInstituicao";
+		return "redirect:/painel";
 	}
 }

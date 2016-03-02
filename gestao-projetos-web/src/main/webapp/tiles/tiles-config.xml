@@ -90,7 +90,7 @@
 	<!-- Semear - Cadastro de Instituicao -->
 	<definition name="cadastroInstituicao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/semear/cadastroInstituicao.jsp" />
+			value="/pages/painel/instituições/cadastroInstituicao.jsp" />
 	</definition>
 
 

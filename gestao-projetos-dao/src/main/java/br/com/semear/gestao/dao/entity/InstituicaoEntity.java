@@ -4,8 +4,11 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,6 +62,10 @@ public class InstituicaoEntity {
 
 	@Column(name = "RESPONSAVEL")
 	private String responsavel;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "PROJETO_INSTITUICAO", nullable = false)
+	private ProjetoEntity projetoInstituicao;
 
 	@Column(name = "DATA_CADASTRO")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -186,6 +193,14 @@ public class InstituicaoEntity {
 
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+
+	public ProjetoEntity getProjetoInstituicao() {
+		return projetoInstituicao;
+	}
+
+	public void setProjetoInstituicao(ProjetoEntity projetoInstituicao) {
+		this.projetoInstituicao = projetoInstituicao;
 	}
 
 }
