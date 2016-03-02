@@ -3,5 +3,5 @@
 
 .class
 .settings
-/.classpath
-/.project
+.project
+.classpath

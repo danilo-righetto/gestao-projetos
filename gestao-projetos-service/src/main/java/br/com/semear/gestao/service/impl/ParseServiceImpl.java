@@ -293,4 +293,18 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return model;
 	}
+	
+	@Override
+	public Acao parseToModel(AcaoEntity a) {
+		Acao acao = new Acao();
+		acao.setId(a.getId());
+		acao.setNome(a.getNome());
+		acao.setDescricao(a.getDescricao());
+		acao.setDataCadastro(a.getDataCadastro());
+		acao.setDataInicio(a.getDataInicio());
+		acao.setDataTermino(a.getDataTermino());
+		acao.setStatus(a.getStatus());
+		acao.setUsuario(parseToModel(a.getUsuario()));
+		return acao;
+	}
 }

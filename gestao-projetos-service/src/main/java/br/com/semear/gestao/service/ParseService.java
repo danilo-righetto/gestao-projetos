@@ -50,10 +50,12 @@ public interface ParseService {
 	Projeto parseToModel(ProjetoEntity entity);
 
 	Reeducando parseToModel(ReeducandoEntity entity);
-	
+
 	UnidadePrisional parseToModel(UnidadePrisionalEntity entity);
 
 	Questionario parseToModel(QuestionarioEntity entity);
 
 	TipoPergunta parseToModel(TipoPerguntaEntity entity);
+	
+	Acao parseToModel(AcaoEntity a);
 }

@@ -3,6 +3,5 @@
 
 .class
 .settings
-/.classpath
-/.project
-/.tern-project
+.project
+.classpath
