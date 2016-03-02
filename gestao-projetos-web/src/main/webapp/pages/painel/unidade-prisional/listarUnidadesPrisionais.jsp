@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+	<script type="text/javascript">
+	$(function() {
+		$("#menu-configuracoes").attr('class','active');
+		$("#menu-unidades").attr('class','active');
+	});
+	</script>
 </head>
 <body>
 	<div class="section">
@@ -15,8 +22,7 @@
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>
-						<td class="text-center"><span style="font-weight: bold;">Nome
-								da Unidade Penite</span></td>
+						<td class="text-center"><span style="font-weight: bold;">Unidade Prisional</span></td>
 						<td class="text-center"><span style="font-weight: bold;">Status</span></td>
 						<td class="text-center"><span style="font-weight: bold;">Ação</span></td>
 					</tr>

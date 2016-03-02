@@ -60,6 +60,21 @@
 	color: #000 !important;
 }
 
+.dropdown-menu {
+	background-color: #4DC1FF !important;
+	color: #fff;
+}
+
+.dropdown-menu>.active>a {
+	color: #000 !important;
+	background-color: #fff;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+	background-color: #4DC1FF !important;
+	color: #fff;
+}
+	
 .data {
 	
 }
@@ -91,8 +106,6 @@
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse"
 				style="margin-top: 10px">
 				<ul id="menu" class="nav navbar-nav navbar-left">
-					<li id="menu-indicadores"><a
-						href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
 					<li id="menu-projetos"><a
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
 					<li id="menu-acoes"><a
@@ -105,6 +118,17 @@
 					</li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
+					<li id="menu-configuracoes" class="dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"> Configurações<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li id="menu-indicadores"><a
+								href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
+							<li id="menu-unidades"><a
+								href='<c:url value="/painel/unidades-prisionais/" />'>Unidades
+									Prisionais</a></li>
+						</ul></li>
 				</ul>
 				<div class="hidden-xs hidden-sm"
 					style="float: right; margin-top: 5px; margin-left: 150px">
