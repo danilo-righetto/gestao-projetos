@@ -32,11 +32,7 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
-<<<<<<< HEAD
-<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
-=======
 	<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
->>>>>>> 19cfb4cfff87f63f75727c2f32c57acd7a0bdc49
 	type="text/css">
 
 <link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
@@ -51,14 +47,6 @@
 	color: #000;
 	background-color: #fff;
 }
-<<<<<<< HEAD
-
-.data {
-	
-}
-</style>
-=======
->>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
 
 .paginate_button.current:hover {
 	background: #4DC1FF !important;
@@ -130,9 +118,6 @@
 					<li id="menu-reeducandos"><a
 						href='<c:url value="/painel/reeducandos/cadastro" />'>Reeducandos</a>
 					</li>
-					<li id="menu-usuarios"><a
-						href='<c:url value="/painel/unidades-prisionais/" />'>Unidades
-							Prisionais</a></li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
 					<li id="menu-configuracoes" class="dropdown"><a href="#"
