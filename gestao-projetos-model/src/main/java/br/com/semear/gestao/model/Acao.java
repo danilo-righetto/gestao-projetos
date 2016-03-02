@@ -8,6 +8,8 @@ public class Acao {
 
 	private long id;
 
+	private String nome;
+
 	private String descricao;
 
 	private Calendar dataCadastro;
@@ -20,12 +22,22 @@ public class Acao {
 
 	private String status;
 
+	private Usuario usuario;
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {
@@ -66,5 +78,13 @@ public class Acao {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

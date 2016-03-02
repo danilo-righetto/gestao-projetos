@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.semear.gestao.model.Projeto;
 
 public interface ProjetoService {
-	public void cadastrarProjeto(Projeto projeto);
+	public String cadastrarProjeto(Projeto projeto);
 
 	List<Projeto> listarTodosProjetos();
 

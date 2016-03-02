@@ -21,6 +21,9 @@
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/js/jquery-ui.min.js"></script>
 
+<script type="text/javascript"
+	src="/gestao-projetos/bootstrap/js/jquery.dataTables.min.js"></script>
+
 <!-- CSS -->
 <link rel="stylesheet" type="text/css"
 	href="/gestao-projetos/bootstrap/css/jquery-ui.min.css" />
@@ -32,6 +35,9 @@
 <link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
 	type="text/css">
 
+<link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css">
+
 <style type="text/css">
 #menu li a {
 	color: #fff;
@@ -41,12 +47,48 @@
 	color: #000;
 	background-color: #fff;
 }
+<<<<<<< HEAD
 
 .data {
 	
 }
 </style>
+=======
+>>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
 
+.paginate_button.current:hover {
+	background: #4DC1FF !important;
+}
+
+.paginate_button.current {
+	background: #4DC1FF !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff),
+		color-stop(100%, #dcdcdc));
+	color: #000 !important;
+}
+
+.dropdown-menu {
+	background-color: #4DC1FF !important;
+	color: #fff;
+}
+
+.dropdown-menu>.active>a {
+	color: #000 !important;
+	background-color: #fff;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+	background-color: #4DC1FF !important;
+	color: #fff;
+}
+	
+.data {
+	
+}
+</style>
 <title>Sistema Gestão de Projetos</title>
 </head>
 <body>
@@ -74,11 +116,6 @@
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse"
 				style="margin-top: 10px">
 				<ul id="menu" class="nav navbar-nav navbar-left">
-					<li id="menu-indicadores"><a
-						href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
-					<li id="menu-questionarios"><a
-						href='<c:url value="/painel/questionarios/" />'>Questionários</a>
-					</li>
 					<li id="menu-projetos"><a
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
 					<li id="menu-acoes"><a
@@ -94,9 +131,20 @@
 							Prisionais</a></li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
+					<li id="menu-configuracoes" class="dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"> Configurações<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li id="menu-indicadores"><a
+								href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
+							<li id="menu-unidades"><a
+								href='<c:url value="/painel/unidades-prisionais/" />'>Unidades
+									Prisionais</a></li>
+						</ul></li>
 				</ul>
 				<div class="hidden-xs hidden-sm"
-					style="float: right; margin-top: -40px; margin-left: 150px">
+					style="float: right; margin-top: 5px; margin-left: 150px">
 					<c:out value="${usuario.nome}" />
 					<a href='<c:url value="/logout/"></c:url>' class="btn btn-default">Logout</a>
 				</div>

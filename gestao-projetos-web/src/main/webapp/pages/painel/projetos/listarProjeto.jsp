@@ -8,6 +8,21 @@
 	<script type="text/javascript">
 	$(function() {
 		$("#menu-projetos").attr('class','active');
+		$("#tbProjetos").dataTable( {
+	        "iDisplayLength": 5,
+	        "bPaginate": true,
+	        "bLengthChange": false,
+	        "bFilter": false,
+	        "bInfo": false,
+	        "bAutoWidth": true,
+	        "language": {
+	            "emptyTable": "Nenhuma informação cadastrada"
+	          }
+        
+	    });
+		$(".previous").text('Anterior');
+		$(".next").text('Próximo');
+	    
 	});
 	</script>
 </head>
@@ -16,7 +31,7 @@
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Projetos</h4>
 			<div id="alertas"></div>
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="tbProjetos">
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>
@@ -35,8 +50,16 @@
 									<td class="text-center">${projeto.nome}</td>
 									<td class="text-center"><fmt:formatDate value="${projeto.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 									<td class="text-center">${projeto.status}</td>
-									<td class="text-center"><a href="editar/${projeto.id}"><span
-										class="glyphicon glyphicon-pencil"></span></a></td>
+									<td class="text-center">
+										<a href="editar/${projeto.id}">
+											<span class="glyphicon glyphicon-pencil"> </span>
+										</a>
+										<a style="margin-left:20px" href='<c:url value="/painel/questionarios/cadastro/${projeto.id}" />'>
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</a>
+									</td>
+										
+										
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -48,6 +71,7 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<br />
 			<a href='<c:url value="cadastro"></c:url>' style="float:right;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Novo Projeto</a>
 		</div>
 	</div>

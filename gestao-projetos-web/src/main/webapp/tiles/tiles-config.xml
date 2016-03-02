@@ -11,6 +11,7 @@
 
 	<!-- Semear - Login -->
 	<definition name="login" template="/pages/login.jsp">
+<<<<<<< HEAD
 	</definition>
 
 	<!-- ESQUECEU A SENHA -->
@@ -18,6 +19,15 @@
 	</definition>
 
 	<!-- REDEFINIR SENHA -->
+=======
+	</definition>
+
+	<!-- Semear - Esqueceu a senha -->
+	<definition name="esqueceu-senha" template="/pages/esqueceu-senha.jsp">
+	</definition>
+
+	<!-- Semear - Redefinir Senha -->
+>>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
 	<definition name="redefinir-senha" template="/pages/redefinir-senha.jsp">
 	</definition>
 
@@ -60,6 +70,15 @@
 	<definition name="editarProjeto" extends="main">
 		<put-attribute name="conteudo"
 			value="/pages/painel/projetos/editarProjeto.jsp" />
+<<<<<<< HEAD
+=======
+	</definition>
+
+	<!-- Semear - Cadastro de Questionario -->
+	<definition name="cadastroQuestionario" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/questionarios/cadastroQuestionario.jsp" />
+>>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
 	</definition>
 
 	<!-- Semear - Cadastro de Ações -->
@@ -93,8 +112,11 @@
 			value="/pages/painel/instituições/cadastroInstituicao.jsp" />
 	</definition>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
 	<!-- Semear - Cadastro de Participação Projeto -->
 	<definition name="cadastroParticipacaoProjeto" extends="main">
 		<put-attribute name="conteudo"

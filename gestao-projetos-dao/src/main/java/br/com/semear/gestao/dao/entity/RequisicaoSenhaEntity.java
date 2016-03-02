@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="BNT_REQUISICAO_SENHA")
+@Table(name="REQUISICAO_SENHA")
 public class RequisicaoSenhaEntity {
 	
 	@Id

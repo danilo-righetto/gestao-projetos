@@ -1,5 +1,7 @@
 package br.com.semear.gestao.service.impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,22 +18,37 @@ import br.com.semear.gestao.service.ParseService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class AcaoServiceImpl implements AcaoService{
-	
+public class AcaoServiceImpl implements AcaoService {
+
 	@Inject
 	private AcaoDAO acaoDAO;
-	
+
 	@Inject
 	private ParseService parse;
 
 	@Override
 	public void cadastrar(Acao acao) {
+		acao.setDataCadastro(Calendar.getInstance());
 		acaoDAO.cadastrar(parse.parseToEntity(acao));
 	}
 
 	@Override
-	public List<AcaoEntity> listarAcoes() {
-		return acaoDAO.listarAcoes();
+	public void editar(Acao acao) {
+		acaoDAO.editar(parse.parseToEntity(acao));
 	}
 
+	@Override
+	public List<Acao> listarAcoes() {
+		List<AcaoEntity> lista = acaoDAO.listarAcoes();
+		List<Acao> acao = new ArrayList<Acao>();
+		for (AcaoEntity a : lista) {
+			acao.add(parse.parseToModel(a));
+		}
+		return acao;
+	}
+
+	@Override
+	public Acao buscarAcaoPorId(long idAcao) {
+		return parse.parseToModel(acaoDAO.buscarAcaoPorId(idAcao));
+	}
 }

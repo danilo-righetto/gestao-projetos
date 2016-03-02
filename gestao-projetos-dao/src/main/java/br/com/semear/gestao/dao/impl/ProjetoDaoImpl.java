@@ -20,8 +20,9 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 	private EntityManager em;
 
 	@Override
-	public void cadastrarProjeto(ProjetoEntity projeto) {
+	public long cadastrarProjeto(ProjetoEntity projeto) {
 		em.persist(projeto);
+		return projeto.getId();
 	}
 
 	@Override
