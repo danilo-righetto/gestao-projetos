@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<script type="text/javascript">
+	$("#menu-acoes").attr('class', 'active');
+</script>
 </head>
 <body>
 	<div class="section">
@@ -33,7 +36,8 @@
 									<td class="text-center"><fmt:formatDate
 											value="${acao.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 									<td class="text-center">${acao.status}</td>
-									<td class="text-center"><a href="editar/${acao.id}"><span
+									<td class="text-center"><a
+										href='<c:url value="/painel/acoes/editar/${acao.id}"></c:url>'><span
 											class="glyphicon glyphicon-pencil"></span></a></td>
 								</tr>
 							</c:forEach>
@@ -46,7 +50,7 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<a href='<c:url value="/painel/acoes/cadastrar"></c:url>'
+			<a href='<c:url value="/painel/acoes/cadastro"></c:url>'
 				class="btn btn-default btn-add">Nova Ação</a>
 		</div>
 	</div>

@@ -34,7 +34,14 @@ public class AcaoServiceImpl implements AcaoService {
 
 	@Override
 	public void editar(Acao acao) {
-		acaoDAO.editar(parse.parseToEntity(acao));
+		Acao a = buscarAcaoPorId(acao.getId());
+		a.setId(acao.getId());
+		a.setNome(acao.getNome());
+		a.setDescricao(acao.getDescricao());
+		a.setDataInicio(acao.getDataInicio());
+		a.setDataTermino(acao.getDataTermino());
+		a.setStatus(acao.getStatus());
+		acaoDAO.editar(parse.parseToEntity(a));
 	}
 
 	@Override

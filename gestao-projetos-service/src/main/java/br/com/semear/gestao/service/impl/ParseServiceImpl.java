@@ -206,15 +206,14 @@ public class ParseServiceImpl implements ParseService {
 		if(acao != null){
 			acaoEn = new AcaoEntity();
 			acaoEn.setId(acao.getId());
+			acaoEn.setNome(acao.getNome());
 			acaoEn.setDescricao(acao.getDescricao());
 			acaoEn.setDataCadastro(acao.getDataCadastro());
 			acaoEn.setDataInicio(acao.getDataInicio());
 			acaoEn.setDataTermino(acao.getDataTermino());
 			acaoEn.setStatus(acao.getStatus());
+			acaoEn.setUsuario(parseToEntity(acao.getUsuario()));
 		}
-
-		
-
 		return acaoEn;
 	}
 

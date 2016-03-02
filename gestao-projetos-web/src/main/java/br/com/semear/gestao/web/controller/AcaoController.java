@@ -20,7 +20,7 @@ public class AcaoController {
 	@Inject
 	private AcaoService acaoService;
 
-	@RequestMapping("/cadastrar")
+	@RequestMapping("/cadastro")
 	public String formCadastro() {
 		return "cadastrarAcao";
 	}

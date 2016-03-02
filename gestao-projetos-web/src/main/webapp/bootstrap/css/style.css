@@ -3,14 +3,14 @@
 	color: #4DC1FF;
 }
 
-.btn-return {
+.btn-return:hover, .btn-return {
 	float: left;
 	background-color: #4DC1FF;
 	color: #fff;
 	border-color: #4DC1FF;
 }
 
-.btn-add {
+.btn-add:hover, .btn-add {
 	float: right;
 	background-color: #4DC1FF;
 	color: #fff;

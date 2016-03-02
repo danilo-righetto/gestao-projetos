@@ -32,7 +32,7 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
-	<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
+<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
 	type="text/css">
 
 <link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
@@ -72,11 +72,11 @@
 	background-color: #fff;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
 	background-color: #4DC1FF !important;
 	color: #fff;
 }
-	
+
 .data {
 	
 }
@@ -111,7 +111,7 @@
 					<li id="menu-projetos"><a
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
 					<li id="menu-acoes"><a
-						href='<c:url value="/painel/acoes/cadastro" />'>Ações</a></li>
+						href='<c:url value="/painel/acoes/" />'>Ações</a></li>
 					<li id="menu-instituicoes"><a
 						href='<c:url value="/painel/instituicoes/cadastro" />'>Instituições</a>
 					</li>

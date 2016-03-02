@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<script type="text/javascript">
+	$("#menu-acoes").attr('class', 'active');
+</script>
 </head>
 <body>
 	<div class="section">
@@ -63,14 +66,14 @@
 								<label for="dataInicio">Data Inicio:</label> <input type="text"
 									class="form-control data" id="dataInicio" name="dataInicio"
 									value="<fmt:formatDate value="${acao.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
-									placeholder="Selecione a Data" required autofocus>
+									placeholder="Selecione a Data" required>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text"
 									value="<fmt:formatDate value="${acao.dataTermino.time}" pattern="dd/MM/yyyy"></fmt:formatDate>"
 									class="form-control data" id="dataTermino" name="dataTermino"
-									placeholder="Selecione a Data" required autofocus>
+									placeholder="Selecione a Data">
 							</div>
 							<div class="form-group col-md-12">
 								<label for="descricao">Descrição</label>

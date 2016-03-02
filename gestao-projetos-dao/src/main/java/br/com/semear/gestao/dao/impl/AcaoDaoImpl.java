@@ -40,6 +40,7 @@ public class AcaoDaoImpl implements AcaoDAO {
 	@Override
 	public AcaoEntity buscarAcaoPorId(long idAcao) {
 		Query query = em.createQuery("select a from AcaoEntity a where a.id = :idAcao");
+		query.setParameter("idAcao", idAcao);
 		return (AcaoEntity) query.getSingleResult();
 	}
 }
