@@ -56,4 +56,6 @@ public interface ParseService {
 	Questionario parseToModel(QuestionarioEntity entity);
 
 	TipoPergunta parseToModel(TipoPerguntaEntity entity);
+	
+	Acao parseToModel(AcaoEntity a);
 }

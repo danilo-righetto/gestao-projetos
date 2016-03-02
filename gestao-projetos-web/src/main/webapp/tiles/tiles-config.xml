@@ -77,9 +77,16 @@
 	</definition>
 
 	<!-- Semear - Cadastro de Ações -->
-	<definition name="cadastroAcao" extends="main">
+	<definition name="cadastrarAcao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/ações/cadastroAcao.jsp" />
+			value="/pages/painel/acoes/cadastrarAcao.jsp" />
+	</definition>
+	<definition name="editarAcao" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/acoes/editarAcao.jsp" />
+	</definition>
+	<definition name="listarAcoes" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/acoes/listarAcoes.jsp" />
 	</definition>
 
 	<!-- Semear - 403 -->
