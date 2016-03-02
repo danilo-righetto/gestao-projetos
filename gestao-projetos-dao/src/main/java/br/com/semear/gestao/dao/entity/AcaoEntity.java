@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +23,9 @@ public class AcaoEntity {
 	@GeneratedValue
 	@Column(name = "ID")
 	private long id;
+
+	@Column(name = "NOME")
+	private String nome;
 
 	@Column(name = "DESCRICAO")
 	private String descricao;
@@ -39,6 +44,10 @@ public class AcaoEntity {
 
 	@Column(name = "STATUS")
 	private String status;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USUARIO", nullable = false)
+	private UsuarioEntity usuario;
 
 	@ManyToMany(mappedBy = "acao", fetch = FetchType.LAZY)
 	private List<ParticipacaoAcaoEntity> participacoes;
@@ -49,6 +58,14 @@ public class AcaoEntity {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {
@@ -89,5 +106,21 @@ public class AcaoEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public List<ParticipacaoAcaoEntity> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<ParticipacaoAcaoEntity> participacoes) {
+		this.participacoes = participacoes;
+	}
+
+	public UsuarioEntity getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
 	}
 }

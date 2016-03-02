@@ -10,7 +10,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4>Editar Unidade Prisional</h4>
+			<h4 class="title-screen">Editar Unidade Prisional</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">

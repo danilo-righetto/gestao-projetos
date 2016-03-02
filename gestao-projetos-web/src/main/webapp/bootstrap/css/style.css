@@ -1,4 +1,10 @@
+.title-screen {
+	font-family: arial;
+	color: #4DC1FF;
+}
+
 .btn-return {
+	float: left;
 	background-color: #4DC1FF;
 	color: #fff;
 	border-color: #4DC1FF;

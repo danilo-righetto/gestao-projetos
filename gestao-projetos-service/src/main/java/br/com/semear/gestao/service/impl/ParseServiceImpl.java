@@ -137,6 +137,7 @@ public class ParseServiceImpl implements ParseService {
 			unidadePrisionalEn = new UnidadePrisionalEntity();
 			unidadePrisionalEn.setId(unidade.getId());
 			unidadePrisionalEn.setNome(unidade.getNome());
+			unidadePrisionalEn.setStatus(unidade.isStatus());
 		}
 		
 		return unidadePrisionalEn;
