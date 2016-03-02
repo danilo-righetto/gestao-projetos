@@ -3,10 +3,5 @@
 
 .class
 .settings
-<<<<<<< HEAD
-database.properties
-=======
-/.classpath
-/.project
-/.tern-project
->>>>>>> f8ce871307d1bffcc42509e30e868eb4966eac80
+.project
+.classpath
