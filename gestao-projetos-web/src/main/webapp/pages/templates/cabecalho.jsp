@@ -32,7 +32,11 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
+<<<<<<< HEAD
 <link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
+=======
+	<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
+>>>>>>> 19cfb4cfff87f63f75727c2f32c57acd7a0bdc49
 	type="text/css">
 
 <link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
