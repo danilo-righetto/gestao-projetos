@@ -41,5 +41,7 @@ public interface ParseService {
 
 	Projeto parseToModel(ProjetoEntity entity);
 
-	Reeducando parseToModel(ReeducandoEntity buscarReeducandoPorId);
+	Reeducando parseToModel(ReeducandoEntity entity);
+
+	UnidadePrisional parseToModel(UnidadePrisionalEntity entity);
 }

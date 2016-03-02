@@ -19,10 +19,20 @@ public class UnidadePrisionalDaoImpl implements UnidadePrisionalDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public void cadastrar(UnidadePrisionalEntity unidadePrisional) {
 		em.persist(unidadePrisional);
+	}
+
+	@Override
+	public void editar(UnidadePrisionalEntity unidadePrisional) {
+		em.merge(unidadePrisional);
+	}
+
+	@Override
+	public void excluir(UnidadePrisionalEntity unidadePrisional) {
+		em.remove(unidadePrisional);
 	}
 
 	@Override
@@ -30,5 +40,12 @@ public class UnidadePrisionalDaoImpl implements UnidadePrisionalDAO {
 	public List<UnidadePrisionalEntity> listarUnidades() {
 		Query query = em.createQuery("select up from UnidadePrisionalEntity up");
 		return query.getResultList();
+	}
+
+	@Override
+	public UnidadePrisionalEntity buscarUnidadePrisionalPorId(long idUnidadePrisional) {
+		Query query = em.createQuery("select u from UnidadePrisionalEntity u where u.id = :idUnidadePrisional");
+		query.setParameter("idUnidadePrisional", idUnidadePrisional);
+		return (UnidadePrisionalEntity) query.getSingleResult();
 	}
 }

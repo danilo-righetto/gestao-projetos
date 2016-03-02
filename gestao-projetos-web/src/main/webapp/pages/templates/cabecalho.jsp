@@ -29,6 +29,8 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
+<link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
+	type="text/css">
 
 <style type="text/css">
 #menu li a {
@@ -39,7 +41,10 @@
 	color: #000;
 	background-color: #fff;
 }
-.data{ }
+
+.data {
+	
+}
 </style>
 
 <title>Sistema Gestão de Projetos</title>
@@ -84,6 +89,9 @@
 					<li id="menu-reeducandos"><a
 						href='<c:url value="/painel/reeducandos/cadastro" />'>Reeducandos</a>
 					</li>
+					<li id="menu-usuarios"><a
+						href='<c:url value="/painel/unidades-prisionais/" />'>Unidades
+							Prisionais</a></li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
 				</ul>

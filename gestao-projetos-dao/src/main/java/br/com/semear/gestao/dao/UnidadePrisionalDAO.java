@@ -6,6 +6,12 @@ import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 
 public interface UnidadePrisionalDAO {
 	public void cadastrar(UnidadePrisionalEntity unidadePrisional);
-	
-	public List<UnidadePrisionalEntity> listarUnidades();	
+
+	public void editar(UnidadePrisionalEntity unidadePrisional);
+
+	public void excluir(UnidadePrisionalEntity unidadePrisional);
+
+	public List<UnidadePrisionalEntity> listarUnidades();
+
+	public UnidadePrisionalEntity buscarUnidadePrisionalPorId(long idUnidadePrisional);
 }

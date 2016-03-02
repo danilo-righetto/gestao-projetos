@@ -105,6 +105,7 @@ public class ParseServiceImpl implements ParseService {
 			unidadePrisionalEn = new UnidadePrisionalEntity();
 			unidadePrisionalEn.setId(unidade.getId());
 			unidadePrisionalEn.setNome(unidade.getNome());
+			unidadePrisionalEn.setStatus(unidade.isStatus());
 		}
 		
 		return unidadePrisionalEn;
@@ -224,13 +225,13 @@ public class ParseServiceImpl implements ParseService {
 		return reeducando;
 	}
 
-	private UnidadePrisional parseToModel(UnidadePrisionalEntity entity) {
+	public UnidadePrisional parseToModel(UnidadePrisionalEntity entity) {
 		UnidadePrisional unidadePrisional = null;
 		if(entity != null){
 			unidadePrisional = new UnidadePrisional();
 			unidadePrisional.setId(entity.getId());
 			unidadePrisional.setNome(entity.getNome());
-			unidadePrisional.setStatus(entity.getStatus());
+			unidadePrisional.setStatus(entity.isStatus());
 		}
 		
 		return unidadePrisional;

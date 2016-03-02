@@ -1,5 +1,6 @@
 package br.com.semear.gestao.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ public class UnidadePrisionalServiceImpl implements UnidadePrisionalService {
 
 	@Inject
 	private UnidadePrisionalDAO unidadePrisionalDAO;
-	
+
 	@Inject
 	private ParseService parse;
 
@@ -30,7 +31,27 @@ public class UnidadePrisionalServiceImpl implements UnidadePrisionalService {
 	}
 
 	@Override
-	public List<UnidadePrisionalEntity> listaUnidades() {
-		return unidadePrisionalDAO.listarUnidades();
+	public void editar(UnidadePrisional unidadePrisional) {
+		unidadePrisionalDAO.editar(parse.parseToEntity(unidadePrisional));
+	}
+
+	@Override
+	public void excluir(UnidadePrisional unidadePrisional) {
+		unidadePrisionalDAO.excluir(parse.parseToEntity(unidadePrisional));
+	}
+
+	@Override
+	public List<UnidadePrisional> listaUnidades() {
+		List<UnidadePrisionalEntity> lista = unidadePrisionalDAO.listarUnidades();
+		List<UnidadePrisional> unidadesPrisionais = new ArrayList<UnidadePrisional>();
+		for (UnidadePrisionalEntity u : lista) {
+			unidadesPrisionais.add(parse.parseToModel(u));
+		}
+		return unidadesPrisionais;
+	}
+
+	@Override
+	public UnidadePrisional buscarUnidadePrisionalPorId(long idUnidadePrisional) {
+		return parse.parseToModel(unidadePrisionalDAO.buscarUnidadePrisionalPorId(idUnidadePrisional));
 	}
 }
