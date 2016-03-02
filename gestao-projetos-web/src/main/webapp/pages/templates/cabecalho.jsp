@@ -21,6 +21,9 @@
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/js/jquery-ui.min.js"></script>
 
+<script type="text/javascript"
+	src="/gestao-projetos/bootstrap/js/jquery.dataTables.min.js"></script>
+
 <!-- CSS -->
 <link rel="stylesheet" type="text/css"
 	href="/gestao-projetos/bootstrap/css/jquery-ui.min.css" />
@@ -29,6 +32,9 @@
 	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
+
+<link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css">
 
 <style type="text/css">
 #menu li a {
@@ -40,12 +46,24 @@
 	background-color: #fff;
 }
 
+.paginate_button.current:hover {
+	background: #4DC1FF !important;
+}
+
+.paginate_button.current {
+	background: #4DC1FF !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff),
+		color-stop(100%, #dcdcdc));
+	color: #000 !important;
+}
+
 .data {
 	
 }
-
 </style>
-
 <title>Sistema Gestão de Projetos</title>
 </head>
 <body>
@@ -75,9 +93,6 @@
 				<ul id="menu" class="nav navbar-nav navbar-left">
 					<li id="menu-indicadores"><a
 						href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
-					<li id="menu-questionarios"><a
-						href='<c:url value="/painel/questionarios/" />'>Questionários</a>
-					</li>
 					<li id="menu-projetos"><a
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
 					<li id="menu-acoes"><a
@@ -92,7 +107,7 @@
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
 				</ul>
 				<div class="hidden-xs hidden-sm"
-					style="float: right; margin-top: -40px; margin-left: 150px">
+					style="float: right; margin-top: 5px; margin-left: 150px">
 					<c:out value="${usuario.nome}" />
 					<a href='<c:url value="/logout/"></c:url>' class="btn btn-default">Logout</a>
 				</div>

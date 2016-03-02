@@ -15,6 +15,7 @@ import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ProjetoService;
+import br.com.semear.gestao.service.QuestionarioService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -25,12 +26,19 @@ public class ProjetoServiceImpl implements ProjetoService {
 
 	@Inject
 	private ParseService parseService;
+	
+	@Inject
+	private QuestionarioService questionarioService;
 
 	@Override
-	public void cadastrarProjeto(Projeto projeto) {
-		projeto.setDataCadastro(Calendar.getInstance());
-
-		projetoDAO.cadastrarProjeto(parseService.parseToEntity(projeto));
+	public String cadastrarProjeto(Projeto novoProjeto) {
+		novoProjeto.setDataCadastro(Calendar.getInstance());
+		ProjetoEntity projetoEntity = parseService.parseToEntity(novoProjeto);
+		novoProjeto.setId(projetoDAO.cadastrarProjeto(projetoEntity));
+		if(novoProjeto.getId() > 0){
+			return "OK";
+		}
+		return "NOK";
 	}
 
 	@Override

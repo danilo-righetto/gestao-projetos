@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 
 public interface ProjetoDAO {
-	public void cadastrarProjeto(ProjetoEntity projeto);
+	public long cadastrarProjeto(ProjetoEntity projeto);
 
 	List<ProjetoEntity> listarTodosProjetos();
 
