@@ -1,0 +1,160 @@
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- TEMPLATE PRIVADO (PARA QUEM ESTÁ AUTENTICADO) -->
+	<definition name="main" template="/pages/templates/conteudo.jsp">
+		<put-attribute name="cabecalho" value="/pages/templates/cabecalho.jsp" />
+		<put-attribute name="rodape" value="/pages/templates/rodape.jsp" />
+	</definition>
+
+	<!-- Semear - Login -->
+	<definition name="login" template="/pages/login.jsp">
+	</definition>
+
+	<!-- ESQUECEU A SENHA -->
+	<definition name="esqueceu-senha" template="/pages/esqueceu-senha.jsp">
+	</definition>
+
+	<!-- REDEFINIR SENHA -->
+	<definition name="redefinir-senha" template="/pages/redefinir-senha.jsp">
+	</definition>
+
+	<!-- Semear - Esqueceu a senha -->
+	<definition name="esqueceu-senha" template="/pages/esqueceu-senha.jsp">
+	</definition>
+
+	<!-- Semear - Redefinir Senha -->
+	<definition name="redefinir-senha" template="/pages/redefinir-senha.jsp">
+	</definition>
+
+	<!-- Semear - Painel -->
+	<definition name="painel" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/painel.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Usuario -->
+	<definition name="cadastroUsuario" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/usuario/cadastroUsuario.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Usuarios -->
+	<definition name="listar-usuarios" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/usuario/listarUsuario.jsp" />
+	</definition>
+
+	<!-- Semear - Editar Usuario -->
+	<definition name="editarUsuario" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/usuario/editarUsuario.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Projetos -->
+	<definition name="cadastroProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/cadastroProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Projetos -->
+	<definition name="listar-projetos" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/listarProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Editar Usuario -->
+	<definition name="editarProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/editarProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Questionario -->
+	<definition name="cadastroQuestionario" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/questionarios/cadastroQuestionario.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Ações -->
+	<definition name="cadastrarAcao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/acoes/cadastroAcao.jsp" />
+	</definition>
+	<definition name="editarAcao" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/acoes/editarAcao.jsp" />
+	</definition>
+	<definition name="listarAcoes" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/acoes/listarAcoes.jsp" />
+	</definition>
+
+	<!-- Semear - 403 -->
+	<definition name="403" template="/pages/erro/403.jsp">
+	</definition>
+
+	<!-- Semear 404 -->
+	<definition name="404" template="/pages/erro/404.jsp">
+	</definition>
+
+	<!-- Semear - Cadastro de Perfil -->
+	<definition name="cadastroPerfil" extends="main">
+		<put-attribute name="conteudo" value="/pages/semear/cadastroPerfil.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Reeducando -->
+	<definition name="cadastroReeducando" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/reeducandos/cadastroReeducando.jsp" />
+	</definition>
+
+	<!-- Semear - Edição de Reeducando -->
+	<definition name="editarReeducando" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/reeducandos/editarReeducando.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Reeducandos -->
+	<definition name="listarReeducandos" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/reeducandos/listarReeducandos.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Instituicao -->
+	<definition name="cadastroInstituicao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/instituicoes/cadastroInstituicao.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Instituicoes -->
+	<definition name="listarInstituicoes" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/instituicoes/listarInstituicoes.jsp" />
+	</definition>
+
+	<!-- Semear - Edição de Instituicoes -->
+	<definition name="editarInstituicao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/instituicoes/editarInstituicao.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Participação Projeto -->
+	<definition name="cadastroParticipacaoProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/semear/cadastroParticipacaoProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro de Unidade Prisional -->
+	<definition name="cadastrarUnidadePrisional" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/unidade-prisional/cadastrarUnidadePrisional.jsp" />
+	</definition>
+	<definition name="editarUnidadePrisional" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/unidade-prisional/editarUnidadePrisional.jsp" />
+	</definition>
+	<definition name="listarUnidadesPrisionais" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/unidade-prisional/listarUnidadesPrisionais.jsp" />
+	</definition>
+</tiles-definitions>
