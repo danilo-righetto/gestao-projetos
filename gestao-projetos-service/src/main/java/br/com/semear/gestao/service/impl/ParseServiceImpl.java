@@ -64,6 +64,8 @@ public class ParseServiceImpl implements ParseService {
 			instituicaoEn.setEmail(instituicao.getEmail());
 			instituicaoEn.setResponsavel(instituicao.getResponsavel());
 			instituicaoEn.setProjetoInstituicao(parseToEntity(instituicao.getProjetoInstituicao()));
+			instituicaoEn.setStatus(instituicao.getStatus());
+			instituicaoEn.setUnidadePrisional(parseToEntity(instituicao.getUnidadePrisional()));
 		}
 		return instituicaoEn;
 	}
@@ -124,6 +126,36 @@ public class ParseServiceImpl implements ParseService {
 		}
 		
 		return usuario;
+	}
+	
+	@Override
+	public Instituicao parseToModel(InstituicaoEntity entity) {
+		Instituicao instituicao = null;
+		if(entity != null){
+			instituicao = new Instituicao();
+			instituicao.setId(entity.getId());
+			instituicao.setNomefantasia(entity.getNomefantasia());
+			instituicao.setRazaosocial(entity.getRazaosocial());
+			instituicao.setDocumento(entity.getDocumento());
+			instituicao.setTipoDocumento(entity.getTipoDocumento());
+			instituicao.setLogradouro(entity.getLogradouro());
+			instituicao.setNumero(entity.getNumero());
+			instituicao.setComplemento(entity.getComplemento());
+			instituicao.setBairro(entity.getBairro());
+			instituicao.setCep(entity.getCep());
+			instituicao.setUf(entity.getUf());
+			instituicao.setCidade(entity.getCidade());
+			instituicao.setTelefone(entity.getTelefone());
+			instituicao.setEmail(entity.getEmail());
+			instituicao.setResponsavel(entity.getResponsavel());
+			instituicao.setProjetoInstituicao(parseToModel(entity.getProjetoInstituicao()));
+			instituicao.setDataCadastro(entity.getDataCadastro());
+			instituicao.setStatus(entity.getStatus());
+			instituicao.setUnidadePrisional(parseToModel(entity.getUnidadePrisional()));
+			
+		}
+		
+		return instituicao;
 	}
 
 	@Override
@@ -263,4 +295,5 @@ public class ParseServiceImpl implements ParseService {
 		
 		return unidadePrisional;
 	}
+
 }

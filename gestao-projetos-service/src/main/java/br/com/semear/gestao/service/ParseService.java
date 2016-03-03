@@ -30,6 +30,8 @@ public interface ParseService {
 	PerfilEntity parseToEntity(Perfil perfil);
 
 	Usuario parseToModel(UsuarioEntity entity);
+	
+	Instituicao parseToModel(InstituicaoEntity entity);
 
 	Perfil parseToModel(PerfilEntity entity);
 

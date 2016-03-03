@@ -2,7 +2,6 @@ package br.com.semear.gestao.service;
 
 import java.util.List;
 
-import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Usuario;
 
 public interface UsuarioService {

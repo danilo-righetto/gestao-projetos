@@ -52,6 +52,14 @@ public class ProjetoEntity {
 
 	@OneToMany(mappedBy = "projeto", fetch = FetchType.LAZY)
 	private List<ParticipacaoProjetoEntity> participacoes;
+	
+	public ProjetoEntity(){
+		
+	}
+
+	public ProjetoEntity(long id) {
+		this.id = id;
+	}
 
 	public long getId() {
 		return id;

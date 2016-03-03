@@ -16,12 +16,22 @@
   
   <script type="text/javascript">
 	$(function() {
+		$("#menu-instituicoes").attr('class', 'active');
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
 		//$('#cpf').mask('000.000.000-00');
 		$('#cep').mask('00000-000');
 		$('#telefoneFixo').mask('(00) 0000-0000');
 		$('#telefone').mask('(00) 0000-00009');
 	});
+	
+	function escolheValidacao(){
+		var escolha = document.getElementById("tipopessoa").value;
+		if(escolha == "fisica"){
+			validarCPF();
+		}else if(escolha == "juridica"){
+			
+		}
+	}
 	
 	function ocultarCNPJ(){
 		var escolha = document.getElementById("tipopessoa").value;
@@ -30,13 +40,17 @@
 			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
 			document.getElementById("jurudico1").style.display = "none";
 			document.getElementById("jurudico2").style.display = "none";
+			document.getElementById("fisica1").style.display = "block";
 			$('#documento').mask('000.000.000-00');
+			$('#nomecompleto').val("");
 			$('#cnpj').remove();
 		} else if(escolha == "juridica"){
 			$('#tipoDocumento').append('<option value="cnpj" id="cnpj">CNPJ</option>');
 			document.getElementById("jurudico1").style.display = "block";
 			document.getElementById("jurudico2").style.display = "block";
+			document.getElementById("fisica1").style.display = "none";
 			$('#documento').mask('00.000.000/0000-00');
+			$('#razaosocial').val("");
 			$('#cpf').remove();
 			$('#rg').remove();
 		}
@@ -114,19 +128,14 @@
   <body>
     <div class="section">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center text-success">Cadastro de Instituição</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
+      <h4 style="font-family: arial; color: #4DC1FF">Cadastro de
+				Instituição</h4>
+				<hr />
         <div class="row">
           <div class="col-md-12">
             <form action="salvarInstituicao" method="POST" role="form">
-              <div class="form-group col-md-4">
+            <div id="alertas"></div>
+              <div class="form-group col-md-2">
 				<label for="tipopessoa">Tipo de Pessoa:</label> <select class="form-control"
 						name="tipopessoa" id=tipopessoa onchange="ocultarCNPJ();" required>
 						<option value="">Selecione ...</option>
@@ -134,32 +143,36 @@
 						<option value="juridica">Pessoa Juridica</option>
 					</select>
 			  </div>
-			  <div class="form-group col-md-4" id="jurudico1">
-				<label for="nomefantasia">Nome Fantasia:</label> 
-					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" autofocus>
+			  <div class="form-group col-md-5" id="fisica1" style="display:none;">
+				<label for="razaosocial">Nome Completo:</label> <input type="text"
+						class="form-control" id="nomecompleto" name="razaosocial" placeholder="Digite o nome" autofocus>
 			  </div>
-			  <div class="form-group col-md-4" id="jurudico2">
+			  <div class="form-group col-md-5" id="jurudico2">
 				<label for="razaosocial">Razão Social:</label> <input type="text"
 						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-5" id="jurudico1">
+				<label for="nomefantasia">Nome Fantasia:</label> 
+					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" autofocus>
+			  </div>
+			  <div class="form-group col-md-2">
 				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
 						name="tipoDocumento" id="tipoDocumento" required>
 					</select>
 			  </div>
-			  <div class="form-group col-md-4">
-				<label for="documento">Documento:</label> 
-					<input onblur="validarDocumento();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
-			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-3">
 				<label for="documento">Número do Documento:</label> 
-					<input onblur="validarDocumento();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
+					<input onblur="escolheValidacao();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-2">
+				<label for="cep">CEP:</label> <input type="text"
+						class="form-control" id="cep" name="cep" placeholder="Digite o cep" required autofocus>
+			  </div>
+			  <div class="form-group col-md-5">
 				<label for="logradouro">Logradouro:</label> <input type="text"
 						class="form-control" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-2">
 				<label for="numero">Número:</label> <input type="text"
 						class="form-control" id="numero" name="numero" placeholder="Digite o numero" required autofocus>
 			  </div>
@@ -167,23 +180,20 @@
 				<label for="complemento">Complemento:</label> <input type="text"
 						class="form-control" id="complemento" name="complemento" placeholder="Digite o complemento" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-3">
 				<label for="bairro">Bairro:</label> <input type="text"
 						class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
-				<label for="cep">CEP:</label> <input type="text"
-						class="form-control" id="cep" name="cep" placeholder="Digite o cep" required autofocus>
-			  </div>
-			  <div class="form-group col-md-4">
+			  
+			  <div class="form-group col-md-1">
 				<label for="uf">UF:</label> <input type="text"
-						class="form-control" id="uf" name="uf" placeholder="Digite o uf" required autofocus>
+						class="form-control" id="uf" name="uf" placeholder="uf" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-2">
 				<label for="cidade">Cidade:</label> <input type="text"
 						class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-2">
 				<label for="telefone">Telefone:</label> <input type="text"
 						class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone" required autofocus>
 			  </div>
@@ -191,11 +201,11 @@
 				<label for="email">Email:</label> <input type="email"
 						class="form-control" id="email" name="email" placeholder="Digite o E-mail" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-3">
 				<label for="responsavel">Responsável:</label> <input type="text"
 						class="form-control" id="responsavel" name="responsavel" placeholder="Digite o nome do responsavel" required autofocus>
 			  </div>
-			  <div class="form-group col-md-4">
+			  <div class="form-group col-md-3">
 				<label for="projeto">Selecione o projeto:</label> <select class="form-control" id="projeto"
 						name="projetoInstituicao.id" required>
 						<option value="">Selecione ...</option>
@@ -204,12 +214,38 @@
 						</c:forEach>
 					</select>
 			  </div>
+			  <div class="form-group col-md-3">
+				<label for="projeto">Selecione a unidade:</label> <select class="form-control" id="unidadePrisional"
+						name="unidadePrisional.id" required>
+						<option value="">Selecione ...</option>
+						<c:forEach items="${unidadesprisionais}" var="unidadePrisional">
+								<option value="${unidadePrisional.id}">${unidadePrisional.nome}</option>
+						</c:forEach>
+					</select>
+			  </div>
+			  <div class="form-group col-md-2">
+				<label for="status">Status:</label> <select class="form-control"
+						name="status" id=status  required>
+						<option value="">Selecione ...</option>
+						<option value="0">Inativo</option>
+						<option value="1">Ativo</option>
+					</select>
+			  </div>
 			  <div class="form-group">
 			  </div>
-			  <br /><br />
+			  <br /><br /><br /><br />
 			  <div class="form-group col-md-12">
-				<button type="submit" class="btn btn-default">Enviar</button>
-			  </div>
+			  
+			  <hr />
+						<div class="form-group col-xs-offset-0">
+							<a href='<c:url value="/painel/instituicoes/" />'
+								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+								class="btn btn-default">Cancelar</a>
+							<button type="submit"
+								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+								class="btn btn-default">Salvar Instituição</button>
+						</div>
+			</div>
             </form>
           </div>
         </div>

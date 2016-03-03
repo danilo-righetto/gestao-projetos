@@ -19,7 +19,23 @@ public class Instituicao {
 	private String email;
 	private String responsavel;
 	private Projeto projetoInstituicao;
+	private UnidadePrisional unidadePrisional;
+	private String status;
 	private Calendar dataCadastro;
+	
+	public UnidadePrisional getUnidadePrisional() {
+		return unidadePrisional;
+	}
+	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
+		this.unidadePrisional = unidadePrisional;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	public String getNomefantasia() {
 		return nomefantasia;
@@ -41,6 +57,9 @@ public class Instituicao {
 	}
 	public String getTipoDocumento() {
 		return tipoDocumento;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
