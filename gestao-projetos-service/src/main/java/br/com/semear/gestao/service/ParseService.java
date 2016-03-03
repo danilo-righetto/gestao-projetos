@@ -1,6 +1,7 @@
 package br.com.semear.gestao.service;
 
 import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
@@ -13,6 +14,7 @@ import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
+import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
@@ -70,4 +72,6 @@ public interface ParseService {
 	TipoPerguntaEntity parseToEntity(TipoPergunta model);
 
 	Pergunta parseToModel(PerguntaEntity p);
+
+	AlternativaPerguntaEntity parseToEntity(AlternativaPergunta alternativa);
 }

@@ -51,7 +51,7 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<a href='<c:url value="cadastro"></c:url>' style="float:right;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Novo Usuário</a>
+			<a href='<c:url value="cadastro"></c:url>' style="float:right;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Nova Instituição</a>
 		</div>
 	</div>
 	<div class="section" style="margin-top: 20px"></div>

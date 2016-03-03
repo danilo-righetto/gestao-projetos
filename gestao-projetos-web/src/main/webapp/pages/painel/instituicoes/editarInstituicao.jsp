@@ -42,6 +42,15 @@ $(function() {
 		}
 	}
 	
+	function mascaraRG(){
+		var rg = document.getElementById("tipoDocumento").value;
+		if(rg == "rg"){
+			$('#documento').mask('00000000000000');
+		}else if(rg == "cpf"){
+			$('#documento').mask('000.000.000-00');
+		}
+	}
+	
 	function ocultarCNPJ(){
 		var escolha = document.getElementById("tipopessoa").value;
 		if(escolha == "fisica"){
@@ -145,7 +154,7 @@ $(function() {
 				<div class="row">
 					<div class="form-group col-md-2">
 				<label for="tipopessoa">Tipo de Pessoa:</label> <select class="form-control"
-						name="tipopessoa" id=tipopessoa onchange="ocultarCNPJ();" required>
+						name="tipopessoa" id=tipopessoa onchange="ocultarCNPJ();" readonly="readonly" required>
 						<option value="">Selecione ...</option>
 						<option value="fisica" ${(inst.tipoDocumento == "cnpj" ? 
 								'' : 'selected')}>Pessoa Fisica</option>
@@ -169,13 +178,13 @@ $(function() {
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
-						name="tipoDocumento" id="tipoDocumento" required>
+						name="tipoDocumento" id="tipoDocumento" onchange="mascaraRG();" readonly="readonly" required>
 						<option value="${inst.tipoDocumento}" id="${inst.tipoDocumento}">${inst.tipoDocumento}</option>
 					</select>
 			  </div>
 			  <div class="form-group col-md-3">
 				<label for="documento">Número do Documento:</label> 
-					<input onblur="escolheValidacao();" type="text" class="form-control"  id="documento" value="${inst.documento}" name="documento" placeholder="Digite o documento">
+					<input onblur="escolheValidacao();" type="text" class="form-control"  id="documento" value="${inst.documento}" name="documento" readonly="readonly" placeholder="Digite o documento">
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="cep">CEP:</label> <input type="text"

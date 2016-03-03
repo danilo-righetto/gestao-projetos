@@ -105,7 +105,19 @@
 	<!-- Semear - Cadastro de Reeducando -->
 	<definition name="cadastroReeducando" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/semear/cadastroReeducando.jsp" />
+			value="/pages/painel/reeducandos/cadastroReeducando.jsp" />
+	</definition>
+
+	<!-- Semear - Edição de Reeducando -->
+	<definition name="editarReeducando" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/reeducandos/editarReeducando.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Reeducandos -->
+	<definition name="listarReeducandos" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/reeducandos/listarReeducandos.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Instituicao -->
@@ -116,12 +128,14 @@
 
 	<!-- Semear - Lista de Instituicoes -->
 	<definition name="listarInstituicoes" extends="main">
-		<put-attribute name="conteudo" value="/pages/painel/instituicoes/listarInstituicoes.jsp" />
+		<put-attribute name="conteudo"
+			value="/pages/painel/instituicoes/listarInstituicoes.jsp" />
 	</definition>
-	
+
 	<!-- Semear - Edição de Instituicoes -->
 	<definition name="editarInstituicao" extends="main">
-		<put-attribute name="conteudo" value="/pages/painel/instituicoes/editarInstituicao.jsp" />
+		<put-attribute name="conteudo"
+			value="/pages/painel/instituicoes/editarInstituicao.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Participação Projeto -->

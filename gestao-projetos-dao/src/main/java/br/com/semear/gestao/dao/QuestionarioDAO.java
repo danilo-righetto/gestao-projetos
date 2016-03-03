@@ -2,6 +2,7 @@ package br.com.semear.gestao.dao;
 
 import java.util.List;
 
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
@@ -27,5 +28,7 @@ public interface QuestionarioDAO {
 	void alterarPergunta(PerguntaEntity perguntaEntity);
 
 	PerguntaEntity buscarPerguntasPorId(long id);
+
+	void salvarAlternativa(AlternativaPerguntaEntity alternativa);
 
 }
