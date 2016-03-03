@@ -1,5 +1,6 @@
 package br.com.semear.gestao.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.QuestionarioDAO;
+import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 
@@ -48,6 +50,48 @@ public class QuestionarioDaoImpl implements QuestionarioDAO {
 	public List<TipoPerguntaEntity> listarTiposDePerguntas() {
 		Query query = em.createQuery("select tp from TipoPerguntaEntity tp");
 		return query.getResultList();
+	}
+
+	@Override
+	public void alterarQuestionario(QuestionarioEntity entity) {
+		em.merge(entity);
+		
+	}
+
+	@Override
+	public void salvarPergunta(PerguntaEntity entity) {
+		em.persist(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PerguntaEntity> buscarPerguntasPorIdQuestionario(long idQuestionario) {
+		Query query = em.createQuery("select p from PerguntaEntity p where p.questionarioEntity.id = :idQuestionario");
+		query.setParameter("idQuestionario", idQuestionario);
+		if(!query.getResultList().isEmpty()){
+			return query.getResultList();
+		}
+		return new ArrayList<PerguntaEntity>();
+	}
+
+	@Override
+	public void removerPergunta(PerguntaEntity perguntaEntity) {
+		em.remove(perguntaEntity);
+	}
+
+	@Override
+	public void alterarPergunta(PerguntaEntity perguntaEntity) {
+		em.merge(perguntaEntity);		
+	}
+
+	@Override
+	public PerguntaEntity buscarPerguntasPorId(long id) {
+		Query query = em.createQuery("select p from PerguntaEntity p where p.id = :id");
+		query.setParameter("id", id);
+		if(!query.getResultList().isEmpty()){
+			return (PerguntaEntity) query.getResultList().get(0);
+		}
+		return null;
 	}
 
 }

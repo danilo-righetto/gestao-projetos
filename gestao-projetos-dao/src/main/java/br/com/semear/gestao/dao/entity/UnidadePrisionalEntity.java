@@ -27,6 +27,14 @@ public class UnidadePrisionalEntity {
 	@OneToMany(mappedBy = "unidadePrisional", fetch = FetchType.LAZY)
 	private List<ReeducandoEntity> reeducandos;
 
+	public UnidadePrisionalEntity(long id) {
+		this.id = id;
+	}
+	
+	public UnidadePrisionalEntity(){
+		
+	}
+
 	public long getId() {
 		return id;
 	}

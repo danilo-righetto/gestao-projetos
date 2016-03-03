@@ -79,7 +79,7 @@
 	<!-- Semear - Cadastro de Ações -->
 	<definition name="cadastrarAcao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/acoes/cadastrarAcao.jsp" />
+			value="/pages/painel/acoes/cadastroAcao.jsp" />
 	</definition>
 	<definition name="editarAcao" extends="main">
 		<put-attribute name="conteudo" value="/pages/painel/acoes/editarAcao.jsp" />
@@ -111,7 +111,17 @@
 	<!-- Semear - Cadastro de Instituicao -->
 	<definition name="cadastroInstituicao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/instituições/cadastroInstituicao.jsp" />
+			value="/pages/painel/instituicoes/cadastroInstituicao.jsp" />
+	</definition>
+
+	<!-- Semear - Lista de Instituicoes -->
+	<definition name="listarInstituicoes" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/instituicoes/listarInstituicoes.jsp" />
+	</definition>
+	
+	<!-- Semear - Edição de Instituicoes -->
+	<definition name="editarInstituicao" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/instituicoes/editarInstituicao.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Participação Projeto -->

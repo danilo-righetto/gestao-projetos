@@ -21,6 +21,10 @@ public class InstituicaoEntity {
 	@Column(name = "ID")
 	private long id;
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Column(name = "NOME_FANTASIA")
 	private String nomefantasia;
 
@@ -66,6 +70,29 @@ public class InstituicaoEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJETO_INSTITUICAO", nullable = false)
 	private ProjetoEntity projetoInstituicao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "UNIDADE_PRISIONAL", nullable = false)
+	private UnidadePrisionalEntity unidadePrisional;
+	
+	public UnidadePrisionalEntity getUnidadePrisional() {
+		return unidadePrisional;
+	}
+
+	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
+		this.unidadePrisional = unidadePrisional;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Column(name = "STATUS")
+	private String status;
 
 	@Column(name = "DATA_CADASTRO")
 	@Temporal(TemporalType.TIMESTAMP)

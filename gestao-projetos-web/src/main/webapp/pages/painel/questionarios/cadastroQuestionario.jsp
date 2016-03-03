@@ -178,9 +178,35 @@
 			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
 				Questionário</h4>
 			<hr />
+			<c:if test="${mensagem != null && mensagem ne ''}">
+				<c:if test="${mensagem eq 'ADD'}">
+					<div class="alert alert-success">
+					 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Sucesso!</strong> Pergunta adicionada com sucesso.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'REMOVE'}">
+					<div class="alert alert-success">
+					 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Sucesso!</strong> Pergunta removida com sucesso.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO_EXISTENTE'}">
+					<div class="alert alert-warning">
+						 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Alerta!</strong>Esta pergunta já foi adicionada ao questionário.</span>
+					</div>
+				</c:if>
+				<c:if test="${mensagem eq 'ERRO'}">
+					<div class="alert alert-danger">
+						 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Erro!</strong>Não foi possível executar a ação, tente novamente mais tarde!</span>
+					</div>
+				</c:if>
+			</c:if>
 			<div class="row">
 				<div class="col-md-12">
-					<form action="salvarProjeto" method="POST" role="form">
+					<form action='<c:url value="/painel/questionarios/salvarQuestionario" />' method="POST" role="form">
 						<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
 								<label for="nome">Titulo do Questionário:</label> <input
@@ -224,7 +250,11 @@
 										</c:choose>
 										<td class="text-center">${pergunta.descricaoPergunta}</td>
 										<td class="text-center"><fmt:formatDate value="${pergunta.dataCadastro.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
-										<td class="text-center"><span class="glyphicon glyphicon-remove-circle"></span></td>
+										<td class="text-center">
+											<a href='<c:url value="/painel/questionarios/removerPergunta?idPergunta=${pergunta.id}&&descricaoPergunta=${pergunta.descricaoPergunta}" />'>
+												<span class="glyphicon glyphicon-remove-circle"></span>
+											</a>
+										</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -247,9 +277,9 @@
 								Cancelar</a>
 							<button type="submit"
 								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">
-								Salvar Projeto <span class="glyphicon glyphicon-ok"
-									style="margin-top: 1px"></span>
+								class="btn btn-default"><span class="glyphicon glyphicon-ok"
+									style="margin-top: 1px"> </span>
+								Salvar Questionário 
 							</button>
 						</div>
 					</form>

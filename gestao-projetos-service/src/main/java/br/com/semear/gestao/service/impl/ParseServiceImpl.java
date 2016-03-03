@@ -7,6 +7,7 @@ import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
+import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
@@ -18,6 +19,7 @@ import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
 import br.com.semear.gestao.model.Perfil;
+import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.Reeducando;
@@ -68,6 +70,8 @@ public class ParseServiceImpl implements ParseService {
 			instituicaoEn.setEmail(instituicao.getEmail());
 			instituicaoEn.setResponsavel(instituicao.getResponsavel());
 			instituicaoEn.setProjetoInstituicao(parseToEntity(instituicao.getProjetoInstituicao()));
+			instituicaoEn.setStatus(instituicao.getStatus());
+			instituicaoEn.setUnidadePrisional(parseToEntity(instituicao.getUnidadePrisional()));
 		}
 		return instituicaoEn;
 	}
@@ -128,6 +132,36 @@ public class ParseServiceImpl implements ParseService {
 		}
 		
 		return usuario;
+	}
+	
+	@Override
+	public Instituicao parseToModel(InstituicaoEntity entity) {
+		Instituicao instituicao = null;
+		if(entity != null){
+			instituicao = new Instituicao();
+			instituicao.setId(entity.getId());
+			instituicao.setNomefantasia(entity.getNomefantasia());
+			instituicao.setRazaosocial(entity.getRazaosocial());
+			instituicao.setDocumento(entity.getDocumento());
+			instituicao.setTipoDocumento(entity.getTipoDocumento());
+			instituicao.setLogradouro(entity.getLogradouro());
+			instituicao.setNumero(entity.getNumero());
+			instituicao.setComplemento(entity.getComplemento());
+			instituicao.setBairro(entity.getBairro());
+			instituicao.setCep(entity.getCep());
+			instituicao.setUf(entity.getUf());
+			instituicao.setCidade(entity.getCidade());
+			instituicao.setTelefone(entity.getTelefone());
+			instituicao.setEmail(entity.getEmail());
+			instituicao.setResponsavel(entity.getResponsavel());
+			instituicao.setProjetoInstituicao(parseToModel(entity.getProjetoInstituicao()));
+			instituicao.setDataCadastro(entity.getDataCadastro());
+			instituicao.setStatus(entity.getStatus());
+			instituicao.setUnidadePrisional(parseToModel(entity.getUnidadePrisional()));
+			
+		}
+		
+		return instituicao;
 	}
 
 	@Override
@@ -268,6 +302,7 @@ public class ParseServiceImpl implements ParseService {
 		return unidadePrisional;
 	}
 
+
 	@Override
 	public Questionario parseToModel(QuestionarioEntity entity) {
 		Questionario model = null;
@@ -294,6 +329,17 @@ public class ParseServiceImpl implements ParseService {
 	}
 	
 	@Override
+	public TipoPerguntaEntity parseToEntity(TipoPergunta model) {
+		TipoPerguntaEntity entity = null;
+		if(model != null){
+			entity = new TipoPerguntaEntity();
+			entity.setDescricao(model.getDescricao());
+			entity.setId(model.getId());
+		}
+		return entity;
+	}
+	
+	@Override
 	public Acao parseToModel(AcaoEntity a) {
 		Acao acao = new Acao();
 		acao.setId(a.getId());
@@ -305,5 +351,48 @@ public class ParseServiceImpl implements ParseService {
 		acao.setStatus(a.getStatus());
 		acao.setUsuario(parseToModel(a.getUsuario()));
 		return acao;
+	}
+
+	@Override
+	public QuestionarioEntity parseToEntity(Questionario model) {
+		QuestionarioEntity entity = null;
+		if(model != null){
+			entity = new QuestionarioEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setProjeto(parseToEntity(model.getProjeto()));
+			entity.setDescricao(model.getDescricao());
+			entity.setId(model.getId());
+		}
+		return entity;
+	}
+
+	@Override
+	public PerguntaEntity parseToEntity(Pergunta model) {
+		PerguntaEntity entity = null;
+		if(model != null){
+			entity = new PerguntaEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setDescricaoPergunta(model.getDescricaoPergunta());
+			entity.setId(model.getId());
+			entity.setQuestionarioEntity(parseToEntity(model.getQuestionario()));
+			entity.setTipoPerguntaentity(parseToEntity(model.getTipoPergunta()));
+			entity.setUsuarioEntity(parseToEntity(model.getUsuario()));
+		}
+		return entity;
+	}
+
+	@Override
+	public Pergunta parseToModel(PerguntaEntity entity) {
+		Pergunta model = null;
+		if(entity != null){
+			model = new Pergunta();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoPergunta(entity.getDescricaoPergunta());
+			model.setId(entity.getId());
+			model.setQuestionario(parseToModel(entity.getQuestionarioEntity()));
+			model.setTipoPergunta(parseToModel(entity.getTipoPerguntaentity()));
+			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
+		}
+		return model;
 	}
 }

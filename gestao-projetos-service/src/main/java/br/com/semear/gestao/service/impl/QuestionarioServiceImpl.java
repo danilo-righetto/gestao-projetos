@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.QuestionarioDAO;
+import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
+import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.TipoPergunta;
@@ -49,6 +51,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 		Questionario questionario = null;
 		if(entity != null){
 			questionario = parseService.parseToModel(entity);
+			questionario.setPerguntas(buscarPerguntasPorIdQuestionario(questionario.getId()));
 		}else{
 			Projeto projeto = projetoService.buscarProjetoPorId(idProjeto);
 			if(projeto != null){
@@ -59,6 +62,15 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 			}
 		}
 		return questionario;
+	}
+
+	private List<Pergunta> buscarPerguntasPorIdQuestionario(long idQuestionario) {
+		List<PerguntaEntity> entitys = questionarioDAO.buscarPerguntasPorIdQuestionario(idQuestionario);
+		List<Pergunta> perguntas = new ArrayList<Pergunta>();
+		for(PerguntaEntity p : entitys){
+			perguntas.add(parseService.parseToModel(p));
+		}
+		return perguntas;
 	}
 
 	@Override
@@ -79,6 +91,34 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 			tipos.add(parseService.parseToModel(t));
 		}
 		return tipos;
+	}
+
+	@Override
+	public void alterarQuestionario(Questionario questionario,List<Pergunta> perguntasRemovidas) {
+		removerPerguntas(perguntasRemovidas);
+		adicionarPerguntas(questionario);		
+	}
+
+	private void adicionarPerguntas(Questionario questionario) {
+		for(Pergunta p : questionario.getPerguntas()){
+			PerguntaEntity perguntaEntity = parseService.parseToEntity(p);
+			if(perguntaEntity.getId() != 0){
+				questionarioDAO.alterarPergunta(perguntaEntity);
+			}else{
+				questionarioDAO.salvarPergunta(perguntaEntity);
+			}
+			
+		}
+		
+	}
+
+	private void removerPerguntas(List<Pergunta> perguntasRemovidas) {
+		for(Pergunta p : perguntasRemovidas){
+			if(p.getId() != 0){
+				PerguntaEntity perguntaEntity = questionarioDAO.buscarPerguntasPorId(p.getId());
+				questionarioDAO.removerPergunta(perguntaEntity);
+			}
+		}
 	}
 
 }
