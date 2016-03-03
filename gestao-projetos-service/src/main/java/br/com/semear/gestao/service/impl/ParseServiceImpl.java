@@ -68,7 +68,7 @@ public class ParseServiceImpl implements ParseService {
 			instituicaoEn.setEmail(instituicao.getEmail());
 			instituicaoEn.setResponsavel(instituicao.getResponsavel());
 			instituicaoEn.setProjetoInstituicao(parseToEntity(instituicao.getProjetoInstituicao()));
-			instituicaoEn.setStatus(instituicao.getStatus());
+			instituicaoEn.setStatus("ativo");
 			instituicaoEn.setUnidadePrisional(parseToEntity(instituicao.getUnidadePrisional()));
 		}
 		return instituicaoEn;

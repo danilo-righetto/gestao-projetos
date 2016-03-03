@@ -29,15 +29,24 @@
 		if(escolha == "fisica"){
 			validarCPF();
 		}else if(escolha == "juridica"){
-			
+			validaCNPJ();
+		}
+	}
+	
+	function mascaraRG(){
+		var rg = document.getElementById("tipoDocumento").value;
+		if(rg == "rg"){
+			$('#documento').mask('00000000000000');
+		}else{
+			$('#documento').mask('000.000.000-00');
 		}
 	}
 	
 	function ocultarCNPJ(){
 		var escolha = document.getElementById("tipopessoa").value;
 		if(escolha == "fisica"){
-			$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
 			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
+			$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
 			document.getElementById("jurudico1").style.display = "none";
 			document.getElementById("jurudico2").style.display = "none";
 			document.getElementById("fisica1").style.display = "block";
@@ -122,6 +131,92 @@
 	    return true;   
 		}
 	}
+	
+	function validaCNPJ(){
+		 //var cnpj = cnpj.replace(/[^\d]+/g,'');
+		 var cnpj = document.getElementById("documento").value;
+		 
+		    if(cnpj == '') return false;
+		     
+		    if (cnpj.length != 14){
+			    	$("#alertadocdiv").remove();
+					var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+					"<span style='color: #000000'><strong>Alerta!</strong>"+
+					"O CNPJ informado  é inválido.</span></div>";
+					$("#alertas" ).append( alerta );
+					//$("#documento").val("");
+					$("#documento").focus();
+					return false;
+			    }
+		        
+		 
+		    // Elimina CNPJs invalidos conhecidos
+		    if (cnpj == "00000000000000" || 
+		        cnpj == "11111111111111" || 
+		        cnpj == "22222222222222" || 
+		        cnpj == "33333333333333" || 
+		        cnpj == "44444444444444" || 
+		        cnpj == "55555555555555" || 
+		        cnpj == "66666666666666" || 
+		        cnpj == "77777777777777" || 
+		        cnpj == "88888888888888" || 
+		        cnpj == "99999999999999"){
+			    	$("#alertadocdiv").remove();
+					var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+					"<span style='color: #000000'><strong>Alerta!</strong>"+
+					"O CNPJ informado  é inválido.</span></div>";
+					$("#alertas" ).append( alerta );
+					//$("#documento").val("");
+					$("#documento").focus();
+				return false;
+		        }
+		         
+		    // Valida DVs
+		    tamanho = cnpj.length - 2
+		    numeros = cnpj.substring(0,tamanho);
+		    digitos = cnpj.substring(tamanho);
+		    soma = 0;
+		    pos = tamanho - 7;
+		    for (var i = tamanho; i >= 1; i--) {
+		      soma += numeros.charAt(tamanho - i) * pos--;
+		      if (pos < 2)
+		            pos = 9;
+		    }
+		    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		    if (resultado != digitos.charAt(0)){
+			    	$("#alertadocdiv").remove();
+					var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+					"<span style='color: #000000'><strong>Alerta!</strong>"+
+					"O CNPJ informado  é inválido.</span></div>";
+					$("#alertas" ).append( alerta );
+					//$("#documento").val("");
+					$("#documento").focus();
+					return false;
+			    }
+		    tamanho = tamanho + 1;
+		    numeros = cnpj.substring(0,tamanho);
+		    soma = 0;
+		    pos = tamanho - 7;
+		    for (i = tamanho; i >= 1; i--) {
+		      soma += numeros.charAt(tamanho - i) * pos--;
+		      if (pos < 2)
+		            pos = 9;
+		    }
+		    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		    if (resultado != digitos.charAt(1)){
+			    	$("#alertadocdiv").remove();
+					var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+					"<span style='color: #000000'><strong>Alerta!</strong>"+
+					"O CNPJ informado  é inválido.</span></div>";
+					$("#alertas" ).append( alerta );
+					//$("#documento").val("");
+					$("#documento").focus();
+					return false;
+			    }
+		    $("#alertadocdiv").remove();
+		    return true;
+		    
+		}
 
 </script>
   
@@ -145,24 +240,24 @@
 			  </div>
 			  <div class="form-group col-md-5" id="fisica1" style="display:none;">
 				<label for="razaosocial">Nome Completo:</label> <input type="text"
-						class="form-control" id="nomecompleto" name="razaosocial" placeholder="Digite o nome" autofocus>
+						class="form-control" id="nomecompleto" name="razaosocial" placeholder="Digite o nome" autofocus required>
 			  </div>
 			  <div class="form-group col-md-5" id="jurudico2">
 				<label for="razaosocial">Razão Social:</label> <input type="text"
-						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" autofocus>
+						class="form-control" id="razaosocial" name="razaosocial" placeholder="Digite a razao social" autofocus required>
 			  </div>
 			  <div class="form-group col-md-5" id="jurudico1">
 				<label for="nomefantasia">Nome Fantasia:</label> 
-					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" autofocus>
+					<input type="text" class="form-control" id="nomefantasia" name="nomefantasia" placeholder="Digite o nome" autofocus required>
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
-						name="tipoDocumento" id="tipoDocumento" required>
+						name="tipoDocumento" id="tipoDocumento" onchange="mascaraRG();" required>
 					</select>
 			  </div>
 			  <div class="form-group col-md-3">
 				<label for="documento">Número do Documento:</label> 
-					<input onblur="escolheValidacao();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento">
+					<input onblur="escolheValidacao();" onchange="escolheValidacao();" type="text" class="form-control" id="documento" name="documento" placeholder="Digite o documento" required>
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="cep">CEP:</label> <input type="text"
@@ -221,14 +316,6 @@
 						<c:forEach items="${unidadesprisionais}" var="unidadePrisional">
 								<option value="${unidadePrisional.id}">${unidadePrisional.nome}</option>
 						</c:forEach>
-					</select>
-			  </div>
-			  <div class="form-group col-md-2">
-				<label for="status">Status:</label> <select class="form-control"
-						name="status" id=status  required>
-						<option value="">Selecione ...</option>
-						<option value="0">Inativo</option>
-						<option value="1">Ativo</option>
 					</select>
 			  </div>
 			  <div class="form-group">
