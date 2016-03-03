@@ -1,6 +1,8 @@
 package br.com.semear.gestao.dao.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "PERGUNTA")
@@ -39,6 +42,9 @@ public class PerguntaEntity {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USUARIO", nullable = false)
 	private UsuarioEntity usuarioEntity;
+	
+	@Transient
+	private List<AlternativaPerguntaEntity> alternativas = new ArrayList<AlternativaPerguntaEntity>();
 
 	public long getId() {
 		return id;
@@ -88,4 +94,11 @@ public class PerguntaEntity {
 		this.usuarioEntity = usuarioEntity;
 	}
 
+	public List<AlternativaPerguntaEntity> getAlternativas() {
+		return alternativas;
+	}
+
+	public void setAlternativas(List<AlternativaPerguntaEntity> alternativas) {
+		this.alternativas = alternativas;
+	}
 }

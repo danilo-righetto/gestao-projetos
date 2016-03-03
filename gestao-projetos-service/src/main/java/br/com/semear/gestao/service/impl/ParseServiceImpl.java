@@ -3,6 +3,7 @@ package br.com.semear.gestao.service.impl;
 import org.springframework.stereotype.Service;
 
 import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
@@ -15,6 +16,7 @@ import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
+import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
@@ -394,5 +396,19 @@ public class ParseServiceImpl implements ParseService {
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
 		}
 		return model;
+	}
+
+	@Override
+	public AlternativaPerguntaEntity parseToEntity(AlternativaPergunta model) {
+		AlternativaPerguntaEntity entity = null;
+		if(model != null){
+			entity = new AlternativaPerguntaEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setDescricaoAlternativa(model.getDescricaoAlternativa());
+			entity.setId(model.getId());
+			entity.setPerguntaEntity(parseToEntity(model.getPergunta()));
+		}
+		
+		return entity;
 	}
 }

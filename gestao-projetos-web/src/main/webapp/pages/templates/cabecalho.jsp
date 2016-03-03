@@ -113,7 +113,7 @@
 					<li id="menu-acoes"><a
 						href='<c:url value="/painel/acoes/" />'>Ações</a></li>
 					<li id="menu-instituicoes"><a
-						href='<c:url value="/painel/instituicoes/cadastro" />'>Instituições</a>
+						href='<c:url value="/painel/instituicoes/" />'>Instituições</a>
 					</li>
 					<li id="menu-reeducandos"><a
 						href='<c:url value="/painel/reeducandos/cadastro" />'>Reeducandos</a>
