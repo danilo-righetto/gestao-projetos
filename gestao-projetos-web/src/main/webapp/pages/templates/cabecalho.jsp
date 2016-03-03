@@ -116,7 +116,7 @@
 						href='<c:url value="/painel/instituicoes/" />'>Instituições</a>
 					</li>
 					<li id="menu-reeducandos"><a
-						href='<c:url value="/painel/reeducandos/cadastro" />'>Reeducandos</a>
+						href='<c:url value="/painel/reeducandos/" />'>Reeducandos</a>
 					</li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>

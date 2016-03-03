@@ -23,7 +23,7 @@ public class ReeducandoEntity {
 	@Column(name = "ID")
 	private long id;
 
-	@Column(name = "MATRICULA")
+	@Column(name = "MATRICULA", unique = true)
 	private String matricula;
 
 	@Column(name = "NOME")
