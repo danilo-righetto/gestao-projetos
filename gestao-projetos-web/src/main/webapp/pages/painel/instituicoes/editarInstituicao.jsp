@@ -54,8 +54,8 @@ $(function() {
 	function ocultarCNPJ(){
 		var escolha = document.getElementById("tipopessoa").value;
 		if(escolha == "fisica"){
-			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
 			$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
+			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
 			document.getElementById("jurudico1").style.display = "none";
 			document.getElementById("jurudico2").style.display = "none";
 			document.getElementById("fisica1").style.display = "block";

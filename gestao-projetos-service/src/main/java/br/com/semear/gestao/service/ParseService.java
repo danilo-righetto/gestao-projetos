@@ -5,6 +5,7 @@ import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
+import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
@@ -16,6 +17,7 @@ import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
 import br.com.semear.gestao.model.Perfil;
+import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.Reeducando;
@@ -60,4 +62,12 @@ public interface ParseService {
 	TipoPergunta parseToModel(TipoPerguntaEntity entity);
 	
 	Acao parseToModel(AcaoEntity a);
+
+	QuestionarioEntity parseToEntity(Questionario questionario);
+
+	PerguntaEntity parseToEntity(Pergunta model);
+
+	TipoPerguntaEntity parseToEntity(TipoPergunta model);
+
+	Pergunta parseToModel(PerguntaEntity p);
 }

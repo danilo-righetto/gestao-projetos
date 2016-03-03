@@ -29,6 +29,7 @@
 		if(escolha == "fisica"){
 			validarCPF();
 		}else if(escolha == "juridica"){
+
 			validaCNPJ();
 		}
 	}
@@ -39,6 +40,7 @@
 			$('#documento').mask('00000000000000');
 		}else{
 			$('#documento').mask('000.000.000-00');
+
 		}
 	}
 	
@@ -316,6 +318,14 @@
 						<c:forEach items="${unidadesprisionais}" var="unidadePrisional">
 								<option value="${unidadePrisional.id}">${unidadePrisional.nome}</option>
 						</c:forEach>
+					</select>
+			  </div>
+			  <div class="form-group col-md-2">
+				<label for="status">Status:</label> <select class="form-control"
+						name="status" id=status  required>
+						<option value="">Selecione ...</option>
+						<option value="0">Inativo</option>
+						<option value="1">Ativo</option>
 					</select>
 			  </div>
 			  <div class="form-group">

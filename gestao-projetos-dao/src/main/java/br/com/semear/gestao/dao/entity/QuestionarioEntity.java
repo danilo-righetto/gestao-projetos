@@ -59,4 +59,8 @@ public class QuestionarioEntity {
 	public void setProjeto(ProjetoEntity projeto) {
 		this.projeto = projeto;
 	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

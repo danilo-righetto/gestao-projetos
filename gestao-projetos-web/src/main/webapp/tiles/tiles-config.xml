@@ -79,7 +79,7 @@
 	<!-- Semear - Cadastro de Ações -->
 	<definition name="cadastrarAcao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/acoes/cadastrarAcao.jsp" />
+			value="/pages/painel/acoes/cadastroAcao.jsp" />
 	</definition>
 	<definition name="editarAcao" extends="main">
 		<put-attribute name="conteudo" value="/pages/painel/acoes/editarAcao.jsp" />
