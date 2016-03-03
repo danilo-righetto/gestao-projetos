@@ -22,7 +22,7 @@ public class UnidadePrisionalEntity {
 	private String nome;
 
 	@Column(name = "STATUS_UNIDADE", nullable = false)
-	private Boolean status;
+	private boolean status;
 
 	@OneToMany(mappedBy = "unidadePrisional", fetch = FetchType.LAZY)
 	private List<ReeducandoEntity> reeducandos;
@@ -51,11 +51,11 @@ public class UnidadePrisionalEntity {
 		this.nome = nome;
 	}
 
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

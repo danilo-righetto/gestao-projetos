@@ -8,26 +8,55 @@
 
 <script type="text/javascript">
 	$(function() {
+		var msg = "<c:out value='${msg}'/>";
+		if(msg == 'OK'){
+			$("#modalProjetoAdicionado").modal({
+				  keyboard: false,
+				  backdrop: 'static'
+			});
+		}
 		$("#menu-projetos").attr('class', 'active');
-		$( ".data" ).datepicker({
-			dateFormat : 'dd/mm/yy',
-			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
-					'Quinta', 'Sexta', 'Sábado' ],
-			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
-			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
-					'Sáb', 'Dom' ],
-			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
-					'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-					'Outubro', 'Novembro', 'Dezembro' ],
-			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
-					'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-			nextText : 'Próximo',
-			prevText : 'Anterior'
-		});
+		$(".data").datepicker(
+				{
+					dateFormat : 'dd/mm/yy',
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+							'Sexta', 'Sábado' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb', 'Dom' ],
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+							'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					nextText : 'Próximo',
+					prevText : 'Anterior'
+				});
 	});
 </script>
 
 <body>
+<!-- MODAL PROJETO ADICIONADO INICIO -->
+	<div class="modal fade" id="modalProjetoAdicionado" tabindex="-1" role="dialog"
+		data-backdrop="static" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Projeto adicionado com sucesso!</h4>
+				</div>
+				<div class="modal-body">
+					<p>O que deseja fazer agora?</p>
+				</div>
+				<div class="modal-footer">
+					<a href='<c:url value="/painel/projetos/" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Ir para a lista de projetos</a>
+					<a href='<c:url value="/painel/questionarios/cadastro/${idProjeto}" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Cadastrar Questionario</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL PROJETO ADICIONADO FIM -->
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
@@ -72,10 +101,9 @@
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/projetos/" />'
 								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Cancelar</a>
-							<button type="submit"
-								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Salvar Projeto</button>
+								class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+							<button type="submit" style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+								class="btn btn-default">Salvar Projeto<span class="glyphicon glyphicon-ok"></span></button>
 						</div>
 					</form>
 				</div>

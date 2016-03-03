@@ -4,6 +4,11 @@ INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_COLABOR
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_USUARIO', 'USUARIO');
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_REEDUCANDO', 'REEDUCANDO');
 
+INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('1', 'RESPOSTA �NICA');
+INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('2', 'RESPOSTA M�LTIPLA');
+INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('3', 'TEXTO');
+
+
 INSERT INTO `gestao-projetos`.`usuario` (`dataCadastro`,`NOME`,`REALIZA_LOGIN`,`SENHA`,`USUARIO`,`PERFIL`)
 VALUES ('2016-02-27 00:54:04','WELINGTON RICARDO DE ALMEIDA',1,'$2a$10$zFbgQoQCfWUMrbg/DTyvm.TLWQv1N.kXF33YLPmfH5Me1Y2oVoeG2','welington2.ralmeida@gmail.com','ROLE_COORDENADOR');
 

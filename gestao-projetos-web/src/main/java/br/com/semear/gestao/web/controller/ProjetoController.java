@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Usuario;
@@ -39,11 +40,16 @@ public class ProjetoController {
 	}
 
 	@RequestMapping(value = "salvarProjeto", method = RequestMethod.POST)
-	public String salvarProjeto(Projeto projeto, HttpSession session) {
+	public ModelAndView salvarProjeto(Projeto novoProjeto, HttpSession session, RedirectAttributes redirectAttributes) {
 		
-		projeto.setUsuario((Usuario) session.getAttribute("usuario"));
-		projetoService.cadastrarProjeto(projeto);
-		return "redirect:/painel/projetos/";
+		novoProjeto.setUsuario((Usuario) session.getAttribute("usuario"));
+		String msg = projetoService.cadastrarProjeto(novoProjeto);
+		
+		mav.clear();
+		mav.setViewName("cadastroProjeto");
+		mav.addObject("idProjeto", novoProjeto.getId());
+		mav.addObject("msg", msg);
+		return mav;
 	}
 	
 	@RequestMapping(value="editar/{idProjeto}")

@@ -26,9 +26,21 @@ public class AcaoDaoImpl implements AcaoDAO {
 	}
 
 	@Override
+	public void editar(AcaoEntity acao) {
+		em.merge(acao);
+	}
+
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<AcaoEntity> listarAcoes() {
 		Query query = em.createQuery("select a from AcaoEntity a");
 		return query.getResultList();
+	}
+
+	@Override
+	public AcaoEntity buscarAcaoPorId(long idAcao) {
+		Query query = em.createQuery("select a from AcaoEntity a where a.id = :idAcao");
+		query.setParameter("idAcao", idAcao);
+		return (AcaoEntity) query.getSingleResult();
 	}
 }
