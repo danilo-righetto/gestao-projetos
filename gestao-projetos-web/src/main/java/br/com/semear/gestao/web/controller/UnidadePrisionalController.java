@@ -20,7 +20,7 @@ public class UnidadePrisionalController {
 	private UnidadePrisionalService unidadePrisionalService;
 
 	@RequestMapping("/cadastrar")
-	public String formCadastrar() {
+	public String formCadastro() {
 		return "cadastrarUnidadePrisional";
 	}
 

@@ -30,10 +30,12 @@
 		if ($("#tipoPergunta").val() == 1) {
 
 			$("#inputQtdAlternativasMultipla").val("");
+			$("#inputQtdAlternativasMultipla").removeAttr('required');
 			validarQtdAlternativasMultipla();
 
 			$("#divRespostaUnica").removeAttr('style');
 			$("#divRespostaUnica").attr('style', 'display:block');
+			$("#inputRespostaUnica").attr('required', 'required');
 
 			$("#divRespostaMultipla").removeAttr('style');
 			$("#divRespostaMultipla").attr('style', 'display:none');
@@ -44,9 +46,11 @@
 
 			$("#divRespostaMultipla").removeAttr('style');
 			$("#divRespostaMultipla").attr('style', 'display:block');
+			$("#inputQtdAlternativasMultipla").attr('required', 'required');
 
 			$("#divRespostaUnica").removeAttr('style');
 			$("#divRespostaUnica").attr('style', 'display:none');
+			$("#inputRespostaUnica").removeAttr('required');
 
 		} else if ($("#tipoPergunta").val() == 3) {
 			$("#inputRespostaUnica").val("");
@@ -56,8 +60,10 @@
 
 			$("#divRespostaUnica").removeAttr('style');
 			$("#divRespostaUnica").attr('style', 'display:none');
+			$("#inputRespostaUnica").removeAttr('required');
 			$("#divRespostaMultipla").removeAttr('style');
 			$("#divRespostaMultipla").attr('style', 'display:none');
+			$("#inputQtdAlternativasMultipla").removeAttr('required');
 		} else {
 			$("#inputRespostaUnica").val("");
 
@@ -71,13 +77,15 @@
 	function escondeTodasAsDivsDeResposta() {
 		$("#divRespostaUnica").removeAttr('style');
 		$("#divRespostaUnica").attr('style', 'display:none');
+		$("#inputRespostaUnica").removeAttr('required');
 		$("#divRespostaMultipla").removeAttr('style');
 		$("#divRespostaMultipla").attr('style', 'display:none');
+		$("#inputQtdAlternativasMultipla").removeAttr('required');
 	}
 
 	function validarQtdAlternativasMultipla() {
 		if ($("#inputQtdAlternativasMultipla").val() != ""
-				&& $("#inputQtdAlternativasMultipla").val() > 0
+				&& $("#inputQtdAlternativasMultipla").val() > 1
 				&& $("#inputQtdAlternativasMultipla").val() <= 5) {
 			var qtd = $("#inputQtdAlternativasMultipla").val();
 			$("#divAlternativasRespostaMultipla label").remove();
@@ -85,8 +93,8 @@
 			for ( var i = 1; i <= qtd; i++) {
 				$("#divAlternativasRespostaMultipla")
 						.append(
-								"<label for='nome'>Alternativa:</label> <input type='text' class='form-control'"+
-						"'name='alternativaRespostaMultipla' placeholder='Digite a alternativa' required autofocus>");
+								"<label>Alternativa:</label><input type='text' class='form-control' name='alternativaRespostaMultipla' "+
+								"placeholder='Digite a alternativa' required autofocus>");
 			}
 
 			$("#divAlternativasRespostaMultipla").removeAttr('style');
@@ -245,6 +253,12 @@
 												</c:if>
 												<c:if test="${pergunta.tipoPergunta.id eq 3}">
 													<td class="text-center">TEXTO</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 4}">
+													<td class="text-center">SIM/NÃO</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 4}">
+													<td class="text-center">SIM/NÃO</td>
 												</c:if>
 											</c:otherwise>
 										</c:choose>

@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.QuestionarioDAO;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
+import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
@@ -102,14 +104,28 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	private void adicionarPerguntas(Questionario questionario) {
 		for(Pergunta p : questionario.getPerguntas()){
 			PerguntaEntity perguntaEntity = parseService.parseToEntity(p);
+			
+			for(AlternativaPergunta alternativa : p.getAlternativas()){
+				perguntaEntity.getAlternativas().add(parseService.parseToEntity(alternativa));
+			}
+
 			if(perguntaEntity.getId() != 0){
 				questionarioDAO.alterarPergunta(perguntaEntity);
 			}else{
 				questionarioDAO.salvarPergunta(perguntaEntity);
+				adicionarAlternativas(perguntaEntity);
 			}
 			
 		}
 		
+	}
+
+	private void adicionarAlternativas(PerguntaEntity perguntaEntity) {
+		for(AlternativaPerguntaEntity alternativa : perguntaEntity.getAlternativas()){
+			alternativa.setDataCadastro(Calendar.getInstance());
+			alternativa.setPerguntaEntity(perguntaEntity);
+			questionarioDAO.salvarAlternativa(alternativa);
+		}
 	}
 
 	private void removerPerguntas(List<Pergunta> perguntasRemovidas) {

@@ -1,35 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
-
-<!DOCTYPE html>
-<html>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css"
-	href="/gestao-projetos/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-<link href="/gestao-projetos/bootstrap/datepicker/dist/css/bootstrap-datepicker.css"
-	rel="stylesheet" />
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script src="/gestao-projetos/bootstrap/js/jquery.mask.min.js"></script>
-<script
-	src="/gestao-projetos/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-<script
-	src="/gestao-projetos/bootstrap/datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 <title>Cadastro de Reeducando</title>
-<style type="text/css">
-#main {
-	margin-top: 60px;
-}
-</style>
-
 <script type="text/javascript">
+	$(function() {
+		$("#menu-reeducandos").attr('class', 'active');
+	});
+
 	$(function() {
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
 		$('#cep').mask('00000-000');
@@ -100,84 +84,89 @@
 	// 	    return true;   
 	// 	}
 </script>
-
 </head>
-
 <body>
 	<!-- Formulario de Cadastro - INICIO -->
-	<div id="main" class="container-fluid">
-
-		<h3 class="page-header">Cadastro de Reeducando</h3>
-		<div id="alertas"></div>
-		<form action="salvarReeducando" method="POST">
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label for="matricula">Número da Matrícula:</label><input
-						type="text" class="form-control" id="matricula" name="matricula"
-						placeholder="Digite a matrícula" required autofocus />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label for="nome">Nome Completo:</label> <input type="text"
-						class="form-control" id="nome" name="nome"
-						placeholder="Digite o nome" required autofocus>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label for="sexo">Sexo</label> <select class="form-control"
-						name="sexo" required>
-						<option value="0">Selecione ...</option>
-						<option value="F">Feminino</option>
-						<option value="M">Masculino</option>
-					</select>
-				</div>
-			</div>
-			<!-- datepicker  - INICIO -->
-
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label for="dataNascimento">Data de Nascimento:</label> <input
-						type="text" class="form-control" id="dataNascimento"
-						name="dataNascimento" placeholder="Selecione a Data" required
-						autofocus>
-				</div>
-			</div>
-
-			<!-- datepicker  - FIM -->
-
-
-			<div class="row">
-				<div class="form-group col-md-4">
-					<label for="unidadePrisional">Unidade Prisional</label> <select
-						id="unidadePrisional" name="unidadePrisional.id"
-						class="form-control" required>
-						<option value="" label="Selecione..." />
-						<c:forEach var="unidadePrisional" items="${unidades}">
-							<option value="${unidadePrisional.id}"
-								label="${unidadePrisional.nome}" />
-						</c:forEach>
-					</select>
-				</div>
-			</div>
+	<div class="section">
+		<div class="container">
+			<h3 class="title-screen">Cadastro de Reeducando</h3>
 			<hr />
+			<div id="alertas"></div>
+			<div class="col-md-15">
+				<form action="salvarReeducando" method="POST">
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="nome">Nome Completo:</label> <input type="text"
+								class="form-control" id="nome" name="nome"
+								placeholder="Digite o nome" required autofocus>
+						</div>
+						<div class="form-group col-md-4">
+							<label for="unidadePrisional">Unidade Prisional:</label> <select
+								id="unidadePrisional" name="unidadePrisional.id"
+								class="form-control" required>
+								<option value="" label="Selecione..." />
+								<c:forEach var="unidadePrisional" items="${unidades}">
+									<option value="${unidadePrisional.id}"
+										label="${unidadePrisional.nome}" />
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-3">
+							<label for="matricula">Número da Matrícula:</label><input
+								type="text" class="form-control" id="matricula" name="matricula"
+								placeholder="Digite a matrícula" required />
+						</div>
+						<div class="form-group col-md-2">
+							<label for="sexo">Sexo:</label> <select class="form-control"
+								name="sexo" required>
+								<option value="">Selecione ...</option>
+								<option value="F">Feminino</option>
+								<option value="M">Masculino</option>
+							</select>
+						</div>
+						<!-- datepicker  - INICIO -->
 
-			<div class="row">
-				<div class="col-md-12">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-					<a href="#" class="btn btn-default">Cancelar</a>
-				</div>
+						<div class="form-group col-md-2">
+							<label for="dataNascimento">Data de Nascimento:</label> <input
+								type="text" class="form-control data" id="dataNascimento"
+								name="dataNascimento" placeholder="Selecione a Data" required>
+						</div>
+						<!-- datepicker  - FIM -->
+					</div>
+					<hr />
+
+					<div class="row">
+						<div class="col-md-12">
+							<a href='<c:url value="/painel/reeducandos/"></c:url>'
+								class="btn btn-default btn-return">Cancelar</a>
+							<button type="submit" class="btn btn-default btn-add">Salvar Reeducando</button>
+						</div>
+					</div>
+				</form>
 			</div>
-
-		</form>
+		</div>
 	</div>
-
 	<!-- Formulario de Cadastro - FIM -->
+	<div class="section" style="margin-top: 60px;"></div>
 </body>
 <script>
-	$('#dataNascimento').datepicker({
-		language : 'pt-BR'
-	});
+	$(".data").datepicker(
+			{
+				dateFormat : 'dd/mm/yy',
+				dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+						'Sexta', 'Sábado' ],
+				dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
+				dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+						'Sáb', 'Dom' ],
+				monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+						'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+						'Outubro', 'Novembro', 'Dezembro' ],
+				monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+						'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+				nextText : 'Próximo',
+				prevText : 'Anterior'
+			});
 </script>
 </html>

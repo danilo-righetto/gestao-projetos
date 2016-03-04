@@ -31,6 +31,7 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 	@Override
 	public void cadastrarInstituicao(Instituicao instituicao) {
 		instituicao.setDataCadastro(Calendar.getInstance());
+		instituicao.setStatus("ATIVO");
 		instituicaoDAO.cadastrarInstituicao(parse.parseToEntity(instituicao));
 	}
 
@@ -79,6 +80,13 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 	@Override
 	public Instituicao buscarInstituicaoPorId(long idInstituicao) {
 		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorId(idInstituicao);
+		Instituicao instituicao = parse.parseToModel(entity);
+		return instituicao;
+	}
+
+	@Override
+	public Instituicao buscarInstituicaoPorDocumento(String documento) {
+		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorDocumento(documento);
 		Instituicao instituicao = parse.parseToModel(entity);
 		return instituicao;
 	}

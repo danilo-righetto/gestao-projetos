@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.QuestionarioDAO;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
@@ -92,6 +93,13 @@ public class QuestionarioDaoImpl implements QuestionarioDAO {
 			return (PerguntaEntity) query.getResultList().get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public void salvarAlternativa(AlternativaPerguntaEntity alternativa) {
+		
+		em.persist(alternativa);
+		
 	}
 
 }

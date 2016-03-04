@@ -1,5 +1,6 @@
 package br.com.semear.gestao.web.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.Usuario;
@@ -24,8 +26,13 @@ import br.com.semear.gestao.service.QuestionarioService;
 @Controller
 @RequestMapping("/painel/questionarios")
 @Scope(value=WebApplicationContext.SCOPE_SESSION)
-public class QuestionarioController {
+public class QuestionarioController implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7770365736587524256L;
+
 	@Inject
 	private QuestionarioService questionarioService;
 	
@@ -78,10 +85,37 @@ public class QuestionarioController {
 	}
 	
 	@RequestMapping("adicionarPergunta")
-	public String adicionarPergunta(Pergunta novaPergunta,HttpSession session,RedirectAttributes redirectAttributes){
+	public String adicionarPergunta(Pergunta novaPergunta,String inputRespostaUnica,
+			String[] alternativaRespostaMultipla,
+			HttpSession session,RedirectAttributes redirectAttributes){
+		
 		if(!validarPergunta(novaPergunta)){
+			
 			novaPergunta.setDataCadastro(Calendar.getInstance());
 			novaPergunta.setUsuario((Usuario) session.getAttribute("usuario"));
+			if(novaPergunta.getTipoPergunta().getId() == 1){
+				AlternativaPergunta alternativa = new AlternativaPergunta();
+				alternativa.setDescricaoAlternativa(inputRespostaUnica);
+				novaPergunta.getAlternativas().add(alternativa);
+			}
+			else if(novaPergunta.getTipoPergunta().getId() == 2){
+				for(int i =0; i < alternativaRespostaMultipla.length; i++){
+					AlternativaPergunta alternativa = new AlternativaPergunta();
+					alternativa.setDescricaoAlternativa(alternativaRespostaMultipla[i]);
+					novaPergunta.getAlternativas().add(alternativa);
+				}
+			}
+			
+			else if(novaPergunta.getTipoPergunta().getId() == 4){
+				AlternativaPergunta alternativaSim = new AlternativaPergunta();
+				alternativaSim.setDescricaoAlternativa("Sim");
+				novaPergunta.getAlternativas().add(alternativaSim);
+				
+				AlternativaPergunta alternativaNao = new AlternativaPergunta();
+				alternativaNao.setDescricaoAlternativa("Não");
+				novaPergunta.getAlternativas().add(alternativaNao);
+			}
+			
 			this.questionario.getPerguntas().add(novaPergunta);
 			redirectAttributes.addFlashAttribute("mensagem","ADD");
 		}else{

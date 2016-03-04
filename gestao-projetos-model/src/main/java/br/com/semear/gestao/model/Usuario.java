@@ -8,6 +8,7 @@ public class Usuario {
 	private String usuario;
 	private String senha;
 	private Perfil perfil;
+	private Instituicao instituicao;
 	private Calendar dataCadastro;
 	private boolean realizaLogin;
 	
@@ -52,5 +53,11 @@ public class Usuario {
 	}
 	public void setRealizaLogin(boolean realizaLogin) {
 		this.realizaLogin = realizaLogin;
+	}
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
 	}
 }

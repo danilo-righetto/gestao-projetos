@@ -1,5 +1,7 @@
 package br.com.semear.gestao.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -21,12 +23,23 @@ public class ReeducandoDaoImpl implements ReeducandoDAO {
 	public void cadastrarReeducando(ReeducandoEntity reeducando) {
 		em.persist(reeducando);
 	}
-	
+
 	@Override
-	public ReeducandoEntity buscarReeducandoPorId(long idReeducando){
+	public void editarReeducando(ReeducandoEntity reeducando) {
+		em.merge(reeducando);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ReeducandoEntity> listarReeducandos() {
+		Query query = em.createQuery("select r from ReeducandoEntity r");
+		return query.getResultList();
+	}
+
+	@Override
+	public ReeducandoEntity buscarReeducandoPorId(long idReeducando) {
 		Query query = em.createQuery("select r from ReeducandoEntity r where r.id = :idReeducando");
 		query.setParameter("idReeducando", idReeducando);
 		return (ReeducandoEntity) query.getSingleResult();
 	}
-
 }

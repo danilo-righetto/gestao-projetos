@@ -12,5 +12,6 @@ public interface InstituicaoService {
 	public Instituicao buscarInstituicaoPorId(long idInstituicao);
 
 	public void editarInstituicao(Instituicao instituicao);
-
+	
+	public Instituicao buscarInstituicaoPorDocumento(String documento);
 }

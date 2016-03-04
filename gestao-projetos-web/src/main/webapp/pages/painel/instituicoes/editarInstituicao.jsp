@@ -18,115 +18,96 @@ $(function() {
 </head>
 
 <script type="text/javascript">
-	$(function() {
-		$('#documentoCNPJ').mask('00.000.000/0000-00');
-		//$('#cpf').mask('000.000.000-00');
-		$('#cep').mask('00000-000');
-		$('#telefoneFixo').mask('(00) 0000-0000');
-		$('#telefone').mask('(00) 0000-00009');
+$(function() {
+	$("#menu-instituicoes").attr('class', 'active');
+	$('#documentoCNPJ').mask('00.000.000/0000-00');
+	//$('#cpf').mask('000.000.000-00');
+	$('#cep').mask('00000-000');
+	$('#telefoneFixo').mask('(00) 0000-0000');
+	$('#telefone').mask('(00) 0000-00009');
+	
+	var docTipo = ${inst.tipoDocumento};
+	if(docTipo == "rg" || (docTipo == "cpf")){
 		
-		var escolha = document.getElementById("tipopessoa").value;
-		if(escolha == "fisica"){
-			$('#documento').mask('000.000.000-00');
-		}else if(escolha == "juridica"){
-			$('#documento').mask('00.000.000/0000-00');
-		}
-	});
-	
-	function escolheValidacao(){
-		var escolha = document.getElementById("tipopessoa").value;
-		if(escolha == "fisica"){
-			validarCPF();
-		}else if(escolha == "juridica"){
-			
-		}
+	}else if((docTipo == "rg")){
+		
 	}
-	
-	function mascaraRG(){
+});
+
+function escolheValidacao(){
+	var escolha = document.getElementById("tipopessoa").value;
+	if(escolha == "fisica"){
 		var rg = document.getElementById("tipoDocumento").value;
 		if(rg == "rg"){
-			$('#documento').mask('00000000000000');
+			validarDocumentoInst();
 		}else if(rg == "cpf"){
-			$('#documento').mask('000.000.000-00');
+			if(validarCPF()){
+				validarDocumentoInst();
+			}
+		}
+	}else if(escolha == "juridica"){
+		if(validaCNPJ()){
+			validarDocumentoInst();
 		}
 	}
-	
-	function ocultarCNPJ(){
-		var escolha = document.getElementById("tipopessoa").value;
-		if(escolha == "fisica"){
-			$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
-			$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
-			document.getElementById("jurudico1").style.display = "none";
-			document.getElementById("jurudico2").style.display = "none";
-			document.getElementById("fisica1").style.display = "block";
-			$('#documento').mask('000.000.000-00');
-			$('#nomecompleto').val("");
-			$('#cnpj').remove();
-		} else if(escolha == "juridica"){
-			$('#tipoDocumento').append('<option value="cnpj" id="cnpj">CNPJ</option>');
-			document.getElementById("jurudico1").style.display = "block";
-			document.getElementById("jurudico2").style.display = "block";
-			document.getElementById("fisica1").style.display = "none";
-			$('#documento').mask('00.000.000/0000-00');
-			$('#razaosocial').val("");
-			$('#cpf').remove();
-			$('#rg').remove();
-		}
+}
+
+function mascaraRG(){
+	var rg = document.getElementById("tipoDocumento").value;
+	if(rg == "rg"){
+		$('#documento').mask('00000000000000');
+	}else{
+		$('#documento').mask('000.000.000-00');
+
 	}
+}
+
+function ocultarCNPJ(){
+	var escolha = document.getElementById("tipopessoa").value;
+	if(escolha == "fisica"){
+		$('#tipoDocumento').append('<option value="cpf" id="cpf">CPF</option>');
+		$('#tipoDocumento').append('<option value="rg" id="rg">RG</option>');
+		document.getElementById("jurudico1").style.display = "none";
+		document.getElementById("jurudico2").style.display = "none";
+		document.getElementById("fisica1").style.display = "block";
+		$('#documento').mask('000.000.000-00');
+		$('#nomecompleto').val("");
+		$('#cnpj').remove();
+		$('#razaosocial').removeAttr('required');
+		$('#nomefantasia').removeAttr('required');
+	} else if(escolha == "juridica"){
+		$('#tipoDocumento').append('<option value="cnpj" id="cnpj">CNPJ</option>');
+		document.getElementById("jurudico1").style.display = "block";
+		document.getElementById("jurudico2").style.display = "block";
+		document.getElementById("fisica1").style.display = "none";
+		$('#documento').mask('00.000.000/0000-00');
+		$('#razaosocial').val("");
+		$('#cpf').remove();
+		$('#rg').remove();
+		$('#razaosocial').attr('required', 'required');
+		$('#nomefantasia').attr('required', 'required');
+	}
+}
 
 
-	function validarCPF() { 
-		var escolhapessoa = document.getElementById("tipopessoa").value;
-		if(escolhapessoa == "fisica"){
-		var cpf = $('#documento').val();
-	    cpf = cpf.replace(/[^\d]+/g,'');    
-	    if(cpf == '') return false; 
-	    // Elimina CPFs invalidos conhecidos    
-	    if (cpf.length != 11 || 
-	        cpf == "00000000000" || 
-	        cpf == "11111111111" || 
-	        cpf == "22222222222" || 
-	        cpf == "33333333333" || 
-	        cpf == "44444444444" || 
-	        cpf == "55555555555" || 
-	        cpf == "66666666666" || 
-	        cpf == "77777777777" || 
-	        cpf == "88888888888" || 
-	        cpf == "99999999999"){
-		    	$("#alertadocdiv").remove();
-				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
-				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  é inválido.</span></div>";
-				$("#alertas" ).append( alerta );
-				$("#cpf").val("");
-				$("#cpf").focus();
-				return false;
-	        }
-	    // Valida 1o digito 
-	    add = 0;    
-	    for (i=0; i < 9; i ++)       
-	        add += parseInt(cpf.charAt(i)) * (10 - i);  
-	        rev = 11 - (add % 11);  
-	        if (rev == 10 || rev == 11)     
-	            rev = 0;    
-	        if (rev != parseInt(cpf.charAt(9))) {
-	        	$("#alertadocdiv").remove();
-				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
-				"<span style='color: #000000'><strong>Alerta!</strong>"+
-				"O CPF informado  é inválido.</span></div>";
-				$("#alertas" ).append( alerta );
-				$("#documento").val("");
-				$("#documento").focus();
-				return false;
-		        }    
-	    // Valida 2o digito 
-	    add = 0;    
-	    for (i = 0; i < 10; i ++)        
-	        add += parseInt(cpf.charAt(i)) * (11 - i);  
-	    rev = 11 - (add % 11);  
-	    if (rev == 10 || rev == 11) 
-	        rev = 0;    
-	    if (rev != parseInt(cpf.charAt(10))){
+function validarCPF() { 
+	var escolhapessoa = document.getElementById("tipopessoa").value;
+	if(escolhapessoa == "fisica"){
+	var cpf = $('#documento').val();
+    cpf = cpf.replace(/[^\d]+/g,'');    
+    if(cpf == '') return false; 
+    // Elimina CPFs invalidos conhecidos    
+    if (cpf.length != 11 || 
+        cpf == "00000000000" || 
+        cpf == "11111111111" || 
+        cpf == "22222222222" || 
+        cpf == "33333333333" || 
+        cpf == "44444444444" || 
+        cpf == "55555555555" || 
+        cpf == "66666666666" || 
+        cpf == "77777777777" || 
+        cpf == "88888888888" || 
+        cpf == "99999999999"){
 	    	$("#alertadocdiv").remove();
 			var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
 			"<span style='color: #000000'><strong>Alerta!</strong>"+
@@ -135,11 +116,148 @@ $(function() {
 			$("#documento").val("");
 			$("#documento").focus();
 			return false;
+        }
+    // Valida 1o digito 
+    add = 0;    
+    for (i=0; i < 9; i ++)       
+        add += parseInt(cpf.charAt(i)) * (10 - i);  
+        rev = 11 - (add % 11);  
+        if (rev == 10 || rev == 11)     
+            rev = 0;    
+        if (rev != parseInt(cpf.charAt(9))) {
+        	$("#alertadocdiv").remove();
+			var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+			"<span style='color: #000000'><strong>Alerta!</strong>"+
+			"O CPF informado  é inválido.</span></div>";
+			$("#alertas" ).append( alerta );
+			$("#documento").val("");
+			$("#documento").focus();
+			return false;
+	        }    
+    // Valida 2o digito 
+    add = 0;    
+    for (i = 0; i < 10; i ++)        
+        add += parseInt(cpf.charAt(i)) * (11 - i);  
+    rev = 11 - (add % 11);  
+    if (rev == 10 || rev == 11) 
+        rev = 0;    
+    if (rev != parseInt(cpf.charAt(10))){
+    	$("#alertadocdiv").remove();
+		var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+		"<span style='color: #000000'><strong>Alerta!</strong>"+
+		"O CPF informado  é inválido.</span></div>";
+		$("#alertas" ).append( alerta );
+		$("#documento").val("");
+		$("#documento").focus();
+		return false;
+	    }
+    $("#alertadocdiv").remove();
+    return true;   
+	}
+}
+
+function validaCNPJ(){
+	 var cnpj = document.getElementById("documento").value;
+	 cnpj = cnpj.replace(/[^\d]+/g,'');
+	 
+	    if(cnpj == '') return false;
+	     
+	    if (cnpj.length != 14){
+		    	$("#alertadocdiv").remove();
+				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+				"<span style='color: #000000'><strong>Alerta!</strong>"+
+				"O CNPJ informado  é inválido.</span></div>";
+				$("#alertas" ).append( alerta );
+				//$("#documento").val("");
+				$("#documento").focus();
+				return false;
+		    }
+	        
+	 
+	    // Elimina CNPJs invalidos conhecidos
+	    if (cnpj == "00000000000000" || 
+	        cnpj == "11111111111111" || 
+	        cnpj == "22222222222222" || 
+	        cnpj == "33333333333333" || 
+	        cnpj == "44444444444444" || 
+	        cnpj == "55555555555555" || 
+	        cnpj == "66666666666666" || 
+	        cnpj == "77777777777777" || 
+	        cnpj == "88888888888888" || 
+	        cnpj == "99999999999999"){
+		    	$("#alertadocdiv").remove();
+				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+				"<span style='color: #000000'><strong>Alerta!</strong>"+
+				"O CNPJ informado  é inválido.</span></div>";
+				$("#alertas" ).append( alerta );
+				$("#documento").val("");
+				$("#documento").focus();
+			return false;
+	        }
+	         
+	    // Valida DVs
+	    tamanho = cnpj.length - 2
+	    numeros = cnpj.substring(0,tamanho);
+	    digitos = cnpj.substring(tamanho);
+	    soma = 0;
+	    pos = tamanho - 7;
+	    for (var i = tamanho; i >= 1; i--) {
+	      soma += numeros.charAt(tamanho - i) * pos--;
+	      if (pos < 2)
+	            pos = 9;
+	    }
+	    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+	    if (resultado != digitos.charAt(0)){
+		    	$("#alertadocdiv").remove();
+				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+				"<span style='color: #000000'><strong>Alerta!</strong>"+
+				"O CNPJ informado  é inválido.</span></div>";
+				$("#alertas" ).append( alerta );
+				$("#documento").val("");
+				$("#documento").focus();
+				return false;
+		    }
+	    tamanho = tamanho + 1;
+	    numeros = cnpj.substring(0,tamanho);
+	    soma = 0;
+	    pos = tamanho - 7;
+	    for (i = tamanho; i >= 1; i--) {
+	      soma += numeros.charAt(tamanho - i) * pos--;
+	      if (pos < 2)
+	            pos = 9;
+	    }
+	    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+	    if (resultado != digitos.charAt(1)){
+		    	$("#alertadocdiv").remove();
+				var alerta ="<div id='alertadocdiv' class='alert alert-warning'>"+
+				"<span style='color: #000000'><strong>Alerta!</strong>"+
+				"O CNPJ informado  é inválido.</span></div>";
+				$("#alertas" ).append( alerta );
+				//$("#documento").val("");
+				$("#documento").focus();
+				return false;
 		    }
 	    $("#alertadocdiv").remove();
-	    return true;   
-		}
+	    return true;
+	    
 	}
+
+
+function validarDocumentoInst(){
+	var documento = $("#documento").val();
+	$.post("/gestao-projetos/painel/instituicoes/consultarInstituicao?documento="+documento, function(existe) {
+		if(existe){
+			$("#alertadocdiv").remove();
+			var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
+					+ "<span style='color: #000000'><strong>Alerta!</strong>"
+					+ "O Documento informado já está sendo utilizado.</span></div>";
+			$("#alertas").append(alerta);
+			$("#documento").val("").focus();
+		}else{
+			$("#alertadocdiv").remove();
+		}
+	});
+}
 
 </script>
 
@@ -162,11 +280,15 @@ $(function() {
 								'selected' : '')}>Pessoa Juridica</option>
 					</select>
 			  </div>
-			  <div class="form-group col-md-5" id="fisica1" style="display:none;">
-				<label for="razaosocial">Nome Completo:</label> <input type="text"
-						class="form-control" id="nomecompleto" value="${inst.nomefantasia}" name="razaosocial" placeholder="Digite o nome" autofocus>
-			  </div>
-			  <div class="form-group col-md-5" id="jurudico2" ${(inst.tipoDocumento == "cnpj" ? 
+			  <c:choose>
+			  	<c:when test="${(inst.tipoDocumento == 'rg' || 'cpf')}">
+				  	<div class="form-group col-md-5" id="fisica1">
+					<label for="razaosocial">Nome Completo:</label> <input type="text"
+							class="form-control" id="nomecompleto" value="${inst.nomefantasia}" name="razaosocial" placeholder="Digite o nome" autofocus>
+				    </div>
+			  	</c:when>
+			  	<c:otherwise>
+			  	<div class="form-group col-md-5" id="jurudico2" ${(inst.tipoDocumento == "cnpj" ? 
 								'' : 'style="display: none;"')}>
 				<label for="razaosocial">Razão Social:</label> <input type="text"
 						class="form-control" id="razaosocial" value="${inst.razaosocial}" name="razaosocial" placeholder="Digite a razao social" autofocus>
@@ -176,6 +298,8 @@ $(function() {
 				<label for="nomefantasia">Nome Fantasia:</label> 
 					<input type="text" class="form-control" id="nomefantasia" value="${inst.nomefantasia}" name="nomefantasia" placeholder="Digite o nome" autofocus>
 			  </div>
+			  	</c:otherwise>
+			  </c:choose>
 			  <div class="form-group col-md-2">
 				<label for="tipoDocumento">Tipo do Documento</label> <select class="form-control"
 						name="tipoDocumento" id="tipoDocumento" onchange="mascaraRG();" readonly="readonly" required>
@@ -251,9 +375,9 @@ $(function() {
 				<label for="status">Status:</label> <select class="form-control"
 						name="status" id=status  required>
 						<option value="">Selecione ...</option>
-						<option value="0" ${(inst.status == "0" ? 
+						<option value="INATIVO" ${(inst.status == "INATIVO" ? 
 								'selected' : '')}>Inativo</option>
-						<option value="1" ${(inst.status == "1" ? 
+						<option value="ATIVO" ${(inst.status == "ATIVO" ? 
 								'selected' : '')}>Ativo</option>
 					</select>
 			  </div>
