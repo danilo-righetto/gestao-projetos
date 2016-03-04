@@ -61,7 +61,7 @@ public class InstituicaoEntity {
 	@Column(name = "TELEFONE")
 	private String telefone;
 
-	@Column(name = "EMAIL", unique = true)
+	@Column(name = "EMAIL")
 	private String email;
 
 	@Column(name = "RESPONSAVEL")

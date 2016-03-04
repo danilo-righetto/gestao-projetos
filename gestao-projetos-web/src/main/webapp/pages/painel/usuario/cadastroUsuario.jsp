@@ -59,6 +59,16 @@
 							</c:forEach>
 						</select>
 					</div>
+					<!-- Instituição - Usuario -->
+					<div class="form-group col-md-4">
+						<label for="instituicao">Instituição:</label> <select id="instituicao"
+							class="form-control" name="instituicao.id" required>
+							<option value="">Selecione ...</option>
+							<c:forEach items="${listaperfil}" var="instituicao">
+								<option value="${perfil.id}">${perfil.descricao}</option>
+							</c:forEach>
+						</select>
+					</div>
 					<div style="clear: both;"
 						class="form-group col-md-offset-2 col-md-4">
 						<div class="radio">

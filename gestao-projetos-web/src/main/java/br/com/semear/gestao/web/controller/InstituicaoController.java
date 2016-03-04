@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Instituicao;
@@ -65,5 +66,18 @@ public class InstituicaoController {
 		mav.addObject("unidadesprisionais", unidadePrisionalService.listaUnidades());
 		mav.addObject("inst", instituicaoService.buscarInstituicaoPorId(idInstituicao));
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="consultarInstituicao", method=RequestMethod.POST)
+	public boolean consultarInstituicao(String documento){
+		boolean documentoExiste = false;
+		
+		if(instituicaoService.buscarInstituicaoPorDocumento(documento) != null){
+			documentoExiste = true;
+		}
+		
+		return documentoExiste;
+		
 	}
 }

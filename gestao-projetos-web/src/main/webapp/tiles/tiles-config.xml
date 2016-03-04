@@ -93,9 +93,6 @@
 	<definition name="403" template="/pages/erro/403.jsp">
 	</definition>
 
-	<!-- Semear 404 -->
-	<definition name="404" template="/pages/erro/404.jsp">
-	</definition>
 
 	<!-- Semear - Cadastro de Perfil -->
 	<definition name="cadastroPerfil" extends="main">

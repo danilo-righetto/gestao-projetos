@@ -35,6 +35,26 @@ public class UsuarioEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PERFIL", nullable = false)
 	private PerfilEntity perfil;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "INSTITUICAO", nullable = true)
+	private InstituicaoEntity instituicao;
+
+	public InstituicaoEntity getInstituicao() {
+		return instituicao;
+	}
+
+	public void setInstituicao(InstituicaoEntity instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public List<ProjetoEntity> getProjetos() {
+		return projetos;
+	}
+
+	public void setProjetos(List<ProjetoEntity> projetos) {
+		this.projetos = projetos;
+	}
 
 	@Column(name="REALIZA_LOGIN" ,nullable = false)
 	private Boolean realizaLogin;

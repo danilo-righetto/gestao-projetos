@@ -48,4 +48,14 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 		return null;
 	}
 
+	@Override
+	public InstituicaoEntity buscarInstituicaoPorDocumento(String documento) {
+		Query query = em.createQuery("select u from InstituicaoEntity u where u.documento = :documento");
+		query.setParameter("documento", documento);
+		if(!query.getResultList().isEmpty()){
+			return (InstituicaoEntity) query.getSingleResult();
+		}
+		return null;
+	}
+
 }

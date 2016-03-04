@@ -12,4 +12,6 @@ public interface InstituicaoDAO {
 	public void editarInstituicao(InstituicaoEntity instituicao);
 
 	public InstituicaoEntity buscarInstituicaoPorId(long idInstituicao);
+	
+	public InstituicaoEntity buscarInstituicaoPorDocumento(String documento);
 }
