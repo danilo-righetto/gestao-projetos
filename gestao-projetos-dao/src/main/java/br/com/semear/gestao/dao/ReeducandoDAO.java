@@ -12,4 +12,6 @@ public interface ReeducandoDAO {
 	public List<ReeducandoEntity> listarReeducandos();
 
 	public ReeducandoEntity buscarReeducandoPorId(long idReeducando);
+
+	public ReeducandoEntity buscarMatricula(long matricula);
 }

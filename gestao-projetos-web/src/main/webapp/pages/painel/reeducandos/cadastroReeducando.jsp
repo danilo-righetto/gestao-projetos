@@ -92,10 +92,10 @@
 			<h3 class="title-screen">Cadastro de Reeducando</h3>
 			<hr />
 			<div id="alertas"></div>
-			<div class="col-md-15">
+			<div class="col-md-12">
 				<form action="salvarReeducando" method="POST">
-					<div class="row">
-						<div class="form-group col-md-4">
+					<div class="row col-md-offset-2">
+						<div class="form-group col-md-5">
 							<label for="nome">Nome Completo:</label> <input type="text"
 								class="form-control" id="nome" name="nome"
 								placeholder="Digite o nome" required autofocus>
@@ -106,24 +106,27 @@
 								class="form-control" required>
 								<option value="" label="Selecione..." />
 								<c:forEach var="unidadePrisional" items="${unidades}">
-									<option value="${unidadePrisional.id}"
-										label="${unidadePrisional.nome}" />
+									<c:if test="${unidadePrisional.status != false}">
+										<option value="${unidadePrisional.id}"
+											label="${unidadePrisional.nome}" />
+									</c:if>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-3">
+					<div class="row col-md-offset-2">
+						<div class="form-group col-md-5">
 							<label for="matricula">Número da Matrícula:</label><input
 								type="text" class="form-control" id="matricula" name="matricula"
-								placeholder="Digite a matrícula" required />
+								placeholder="Digite a matrícula" required
+								onblur="verificarMatricula();" />
 						</div>
 						<div class="form-group col-md-2">
 							<label for="sexo">Sexo:</label> <select class="form-control"
 								name="sexo" required>
 								<option value="">Selecione ...</option>
-								<option value="F">Feminino</option>
-								<option value="M">Masculino</option>
+								<option value="F">FEMININO</option>
+								<option value="M">MASCULINO</option>
 							</select>
 						</div>
 						<!-- datepicker  - INICIO -->
@@ -141,7 +144,8 @@
 						<div class="col-md-12">
 							<a href='<c:url value="/painel/reeducandos/"></c:url>'
 								class="btn btn-default btn-return">Cancelar</a>
-							<button type="submit" class="btn btn-default btn-add">Salvar Reeducando</button>
+							<button type="submit" class="btn btn-default btn-add">Salvar
+								Reeducando</button>
 						</div>
 					</div>
 				</form>
@@ -151,7 +155,7 @@
 	<!-- Formulario de Cadastro - FIM -->
 	<div class="section" style="margin-top: 60px;"></div>
 </body>
-<script>
+<script type="text/javascript">
 	$(".data").datepicker(
 			{
 				dateFormat : 'dd/mm/yy',
@@ -168,5 +172,26 @@
 				nextText : 'Próximo',
 				prevText : 'Anterior'
 			});
+</script>
+<script type="text/javascript">
+	function verificarMatricula() {
+		var matricula = $("#matricula").val();
+		$
+				.post(
+						"/gestao-projetos/painel/reeducandos/verificarMatricula?matricula="
+								+ matricula,
+						function(existe) {
+							if (existe) {
+								$("#alertadocdiv").remove();
+								var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
+										+ "<span style='color: #000000'><strong>Alerta! </strong>"
+										+ "Matrícula já existe.</span></div>";
+								$("#alertas").append(alerta);
+								$("#matricula").val("").focus();
+							} else {
+								$("#alertadocdiv").remove();
+							}
+						})
+	};
 </script>
 </html>
