@@ -23,7 +23,7 @@
 		});
 		$(".previous").text('Anterior');
 		$(".next").text('Próximo');
-
+		
 	});
 
 	function validarTipoPergunta() {
@@ -114,8 +114,7 @@
 	<div class="modal fade" id="modalPergunta" tabindex="-1" role="dialog"
 		data-backdrop="static" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
-			<form id="form-add-pergunta" method="POST"
-				action='<c:url value="/painel/questionarios/adicionarPergunta" />'>
+			<form id="form-add-pergunta" method="POST" action='<c:url value="/painel/questionarios/adicionarPergunta" />'>
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -125,9 +124,8 @@
 						<h4 class="modal-title">Adicionar Pergunta</h4>
 					</div>
 					<div class="modal-body">
-						<input type="hidden" name="questionario.id"
-							value="${questionario.id}" /> <input type="hidden"
-							name="questionario.projeto.id" value="${questionario.projeto.id}" />
+						<input type="hidden" name="questionario.id" value="${questionario.id}"/>
+						<input type="hidden" name="questionario.projeto.id" value="${questionario.projeto.id}"/>
 						<div class="row">
 							<div class="form-group col-md-8">
 								<label for="nome">Pergunta:</label> <input type="text"
@@ -175,8 +173,7 @@
 						<button type="button"
 							style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 							class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit"
-							style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						<input type="submit" style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 							class="btn btn-default" value="Adicionar">
 					</div>
 				</div>
@@ -186,103 +183,96 @@
 	<!-- MODAL ADICIONAR PERGUNTA FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Questionário</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
+				Questionário</h4>
 			<hr />
 			<c:if test="${mensagem != null && mensagem ne ''}">
 				<c:if test="${mensagem eq 'ADD'}">
 					<div class="alert alert-success">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<span style="color: #000000"><strong>Sucesso!</strong>
-							Pergunta adicionada com sucesso.</span>
+					 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Sucesso!</strong> Pergunta adicionada com sucesso.</span>
 					</div>
 				</c:if>
 				<c:if test="${mensagem eq 'REMOVE'}">
 					<div class="alert alert-success">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<span style="color: #000000"><strong>Sucesso!</strong>
-							Pergunta removida com sucesso.</span>
+					 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Sucesso!</strong> Pergunta removida com sucesso.</span>
 					</div>
 				</c:if>
 				<c:if test="${mensagem eq 'ERRO_EXISTENTE'}">
 					<div class="alert alert-warning">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<span style="color: #000000"><strong>Alerta!</strong>Esta
-							pergunta já foi adicionada ao questionário.</span>
+						 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Alerta!</strong>Esta pergunta já foi adicionada ao questionário.</span>
 					</div>
 				</c:if>
 				<c:if test="${mensagem eq 'ERRO'}">
 					<div class="alert alert-danger">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<span style="color: #000000"><strong>Erro!</strong>Não foi
-							possível executar a ação, tente novamente mais tarde!</span>
+						 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span style="color: #000000"><strong>Erro!</strong>Não foi possível executar a ação, tente novamente mais tarde!</span>
 					</div>
 				</c:if>
 			</c:if>
 			<div class="row">
 				<div class="col-md-12">
-					<form
-						action='<c:url value="/painel/questionarios/salvarQuestionario" />'
-						method="POST" role="form">
+					<form action='<c:url value="/painel/questionarios/salvarQuestionario" />' method="POST" role="form">
 						<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
-								<label for="nome">Titulo:</label> <input type="text"
-									class="form-control" id="nome" name="nome" readonly="readonly"
-									value="${questionario.descricao}" placeholder="Digite o nome"
-									required autofocus>
+								<label for="nome">Titulo do Questionário:</label> <input
+									type="text" class="form-control" id="nome" name="nome"
+									readonly="readonly" value="${questionario.descricao}"
+									placeholder="Digite o nome" required autofocus>
 							</div>
 						</div>
 						<h4 style="font-family: arial; color: #4DC1FF">Perguntas</h4>
 						<div class="row">
-							<c:if test="${empty questionario.perguntas}">
-								<table class="table table-responsive" id="tbPerguntas">
-									<thead>
+
+							<table class="table table-responsive" id="tbPerguntas">
+								<thead>
+									<tr>
+										<td class="text-center"><span style="font-weight: bold;">Tipo
+												de Pergunta</span></td>
+										<td class="text-center"><span style="font-weight: bold;">Pergunta</span></td>
+										<td class="text-center"><span style="font-weight: bold;">Data
+												de Cadastro</span></td>
+										<td class="text-center"><span style="font-weight: bold;">Ação</span></td>
+									</tr>
+								</thead>
+								<tbody id="tbBodyPerguntas">
+									<c:forEach items="${questionario.perguntas}" var="pergunta">
 										<tr>
-											<td class="text-center"><span style="font-weight: bold;">Tipo
-													de Pergunta</span></td>
-											<td class="text-center"><span style="font-weight: bold;">Pergunta</span></td>
-											<td class="text-center"><span style="font-weight: bold;">Data
-													de Cadastro</span></td>
-											<td class="text-center"><span style="font-weight: bold;">Ação</span></td>
+										<c:choose>
+											<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
+												<td class="text-center">${pergunta.tipoPergunta.descricao}</td>
+											</c:when>
+											<c:otherwise>
+												<c:if test="${pergunta.tipoPergunta.id eq 1}">
+													<td class="text-center">RESPOSTA ÚNICA</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 2}">
+													<td class="text-center">RESPOSTA MÚLTIPLA</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 3}">
+													<td class="text-center">TEXTO</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 4}">
+													<td class="text-center">SIM/NÃO</td>
+												</c:if>
+												<c:if test="${pergunta.tipoPergunta.id eq 4}">
+													<td class="text-center">SIM/NÃO</td>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+										<td class="text-center">${pergunta.descricaoPergunta}</td>
+										<td class="text-center"><fmt:formatDate value="${pergunta.dataCadastro.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
+										<td class="text-center">
+											<a href='<c:url value="/painel/questionarios/removerPergunta?idPergunta=${pergunta.id}&&descricaoPergunta=${pergunta.descricaoPergunta}" />'>
+												<span class="glyphicon glyphicon-remove-circle"></span>
+											</a>
+										</td>
 										</tr>
-									</thead>
-									<tbody id="tbBodyPerguntas">
-										<c:forEach items="${questionario.perguntas}" var="pergunta">
-											<tr>
-												<c:choose>
-													<c:when
-														test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
-														<td class="text-center">${pergunta.tipoPergunta.descricao}</td>
-													</c:when>
-													<c:otherwise>
-														<c:if test="${pergunta.tipoPergunta.id eq 1}">
-															<td class="text-center">RESPOSTA ÚNICA</td>
-														</c:if>
-														<c:if test="${pergunta.tipoPergunta.id eq 2}">
-															<td class="text-center">RESPOSTA MÚLTIPLA</td>
-														</c:if>
-														<c:if test="${pergunta.tipoPergunta.id eq 3}">
-															<td class="text-center">TEXTO</td>
-														</c:if>
-														<c:if test="${pergunta.tipoPergunta.id eq 4}">
-															<td class="text-center">SIM/NÃO</td>
-														</c:if>
-														<c:if test="${pergunta.tipoPergunta.id eq 4}">
-															<td class="text-center">SIM/NÃO</td>
-														</c:if>
-													</c:otherwise>
-												</c:choose>
-												<td class="text-center">${pergunta.descricaoPergunta}</td>
-												<td class="text-center"><fmt:formatDate
-														value="${pergunta.dataCadastro.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
-												<td class="text-center"><a
-													href='<c:url value="/painel/questionarios/removerPergunta?idPergunta=${pergunta.id}&&descricaoPergunta=${pergunta.descricaoPergunta}" />'>
-														<span class="glyphicon glyphicon-remove-circle"></span>
-												</a></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</c:if>
+									</c:forEach>
+								</tbody>
+							</table>
 							<br />
 							<button type="button"
 								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
@@ -301,9 +291,9 @@
 								Cancelar</a>
 							<button type="submit"
 								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">
-								<span class="glyphicon glyphicon-ok" style="margin-top: 1px">
-								</span> Salvar Questionário
+								class="btn btn-default"><span class="glyphicon glyphicon-ok"
+									style="margin-top: 1px"> </span>
+								Salvar Questionário 
 							</button>
 						</div>
 					</form>
