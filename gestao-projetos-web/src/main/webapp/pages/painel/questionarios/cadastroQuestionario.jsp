@@ -257,9 +257,6 @@
 												<c:if test="${pergunta.tipoPergunta.id eq 4}">
 													<td class="text-center">SIM/NÃO</td>
 												</c:if>
-												<c:if test="${pergunta.tipoPergunta.id eq 4}">
-													<td class="text-center">SIM/NÃO</td>
-												</c:if>
 											</c:otherwise>
 										</c:choose>
 										<td class="text-center">${pergunta.descricaoPergunta}</td>

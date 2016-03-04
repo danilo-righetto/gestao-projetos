@@ -60,6 +60,6 @@
 				class="btn btn-default">Novo Reeducando</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
+	<div class="section" style="margin-top: 130px"></div>
 </body>
 </html>

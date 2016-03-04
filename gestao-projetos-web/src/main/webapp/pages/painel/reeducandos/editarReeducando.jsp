@@ -92,17 +92,49 @@
 			<h3 class="title-screen">Edição de Reeducando</h3>
 			<hr />
 			<div id="alertas"></div>
-			<div class="col-md-15">
-				<form
-					action='<c:url value="/painel/reeducandos/editar"></c:url>'
+			<div class="col-md-12">
+				<form action='<c:url value="/painel/reeducandos/editar"></c:url>'
 					method="POST">
-					<div class="row">
+					<div class="row col-md-offset-2">
 						<input id="idReeducando" name="id" value="${idReeducando}"
 							type="hidden" />
 						<div class="form-group col-md-4">
 							<label for="nome">Nome Completo:</label> <input type="text"
 								class="form-control" id="nome" name="nome"
 								value="${reeducando.nome}" required autofocus>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="sexo">Sexo:</label> <select class="form-control"
+								name="sexo" required>
+								<c:choose>
+									<c:when test="${reeducando.sexo == 'M'}">
+										<option value="M" selected>Masculino</option>
+										<option value="F">Feminino</option>
+									</c:when>
+									<c:otherwise>
+										<option value="M">Masculino</option>
+										<option value="F" selected>Feminino</option>
+									</c:otherwise>
+								</c:choose>
+							</select>
+						</div>
+						<!-- datepicker  - INICIO -->
+
+						<div class="form-group col-md-2">
+							<label for="dataNascimento">Data de Nascimento:</label> <input
+								type="text" class="form-control data" id="dataNascimento"
+								name="dataNascimento"
+								value='<fmt:formatDate value="${reeducando.dataNascimento.time}"/>'
+								required>
+						</div>
+						<!-- datepicker  - FIM -->
+
+					</div>
+					<div class="row col-md-offset-2">
+						<div class="form-group col-md-4">
+							<label for="matricula">Número da Matrícula:</label><input
+								type="text" class="form-control" id="matricula" name="matricula"
+								value="${reeducando.matricula}" required disabled="disabled" />
 						</div>
 						<div class="form-group col-md-4">
 							<label for="unidadePrisional">Unidade Prisional:</label> <select
@@ -123,40 +155,7 @@
 								</c:forEach>
 							</select>
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-3">
-							<label for="matricula">Número da Matrícula:</label><input
-								type="text" class="form-control" id="matricula" name="matricula"
-								value="${reeducando.matricula}" required />
-						</div>
-						<div class="form-group col-md-2">
-							<label for="sexo">Sexo:</label> <select class="form-control"
-								name="sexo" required>
-								<c:choose>
-									<c:when test="${reeducando.sexo == 'M'}">
-										<option value="M" selected>Masculino</option>
-										<option value="F">Feminino</option>
-									</c:when>
-									<c:otherwise>
-										<option value="M">Masculino</option>
-										<option value="F" selected>Feminino</option>
-									</c:otherwise>
-								</c:choose>
 
-
-							</select>
-						</div>
-						<!-- datepicker  - INICIO -->
-
-						<div class="form-group col-md-2">
-							<label for="dataNascimento">Data de Nascimento:</label> <input
-								type="text" class="form-control data" id="dataNascimento"
-								name="dataNascimento"
-								value='<fmt:formatDate value="${reeducando.dataNascimento.time}"/>'
-								required>
-						</div>
-						<!-- datepicker  - FIM -->
 					</div>
 					<hr />
 
@@ -164,7 +163,8 @@
 						<div class="col-md-12">
 							<a href='<c:url value="/painel/reeducandos/"></c:url>'
 								class="btn btn-default btn-return">Cancelar</a>
-							<button type="submit" class="btn btn-default btn-add">Salvar Reeducando</button>
+							<button type="submit" class="btn btn-default btn-add">Salvar
+								Reeducando</button>
 						</div>
 					</div>
 				</form>

@@ -29,29 +29,29 @@
 									name="status" required>
 									<c:choose>
 										<c:when test="${acao.status == 'Aberto'}">
-											<option selected="selected" value="Aberto">Aberto</option>
-											<option value="Em andamento">Em andamento</option>
-											<option value="Encerrado">Encerrado</option>
-											<option value="Concluido">Concluido</option>
+											<option selected="selected" value="Aberto">ABERTO</option>
+											<option value="Em andamento">EM ANDAMENTO</option>
+											<option value="Encerrado">ENCERRADO</option>
+											<option value="Concluido">CONCLUIDO</option>
 										</c:when>
 										<c:when test="${acao.status == 'Em andamento'}">
-											<option selected="selected" value="Em andamento">Em
-												andamento</option>
-											<option value="Aberto">Aberto</option>
-											<option value="Encerrado">Encerrado</option>
-											<option value="Concluido">Concluido</option>
+											<option selected="selected" value="Em andamento">EM
+												ANDAMENTO</option>
+											<option value="Aberto">ABERTO</option>
+											<option value="Encerrado">ENCERRADO</option>
+											<option value="Concluido">CONCLUIDO</option>
 										</c:when>
 										<c:when test="${acao.status == 'Encerrado'}">
-											<option selected="selected" value="Encerrado">Encerrado</option>
-											<option value="Aberto">Aberto</option>
-											<option value="Em andamento">Em andamento</option>
-											<option value="Concluido">Concluido</option>
+											<option selected="selected" value="Encerrado">ENCERRADO</option>
+											<option value="Aberto">ABERTO</option>
+											<option value="Em andamento">EM ANDAMENTO</option>
+											<option value="Concluido">CONCLUIDO</option>
 										</c:when>
 										<c:when test="${acao.status == 'Concluido'}">
-											<option selected="selected" value="Concluido">Concluido</option>
-											<option value="Aberto">Aberto</option>
-											<option value="Em andamento">Em andamento</option>
-											<option value="Encerrado">Encerrado</option>
+											<option selected="selected" value="Concluido">CONCLUIDO</option>
+											<option value="Aberto">ABERTO</option>
+											<option value="Em andamento">EM ANDAMENTO</option>
+											<option value="Encerrado">ENCERRADO</option>
 										</c:when>
 										<c:otherwise>
 											<option value="Aberto">ABERTO</option>
@@ -94,5 +94,23 @@
 		</div>
 	</div>
 	<div class="section" style="margin-top: -2px"></div>
+	<script>
+		$(".data").datepicker(
+				{
+					dateFormat : 'dd/mm/yy',
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb', 'Dom' ],
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					nextText : 'Próximo',
+					prevText : 'Anterior'
+				});
+	</script>
 </body>
 </html>
