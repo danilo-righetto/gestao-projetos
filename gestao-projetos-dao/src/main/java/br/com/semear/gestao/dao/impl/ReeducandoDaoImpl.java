@@ -42,4 +42,14 @@ public class ReeducandoDaoImpl implements ReeducandoDAO {
 		query.setParameter("idReeducando", idReeducando);
 		return (ReeducandoEntity) query.getSingleResult();
 	}
+
+	@Override
+	public ReeducandoEntity buscarMatricula(long matricula) {
+		Query query = em.createQuery("select r from ReeducandoEntity r where r.matricula = :matricula");
+		query.setParameter("matricula", String.valueOf(matricula));
+		if(query.getResultList().isEmpty()){
+			return null;
+		}
+		return (ReeducandoEntity)query.getSingleResult();
+	}
 }

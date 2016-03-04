@@ -81,7 +81,7 @@ public class QuestionarioController implements Serializable {
 	@RequestMapping("salvarQuestionario")
 	public String salvarQuestionario(){
 		questionarioService.alterarQuestionario(this.questionario,perguntasRemovidas);
-		return "redirect:/painel/questionarios/editar/"+this.questionario.getProjeto().getId();
+		return "redirect:/painel/questionarios/cadastro/"+this.questionario.getProjeto().getId();
 	}
 	
 	@RequestMapping("adicionarPergunta")
@@ -112,7 +112,7 @@ public class QuestionarioController implements Serializable {
 				novaPergunta.getAlternativas().add(alternativaSim);
 				
 				AlternativaPergunta alternativaNao = new AlternativaPergunta();
-				alternativaNao.setDescricaoAlternativa("Não");
+				alternativaNao.setDescricaoAlternativa("Nï¿½o");
 				novaPergunta.getAlternativas().add(alternativaNao);
 			}
 			

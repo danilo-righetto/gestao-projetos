@@ -15,7 +15,6 @@ import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ReeducandoService;
-import br.com.semear.gestao.service.UnidadePrisionalService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -55,5 +54,14 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 	@Override
 	public Reeducando buscarReeducandoPorId(long idReeducando) {
 		return parse.parseToModel(reeducandoDAO.buscarReeducandoPorId(idReeducando));
+	}
+
+	@Override
+	public boolean verficarMatricula(long matricula) {
+		boolean existe = false;
+		if (reeducandoDAO.buscarMatricula(matricula) != null) {
+			existe = true;
+		}
+		return existe;
 	}
 }

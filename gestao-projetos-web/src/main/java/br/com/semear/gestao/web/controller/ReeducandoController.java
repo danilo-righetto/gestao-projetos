@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Reeducando;
@@ -56,5 +57,11 @@ public class ReeducandoController {
 		mav.setViewName("listarReeducandos");
 		mav.addObject("reeducandos", reeducandoService.listarReeducandos());
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/verificarMatricula")
+	public boolean verificarMatricula(long matricula){
+		return reeducandoService.verficarMatricula(matricula);
 	}
 }
