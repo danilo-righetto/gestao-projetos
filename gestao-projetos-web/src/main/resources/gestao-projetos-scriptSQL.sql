@@ -23,3 +23,24 @@ INSERT INTO `gestao-projetos`.`projeto`
 ("2016-03-07 09:30:32","2016-03-07 00:00:00","2016-03-31 00:00:00","Projeto 01","Projeto 01","Aberto","1"),
 ("2016-03-07 09:30:32","2016-03-07 00:00:00","2016-03-31 00:00:00","Projeto 02","Projeto 02","Aberto","1"),
 ("2016-03-07 09:30:32","2016-03-07 00:00:00","2016-03-31 00:00:00","Projeto 03","Projeto 03","Aberto","1");
+
+INSERT INTO `gestao-projetos`.`instituicao`
+(`BAIRRO`,`CEP`,`CIDADE`,`COMPLEMENTO`,`DATA_CADASTRO`,`DOCUMENTO`,`EMAIL`,`LOGRADOURO`,`NOME_FANTASIA`,`NUMERO`,`RAZAO_SOCIAL`,`RESPONSAVEL`,`STATUS`,`TELEFONE`,`TIPO_DOCUMENTO`,`UF`,`PROJETO_INSTITUICAO`,`UNIDADE_PRISIONAL`)
+VALUES
+('Vila Olimpia","09923-090',
+'São Paulo',
+'Travessa com a Rua Castro',
+'2016-03-07 09:31:53',
+'182.713.046-66',
+'teste@teste.com.br',
+'Rua Martins Fontes',
+'Martins Fontes LTDA',
+'55',
+'Martins Fontes LTDA',
+'Carlos Magno',
+'ATIVO',
+'1122334455',
+'cpf',
+'SP',
+1,
+1);

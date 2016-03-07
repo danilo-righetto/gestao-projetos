@@ -1,5 +1,6 @@
 package br.com.semear.gestao.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -82,5 +83,17 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 				usuario = (UsuarioEntity) query.getResultList().get(0);
 			}
 		return usuario;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
+		Query query = em.createQuery("select u from UsuarioEntity u where u.instituicao.id = :idInstituicao and u.perfil.id = :idPerfil");
+		query.setParameter("idInstituicao", idInstituicao);
+		query.setParameter("idPerfil", idPerfil);
+		if(!query.getResultList().isEmpty()){
+			return query.getResultList();
+		}
+		return new ArrayList<UsuarioEntity>();
 	}
 }

@@ -191,4 +191,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		return s.toString();
 	}
+
+	@Override
+	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
+		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(UsuarioEntity i : entity){
+			usuarios.add(parseService.parseToModel(i));
+		}
+		return usuarios;
+	}
 }

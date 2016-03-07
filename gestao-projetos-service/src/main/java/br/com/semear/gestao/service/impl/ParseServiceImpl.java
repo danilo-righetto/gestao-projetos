@@ -130,7 +130,7 @@ public class ParseServiceImpl implements ParseService {
 			usuario.setNome(entity.getNome());
 			usuario.setPerfil(parseToModel(entity.getPerfil()));
 			usuario.setRealizaLogin(entity.getRealizaLogin());
-			usuario.setInstituicao(parseToModel(entity.getInstituicao()));
+			//usuario.setInstituicao(parseToModel(entity.getInstituicao()));
 			usuario.setSenha(entity.getSenha());
 			usuario.setUsuario(entity.getUsuario());
 		}

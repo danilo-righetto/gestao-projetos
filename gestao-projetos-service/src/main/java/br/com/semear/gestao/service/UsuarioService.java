@@ -12,6 +12,8 @@ public interface UsuarioService {
 	public List<Usuario> listarUsuarios();
 
 	public Usuario buscarUsuarioPorId(long idUsuario);
+	
+	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil);
 
 	public void editarUsuario(Usuario usuario);
 

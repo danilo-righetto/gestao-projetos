@@ -12,6 +12,8 @@ public interface UsuarioDAO {
 	public List<UsuarioEntity> listarUsuarios();
 
 	public UsuarioEntity buscarUsuarioPorId(long idUsuario);
+	
+	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil);
 
 	public void editarUsuario(UsuarioEntity entity);
 

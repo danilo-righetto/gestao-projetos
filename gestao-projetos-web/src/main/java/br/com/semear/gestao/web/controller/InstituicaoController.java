@@ -13,11 +13,15 @@ import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
+import br.com.semear.gestao.service.UsuarioService;
 
 @Controller
 @RequestMapping("/painel/instituicoes")
 public class InstituicaoController {
 	private ModelAndView mav = new ModelAndView();
+	
+	private String colaborador = "ROLE_COLABORADOR";
+	private String coordenador = "ROLE_COORDENADOR";
 	
 	@Inject
 	private InstituicaoService instituicaoService;
@@ -27,6 +31,9 @@ public class InstituicaoController {
 	
 	@Inject
 	private UnidadePrisionalService unidadePrisionalService;
+	
+	@Inject
+	private UsuarioService usuarioService;
 	
 	@RequestMapping("/")
 	public ModelAndView listaDeInstituicoes(){
@@ -65,6 +72,8 @@ public class InstituicaoController {
 		mav.addObject("listaprojetos", projetoService.listarTodosProjetos());
 		mav.addObject("unidadesprisionais", unidadePrisionalService.listaUnidades());
 		mav.addObject("inst", instituicaoService.buscarInstituicaoPorId(idInstituicao));
+		mav.addObject("colaboradores", usuarioService.buscarUsuarioPorInstituicao(idInstituicao, colaborador));
+		mav.addObject("coordenadores", usuarioService.buscarUsuarioPorInstituicao(idInstituicao, coordenador));
 		return mav;
 	}
 	
