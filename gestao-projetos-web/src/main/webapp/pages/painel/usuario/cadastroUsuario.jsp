@@ -24,6 +24,17 @@
 			}
 		});
 	}
+	
+	function verificaPerfil(){
+		var escolha = document.getElementById("perfil").value;
+		if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
+			document.getElementById("oculta1").style.display = "block";
+		}else{
+			document.getElementById("oculta1").style.display = "none";
+			$("#oculta1").val("");
+			$("#instituicao").val("");
+		}
+	}
 </script>
 </head>
 <body>
@@ -52,7 +63,7 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="perfil">Perfil:</label> <select id="perfil"
-							class="form-control" name="perfil.id" required>
+							class="form-control" name="perfil.id" onchange="verificaPerfil();" required>
 							<option value="">Selecione ...</option>
 							<c:forEach items="${listaperfil}" var="perfil">
 								<option value="${perfil.id}">${perfil.descricao}</option>
@@ -60,12 +71,12 @@
 						</select>
 					</div>
 					<!-- Instituição - Usuario -->
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-offset-2 col-md-4" id="oculta1">
 						<label for="instituicao">Instituição:</label> <select id="instituicao"
 							class="form-control" name="instituicao.id" required>
 							<option value="">Selecione ...</option>
-							<c:forEach items="${listaperfil}" var="instituicao">
-								<option value="${perfil.id}">${perfil.descricao}</option>
+							<c:forEach items="${instituicoes}" var="instituicao">
+								<option value="${instituicao.id}">${instituicao.razaosocial}</option>
 							</c:forEach>
 						</select>
 					</div>

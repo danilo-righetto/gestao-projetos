@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.RecuperaSenhaDAO;
 import br.com.semear.gestao.dao.UsuarioDAO;
+import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
 import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -54,6 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		user.setUsuario(usuario.getUsuario());
 		user.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		user.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
+		user.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
 		user.setDataCadastro(Calendar.getInstance());
 		user.setRealizaLogin(usuario.getRealizaLogin());
 		
@@ -88,6 +90,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if(entity != null){
 			entity.setNome(usuario.getNome());
 			entity.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
+			entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
 		}		

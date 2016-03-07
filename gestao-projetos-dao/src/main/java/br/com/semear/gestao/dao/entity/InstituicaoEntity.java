@@ -21,6 +21,14 @@ public class InstituicaoEntity {
 	@Column(name = "ID")
 	private long id;
 
+	public InstituicaoEntity(long id) {
+		this.id = id;
+	}
+	
+	public InstituicaoEntity(){
+		
+	}
+
 	public void setId(long id) {
 		this.id = id;
 	}

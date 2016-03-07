@@ -49,7 +49,7 @@ public class InstituicaoController {
 	@RequestMapping(value="salvarInstituicao", method=RequestMethod.POST)
 	public String salvarInstituicao(Instituicao instituicao){
 		instituicaoService.cadastrarInstituicao(instituicao);
-		return "redirect:/painel";
+		return "redirect:/painel/instituicoes/";
 	}
 	
 	@RequestMapping(value="editarInstituicao", method=RequestMethod.POST)

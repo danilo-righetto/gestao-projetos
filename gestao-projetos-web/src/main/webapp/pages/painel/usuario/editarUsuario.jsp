@@ -5,11 +5,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <script type="text/javascript">
 $(function() {
 	$("#menu-usuarios").attr('class','active');
+	verificaPerfil();
 });
+
+function verificaPerfil(){
+	var escolha = document.getElementById("perfil").value;
+	if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
+		document.getElementById("oculta1").style.display = "block";
+	}else{
+		document.getElementById("oculta1").style.display = "none";
+		$("#oculta1").val("");
+		$("#instituicao").val("");
+	}
+}
 </script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="section">
@@ -34,7 +49,7 @@ $(function() {
 					</div>
 					<div class="form-group col-md-2">
 						<label for="perfil">Perfil:</label> <select id="perfil"
-							class="form-control" name="perfil.id" required>
+							class="form-control" name="perfil.id" onchange="verificaPerfil();" required>
 							<option value="">Selecione ...</option>
 							<c:forEach items="${listaperfil}" var="perfil">
 								<c:choose>
@@ -45,6 +60,17 @@ $(function() {
 										<option value="${perfil.id}">${perfil.descricao}</option>
 									</c:otherwise>
 								</c:choose>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- Instituição - Usuario -->
+					<div class="form-group col-md-3" id="oculta1">
+						<label for="instituicao">Instituição:</label> <select id="instituicao"
+							class="form-control" name="instituicao.id" required>
+							<option value="">Selecione ...</option>
+							<c:forEach items="${inst}" var="instituicao">
+										<option value="${instituicao.id}" ${(instituicao.id == user.instituicao.id ? 
+								'selected' : '')}>${instituicao.razaosocial}</option>
 							</c:forEach>
 						</select>
 					</div>
