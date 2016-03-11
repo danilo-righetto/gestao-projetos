@@ -16,9 +16,16 @@
   
   <script type="text/javascript">
 	$(function() {
+		var msg = "<c:out value='${msg}'/>";
+		if(msg == 'OK'){
+			$("#modalInstituicaoAdicionada").modal({
+				  keyboard: false,
+				  backdrop: 'static'
+			});
+		}
+		
 		$("#menu-instituicoes").attr('class', 'active');
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
-		//$('#cpf').mask('000.000.000-00');
 		$('#cep').mask('00000-000');
 		$('#telefoneFixo').mask('(00) 0000-0000');
 		$('#telefone').mask('(00) 0000-00009');
@@ -63,6 +70,8 @@
 			$('#documento').mask('000.000.000-00');
 			$('#nomecompleto').val("");
 			$('#nomecompleto').removeAttr('disabled');
+			$('#nomecompleto').attr('required', 'required');
+			$('#razaosocial').removeAttr('required');
 			$('#cnpj').remove();
 			$('#razaosocial').attr('disabled', 'disabled');
 			$('#razaosocial').removeAttr('required');
@@ -78,8 +87,10 @@
 			$('#rg').remove();
 			$('#nomecompleto').attr('disabled', 'disabled');
 			$('#razaosocial').attr('required', 'required');
-			$('#nomefantasia').attr('required', 'required')
+			$('#nomefantasia').attr('required', 'required');
 			$('#razaosocial').removeAttr('disabled');
+			$('#nomecompleto').removeAttr('required');
+			$('#razaosocial').attr('required', 'required');
 		}
 	}
 
@@ -256,6 +267,27 @@
 </script>
   
   <body>
+  <!-- MODAL INSTITUICAO ADICIONADA INICIO -->
+	<div class="modal fade" id="modalInstituicaoAdicionada" tabindex="-1" role="dialog"
+		data-backdrop="static" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Instituição adicionada com sucesso!</h4>
+				</div>
+				<div class="modal-body">
+					<p>O que deseja fazer agora?</p>
+				</div>
+				<div class="modal-footer">
+					<a href='<c:url value="/painel/instituicoes/" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Ir para a lista de instituições</a>
+					<a href='<c:url value="/painel/instituicoes/editar/${idInstituicao}" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Informar unidades</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL INSTITUICAO ADICIONADA FIM -->
     <div class="section">
       <div class="container">
       <h4 style="font-family: arial; color: #4DC1FF">Cadastro de
@@ -296,15 +328,15 @@
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="cep">CEP:</label> <input type="text"
-						class="form-control" id="cep" name="cep" placeholder="Digite o cep" required autofocus>
+						class="form-control" id="cep" name="cep" placeholder="Digite o cep" required>
 			  </div>
 			  <div class="form-group col-md-5">
 				<label for="logradouro">Logradouro:</label> <input type="text"
-						class="form-control" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required autofocus>
+						class="form-control" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required>
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="numero">Número:</label> <input type="text"
-						class="form-control" id="numero" name="numero" placeholder="Digite o numero" required autofocus>
+						class="form-control" id="numero" name="numero" placeholder="Digite o numero" required>
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="complemento">Complemento:</label> <input type="text"
@@ -312,20 +344,20 @@
 			  </div>
 			  <div class="form-group col-md-3">
 				<label for="bairro">Bairro:</label> <input type="text"
-						class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro" required autofocus>
+						class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro" required>
 			  </div>
 			  
 			  <div class="form-group col-md-1">
 				<label for="uf">UF:</label> <input type="text"
-						class="form-control" id="uf" name="uf" placeholder="uf" required autofocus>
+						class="form-control" id="uf" name="uf" placeholder="UF" required>
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="cidade">Cidade:</label> <input type="text"
-						class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required autofocus>
+						class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required>
 			  </div>
 			  <div class="form-group col-md-2">
 				<label for="telefone">Telefone:</label> <input type="text"
-						class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone" required autofocus>
+						class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone" required>
 			  </div>
 			  <div class="form-group col-md-4">
 				<label for="email">Email:</label> <input type="email"
@@ -333,25 +365,7 @@
 			  </div>
 			  <div class="form-group col-md-3">
 				<label for="responsavel">Responsável:</label> <input type="text"
-						class="form-control" id="responsavel" name="responsavel" placeholder="Digite o nome do responsavel" required autofocus>
-			  </div>
-			  <div class="form-group col-md-3">
-				<label for="projeto">Selecione o projeto:</label> <select class="form-control" id="projeto"
-						name="projetoInstituicao.id" required>
-						<option value="">Selecione ...</option>
-						<c:forEach items="${listaprojetos}" var="projeto">
-								<option value="${projeto.id}">${projeto.nome}</option>
-						</c:forEach>
-					</select>
-			  </div>
-			  <div class="form-group col-md-3">
-				<label for="projeto">Selecione a unidade:</label> <select class="form-control" id="unidadePrisional"
-						name="unidadePrisional.id" required>
-						<option value="">Selecione ...</option>
-						<c:forEach items="${unidadesprisionais}" var="unidadePrisional">
-								<option value="${unidadePrisional.id}">${unidadePrisional.nome}</option>
-						</c:forEach>
-					</select>
+						class="form-control" id="responsavel" name="responsavel" placeholder="Digite o nome do responsavel" required>
 			  </div>
 			  <div class="form-group">
 			  </div>
@@ -362,10 +376,10 @@
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/instituicoes/" />'
 								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Cancelar</a>
+								class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 							<button type="submit"
 								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Salvar Instituição</button>
+								class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Salvar Instituição</button>
 						</div>
 			</div>
             </form>

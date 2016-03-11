@@ -14,4 +14,10 @@ public interface UnidadePrisionalService {
 	public List<UnidadePrisional> listaUnidades();
 
 	public UnidadePrisional buscarUnidadePrisionalPorId(long idUnidadePrisional);
+
+	public List<UnidadePrisional> buscarUnidadePrisionalPorInstituicao(long idInstituicao);
+
+	public List<UnidadePrisional> listarUnidadesPorStatus(boolean status);
+
+	public void adicionarVinculoInstituicaoComUnidadePrisional(long idInstituicao, long idUnidadePrisional);
 }

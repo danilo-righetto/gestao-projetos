@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 
 public interface InstituicaoDAO {
-	public void cadastrarInstituicao(InstituicaoEntity instituicao);
+	public long cadastrarInstituicao(InstituicaoEntity instituicao);
 	
 	public List<InstituicaoEntity> listarInstituicoes();
 

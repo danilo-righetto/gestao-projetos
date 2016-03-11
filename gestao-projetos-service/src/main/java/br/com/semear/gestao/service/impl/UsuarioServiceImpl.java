@@ -20,6 +20,7 @@ import br.com.semear.gestao.dao.entity.PerfilEntity;
 import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Usuario;
+import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.MailService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
@@ -40,6 +41,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Inject
 	private PasswordEncoder passwordEncoder;
 	
+	@Inject
+	private InstituicaoService instituicaoService;
+	
 	@Override
 	public Usuario buscarUsuarioPorLogin(String login){
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorLogin(login);
@@ -50,15 +54,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public void cadastrarUsuario(Usuario usuario) {
-		UsuarioEntity user = new UsuarioEntity();
-		user.setNome(usuario.getNome());
-		user.setUsuario(usuario.getUsuario());
-		user.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		user.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
-		user.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
-		user.setDataCadastro(Calendar.getInstance());
-		user.setRealizaLogin(usuario.getRealizaLogin());
-		
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		usuario.setDataCadastro(Calendar.getInstance());
+		UsuarioEntity user = parseService.parseToEntity(usuario);
+		if(usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0){
+			user.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+		}
 		usuarioDAO.cadastrarUsuario(user);
 	}
 	
@@ -81,6 +82,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario buscarUsuarioPorId(long idUsuario) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorId(idUsuario);
 		Usuario usuario = parseService.parseToModel(entity);
+		usuario.setInstituicao(parseService.parseToModel(entity.getInstituicao()));
 		return usuario;
 	}
 
@@ -88,12 +90,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void editarUsuario(Usuario usuario) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorId(usuario.getId());
 		if(entity != null){
-			entity.setNome(usuario.getNome());
+			entity.setNome(usuario.getNome().toUpperCase());
 			entity.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
-			if(usuario.getInstituicao() == null){
-				entity.setInstituicao(null);
-			}else{
+			if(usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0){
 				entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+			}else{
+				entity.setInstituicao(null);
 			}
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
@@ -199,6 +201,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
 		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(UsuarioEntity i : entity){
+			usuarios.add(parseService.parseToModel(i));
+		}
+		return usuarios;
+	}
+
+	@Override
+	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao) {
+		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for(UsuarioEntity i : entity){
 			usuarios.add(parseService.parseToModel(i));

@@ -89,7 +89,7 @@
 							<div class="form-group col-md-3">
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text" class="form-control data" id="dataTermino"
-									name="dataTermino" placeholder="Selecione a Data" autofocus>
+									name="dataTermino" placeholder="Selecione a Data" autofocus required>
 							</div>
 							<div class="form-group col-md-12">
 							<label for="descricao">Descrição</label> <textarea
@@ -103,7 +103,7 @@
 								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 								class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 							<button type="submit" style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Salvar Projeto<span class="glyphicon glyphicon-ok"></span></button>
+								class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Salvar Projeto</button>
 						</div>
 					</form>
 				</div>

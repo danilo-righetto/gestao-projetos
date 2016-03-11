@@ -18,17 +18,9 @@ public class Instituicao {
 	private String telefone;
 	private String email;
 	private String responsavel;
-	private Projeto projetoInstituicao;
-	private UnidadePrisional unidadePrisional;
 	private String status;
 	private Calendar dataCadastro;
 	
-	public UnidadePrisional getUnidadePrisional() {
-		return unidadePrisional;
-	}
-	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
-		this.unidadePrisional = unidadePrisional;
-	}
 	public String getStatus() {
 		return status;
 	}
@@ -133,12 +125,4 @@ public class Instituicao {
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	public Projeto getProjetoInstituicao() {
-		return projetoInstituicao;
-	}
-	public void setProjetoInstituicao(Projeto projetoInstituicao) {
-		this.projetoInstituicao = projetoInstituicao;
-	}
-	
-	
 }

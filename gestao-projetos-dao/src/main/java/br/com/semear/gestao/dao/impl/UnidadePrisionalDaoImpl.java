@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.UnidadePrisionalDAO;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
+import br.com.semear.gestao.dao.entity.UnidadeRelInstituicaoEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -47,5 +48,26 @@ public class UnidadePrisionalDaoImpl implements UnidadePrisionalDAO {
 		Query query = em.createQuery("select u from UnidadePrisionalEntity u where u.id = :idUnidadePrisional");
 		query.setParameter("idUnidadePrisional", idUnidadePrisional);
 		return (UnidadePrisionalEntity) query.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UnidadePrisionalEntity> buscarUnidadePrisionalPorInstituicao(long idInstituicao) {
+		Query query = em.createQuery("select u.unidadePrisional from UnidadeRelInstituicaoEntity u where u.instituicao.id = :idInstituicao");
+		query.setParameter("idInstituicao", idInstituicao);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UnidadePrisionalEntity> listarUnidadesPorStatus(boolean status) {
+		Query query = em.createQuery("select up from UnidadePrisionalEntity up where up.status = :status");
+		query.setParameter("status", status);
+		return query.getResultList();
+	}
+
+	@Override
+	public void adicionarVinculoInstituicaoComUnidadePrisional(UnidadeRelInstituicaoEntity rel) {
+		em.persist(rel);
 	}
 }
