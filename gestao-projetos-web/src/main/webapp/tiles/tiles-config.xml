@@ -75,6 +75,12 @@
 		<put-attribute name="conteudo"
 			value="/pages/painel/questionarios/cadastroQuestionario.jsp" />
 	</definition>
+	
+	<!-- Semear - Cadastro de Questionario -->
+	<definition name="cadastroQuestionarioAcao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/questionariosacao/cadastroQuestionario.jsp" />
+	</definition>
 
 	<!-- Semear - Cadastro de Ações -->
 	<definition name="cadastrarAcao" extends="main">

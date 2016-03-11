@@ -102,4 +102,13 @@ public class QuestionarioDaoImpl implements QuestionarioDAO {
 		
 	}
 
+	@Override
+	public void removerAlternativasPorIdPergunta(long idPergunta) {
+		Query query = em.createNativeQuery("delete from ALTERNATIVA_PERGUNTA where PERGUNTA = :idPergunta");
+		
+		query.setParameter("idPergunta",idPergunta);
+		
+		query.executeUpdate();		
+	}
+
 }

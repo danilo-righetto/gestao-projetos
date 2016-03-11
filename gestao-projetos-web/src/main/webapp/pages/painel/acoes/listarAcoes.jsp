@@ -38,7 +38,12 @@
 									<td class="text-center">${acao.status}</td>
 									<td class="text-center"><a
 										href='<c:url value="/painel/acoes/editar/${acao.id}"></c:url>'><span
-											class="glyphicon glyphicon-pencil"></span></a></td>
+											class="glyphicon glyphicon-pencil"></span></a>
+											
+											<a style="margin-left:20px" href='<c:url value="/painel/questionariosacao/cadastro/${acao.id}" />'>
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</a>
+											</td>
 								</tr>
 							</c:forEach>
 						</c:when>

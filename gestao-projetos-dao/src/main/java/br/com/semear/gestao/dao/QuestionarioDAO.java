@@ -30,5 +30,7 @@ public interface QuestionarioDAO {
 	PerguntaEntity buscarPerguntasPorId(long id);
 
 	void salvarAlternativa(AlternativaPerguntaEntity alternativa);
+	
+	void removerAlternativasPorIdPergunta(long idPergunta);
 
 }

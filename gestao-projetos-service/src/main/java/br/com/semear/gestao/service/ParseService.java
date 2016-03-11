@@ -1,13 +1,16 @@
 package br.com.semear.gestao.service;
 
 import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
+import br.com.semear.gestao.dao.entity.PerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
+import br.com.semear.gestao.dao.entity.QuestionarioAcaoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
@@ -15,13 +18,16 @@ import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
+import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
 import br.com.semear.gestao.model.Perfil;
 import br.com.semear.gestao.model.Pergunta;
+import br.com.semear.gestao.model.PerguntaAcao;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
+import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
@@ -60,6 +66,10 @@ public interface ParseService {
 	UnidadePrisional parseToModel(UnidadePrisionalEntity entity);
 
 	Questionario parseToModel(QuestionarioEntity entity);
+	
+	QuestionarioAcao parseToModel(QuestionarioAcaoEntity entity);
+	
+	QuestionarioAcaoEntity parseToEntity(QuestionarioAcao model);
 
 	TipoPergunta parseToModel(TipoPerguntaEntity entity);
 	
@@ -72,6 +82,12 @@ public interface ParseService {
 	TipoPerguntaEntity parseToEntity(TipoPergunta model);
 
 	Pergunta parseToModel(PerguntaEntity p);
+	
+	PerguntaAcao parseToModel(PerguntaAcaoEntity p);
 
 	AlternativaPerguntaEntity parseToEntity(AlternativaPergunta alternativa);
+	
+	AlternativaPerguntaAcaoEntity parseToEntity(AlternativaPerguntaAcao alternativa);
+
+	PerguntaAcaoEntity parseToEntity(PerguntaAcao p);
 }

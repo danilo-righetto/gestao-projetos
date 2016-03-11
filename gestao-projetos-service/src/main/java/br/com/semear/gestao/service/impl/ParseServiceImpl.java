@@ -3,13 +3,16 @@ package br.com.semear.gestao.service.impl;
 import org.springframework.stereotype.Service;
 
 import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
+import br.com.semear.gestao.dao.entity.PerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
+import br.com.semear.gestao.dao.entity.QuestionarioAcaoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
@@ -17,13 +20,16 @@ import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
+import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoAcao;
 import br.com.semear.gestao.model.ParticipacaoProjeto;
 import br.com.semear.gestao.model.Perfil;
 import br.com.semear.gestao.model.Pergunta;
+import br.com.semear.gestao.model.PerguntaAcao;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
+import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
@@ -320,6 +326,20 @@ public class ParseServiceImpl implements ParseService {
 		
 		return model;
 	}
+	
+	@Override
+	public QuestionarioAcao parseToModel(QuestionarioAcaoEntity entity){
+		QuestionarioAcao model = null;
+		if(entity != null){
+			model = new QuestionarioAcao();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setAcao(parseToModel(entity.getAcao()));
+			model.setDescricao(entity.getDescricao());
+			model.setId(entity.getId());
+		}
+		return model;
+		
+	}
 
 	@Override
 	public TipoPergunta parseToModel(TipoPerguntaEntity entity) {
@@ -369,6 +389,21 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return entity;
 	}
+	
+	@Override
+	public QuestionarioAcaoEntity parseToEntity(QuestionarioAcao model){
+		QuestionarioAcaoEntity entity = null;
+		if(model != null){
+			entity = new QuestionarioAcaoEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setAcao(parseToEntity(model.getAcao()));
+			entity.setDescricao(model.getDescricao());
+			entity.setId(model.getId());
+			
+			
+		}
+		return entity;
+	}
 
 	@Override
 	public PerguntaEntity parseToEntity(Pergunta model) {
@@ -379,6 +414,21 @@ public class ParseServiceImpl implements ParseService {
 			entity.setDescricaoPergunta(model.getDescricaoPergunta());
 			entity.setId(model.getId());
 			entity.setQuestionarioEntity(parseToEntity(model.getQuestionario()));
+			entity.setTipoPerguntaentity(parseToEntity(model.getTipoPergunta()));
+			entity.setUsuarioEntity(parseToEntity(model.getUsuario()));
+		}
+		return entity;
+	}
+	
+	@Override
+	public PerguntaAcaoEntity parseToEntity(PerguntaAcao model) {
+		PerguntaAcaoEntity entity = null;
+		if(model != null){
+			entity = new PerguntaAcaoEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setDescricaoPerguntaAcao(model.getDescricaoPerguntaAcao());
+			entity.setId(model.getId());
+			entity.setQuestionarioAcaoEntity(parseToEntity(model.getQuestionarioAcao()));
 			entity.setTipoPerguntaentity(parseToEntity(model.getTipoPergunta()));
 			entity.setUsuarioEntity(parseToEntity(model.getUsuario()));
 		}
@@ -399,6 +449,23 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return model;
 	}
+	
+	@Override
+	public PerguntaAcao parseToModel(PerguntaAcaoEntity entity) {
+		PerguntaAcao model = null;
+		if(entity != null){
+			model = new PerguntaAcao();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoPerguntaAcao(entity.getDescricaoPerguntaAcao());
+			model.setId(entity.getId());
+			model.setQuestionarioAcao(parseToModel(entity.getQuestionarioAcaoEntity()));
+			model.setTipoPergunta(parseToModel(entity.getTipoPerguntaentity()));
+			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
+		}
+		return model;
+	}
+	
+	
 
 	@Override
 	public AlternativaPerguntaEntity parseToEntity(AlternativaPergunta model) {
@@ -413,4 +480,20 @@ public class ParseServiceImpl implements ParseService {
 		
 		return entity;
 	}
+
+	@Override
+	public AlternativaPerguntaAcaoEntity parseToEntity(AlternativaPerguntaAcao model) {
+		AlternativaPerguntaAcaoEntity entity = null;
+		if(model != null){
+			entity = new AlternativaPerguntaAcaoEntity();
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setDescricaoAlternativaAcao(model.getDescricaoAlternativa());
+			entity.setId(model.getId());
+			entity.setPerguntaAcaoEntity(parseToEntity(model.getPerguntaAcao()));
+		}
+		
+		return entity;
+	}
+
+	
 }

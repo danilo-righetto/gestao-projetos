@@ -4,8 +4,8 @@ INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_COLABOR
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_USUARIO', 'USUARIO');
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_REEDUCANDO', 'REEDUCANDO');
 
-INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('1', 'RESPOSTA �NICA');
-INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('2', 'RESPOSTA M�LTIPLA');
+INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('1', 'RESPOSTA UNICA');
+INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('2', 'RESPOSTA MULTIPLA');
 INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('3', 'TEXTO');
 
 

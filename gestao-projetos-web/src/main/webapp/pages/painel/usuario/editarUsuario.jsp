@@ -18,8 +18,10 @@ function verificaPerfil(){
 		document.getElementById("oculta1").style.display = "block";
 	}else{
 		document.getElementById("oculta1").style.display = "none";
+		$('#instituicao').removeAttr('required');
 		$("#oculta1").val("");
 		$("#instituicao").val("");
+		$('#instituicao').attr('disabled', 'disabled');
 	}
 }
 </script>

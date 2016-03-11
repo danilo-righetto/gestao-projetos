@@ -44,7 +44,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 		questionario.setDataCadastro(Calendar.getInstance());
 		questionario.setDescricao("QUESTIONÁRIO DO PROJETO "+projeto.getNome().toUpperCase());
 		questionario.setProjeto(projeto);
-		questionarioDAO.salvarQuestionario(questionario);		
+		questionarioDAO.salvarQuestionario(questionario);
 	}
 
 	@Override
@@ -132,9 +132,15 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 		for(Pergunta p : perguntasRemovidas){
 			if(p.getId() != 0){
 				PerguntaEntity perguntaEntity = questionarioDAO.buscarPerguntasPorId(p.getId());
+				removerAlternativas(perguntaEntity);
 				questionarioDAO.removerPergunta(perguntaEntity);
+				
 			}
 		}
+	}
+	
+	private void removerAlternativas(PerguntaEntity perguntaEntity) {
+		questionarioDAO.removerAlternativasPorIdPergunta(perguntaEntity.getId());
 	}
 
 }

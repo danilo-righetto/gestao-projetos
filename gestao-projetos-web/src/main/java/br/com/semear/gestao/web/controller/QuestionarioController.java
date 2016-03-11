@@ -112,7 +112,7 @@ public class QuestionarioController implements Serializable {
 				novaPergunta.getAlternativas().add(alternativaSim);
 				
 				AlternativaPergunta alternativaNao = new AlternativaPergunta();
-				alternativaNao.setDescricaoAlternativa("Nï¿½o");
+				alternativaNao.setDescricaoAlternativa("Não");
 				novaPergunta.getAlternativas().add(alternativaNao);
 			}
 			

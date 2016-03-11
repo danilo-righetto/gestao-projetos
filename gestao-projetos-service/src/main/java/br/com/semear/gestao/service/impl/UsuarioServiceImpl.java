@@ -90,7 +90,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if(entity != null){
 			entity.setNome(usuario.getNome());
 			entity.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
-			entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+			if(usuario.getInstituicao() == null){
+				entity.setInstituicao(null);
+			}else{
+				entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+			}
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
 		}		
