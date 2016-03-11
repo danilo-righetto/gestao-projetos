@@ -4,11 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,11 +13,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "INSTITUICAO")
 public class InstituicaoEntity {
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private long id;
-
+	
 	public InstituicaoEntity(long id) {
 		this.id = id;
 	}
@@ -28,10 +21,11 @@ public class InstituicaoEntity {
 	public InstituicaoEntity(){
 		
 	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private long id;
 
 	@Column(name = "NOME_FANTASIA")
 	private String nomefantasia;
@@ -75,21 +69,14 @@ public class InstituicaoEntity {
 	@Column(name = "RESPONSAVEL")
 	private String responsavel;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROJETO_INSTITUICAO", nullable = false)
-	private ProjetoEntity projetoInstituicao;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "UNIDADE_PRISIONAL", nullable = false)
-	private UnidadePrisionalEntity unidadePrisional;
-	
-	public UnidadePrisionalEntity getUnidadePrisional() {
-		return unidadePrisional;
-	}
+	@Column(name = "STATUS")
+	private String status;
 
-	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
-		this.unidadePrisional = unidadePrisional;
-	}
+	@Column(name = "DATA_CADASTRO")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataCadastro;
+	
+	/**GETTERS AND SETTERS*/
 
 	public String getStatus() {
 		return status;
@@ -98,13 +85,6 @@ public class InstituicaoEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	@Column(name = "STATUS")
-	private String status;
-
-	@Column(name = "DATA_CADASTRO")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataCadastro;
 
 	public String getNomefantasia() {
 		return nomefantasia;
@@ -229,13 +209,8 @@ public class InstituicaoEntity {
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
-	public ProjetoEntity getProjetoInstituicao() {
-		return projetoInstituicao;
+	
+	public void setId(long id) {
+		this.id = id;
 	}
-
-	public void setProjetoInstituicao(ProjetoEntity projetoInstituicao) {
-		this.projetoInstituicao = projetoInstituicao;
-	}
-
 }

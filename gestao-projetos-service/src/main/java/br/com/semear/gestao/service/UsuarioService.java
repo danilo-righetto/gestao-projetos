@@ -26,4 +26,6 @@ public interface UsuarioService {
 	Usuario buscarDadosDoUsuarioAtivo(String email);
 
 	String geraHash(String valor);
+
+	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.semear.gestao.model.Instituicao;
 
 public interface InstituicaoService {
-	public void cadastrarInstituicao(Instituicao instituicao);
+	public String cadastrarInstituicao(Instituicao instituicao);
 	
 	public List<Instituicao> listarInstituicoes();
 	

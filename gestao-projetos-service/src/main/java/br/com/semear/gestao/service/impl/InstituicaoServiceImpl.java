@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.InstituicaoDAO;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
-import br.com.semear.gestao.dao.entity.ProjetoEntity;
-import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;
@@ -29,10 +27,14 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 	private ParseService parse;
 
 	@Override
-	public void cadastrarInstituicao(Instituicao instituicao) {
+	public String cadastrarInstituicao(Instituicao instituicao) {
 		instituicao.setDataCadastro(Calendar.getInstance());
 		instituicao.setStatus("ATIVO");
-		instituicaoDAO.cadastrarInstituicao(parse.parseToEntity(instituicao));
+		instituicao.setId(instituicaoDAO.cadastrarInstituicao(parse.parseToEntity(instituicao)));
+		if(instituicao.getId() > 0){
+			return "OK";
+		}
+		return "NOK";
 	}
 
 	@Override
@@ -51,29 +53,22 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 	public void editarInstituicao(Instituicao instituicao) {
 		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorId(instituicao.getId());
 		if(entity != null){
-			entity.setId(instituicao.getId());
-			entity.setNomefantasia(instituicao.getNomefantasia());
-			entity.setRazaosocial(instituicao.getRazaosocial());
-			entity.setDocumento(instituicao.getDocumento());
-			entity.setTipoDocumento(instituicao.getTipoDocumento());
-			entity.setLogradouro(instituicao.getLogradouro());
-			entity.setNumero(instituicao.getNumero());
-			entity.setComplemento(instituicao.getComplemento());
-			entity.setBairro(instituicao.getBairro());
-			entity.setCep(instituicao.getCep());
-			entity.setUf(instituicao.getUf());
-			entity.setCidade(instituicao.getCidade());
-			entity.setTelefone(instituicao.getTelefone());
-			entity.setEmail(instituicao.getEmail());
-			entity.setResponsavel(instituicao.getResponsavel());
-			entity.setProjetoInstituicao(new ProjetoEntity(instituicao.getProjetoInstituicao().getId()));
-			entity.setDataCadastro(instituicao.getDataCadastro());
+			entity.setRazaosocial(instituicao.getRazaosocial().toUpperCase());
+			entity.setNomefantasia(instituicao.getNomefantasia() != null ? instituicao.getNomefantasia().toUpperCase() :
+				instituicao.getRazaosocial().toUpperCase());
+			entity.setLogradouro(instituicao.getLogradouro().toUpperCase());
+			entity.setNumero(instituicao.getNumero().toUpperCase());
+			entity.setComplemento(instituicao.getComplemento().toUpperCase());
+			entity.setBairro(instituicao.getBairro().toUpperCase());
+			entity.setCep(instituicao.getCep().toUpperCase());
+			entity.setUf(instituicao.getUf().toUpperCase());
+			entity.setCidade(instituicao.getCidade().toUpperCase());
+			entity.setTelefone(instituicao.getTelefone().toUpperCase());
+			entity.setEmail(instituicao.getEmail().toLowerCase());
+			entity.setResponsavel(instituicao.getResponsavel().toUpperCase());
 			entity.setStatus(instituicao.getStatus());
-			entity.setUnidadePrisional(new UnidadePrisionalEntity(instituicao.getUnidadePrisional().getId()));
-			
 			instituicaoDAO.editarInstituicao(entity);
-		}
-		
+		}		
 	}
 
 

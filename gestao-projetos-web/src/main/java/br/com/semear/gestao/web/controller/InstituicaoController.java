@@ -48,15 +48,16 @@ public class InstituicaoController {
 	public ModelAndView index(){
 		mav.clear();
 		mav.setViewName("cadastroInstituicao");
-		mav.addObject("listaprojetos", projetoService.listarTodosProjetos());
-		mav.addObject("unidadesprisionais", unidadePrisionalService.listaUnidades());
 		return mav;
 	}
 	
 	@RequestMapping(value="salvarInstituicao", method=RequestMethod.POST)
-	public String salvarInstituicao(Instituicao instituicao){
-		instituicaoService.cadastrarInstituicao(instituicao);
-		return "redirect:/painel/instituicoes/";
+	public ModelAndView salvarInstituicao(Instituicao instituicao){
+		mav.clear();
+		mav.setViewName("cadastroInstituicao");
+		mav.addObject("msg",instituicaoService.cadastrarInstituicao(instituicao));
+		mav.addObject("idInstituicao", instituicao.getId());
+		return mav;
 	}
 	
 	@RequestMapping(value="editarInstituicao", method=RequestMethod.POST)
@@ -69,11 +70,10 @@ public class InstituicaoController {
 	public ModelAndView formEditar(@PathVariable("idInstituicao") long idInstituicao){
 		mav.clear();
 		mav.setViewName("editarInstituicao");
-		mav.addObject("listaprojetos", projetoService.listarTodosProjetos());
-		mav.addObject("unidadesprisionais", unidadePrisionalService.listaUnidades());
 		mav.addObject("inst", instituicaoService.buscarInstituicaoPorId(idInstituicao));
-		mav.addObject("colaboradores", usuarioService.buscarUsuarioPorInstituicao(idInstituicao, colaborador));
-		mav.addObject("coordenadores", usuarioService.buscarUsuarioPorInstituicao(idInstituicao, coordenador));
+		mav.addObject("users", usuarioService.buscarUsuarioPorInstituicao(idInstituicao));
+		mav.addObject("unidades", unidadePrisionalService.buscarUnidadePrisionalPorInstituicao(idInstituicao));
+		mav.addObject("unidadesPrisionais", unidadePrisionalService.listarUnidadesPorStatus(true));
 		return mav;
 	}
 	
@@ -88,5 +88,11 @@ public class InstituicaoController {
 		
 		return documentoExiste;
 		
+	}
+	
+	@RequestMapping(value="adicionarUnidade", method=RequestMethod.POST)
+	public String adicionarUnidade(long idInstituicao, long idUnidadePrisional){
+		unidadePrisionalService.adicionarVinculoInstituicaoComUnidadePrisional(idInstituicao,idUnidadePrisional);
+		return "redirect:/painel/instituicoes/editar/"+idInstituicao;
 	}
 }

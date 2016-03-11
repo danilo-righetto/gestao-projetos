@@ -33,7 +33,7 @@
 							<c:forEach items="${instituicoes}" var="instituicao">
 								<tr>
 									<td class="text-center">${instituicao.id}</td>
-									<td class="text-center hidden-xs hidden-sm">${(instituicao.tipoDocumento == "cnpj" ?
+									<td class="text-center hidden-xs hidden-sm">${(instituicao.tipoDocumento == "CNPJ" ?
 									 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
 									<td class="text-center">${instituicao.cidade}</td>
 									<td class="text-center hidden-xs hidden-sm">${instituicao.email}</td>

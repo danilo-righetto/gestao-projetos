@@ -20,8 +20,9 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	private EntityManager em;
 
 	@Override
-	public void cadastrarInstituicao(InstituicaoEntity instituicao) {
+	public long cadastrarInstituicao(InstituicaoEntity instituicao) {
 		em.persist(instituicao);
+		return instituicao.getId();
 		
 	}
 	

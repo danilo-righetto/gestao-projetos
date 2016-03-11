@@ -96,4 +96,12 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 		}
 		return new ArrayList<UsuarioEntity>();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao) {
+		Query query = em.createQuery("select u from UsuarioEntity u where u.instituicao.id = :idInstituicao");
+		query.setParameter("idInstituicao", idInstituicao);
+		return query.getResultList();
+	}
 }

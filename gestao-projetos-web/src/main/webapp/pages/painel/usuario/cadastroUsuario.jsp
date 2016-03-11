@@ -29,10 +29,13 @@
 		var escolha = document.getElementById("perfil").value;
 		if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
 			document.getElementById("oculta1").style.display = "block";
+			$("#instituicao").attr("required","required");
+			$("#instituicao").removeAttr("disabled");
 		}else{
 			document.getElementById("oculta1").style.display = "none";
-			$("#oculta1").val("");
 			$("#instituicao").val("");
+			$("#instituicao").removeAttr("required");
+			$("#instituicao").attr("disabled","disabled");
 		}
 	}
 </script>
