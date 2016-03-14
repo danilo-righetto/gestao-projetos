@@ -12,7 +12,7 @@
 	        "iDisplayLength": 5,
 	        "bPaginate": true,
 	        "bLengthChange": false,
-	        "bFilter": false,
+	        "bFilter": true,
 	        "bInfo": false,
 	        "bAutoWidth": true,
 	        "language": {

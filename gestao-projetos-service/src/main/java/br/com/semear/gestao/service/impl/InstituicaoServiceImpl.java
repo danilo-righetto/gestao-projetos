@@ -12,17 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.InstituicaoDAO;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class InstituicaoServiceImpl implements InstituicaoService{
-	
+public class InstituicaoServiceImpl implements InstituicaoService {
+
 	@Inject
 	private InstituicaoDAO instituicaoDAO;
-	
+
 	@Inject
 	private ParseService parse;
 
@@ -41,8 +42,8 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 	public List<Instituicao> listarInstituicoes() {
 		List<InstituicaoEntity> instituicoesEntity = instituicaoDAO.listarInstituicoes();
 		List<Instituicao> instituicoes = new ArrayList<Instituicao>();
-		if(instituicoesEntity != null){
-			for(InstituicaoEntity u : instituicoesEntity){
+		if (instituicoesEntity != null) {
+			for (InstituicaoEntity u : instituicoesEntity) {
 				instituicoes.add(parse.parseToModel(u));
 			}
 		}
@@ -51,8 +52,9 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 
 	@Override
 	public void editarInstituicao(Instituicao instituicao) {
+		//for?
 		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorId(instituicao.getId());
-		if(entity != null){
+		if (entity != null) {
 			entity.setRazaosocial(instituicao.getRazaosocial().toUpperCase());
 			entity.setNomefantasia(instituicao.getNomefantasia() != null ? instituicao.getNomefantasia().toUpperCase() :
 				instituicao.getRazaosocial().toUpperCase());
@@ -68,12 +70,11 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 			entity.setResponsavel(instituicao.getResponsavel().toUpperCase());
 			entity.setStatus(instituicao.getStatus());
 			instituicaoDAO.editarInstituicao(entity);
-		}		
+		}
 	}
 
-
 	@Override
-	public Instituicao buscarInstituicaoPorId(long idInstituicao) {
+	public Instituicao buscarInstituicaoPorId(Long idInstituicao) {
 		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorId(idInstituicao);
 		Instituicao instituicao = parse.parseToModel(entity);
 		return instituicao;
@@ -86,4 +87,34 @@ public class InstituicaoServiceImpl implements InstituicaoService{
 		return instituicao;
 	}
 
+	@Override
+	public long buscarUnidadePrisionalPorInstituicao(long idInstituicao) {
+		return instituicaoDAO.buscarUnidadePrisionalPorInstituicao(idInstituicao);
+	}
+
+	@Override
+	public List<Instituicao> buscarInstituicaoPorUnidade(long idUnidadePrisional) {
+		List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorUnidade(idUnidadePrisional);
+		List<Instituicao> instituicao = new ArrayList<Instituicao>();
+		for (InstituicaoEntity entity : lista) {
+			instituicao.add(parse.parseToModel(entity));
+		}
+		return instituicao;
+	}
+
+	@Override
+	public List<Instituicao> buscarInstituicoesPorId(Long[] idInstituicoes) {
+		List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorId(idInstituicoes);
+		List<Instituicao> instituicao = new ArrayList<Instituicao>();
+		for(InstituicaoEntity entity : lista){
+			instituicao.add(parse.parseToModel(entity));
+		}
+		return instituicao;
+	}
+
+	@Override
+	public long buscarUnidadePrisionalPorProjeto(long idProjeto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

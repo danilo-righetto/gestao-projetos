@@ -13,5 +13,7 @@ public interface ReeducandoService {
 
 	public Reeducando buscarReeducandoPorId(long idReeducando);
 
-	boolean verficarMatricula(long matricula);
+	public boolean verficarMatricula(long matricula);
+	
+	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idUnidadePrisional);
 }

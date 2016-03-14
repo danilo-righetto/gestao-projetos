@@ -1,6 +1,7 @@
 package br.com.semear.gestao.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,20 +17,20 @@ import br.com.semear.gestao.dao.entity.UsuarioEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public class UsuarioDaoImpl implements UsuarioDAO{
+public class UsuarioDaoImpl implements UsuarioDAO {
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public void cadastrarUsuario(UsuarioEntity usuario) {
 		em.persist(usuario);
 	}
-	
+
 	@Override
-	public UsuarioEntity buscarUsuarioPorLogin(String login){
+	public UsuarioEntity buscarUsuarioPorLogin(String login) {
 		Query query = em.createQuery("select u from UsuarioEntity u where u.usuario = :login");
 		query.setParameter("login", login);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return (UsuarioEntity) query.getSingleResult();
 		}
 		return null;
@@ -46,7 +47,7 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 	public UsuarioEntity buscarUsuarioPorId(long idUsuario) {
 		Query query = em.createQuery("select u from UsuarioEntity u where u.id = :idUsuario");
 		query.setParameter("idUsuario", idUsuario);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return (UsuarioEntity) query.getSingleResult();
 		}
 		return null;
@@ -55,16 +56,17 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 	@Override
 	public void editarUsuario(UsuarioEntity entity) {
 		UsuarioEntity usuario = entity;
-		em.merge(usuario);		
+		em.merge(usuario);
 	}
 
 	@Override
 	public boolean verificaExistenciaUsuario(String email) {
-		Query query = em.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramEmail");
+		Query query = em
+				.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramEmail");
 		query.setParameter("paramEmail", email);
-			if(!query.getResultList().isEmpty()){
-				return true;
-			}
+		if (!query.getResultList().isEmpty()) {
+			return true;
+		}
 		return false;
 	}
 
@@ -77,21 +79,23 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 	@Override
 	public UsuarioEntity buscarDadosDoUsuarioAtivo(String email) {
 		UsuarioEntity usuario = null;
-		Query query = em.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramLogin");
+		Query query = em
+				.createQuery("select u from UsuarioEntity as u where u.realizaLogin = 1 and u.usuario = :paramLogin");
 		query.setParameter("paramLogin", email);
-			if(!query.getResultList().isEmpty()){
-				usuario = (UsuarioEntity) query.getResultList().get(0);
-			}
+		if (!query.getResultList().isEmpty()) {
+			usuario = (UsuarioEntity) query.getResultList().get(0);
+		}
 		return usuario;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
-		Query query = em.createQuery("select u from UsuarioEntity u where u.instituicao.id = :idInstituicao and u.perfil.id = :idPerfil");
+		Query query = em.createQuery(
+				"select u from UsuarioEntity u where u.instituicao.id = :idInstituicao and u.perfil.id = :idPerfil");
 		query.setParameter("idInstituicao", idInstituicao);
 		query.setParameter("idPerfil", idPerfil);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return query.getResultList();
 		}
 		return new ArrayList<UsuarioEntity>();
@@ -102,6 +106,16 @@ public class UsuarioDaoImpl implements UsuarioDAO{
 	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao) {
 		Query query = em.createQuery("select u from UsuarioEntity u where u.instituicao.id = :idInstituicao");
 		query.setParameter("idInstituicao", idInstituicao);
+		return query.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil) {
+		Query query = em.createQuery(
+				"select u from UsuarioEntity u where u.instituicao.id in(:idInstituicoes) and u.perfil.id = :idPerfil order by u.nome");
+		query.setParameter("idInstituicoes", Arrays.asList(idInstituicoes));
+		query.setParameter("idPerfil", idPerfil);
 		return query.getResultList();
 	}
 }

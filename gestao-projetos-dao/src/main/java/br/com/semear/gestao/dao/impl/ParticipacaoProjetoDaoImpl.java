@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoProjetoDAO;
-import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -21,13 +21,13 @@ public class ParticipacaoProjetoDaoImpl implements ParticipacaoProjetoDAO {
 	private EntityManager em;
 
 	@Override
-	public void cadastrar(ParticipacaoProjetoEntity participacaoProjeto) {
+	public void cadastrar(ParticipacaoReeducandoProjetoEntity participacaoProjeto) {
 		em.persist(participacaoProjeto);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ParticipacaoProjetoEntity> listarParticipacaoProjetos() {
+	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos() {
 		Query query = em.createQuery("select pp from ParticipacaoProjetoEntity pp");
 		return query.getResultList();
 	}

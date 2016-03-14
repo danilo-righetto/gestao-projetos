@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ProjetoService;
+import br.com.semear.gestao.service.UnidadePrisionalService;
 
 @Controller
 @RequestMapping("painel/projetos")
@@ -23,6 +24,9 @@ public class ProjetoController {
 
 	@Inject
 	private ProjetoService projetoService;
+	
+	@Inject
+	private UnidadePrisionalService unidadePrisionalService;
 	
 	private ModelAndView mav = new ModelAndView();
 	
@@ -35,8 +39,12 @@ public class ProjetoController {
 	}
 
 	@RequestMapping("/cadastro")
-	public String formCadastro() {
-		return "cadastroProjeto";
+	public ModelAndView formCadastro() {
+		mav.clear();
+		mav.setViewName("cadastroProjeto");
+		mav.addObject("unidadesPrisionais", unidadePrisionalService.listaUnidades());
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "salvarProjeto", method = RequestMethod.POST)

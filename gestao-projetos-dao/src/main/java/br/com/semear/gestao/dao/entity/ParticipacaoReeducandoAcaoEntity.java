@@ -14,8 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "PARTICIPACAO_PROJETO")
-public class ParticipacaoProjetoEntity {
+@Table(name = "PARTICIPACAO_ACAO")
+public class ParticipacaoReeducandoAcaoEntity {
 
 	@Id
 	@GeneratedValue
@@ -23,8 +23,8 @@ public class ParticipacaoProjetoEntity {
 	private long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROJETO", nullable = false)
-	private ProjetoEntity projeto;
+	@JoinColumn(name = "ACAO", nullable = false)
+	private AcaoEntity acao;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "REEDUCANDO", nullable = false)
@@ -52,12 +52,12 @@ public class ParticipacaoProjetoEntity {
 		this.id = id;
 	}
 
-	public ProjetoEntity getProjeto() {
-		return projeto;
+	public AcaoEntity getAcao() {
+		return acao;
 	}
 
-	public void setProjeto(ProjetoEntity projeto) {
-		this.projeto = projeto;
+	public void setAcao(AcaoEntity acao) {
+		this.acao = acao;
 	}
 
 	public ReeducandoEntity getReeducando() {

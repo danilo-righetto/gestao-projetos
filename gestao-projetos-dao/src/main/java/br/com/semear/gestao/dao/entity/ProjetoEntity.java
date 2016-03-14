@@ -50,11 +50,19 @@ public class ProjetoEntity {
 	@JoinColumn(name = "USUARIO", nullable = false)
 	private UsuarioEntity usuarioEntity;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "COORDENADOR")
+	private UsuarioEntity coordenador;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "UNIDADE_PRISIONAL")
+	private UnidadePrisionalEntity unidadePrisional;
+
 	@OneToMany(mappedBy = "projeto", fetch = FetchType.LAZY)
-	private List<ParticipacaoProjetoEntity> participacoes;
-	
-	public ProjetoEntity(){
-		
+	private List<ParticipacaoReeducandoProjetoEntity> participacoes;
+
+	public ProjetoEntity() {
+
 	}
 
 	public ProjetoEntity(long id) {
@@ -125,11 +133,27 @@ public class ProjetoEntity {
 		this.usuarioEntity = usuarioEntity;
 	}
 
-	public List<ParticipacaoProjetoEntity> getParticipacoes() {
+	public UsuarioEntity getCoordenador() {
+		return coordenador;
+	}
+
+	public void setCoordenador(UsuarioEntity coordenador) {
+		this.coordenador = coordenador;
+	}
+
+	public UnidadePrisionalEntity getUnidadePrisional() {
+		return unidadePrisional;
+	}
+
+	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
+		this.unidadePrisional = unidadePrisional;
+	}
+
+	public List<ParticipacaoReeducandoProjetoEntity> getParticipacoes() {
 		return participacoes;
 	}
 
-	public void setParticipacoes(List<ParticipacaoProjetoEntity> participacoes) {
+	public void setParticipacoes(List<ParticipacaoReeducandoProjetoEntity> participacoes) {
 		this.participacoes = participacoes;
 	}
 }

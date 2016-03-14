@@ -2,10 +2,10 @@ package br.com.semear.gestao.dao;
 
 import java.util.List;
 
-import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
 
 public interface ParticipacaoAcaoDAO {
-	public void cadastrar(ParticipacaoAcaoEntity participacaoAcao);
+	public void cadastrar(ParticipacaoReeducandoAcaoEntity participacaoAcao);
 	
-	public List<ParticipacaoAcaoEntity> listarParticipacaoAcoes();
+	public List<ParticipacaoReeducandoAcaoEntity> listarParticipacaoAcoes();
 }

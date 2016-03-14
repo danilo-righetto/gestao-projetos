@@ -45,13 +45,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private InstituicaoService instituicaoService;
 	
 	@Override
-	public Usuario buscarUsuarioPorLogin(String login){
+	public Usuario buscarUsuarioPorLogin(String login) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorLogin(login);
 		Usuario usuario = parseService.parseToModel(entity);
 		return usuario;
-		
+
 	}
-	
+
 	@Override
 	public void cadastrarUsuario(Usuario usuario) {
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
@@ -70,8 +70,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> listarUsuarios() {
 		List<UsuarioEntity> usuariosEntity = usuarioDAO.listarUsuarios();
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		if(usuariosEntity != null){
-			for(UsuarioEntity u : usuariosEntity){
+		if (usuariosEntity != null) {
+			for (UsuarioEntity u : usuariosEntity) {
 				usuarios.add(parseService.parseToModel(u));
 			}
 		}
@@ -108,8 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		try {
 			boolean existe = usuarioDAO.verificaExistenciaUsuario(email);
 			if (existe) {
-				boolean jaEnviado = recuperaSenhaDAO
-						.possuiRequisicaoNovaSenha(email);
+				boolean jaEnviado = recuperaSenhaDAO.possuiRequisicaoNovaSenha(email);
 				if (!jaEnviado) {
 					String hash = inserirRequisicaoDeSenha(email);
 					mailService.enviarEmailNovaSenha(email, hash);
@@ -130,8 +129,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario buscarUsuarioRedefinirSenha(String hash) {
-		RequisicaoSenhaEntity requisicao = recuperaSenhaDAO
-				.buscarUsuarioRedefinirSenha(hash);
+		RequisicaoSenhaEntity requisicao = recuperaSenhaDAO.buscarUsuarioRedefinirSenha(hash);
 		Usuario usuario = null;
 		if (requisicao != null) {
 			usuario = buscarDadosDoUsuarioAtivo(requisicao.getEmail());
@@ -140,15 +138,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public String redefinirSenha(String novaSenha, String confirmaNovaSenha,String email, String hash) {
+	public String redefinirSenha(String novaSenha, String confirmaNovaSenha, String email, String hash) {
 		String mensagem = "ERRO";
 		Usuario usuario = buscarDadosDoUsuarioAtivo(email);
 		if (usuario != null) {
 			if (novaSenha.equals(confirmaNovaSenha)) {
-				usuarioDAO.alterarSenha(parseService.parseToEntity(usuario),
-						passwordEncoder.encode(novaSenha));
-				RequisicaoSenhaEntity requisicao = recuperaSenhaDAO
-						.buscarUsuarioRedefinirSenha(hash);
+				usuarioDAO.alterarSenha(parseService.parseToEntity(usuario), passwordEncoder.encode(novaSenha));
+				RequisicaoSenhaEntity requisicao = recuperaSenhaDAO.buscarUsuarioRedefinirSenha(hash);
 				recuperaSenhaDAO.removerSolicitacao(requisicao);
 				mensagem = "OK";
 			} else {
@@ -157,7 +153,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		return mensagem;
 	}
-	
+
 	private String inserirRequisicaoDeSenha(String email) {
 		RequisicaoSenhaEntity nova = new RequisicaoSenhaEntity();
 		nova.setDataCadastro(Calendar.getInstance());
@@ -166,15 +162,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 		recuperaSenhaDAO.inserirRequisicao(nova);
 		return nova.getHashUrl();
 	}
-	
+
 	@Override
 	public Usuario buscarDadosDoUsuarioAtivo(String email) {
-		
+
 		Usuario usuario = parseService.parseToModel(usuarioDAO.buscarDadosDoUsuarioAtivo(email));
 
 		return usuario;
 	}
-	
+
 	@Override
 	public String geraHash(String valor) {
 		String result = valor + Calendar.getInstance().getTimeInMillis();
@@ -200,14 +196,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
-		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
+		List<UsuarioEntity> entitys = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		for(UsuarioEntity i : entity){
+		for (UsuarioEntity i : entitys) {
 			usuarios.add(parseService.parseToModel(i));
 		}
 		return usuarios;
 	}
-
+	
 	@Override
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao) {
 		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao);
@@ -216,5 +212,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuarios.add(parseService.parseToModel(i));
 		}
 		return usuarios;
+	}
+
+	@Override
+	public List<Usuario> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil) {
+		List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
+		List<Usuario> colaboradores = new ArrayList<Usuario>();
+		for(UsuarioEntity u : lista){
+			colaboradores.add(parseService.parseToModel(u));
+		}
+		return colaboradores;
 	}
 }

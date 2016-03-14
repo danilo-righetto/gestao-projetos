@@ -5,11 +5,11 @@ import java.util.Calendar;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Projeto {
-	
+
 	private long id;
-	
+
 	private String nome;
-	
+
 	private String descricao;
 
 	private Calendar dataCadastro;
@@ -19,11 +19,15 @@ public class Projeto {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar dataTermino;
-	
+
 	private String status;
-	
+
 	// usuario que criou o projeto
 	private Usuario usuario;
+
+	private Usuario coordenador;
+	
+	private UnidadePrisional unidadePrisional;
 
 	public long getId() {
 		return id;
@@ -89,4 +93,19 @@ public class Projeto {
 		this.usuario = usuario;
 	}
 
+	public Usuario getCoordenador() {
+		return coordenador;
+	}
+
+	public void setCoordenador(Usuario coordenador) {
+		this.coordenador = coordenador;
+	}
+
+	public UnidadePrisional getUnidadePrisional() {
+		return unidadePrisional;
+	}
+
+	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
+		this.unidadePrisional = unidadePrisional;
+	}
 }
