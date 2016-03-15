@@ -94,13 +94,10 @@ public interface ParseService {
 	AlternativaPerguntaAcaoEntity parseToEntity(AlternativaPerguntaAcao alternativa);
 
 	PerguntaAcaoEntity parseToEntity(PerguntaAcao p);
-<<<<<<< HEAD
 
 	AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity a);
-=======
 	
 	ParticipacaoColaboradorProjetoEntity parseToEntity(ParticipacaoColaboradorProjeto colaboradorProjeto);
 
 	ParticipacaoReeducandoAcaoEntity parseToEntity(ParticipacaoReeducandoAcao participacaoAcao);
->>>>>>> 9abc6d4e11516cfa2f7a4ae29d8a961fecf8c292
 }

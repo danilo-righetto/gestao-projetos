@@ -511,21 +511,21 @@ public class ParseServiceImpl implements ParseService {
 		
 		return entity;
 	}
-
+	
 	@Override
-<<<<<<< HEAD
-	public AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity entity) {
-		AlternativaPerguntaAcao model = null;
-		if(entity != null){
-			model = new AlternativaPerguntaAcao();
-			model.setDataCadastro(entity.getDataCadastro());
-			model.setDescricaoAlternativa(entity.getDescricaoAlternativaAcao());
-			model.setId(entity.getId());
-			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
-		}
-		
-		return model;
-=======
+		public AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity entity) {
+			AlternativaPerguntaAcao model = null;
+			if(entity != null){
+				model = new AlternativaPerguntaAcao();
+				model.setDataCadastro(entity.getDataCadastro());
+				model.setDescricaoAlternativa(entity.getDescricaoAlternativaAcao());
+				model.setId(entity.getId());
+				model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
+			}
+			
+			return model;
+	}
+	
 	public ParticipacaoColaboradorProjetoEntity parseToEntity(ParticipacaoColaboradorProjeto model) {
 		ParticipacaoColaboradorProjetoEntity entity = null;
 		if(model != null){
@@ -538,6 +538,5 @@ public class ParseServiceImpl implements ParseService {
 			entity.setMotivoSaida(model.getMotivoSaida());
 		}
 		return entity;
->>>>>>> 9abc6d4e11516cfa2f7a4ae29d8a961fecf8c292
 	}
 }
