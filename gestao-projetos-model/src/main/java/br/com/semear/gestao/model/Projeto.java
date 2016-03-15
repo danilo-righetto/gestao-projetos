@@ -29,6 +29,14 @@ public class Projeto {
 	
 	private UnidadePrisional unidadePrisional;
 
+	public Projeto(Long id) {
+		this.id = id;
+	}
+	
+	public Projeto() {
+		
+	}
+
 	public long getId() {
 		return id;
 	}

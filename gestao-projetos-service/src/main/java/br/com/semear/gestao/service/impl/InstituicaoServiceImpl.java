@@ -104,12 +104,15 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
 	@Override
 	public List<Instituicao> buscarInstituicoesPorId(Long[] idInstituicoes) {
-		List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorId(idInstituicoes);
-		List<Instituicao> instituicao = new ArrayList<Instituicao>();
-		for(InstituicaoEntity entity : lista){
-			instituicao.add(parse.parseToModel(entity));
+		if (idInstituicoes != null) {
+			List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorId(idInstituicoes);
+			List<Instituicao> instituicao = new ArrayList<Instituicao>();
+			for (InstituicaoEntity entity : lista) {
+				instituicao.add(parse.parseToModel(entity));
+			}
+			return instituicao;
 		}
-		return instituicao;
+		return null;
 	}
 
 	@Override

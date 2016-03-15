@@ -11,6 +11,19 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#coordenadores").hide();
+
+		$("input[name=idReeducandos]").on("click", function() {
+			var idReeducando = this.id;
+			var idFuncao = this.id.replace("idReeducandos", "funcao");
+			if ($("#" + idReeducando + ":checked").length > 0) {
+				$("#" + idFuncao).removeAttr("disabled");
+				$("#" + idFuncao).attr("required", "required");
+			} else {
+				$("#" + idFuncao).removeAttr("required");
+				$("#" + idFuncao).attr("disabled", "disabled");
+			}
+		});
+
 	});
 </script>
 <script type="text/javascript">
@@ -37,36 +50,7 @@
 	};
 </script>
 <script type="text/javascript">
-	function listarReeducandos() {
-									$("input[name=idReeducandos]")
-											.on(
-													"click",
-													function() {
-														var idReeducando = this.id;
-														var idFuncao = this.id
-																.replace(
-																		"reeducando",
-																		"funcao");
-														if ($("#"
-																+ idReeducando
-																+ ":checked").length > 0) {
-															$("#" + idFuncao)
-																	.removeAttr(
-																			"disabled");
-															$("#" + idFuncao)
-																	.attr(
-																			"required",
-																			"required");
-														} else {
-															$("#" + idFuncao)
-																	.removeAttr(
-																			"required");
-															$("#" + idFuncao)
-																	.attr(
-																			"disabled",
-																			"disabled");
-														}
-													});
+	
 </script>
 </head>
 <body>
@@ -86,19 +70,19 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label for="instituicao">Instituição:</label> <select
-								id="instituicao" name="idInstituicoes" class="form-control"
+								id="instituicao" name="instituicao" class="form-control"
 								required autofocus onchange="listarCoordenadores();">
 								<option value="" label="Selecione..." />
-								<c:forEach var="instituicao" items="${instituicoes}">
-									<option value="${instituicao.id}"
-										label="${instituicao.razaosocial}" />
+								<c:forEach var="associada" items="${instituicoesAssociadas}">
+									<option value="${associada.instituicao.id}"
+										label="${associada.instituicao.razaosocial}" />
 								</c:forEach>
 							</select>
 						</div>
 						<div class="form-group col-md-4" id="coordenadores">
 							<label for="coordenador">Coordenador:</label> <select
 								id="coordenador" name="idCoordenador" class="form-control"
-								required autofocus onchange="listarReeducandos();">
+								required>
 								<option value="" label="" />
 							</select>
 						</div>
@@ -121,17 +105,18 @@
 					<tbody id="tbody-reeducandos">
 						<c:forEach var="reeducando" items="${reeducandos}">
 							<tr class="text-center">
-								<td><input value="${reeducando.id}" name="idReeducandos"
+								<td><input value="${reeducando.id}"
+									id="idReeducandos${reeducando.id}" name="idReeducandos"
 									type="checkbox" /></td>
 								<td>${reeducando.id}</td>
 								<td>${reeducando.matricula}</td>
 								<td>${reeducando.nome}</td>
 								<td>${reeducando.sexo}</td>
-								<td><select class='form-control'
+								<td class="col-md-3"><select class='form-control'
 									id="funcao${reeducando.id}" name='funcoes' disabled>
-										<option value='' label='Selecione...'></option>
+										<option value='' label='Selecione...' />
 										<option value='Reeducando Participante'
-											label='REEDUCANDO PARTICIPANTE'></option>
+											label='REEDUCANDO PARTICIPANTE' />
 										<option value='Reeducando Monitor' label='REEDUCANDO MONITOR'></option>
 								</select></td>
 							</tr>

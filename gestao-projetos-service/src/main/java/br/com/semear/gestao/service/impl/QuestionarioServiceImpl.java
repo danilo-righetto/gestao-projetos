@@ -96,9 +96,16 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	}
 
 	@Override
-	public void alterarQuestionario(Questionario questionario,List<Pergunta> perguntasRemovidas) {
-		removerPerguntas(perguntasRemovidas);
-		adicionarPerguntas(questionario);		
+	public String alterarQuestionario(Questionario questionario,List<Pergunta> perguntasRemovidas) {
+		String msg = null;
+		try {
+			removerPerguntas(perguntasRemovidas);
+			adicionarPerguntas(questionario);
+			msg = "OK";
+		} catch (Exception e) {
+			msg = "NOK";
+		}
+		return msg;
 	}
 
 	private void adicionarPerguntas(Questionario questionario) {

@@ -14,4 +14,6 @@ public interface ProjetoDAO {
 	public ProjetoEntity buscarProjetoPorId(long idProjeto);
 
 	public void editarProjeto(ProjetoEntity entity);
+
+	public long buscarUnidadePrisionalDoProjeto(long idProjeto);
 }

@@ -16,6 +16,7 @@ import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.QuestionarioService;
+import br.com.semear.gestao.service.UsuarioService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -29,6 +30,9 @@ public class ProjetoServiceImpl implements ProjetoService {
 	
 	@Inject
 	private QuestionarioService questionarioService;
+	
+	@Inject
+	private UsuarioService usuarioService;
 
 	@Override
 	public String cadastrarProjeto(Projeto novoProjeto) {
@@ -69,10 +73,17 @@ public class ProjetoServiceImpl implements ProjetoService {
 		entity.setDescricao(projeto.getDescricao());
 		entity.setNome(projeto.getNome());
 		entity.setStatus(projeto.getStatus());
+		
 		if(projeto.getCoordenador() != null && projeto.getCoordenador().getId() > 0){
+			projeto.setCoordenador(usuarioService.buscarUsuarioPorId(projeto.getCoordenador().getId()));
 			entity.setCoordenador(parseService.parseToEntity(projeto.getCoordenador()));
 		}
 		projetoDAO.editarProjeto(entity);
+	}
+
+	@Override
+	public long buscarUnidadePrisionalDoProjeto(long idProjeto) {
+		return projetoDAO.buscarUnidadePrisionalDoProjeto(idProjeto);
 	}
 
 }
