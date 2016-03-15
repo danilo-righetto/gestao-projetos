@@ -70,7 +70,12 @@ public class QuestionarioAcaoServiceImpl implements QuestionarioAcaoService {
 		List<PerguntaAcaoEntity> entitys = questionarioAcaoDAO.buscarPerguntasPorIdQuestionario(idQuestionario);
 		List<PerguntaAcao> perguntas = new ArrayList<PerguntaAcao>();
 		for(PerguntaAcaoEntity p : entitys){
-			perguntas.add(parseService.parseToModel(p));
+			p.setAlternativas(questionarioAcaoDAO.buscarAlternativasPorIdPergunta(p.getId()));
+			PerguntaAcao pergunta = parseService.parseToModel(p);
+			for(AlternativaPerguntaAcaoEntity a:p.getAlternativas()){
+				pergunta.getAlternativas().add(parseService.parseToModel(a));
+			}
+			perguntas.add(pergunta);
 		}
 		return perguntas;
 	}

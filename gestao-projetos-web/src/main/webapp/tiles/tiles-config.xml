@@ -160,4 +160,10 @@
 		<put-attribute name="conteudo"
 			value="/pages/painel/unidade-prisional/listarUnidadesPrisionais.jsp" />
 	</definition>
+	
+	<!-- Semear - RESPOSTA QUESTIONARIO ACAO -->
+	<definition name="respostaAcao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/resposta/respostaAcao.jsp" />
+	</definition>
 </tiles-definitions>

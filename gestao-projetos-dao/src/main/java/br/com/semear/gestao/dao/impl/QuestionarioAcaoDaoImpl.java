@@ -15,7 +15,6 @@ import br.com.semear.gestao.dao.QuestionarioAcaoDAO;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.PerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioAcaoEntity;
-import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 
 @Repository
@@ -113,6 +112,14 @@ public class QuestionarioAcaoDaoImpl implements QuestionarioAcaoDAO {
 		
 		query.executeUpdate();
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AlternativaPerguntaAcaoEntity> buscarAlternativasPorIdPergunta(long id) {
+		Query query = em.createQuery("select a from AlternativaPerguntaAcaoEntity a where a.perguntaAcaoEntity.id = :id");
+		query.setParameter("id", id);
+		return query.getResultList();
 	}
 
 }

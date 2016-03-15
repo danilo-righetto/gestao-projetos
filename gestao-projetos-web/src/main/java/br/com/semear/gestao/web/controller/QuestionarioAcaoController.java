@@ -46,7 +46,6 @@ public class QuestionarioAcaoController {
 			mav.clear();
 			perguntasRemovidas = new ArrayList<PerguntaAcao>();
 			questionarioAcao = questionarioAcaoService.buscarQuestionarioPorIdAcao(idAcao);
-			
 			mav.setViewName("cadastroQuestionarioAcao");
 			mav.addObject("questionario",questionarioAcao);
 			mav.addObject("tiposPerguntas",questionarioAcaoService.listarTiposDePerguntas());
