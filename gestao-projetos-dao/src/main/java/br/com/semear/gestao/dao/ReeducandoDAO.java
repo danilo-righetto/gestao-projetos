@@ -14,4 +14,6 @@ public interface ReeducandoDAO {
 	public ReeducandoEntity buscarReeducandoPorId(long idReeducando);
 
 	public ReeducandoEntity buscarMatricula(long matricula);
+
+	List<ReeducandoEntity> listarReeducandosPorUnidadePrisional(long idUnidadePrisional);
 }

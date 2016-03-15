@@ -11,7 +11,13 @@ public interface InstituicaoDAO {
 
 	public void editarInstituicao(InstituicaoEntity instituicao);
 
-	public InstituicaoEntity buscarInstituicaoPorId(long idInstituicao);
+	public InstituicaoEntity buscarInstituicaoPorId(Long idInstituicao);
 	
 	public InstituicaoEntity buscarInstituicaoPorDocumento(String documento);
+
+	public long buscarUnidadePrisionalPorInstituicao(long idInstituicao);
+
+	public List<InstituicaoEntity> buscarInstituicaoPorUnidade(long idUnidadePrisional);
+
+	public List<InstituicaoEntity> buscarInstituicaoPorId(Long[] idInstituicoes);
 }

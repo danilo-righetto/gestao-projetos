@@ -69,6 +69,9 @@ public class ProjetoServiceImpl implements ProjetoService {
 		entity.setDescricao(projeto.getDescricao());
 		entity.setNome(projeto.getNome());
 		entity.setStatus(projeto.getStatus());
+		if(projeto.getCoordenador() != null && projeto.getCoordenador().getId() > 0){
+			entity.setCoordenador(parseService.parseToEntity(projeto.getCoordenador()));
+		}
 		projetoDAO.editarProjeto(entity);
 	}
 

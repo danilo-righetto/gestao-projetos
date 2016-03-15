@@ -4,8 +4,9 @@ import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
-import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
-import br.com.semear.gestao.dao.entity.ParticipacaoProjetoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
 import br.com.semear.gestao.dao.entity.PerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.PerguntaEntity;
@@ -21,8 +22,9 @@ import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.Instituicao;
-import br.com.semear.gestao.model.ParticipacaoAcao;
-import br.com.semear.gestao.model.ParticipacaoProjeto;
+import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
+import br.com.semear.gestao.model.ParticipacaoReeducandoAcao;
+import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Perfil;
 import br.com.semear.gestao.model.Pergunta;
 import br.com.semear.gestao.model.PerguntaAcao;
@@ -55,9 +57,7 @@ public interface ParseService {
 
 	ReeducandoEntity parseToEntity(Reeducando reeducando);
 
-	ParticipacaoProjetoEntity parseToEntity(ParticipacaoProjeto participacaoProjeto);
-
-	ParticipacaoAcaoEntity parseToEntity(ParticipacaoAcao participacaoAcao);
+	ParticipacaoReeducandoProjetoEntity parseToEntity(ParticipacaoReeducandoProjeto participacaoProjeto);
 
 	AcaoEntity parseToEntity(Acao acao);
 
@@ -68,13 +68,13 @@ public interface ParseService {
 	UnidadePrisional parseToModel(UnidadePrisionalEntity entity);
 
 	Questionario parseToModel(QuestionarioEntity entity);
-	
+
 	QuestionarioAcao parseToModel(QuestionarioAcaoEntity entity);
 	
 	RespostaAcao parseToModel(RespostaAcaoEntity entity);
 	
 	QuestionarioAcaoEntity parseToEntity(QuestionarioAcao model);
-
+	
 	TipoPergunta parseToModel(TipoPerguntaEntity entity);
 	
 	Acao parseToModel(AcaoEntity a);
@@ -86,14 +86,21 @@ public interface ParseService {
 	TipoPerguntaEntity parseToEntity(TipoPergunta model);
 
 	Pergunta parseToModel(PerguntaEntity p);
-	
-	PerguntaAcao parseToModel(PerguntaAcaoEntity p);
 
-	AlternativaPerguntaEntity parseToEntity(AlternativaPergunta alternativa);
+	PerguntaAcao parseToModel(PerguntaAcaoEntity p);
 	
+	AlternativaPerguntaEntity parseToEntity(AlternativaPergunta alternativa);
+
 	AlternativaPerguntaAcaoEntity parseToEntity(AlternativaPerguntaAcao alternativa);
 
 	PerguntaAcaoEntity parseToEntity(PerguntaAcao p);
+<<<<<<< HEAD
 
 	AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity a);
+=======
+	
+	ParticipacaoColaboradorProjetoEntity parseToEntity(ParticipacaoColaboradorProjeto colaboradorProjeto);
+
+	ParticipacaoReeducandoAcaoEntity parseToEntity(ParticipacaoReeducandoAcao participacaoAcao);
+>>>>>>> 9abc6d4e11516cfa2f7a4ae29d8a961fecf8c292
 }

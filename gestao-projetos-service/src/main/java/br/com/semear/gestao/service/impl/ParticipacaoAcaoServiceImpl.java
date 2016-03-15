@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoAcaoDAO;
-import br.com.semear.gestao.dao.entity.ParticipacaoAcaoEntity;
-import br.com.semear.gestao.model.ParticipacaoAcao;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
+import br.com.semear.gestao.model.ParticipacaoReeducandoAcao;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ParticipacaoAcaoService;
 
@@ -25,12 +25,12 @@ public class ParticipacaoAcaoServiceImpl implements ParticipacaoAcaoService {
 	private ParseService parse;
 
 	@Override
-	public void cadastrar(ParticipacaoAcao participacaoAcao) {
+	public void cadastrar(ParticipacaoReeducandoAcao participacaoAcao) {
 		participacaoAcaoDAO.cadastrar(parse.parseToEntity(participacaoAcao));
 	}
 
 	@Override
-	public List<ParticipacaoAcaoEntity> listarParticipacaoAcoes() {
+	public List<ParticipacaoReeducandoAcaoEntity> listarParticipacaoAcoes() {
 		return participacaoAcaoDAO.listarParticipacaoAcoes();
 	}
 

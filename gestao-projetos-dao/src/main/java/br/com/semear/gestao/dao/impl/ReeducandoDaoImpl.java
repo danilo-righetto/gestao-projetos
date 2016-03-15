@@ -52,4 +52,13 @@ public class ReeducandoDaoImpl implements ReeducandoDAO {
 		}
 		return (ReeducandoEntity)query.getSingleResult();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ReeducandoEntity> listarReeducandosPorUnidadePrisional(long idUnidadePrisional) {
+		Query query = em
+				.createQuery("select r from ReeducandoEntity r where r.unidadePrisional.id = :idUnidadePrisional");
+		query.setParameter("idUnidadePrisional", idUnidadePrisional);
+		return query.getResultList();
+	}
 }

@@ -44,11 +44,11 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 	@Override
 	public List<Reeducando> listarReeducandos() {
 		List<ReeducandoEntity> lista = reeducandoDAO.listarReeducandos();
-		List<Reeducando> reeducando = new ArrayList<Reeducando>();
+		List<Reeducando> reeducandos = new ArrayList<Reeducando>();
 		for (ReeducandoEntity reeducandoEn : lista) {
-			reeducando.add(parse.parseToModel(reeducandoEn));
+			reeducandos.add(parse.parseToModel(reeducandoEn));
 		}
-		return reeducando;
+		return reeducandos;
 	}
 
 	@Override
@@ -63,5 +63,15 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 			existe = true;
 		}
 		return existe;
+	}
+
+	@Override
+	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idUnidadePrisional) {
+		List<ReeducandoEntity> lista = reeducandoDAO.listarReeducandosPorUnidadePrisional(idUnidadePrisional);
+		List<Reeducando> reeducandos = new ArrayList<Reeducando>();
+		for(ReeducandoEntity reeducandoEn : lista){
+			reeducandos.add(parse.parseToModel(reeducandoEn));
+		}
+		return reeducandos;
 	}
 }

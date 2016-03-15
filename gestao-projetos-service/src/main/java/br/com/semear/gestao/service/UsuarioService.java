@@ -28,4 +28,6 @@ public interface UsuarioService {
 	String geraHash(String valor);
 
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao);
+
+	public List<Usuario> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil);
 }

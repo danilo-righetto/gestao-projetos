@@ -14,8 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "PARTICIPACAO_ACAO")
-public class ParticipacaoAcaoEntity {
+@Table(name = "PARTICIPACAO_COLABORADOR_PROJETO")
+public class ParticipacaoColaboradorProjetoEntity {
 
 	@Id
 	@GeneratedValue
@@ -23,14 +23,14 @@ public class ParticipacaoAcaoEntity {
 	private long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ACAO", nullable = false)
-	private AcaoEntity acao;
+	@JoinColumn(name = "PROJETO", nullable = false)
+	private ProjetoEntity projeto;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "REEDUCANDO", nullable = false)
-	private ReeducandoEntity reeducando;
+	@JoinColumn(name = "COLABORADOR", nullable = false)
+	private UsuarioEntity colaborador;
 
-	@Column(name = "DATA_ENTRADA")
+	@Column(name = "DATA_ENTRADA", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataEntrada;
 
@@ -41,9 +41,6 @@ public class ParticipacaoAcaoEntity {
 	@Column(name = "MOTIVO_SAIDA")
 	private String motivoSaida;
 
-	@Column(name = "FUNCAO")
-	private String funcao;
-
 	public long getId() {
 		return id;
 	}
@@ -52,20 +49,20 @@ public class ParticipacaoAcaoEntity {
 		this.id = id;
 	}
 
-	public AcaoEntity getAcao() {
-		return acao;
+	public ProjetoEntity getProjeto() {
+		return projeto;
 	}
 
-	public void setAcao(AcaoEntity acao) {
-		this.acao = acao;
+	public void setProjeto(ProjetoEntity projeto) {
+		this.projeto = projeto;
 	}
 
-	public ReeducandoEntity getReeducando() {
-		return reeducando;
+	public UsuarioEntity getColaborador() {
+		return colaborador;
 	}
 
-	public void setReeducando(ReeducandoEntity reeducando) {
-		this.reeducando = reeducando;
+	public void setColaborador(UsuarioEntity colaborador) {
+		this.colaborador = colaborador;
 	}
 
 	public Calendar getDataEntrada() {
@@ -90,13 +87,5 @@ public class ParticipacaoAcaoEntity {
 
 	public void setMotivoSaida(String motivoSaida) {
 		this.motivoSaida = motivoSaida;
-	}
-
-	public String getFuncao() {
-		return funcao;
-	}
-
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
 	}
 }

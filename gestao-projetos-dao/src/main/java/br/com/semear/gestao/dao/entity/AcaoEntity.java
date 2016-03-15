@@ -50,7 +50,7 @@ public class AcaoEntity {
 	private UsuarioEntity usuario;
 
 	@ManyToMany(mappedBy = "acao", fetch = FetchType.LAZY)
-	private List<ParticipacaoAcaoEntity> participacoes;
+	private List<ParticipacaoReeducandoAcaoEntity> participacoes;
 
 	public long getId() {
 		return id;
@@ -108,11 +108,11 @@ public class AcaoEntity {
 		this.status = status;
 	}
 
-	public List<ParticipacaoAcaoEntity> getParticipacoes() {
+	public List<ParticipacaoReeducandoAcaoEntity> getParticipacoes() {
 		return participacoes;
 	}
 
-	public void setParticipacoes(List<ParticipacaoAcaoEntity> participacoes) {
+	public void setParticipacoes(List<ParticipacaoReeducandoAcaoEntity> participacoes) {
 		this.participacoes = participacoes;
 	}
 

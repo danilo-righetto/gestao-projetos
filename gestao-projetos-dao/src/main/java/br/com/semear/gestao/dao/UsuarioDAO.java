@@ -22,6 +22,8 @@ public interface UsuarioDAO {
 	public void alterarSenha(UsuarioEntity usuario, String encode);
 
 	public UsuarioEntity buscarDadosDoUsuarioAtivo(String email);
-
+	
 	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao);
+	
+	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil);
 }

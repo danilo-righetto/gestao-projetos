@@ -10,25 +10,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.semear.gestao.dao.ParticipacaoAcaoDAO;
-import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
+import br.com.semear.gestao.dao.ParticipacaoReeducandoProjetoDAO;
+import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public class ParticipacaoAcaoDaoImpl implements ParticipacaoAcaoDAO {
+public class ParticipacaoReeducandoProjetoDaoImpl implements ParticipacaoReeducandoProjetoDAO {
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
-	public void cadastrar(ParticipacaoReeducandoAcaoEntity participacaoAcao) {
-		em.persist(participacaoAcao);
+	public void cadastrar(ParticipacaoReeducandoProjetoEntity participacaoProjeto) {
+		em.persist(participacaoProjeto);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ParticipacaoReeducandoAcaoEntity> listarParticipacaoAcoes() {
-		Query query = em.createQuery("select pa from ParticipacaoAcaoEntity pa");
+	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos() {
+		Query query = em.createQuery("select pp from ParticipacaoProjetoEntity pp");
 		return query.getResultList();
 	}
 }

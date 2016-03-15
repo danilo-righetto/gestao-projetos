@@ -45,10 +45,10 @@ public class ReeducandoEntity {
 	private UnidadePrisionalEntity unidadePrisional;
 
 	@ManyToMany(mappedBy = "reeducando", fetch = FetchType.LAZY)
-	private List<ParticipacaoProjetoEntity> projetos;
+	private List<ParticipacaoReeducandoProjetoEntity> projetos;
 
 	@ManyToMany(mappedBy = "reeducando", fetch = FetchType.LAZY)
-	private List<ParticipacaoAcaoEntity> acoes;
+	private List<ParticipacaoReeducandoAcaoEntity> acoes;
 
 	public long getId() {
 		return id;

@@ -1,5 +1,6 @@
 package br.com.semear.gestao.dao.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,11 +24,11 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	public long cadastrarInstituicao(InstituicaoEntity instituicao) {
 		em.persist(instituicao);
 		return instituicao.getId();
-		
+
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<InstituicaoEntity> listarInstituicoes() {
 		Query query = em.createQuery("select u from InstituicaoEntity u");
 		return query.getResultList();
@@ -36,14 +37,14 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	@Override
 	public void editarInstituicao(InstituicaoEntity entity) {
 		InstituicaoEntity instituicao = entity;
-		em.merge(instituicao);	
+		em.merge(instituicao);
 	}
 
 	@Override
-	public InstituicaoEntity buscarInstituicaoPorId(long idInstituicao) {
+	public InstituicaoEntity buscarInstituicaoPorId(Long idInstituicao) {
 		Query query = em.createQuery("select u from InstituicaoEntity u where u.id = :idInstituicao");
 		query.setParameter("idInstituicao", idInstituicao);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return (InstituicaoEntity) query.getSingleResult();
 		}
 		return null;
@@ -53,10 +54,37 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	public InstituicaoEntity buscarInstituicaoPorDocumento(String documento) {
 		Query query = em.createQuery("select u from InstituicaoEntity u where u.documento = :documento");
 		query.setParameter("documento", documento);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return (InstituicaoEntity) query.getSingleResult();
 		}
 		return null;
 	}
 
+	@Override
+	public long buscarUnidadePrisionalPorInstituicao(long idInstituicao) {
+		Query query = em
+				.createQuery("select i.unidadePrisional.id from InstituicaoEntity i where i.id = :idInstituicao");
+		query.setParameter("idInstituicao", idInstituicao);
+		if (!query.getResultList().isEmpty()) {
+			return (Long) query.getSingleResult();
+		}
+		return 0;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<InstituicaoEntity> buscarInstituicaoPorUnidade(long idUnidadePrisional) {
+		Query query = em.createQuery(
+				"select i from InstituicaoEntity i where i.status = 'ATIVO' and i.unidadePrisional.id = :idUnidadePrisional");
+		query.setParameter("idUnidadePrisional", idUnidadePrisional);
+		return query.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<InstituicaoEntity> buscarInstituicaoPorId(Long[] idInstituicoes) {
+		Query query = em.createQuery("select i from InstituicaoEntity i where i.status = 'ATIVO' and i.id in(:idInstituicoes)");
+		query.setParameter("idInstituicoes", Arrays.asList(idInstituicoes));
+		return query.getResultList();
+	}
 }

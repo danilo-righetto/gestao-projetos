@@ -2,7 +2,7 @@ package br.com.semear.gestao.model;
 
 import java.util.Calendar;
 
-public class ParticipacaoAcao {
+public class ParticipacaoReeducandoAcao {
 	
 	private long id;
 
