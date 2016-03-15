@@ -16,6 +16,7 @@ import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioAcaoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
+import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -33,6 +34,7 @@ import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
+import br.com.semear.gestao.model.RespostaAcao;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
 import br.com.semear.gestao.model.Usuario;
@@ -340,6 +342,21 @@ public class ParseServiceImpl implements ParseService {
 		return model;
 		
 	}
+	
+	@Override
+	public RespostaAcao parseToModel(RespostaAcaoEntity entity){
+		RespostaAcao model = null;
+		if(entity != null){
+			model = new RespostaAcao();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoRespostaAcao(entity.getDescricaoRespostaAcao());
+			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
+			model.setDataAlteracao(entity.getDataAlteracao());
+			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
+			model.setId(entity.getId());
+		}
+		return model;
+	}
 
 	@Override
 	public TipoPergunta parseToModel(TipoPerguntaEntity entity) {
@@ -493,6 +510,20 @@ public class ParseServiceImpl implements ParseService {
 		}
 		
 		return entity;
+	}
+	
+	@Override
+		public AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity entity) {
+			AlternativaPerguntaAcao model = null;
+			if(entity != null){
+				model = new AlternativaPerguntaAcao();
+				model.setDataCadastro(entity.getDataCadastro());
+				model.setDescricaoAlternativa(entity.getDescricaoAlternativaAcao());
+				model.setId(entity.getId());
+				model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
+			}
+			
+			return model;
 	}
 
 	@Override

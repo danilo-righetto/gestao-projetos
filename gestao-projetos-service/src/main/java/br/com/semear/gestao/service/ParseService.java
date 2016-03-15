@@ -91,6 +91,8 @@ public interface ParseService {
 
 	PerguntaAcaoEntity parseToEntity(PerguntaAcao p);
 	
+	AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity a);
+	
 	ParticipacaoColaboradorProjetoEntity parseToEntity(ParticipacaoColaboradorProjeto colaboradorProjeto);
 
 	ParticipacaoReeducandoAcaoEntity parseToEntity(ParticipacaoReeducandoAcao participacaoAcao);
