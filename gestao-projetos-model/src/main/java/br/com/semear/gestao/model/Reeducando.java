@@ -20,6 +20,14 @@ public class Reeducando {
 
 	private UnidadePrisional unidadePrisional;
 
+	public Reeducando(Long id) {
+		this.id = id;
+	}
+	
+	public Reeducando() {
+		
+	}
+
 	public long getId() {
 		return id;
 	}

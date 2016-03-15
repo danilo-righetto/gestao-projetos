@@ -42,7 +42,7 @@ public class QuestionarioController implements Serializable {
 	private List<Pergunta> perguntasRemovidas;
 	
 	@RequestMapping("cadastro/{idProjeto}")
-	public ModelAndView formCadastro(@PathVariable("idProjeto") long idProjeto){
+	public ModelAndView formCadastro(@PathVariable("idProjeto") long idProjeto, @ModelAttribute("msg") String msg){
 		try {
 			mav.clear();
 			perguntasRemovidas = new ArrayList<Pergunta>();
@@ -51,6 +51,7 @@ public class QuestionarioController implements Serializable {
 			mav.setViewName("cadastroQuestionario");
 			mav.addObject("questionario",questionario);
 			mav.addObject("tiposPerguntas",questionarioService.listarTiposDePerguntas());
+			mav.addObject("msg", msg);
 			
 		} catch (Exception e) {
 			mav.clear();
@@ -79,8 +80,9 @@ public class QuestionarioController implements Serializable {
 	}
 	
 	@RequestMapping("salvarQuestionario")
-	public String salvarQuestionario(){
-		questionarioService.alterarQuestionario(this.questionario,perguntasRemovidas);
+	public String salvarQuestionario(RedirectAttributes attributes){
+		String msg = questionarioService.alterarQuestionario(this.questionario,perguntasRemovidas);
+		attributes.addFlashAttribute("msg", msg);
 		return "redirect:/painel/questionarios/cadastro/"+this.questionario.getProjeto().getId();
 	}
 	

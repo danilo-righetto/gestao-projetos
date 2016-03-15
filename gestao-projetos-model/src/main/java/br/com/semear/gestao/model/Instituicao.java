@@ -21,6 +21,14 @@ public class Instituicao {
 	private String status;
 	private Calendar dataCadastro;
 	
+	public Instituicao(Long id) {
+		this.id = id;
+	}
+	
+	public Instituicao() {
+		
+	}
+	
 	public String getStatus() {
 		return status;
 	}

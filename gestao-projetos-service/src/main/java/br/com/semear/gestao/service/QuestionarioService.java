@@ -17,6 +17,6 @@ public interface QuestionarioService {
 
 	List<TipoPergunta> listarTiposDePerguntas();
 
-	void alterarQuestionario(Questionario questionario,	List<Pergunta> perguntasRemovidas);
+	String alterarQuestionario(Questionario questionario,	List<Pergunta> perguntasRemovidas);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
+import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -50,5 +51,13 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 	public void editarProjeto(ProjetoEntity entity) {
 		ProjetoEntity projeto = entity;
 		em.merge(projeto);
+	}
+
+	@Override
+	public long buscarUnidadePrisionalDoProjeto(long idProjeto) {
+		Query query = em.createQuery("select p.unidadePrisional from ProjetoEntity p where p.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		UnidadePrisionalEntity entity = (UnidadePrisionalEntity) query.getSingleResult();
+		return entity.getId();
 	}
 }

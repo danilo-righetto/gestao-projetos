@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Projeto;
-import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.InstituicaoService;
+import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 
@@ -24,26 +24,33 @@ public class ParticipacaoProjetoController {
 
 	@Inject
 	private ParticipacaoProjetoService participacaoProjetoService;
+	
+	@Inject
+	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
 
 	@Inject
 	private InstituicaoService instituicaoService;
 
 	@Inject
 	private ProjetoService projetoService;
-
+	
 	@RequestMapping("{idProjeto}/instituicoes/cadastroParticipacaoProjeto")
 	public ModelAndView frmCadastro(@PathVariable("idProjeto") long idProjeto, Long[] idInstituicoes) {
+		List<Long> instituicoesAssociadas = participacaoInstituicaoProjetoService.buscarInstituicoesAssociadas(idProjeto);
+		participacaoProjetoService.cadastrarParticipacaoInstituicao(idProjeto, idInstituicoes);
 		mav.clear();
 		mav.setViewName("cadastroParticipacaoProjeto");
-		mav.addObject("instituicoes", instituicaoService.buscarInstituicoesPorId(idInstituicoes));
-		mav.addObject("colaboradores", participacaoProjetoService.listarColaboradoresDasInstituicoes(idInstituicoes, "ROLE_COLABORADOR"));
+		mav.addObject("instituicoesAssociadas", participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+		//mav.addObject("ReeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
+		mav.addObject("colaboradores",
+				participacaoProjetoService.listarColaboradoresDasInstituicoes(instituicoesAssociadas, "ROLE_COLABORADOR"));
 		mav.addObject("reeducandos", participacaoProjetoService.listarReeducandosPorUnidadePrisional(idProjeto));
 		return mav;
 	}
 
 	@RequestMapping("/salvarParticipacaoProjeto")
-	public String salvarParticipacaoProjeto(Long idProjeto, Long idCoordenador, Long[] idReeducandos, String[] funcoes,
-			Long[] idColaboradores) {
+	public String salvarParticipacaoProjeto(Long idProjeto, Long idCoordenador,
+			Long[] idReeducandos, String[] funcoes, Long[] idColaboradores) {
 		participacaoProjetoService.cadastrar(idProjeto, idCoordenador, idReeducandos, funcoes, idColaboradores);
 		return "redirect:/painel/projetos/";
 	}
@@ -55,6 +62,7 @@ public class ParticipacaoProjetoController {
 		mav.setViewName("associarProjetoInstituicao");
 		mav.addObject("instituicoes",
 				instituicaoService.buscarInstituicaoPorUnidade(projeto.getUnidadePrisional().getId()));
+		mav.addObject("participacoes", participacaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
 		return mav;
 	}
 

@@ -11,14 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoReeducandoProjetoDAO;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
+import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
+import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
-import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
+import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.ReeducandoService;
@@ -38,9 +40,6 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	private ReeducandoService reeducandoService;
 
 	@Inject
-	private InstituicaoService instituicaoService;
-
-	@Inject
 	private ParseService parse;
 
 	@Inject
@@ -48,12 +47,33 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 	@Inject
 	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
+	
+	@Inject
+	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
 
+	@Override
+	public void cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes){
+		ParticipacaoInstituicaoProjeto pip = new ParticipacaoInstituicaoProjeto();
+		Projeto projeto = new Projeto(idProjeto);
+		
+		pip.setDataEntrada(Calendar.getInstance());
+		pip.setProjeto(projeto);
+		
+		if(idInstituicoes != null){
+			for(Long id : idInstituicoes){
+				Instituicao instituicao = new Instituicao(id);
+				pip.setInstituicao(instituicao);
+				participacaoInstituicaoProjetoService.cadastrarParticipacaoInstituicao(pip);
+			}
+		}
+	}
+	
 	@Override
 	public void cadastrar(Long idProjeto, Long idCoordenador, Long[] idReeducandos, String[] funcoes,
 			Long[] idColaboradores) {
 		ParticipacaoReeducandoProjeto prp = new ParticipacaoReeducandoProjeto();
 		ParticipacaoColaboradorProjeto pcp = new ParticipacaoColaboradorProjeto();
+
 		Projeto projeto = projetoService.buscarProjetoPorId(idProjeto);
 		projeto.setCoordenador(new Usuario(idCoordenador));
 
@@ -62,13 +82,13 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 		pcp.setDataEntrada(Calendar.getInstance());
 		pcp.setProjeto(projeto);
-
+		
 		int iterator = 0;
 
 		if (idReeducandos != null) {
-			for (Long reeducando : idReeducandos) {
-				Reeducando r = reeducandoService.buscarReeducandoPorId(reeducando);
-				prp.setReeducando((r));
+			for (Long id : idReeducandos) {
+				Reeducando reeducando = new Reeducando(id);
+				prp.setReeducando((reeducando));
 				while (iterator <= funcoes.length) {
 					prp.setFuncao(funcoes[iterator]);
 					iterator++;
@@ -99,12 +119,17 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 	@Override
 	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idProjeto) {
-		long idUnidadePrisional = instituicaoService.buscarUnidadePrisionalPorProjeto(idProjeto);
+		long idUnidadePrisional = projetoService.buscarUnidadePrisionalDoProjeto(idProjeto);
 		return reeducandoService.listarReeducandosPorUnidadePrisional(idUnidadePrisional);
 	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil) {
+	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
 		return usuarioService.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
+	}
+
+	@Override
+	public List<ParticipacaoInstituicaoProjeto> listarParticipacaoInstituicoesProjeto(long idProjeto) {
+		return participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto);
 	}
 }

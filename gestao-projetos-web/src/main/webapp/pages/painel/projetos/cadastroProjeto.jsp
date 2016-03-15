@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+	pageEncoding="ISO-8859-1"%>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -9,26 +9,26 @@
 <script type="text/javascript">
 	$(function() {
 		var msg = "<c:out value='${msg}'/>";
-		if(msg == 'OK'){
+		if (msg == 'OK') {
 			$("#modalProjetoAdicionado").modal({
-				  keyboard: false,
-				  backdrop: 'static'
+				keyboard : false,
+				backdrop : 'static'
 			});
 		}
 		$("#menu-projetos").attr('class', 'active');
 		$(".data").datepicker(
 				{
 					dateFormat : 'dd/mm/yy',
-					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
-							'Sexta', 'Sábado' ],
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
 					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
 					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
 							'Sáb', 'Dom' ],
 					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
 							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
 							'Outubro', 'Novembro', 'Dezembro' ],
-					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-							'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
 					nextText : 'Próximo',
 					prevText : 'Anterior'
 				});
@@ -36,9 +36,9 @@
 </script>
 
 <body>
-<!-- MODAL PROJETO ADICIONADO INICIO -->
-	<div class="modal fade" id="modalProjetoAdicionado" tabindex="-1" role="dialog"
-		data-backdrop="static" aria-labelledby="myModalLabel">
+	<!-- MODAL PROJETO ADICIONADO INICIO -->
+	<div class="modal fade" id="modalProjetoAdicionado" tabindex="-1"
+		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -48,9 +48,11 @@
 					<p>O que deseja fazer agora?</p>
 				</div>
 				<div class="modal-footer">
-					<a href='<c:url value="/painel/projetos/" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-						class="btn btn-default">Ir para a lista de projetos</a>
-					<a href='<c:url value="/painel/questionarios/cadastro/${idProjeto}" />' style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+					<a href='<c:url value="/painel/projetos/" />'
+						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Ir para a lista de projetos</a> <a
+						href='<c:url value="/painel/questionarios/cadastro/${idProjeto}" />'
+						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Cadastrar Questionario</a>
 				</div>
 			</div>
@@ -81,36 +83,50 @@
 									<option value="Concluido">Concluido</option>
 								</select>
 							</div>
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-2">
 								<label for="dataInicio">Data Inicio:</label> <input type="text"
 									class="form-control data" id="dataInicio" name="dataInicio"
-									placeholder="Selecione a Data" required autofocus>
+									placeholder="Selecione a Data" required>
 							</div>
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-2">
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text" class="form-control data" id="dataTermino"
-									name="dataTermino" placeholder="Selecione a Data" autofocus required>
+									name="dataTermino" placeholder="Selecione a Data" required>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="unidadePrisional">Unidade Prisional:</label><select
+									class="form-control" id="unidadePrisional"
+									name="unidadePrisional.id" required>
+									<option value="" label="Selecione..." />
+									<c:forEach var="unidade" items="${unidadesPrisionais}">
+										<option value="${unidade.id}" label="${unidade.nome}">
+									</c:forEach>
+								</select>
 							</div>
 							<div class="form-group col-md-12">
-							<label for="descricao">Descrição</label> <textarea
-								class="form-control" id="descricao"
-								placeholder="Digite uma Descrição" cols="10" rows="5" name="descricao" required></textarea>
-						</div>
+								<label for="descricao">Descrição</label>
+								<textarea class="form-control" id="descricao"
+									placeholder="Digite uma Descrição" cols="10" rows="5"
+									name="descricao" required></textarea>
+							</div>
 						</div>
 						<hr />
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/projetos/" />'
 								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-							<button type="submit" style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Salvar Projeto</button>
+								class="btn btn-default"><span
+								class="glyphicon glyphicon-remove"></span> Cancelar</a>
+							<button type="submit"
+								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+								class="btn btn-default">
+								<span class="glyphicon glyphicon-ok"></span> Salvar Projeto
+							</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top:-2px">
-    </div>
+	<div class="section" style="margin-top: -2px"></div>
 </body>
 </html>

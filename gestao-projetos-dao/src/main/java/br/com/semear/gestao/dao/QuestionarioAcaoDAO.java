@@ -31,4 +31,6 @@ public interface QuestionarioAcaoDAO {
 	void salvarAlternativa(AlternativaPerguntaAcaoEntity alternativa);
 	
 	void removerAlternativasPorIdPergunta(long id);
+
+	List<AlternativaPerguntaAcaoEntity> buscarAlternativasPorIdPergunta(long id);
 }
