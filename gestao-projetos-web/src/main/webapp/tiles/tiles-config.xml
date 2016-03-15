@@ -144,7 +144,11 @@
 	<!-- Semear - Cadastro de Participação Projeto -->
 	<definition name="cadastroParticipacaoProjeto" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/semear/cadastroParticipacaoProjeto.jsp" />
+			value="/pages/painel/participacao-projeto/cadastroParticipacaoProjeto.jsp" />
+	</definition>
+	<definition name="associarProjetoInstituicao" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/participacao-projeto/associarProjetoInstituicao.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Unidade Prisional -->
@@ -159,11 +163,5 @@
 	<definition name="listarUnidadesPrisionais" extends="main">
 		<put-attribute name="conteudo"
 			value="/pages/painel/unidade-prisional/listarUnidadesPrisionais.jsp" />
-	</definition>
-	
-	<!-- Semear - RESPOSTA QUESTIONARIO ACAO -->
-	<definition name="respostaAcao" extends="main">
-		<put-attribute name="conteudo"
-			value="/pages/painel/resposta/respostaAcao.jsp" />
 	</definition>
 </tiles-definitions>

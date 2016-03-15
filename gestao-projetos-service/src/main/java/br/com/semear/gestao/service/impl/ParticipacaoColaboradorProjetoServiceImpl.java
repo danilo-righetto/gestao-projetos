@@ -10,6 +10,7 @@ import br.com.semear.gestao.dao.ParticipacaoColaboradorProjetoDAO;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
+import br.com.semear.gestao.service.UsuarioService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -21,8 +22,12 @@ public class ParticipacaoColaboradorProjetoServiceImpl implements ParticipacaoCo
 	@Inject
 	private ParseService parse;
 	
+	@Inject
+	private UsuarioService usuarioService;
+	
 	@Override
-	public void cadastrar(ParticipacaoColaboradorProjeto colaboradorProjeto) {
-		participacaoColaboradorProjetoDao.cadastrar(parse.parseToEntity(colaboradorProjeto));
+	public void cadastrar(ParticipacaoColaboradorProjeto participacaoColaboradorProjeto) {
+		participacaoColaboradorProjeto.setColaborador((usuarioService.buscarUsuarioPorId(participacaoColaboradorProjeto.getColaborador().getId())));
+		participacaoColaboradorProjetoDao.cadastrar(parse.parseToEntity(participacaoColaboradorProjeto));
 	}
 }

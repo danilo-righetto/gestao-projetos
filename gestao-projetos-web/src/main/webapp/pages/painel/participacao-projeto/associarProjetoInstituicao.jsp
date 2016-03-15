@@ -39,8 +39,30 @@
 							<c:when test="${not empty instituicoes}">
 								<c:forEach items="${instituicoes}" var="instituicao">
 									<tr>
-										<td class="text-center"><input value="${instituicao.id}" name="idInstituicoes"
-											type="checkbox" /></td>
+										<c:set var="encontrou" value="false"></c:set>
+										<c:set var="jaMarcado" value="false"></c:set>
+										<c:forEach items="${participacoes}" var="participacao">
+											<c:if test="${instituicao.id == participacao.instituicao.id}">
+												<c:set var="encontrou" value="true"></c:set>
+											</c:if>
+										</c:forEach>
+										<c:choose>
+											<c:when test="${encontrou}">
+												<c:forEach items="${participacoes}" var="participacao">
+													<c:if test="${instituicao.id == participacao.instituicao.id && !jaMarcado}">
+														<td class="text-center"><input
+															value="${instituicao.id}" name="idInstituicoes"
+															type="checkbox" checked="checked" disabled /></td>
+															<c:set var="jaMarcado" value="true"></c:set>
+													</c:if>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<td class="text-center"><input
+													value="${instituicao.id}" name="idInstituicoes"
+													type="checkbox" /></td>
+											</c:otherwise>
+										</c:choose>
 										<td class="text-center">${instituicao.id}</td>
 										<td class="text-center hidden-xs hidden-sm">${(instituicao.tipoDocumento == "cnpj" ?
 									 'Pessoa Juridica' : 'Pessoa Fisica')}</td>

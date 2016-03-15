@@ -20,7 +20,6 @@ import br.com.semear.gestao.dao.entity.PerfilEntity;
 import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Usuario;
-import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.MailService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
@@ -31,19 +30,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Inject
 	private ParseService parseService;
-	
+
 	@Inject
 	private MailService mailService;
-	
+
 	@Inject
 	private RecuperaSenhaDAO recuperaSenhaDAO;
-	
+
 	@Inject
 	private PasswordEncoder passwordEncoder;
-	
-	@Inject
-	private InstituicaoService instituicaoService;
-	
+
 	@Override
 	public Usuario buscarUsuarioPorLogin(String login) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorLogin(login);
@@ -57,12 +53,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuario.setDataCadastro(Calendar.getInstance());
 		UsuarioEntity user = parseService.parseToEntity(usuario);
-		if(usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0){
+		if (usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0) {
 			user.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
 		}
 		usuarioDAO.cadastrarUsuario(user);
 	}
-	
+
 	@Inject
 	private UsuarioDAO usuarioDAO;
 
@@ -89,17 +85,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void editarUsuario(Usuario usuario) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorId(usuario.getId());
-		if(entity != null){
+		if (entity != null) {
 			entity.setNome(usuario.getNome().toUpperCase());
 			entity.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
-			if(usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0){
+			if (usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0) {
 				entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
-			}else{
+			} else {
 				entity.setInstituicao(null);
 			}
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
-		}		
+		}
 	}
 
 	@Override
@@ -203,24 +199,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		return usuarios;
 	}
-	
+
 	@Override
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao) {
 		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		for(UsuarioEntity i : entity){
+		for (UsuarioEntity i : entity) {
 			usuarios.add(parseService.parseToModel(i));
 		}
 		return usuarios;
 	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil) {
-		List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
-		List<Usuario> colaboradores = new ArrayList<Usuario>();
-		for(UsuarioEntity u : lista){
-			colaboradores.add(parseService.parseToModel(u));
+	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
+		if (idInstituicoes != null) {
+			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
+			List<Usuario> colaboradores = new ArrayList<Usuario>();
+			for (UsuarioEntity u : lista) {
+				colaboradores.add(parseService.parseToModel(u));
+			}
+			return colaboradores;
 		}
-		return colaboradores;
+		return null;
 	}
 }

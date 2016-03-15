@@ -29,5 +29,5 @@ public interface UsuarioService {
 
 	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao);
 
-	public List<Usuario> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil);
+	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil);
 }

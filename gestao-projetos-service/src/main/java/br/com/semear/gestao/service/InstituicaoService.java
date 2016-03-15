@@ -20,6 +20,4 @@ public interface InstituicaoService {
 	public List<Instituicao> buscarInstituicaoPorUnidade(long idUnidadePrisional);
 
 	public List<Instituicao> buscarInstituicoesPorId(Long[] idInstituicoes);
-
-	public long buscarUnidadePrisionalPorProjeto(long idProjeto);
 }

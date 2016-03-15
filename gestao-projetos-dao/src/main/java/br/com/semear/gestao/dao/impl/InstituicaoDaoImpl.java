@@ -75,7 +75,7 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	@SuppressWarnings("unchecked")
 	public List<InstituicaoEntity> buscarInstituicaoPorUnidade(long idUnidadePrisional) {
 		Query query = em.createQuery(
-				"select i from InstituicaoEntity i where i.status = 'ATIVO' and i.unidadePrisional.id = :idUnidadePrisional");
+				"select u.instituicao from UnidadeRelInstituicaoEntity u where u.unidadePrisional.id = :idUnidadePrisional and u.instituicao.status = 'ATIVO'");
 		query.setParameter("idUnidadePrisional", idUnidadePrisional);
 		return query.getResultList();
 	}
@@ -85,6 +85,9 @@ public class InstituicaoDaoImpl implements InstituicaoDAO {
 	public List<InstituicaoEntity> buscarInstituicaoPorId(Long[] idInstituicoes) {
 		Query query = em.createQuery("select i from InstituicaoEntity i where i.status = 'ATIVO' and i.id in(:idInstituicoes)");
 		query.setParameter("idInstituicoes", Arrays.asList(idInstituicoes));
-		return query.getResultList();
+		if(!query.getResultList().isEmpty()){
+			return query.getResultList();
+		}
+		return null;
 	}
 }

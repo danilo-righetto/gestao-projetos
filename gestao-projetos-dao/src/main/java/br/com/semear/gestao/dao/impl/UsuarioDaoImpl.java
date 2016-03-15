@@ -1,7 +1,6 @@
 package br.com.semear.gestao.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -111,10 +110,10 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(Long[] idInstituicoes, String idPerfil) {
+	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
 		Query query = em.createQuery(
 				"select u from UsuarioEntity u where u.instituicao.id in(:idInstituicoes) and u.perfil.id = :idPerfil order by u.nome");
-		query.setParameter("idInstituicoes", Arrays.asList(idInstituicoes));
+		query.setParameter("idInstituicoes", idInstituicoes);
 		query.setParameter("idPerfil", idPerfil);
 		return query.getResultList();
 	}

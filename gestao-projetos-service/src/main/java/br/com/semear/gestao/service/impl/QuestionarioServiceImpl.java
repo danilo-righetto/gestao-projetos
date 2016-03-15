@@ -42,7 +42,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	public void criarQuestionarioProjeto(ProjetoEntity projeto) {
 		QuestionarioEntity questionario = new QuestionarioEntity();
 		questionario.setDataCadastro(Calendar.getInstance());
-		questionario.setDescricao("QUESTIONÁRIO DO PROJETO "+projeto.getNome().toUpperCase());
+		questionario.setDescricao("QUESTIONï¿½RIO DO PROJETO "+projeto.getNome().toUpperCase());
 		questionario.setProjeto(projeto);
 		questionarioDAO.salvarQuestionario(questionario);
 	}
@@ -96,9 +96,16 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	}
 
 	@Override
-	public void alterarQuestionario(Questionario questionario,List<Pergunta> perguntasRemovidas) {
-		removerPerguntas(perguntasRemovidas);
-		adicionarPerguntas(questionario);		
+	public String alterarQuestionario(Questionario questionario,List<Pergunta> perguntasRemovidas) {
+		String msg = null;
+		try {
+			removerPerguntas(perguntasRemovidas);
+			adicionarPerguntas(questionario);
+			msg = "OK";
+		} catch (Exception e) {
+			msg = "NOK";
+		}
+		return msg;
 	}
 
 	private void adicionarPerguntas(Questionario questionario) {

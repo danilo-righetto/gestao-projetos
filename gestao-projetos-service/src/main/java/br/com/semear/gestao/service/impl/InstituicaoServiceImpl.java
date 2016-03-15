@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.InstituicaoDAO;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
-import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;
@@ -32,7 +31,7 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 		instituicao.setDataCadastro(Calendar.getInstance());
 		instituicao.setStatus("ATIVO");
 		instituicao.setId(instituicaoDAO.cadastrarInstituicao(parse.parseToEntity(instituicao)));
-		if(instituicao.getId() > 0){
+		if (instituicao.getId() > 0) {
 			return "OK";
 		}
 		return "NOK";
@@ -52,12 +51,12 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
 	@Override
 	public void editarInstituicao(Instituicao instituicao) {
-		//for?
+		// for?
 		InstituicaoEntity entity = instituicaoDAO.buscarInstituicaoPorId(instituicao.getId());
 		if (entity != null) {
 			entity.setRazaosocial(instituicao.getRazaosocial().toUpperCase());
-			entity.setNomefantasia(instituicao.getNomefantasia() != null ? instituicao.getNomefantasia().toUpperCase() :
-				instituicao.getRazaosocial().toUpperCase());
+			entity.setNomefantasia(instituicao.getNomefantasia() != null ? instituicao.getNomefantasia().toUpperCase()
+					: instituicao.getRazaosocial().toUpperCase());
 			entity.setLogradouro(instituicao.getLogradouro().toUpperCase());
 			entity.setNumero(instituicao.getNumero().toUpperCase());
 			entity.setComplemento(instituicao.getComplemento().toUpperCase());
@@ -104,17 +103,14 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
 	@Override
 	public List<Instituicao> buscarInstituicoesPorId(Long[] idInstituicoes) {
-		List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorId(idInstituicoes);
-		List<Instituicao> instituicao = new ArrayList<Instituicao>();
-		for(InstituicaoEntity entity : lista){
-			instituicao.add(parse.parseToModel(entity));
+		if (idInstituicoes != null) {
+			List<InstituicaoEntity> lista = instituicaoDAO.buscarInstituicaoPorId(idInstituicoes);
+			List<Instituicao> instituicao = new ArrayList<Instituicao>();
+			for (InstituicaoEntity entity : lista) {
+				instituicao.add(parse.parseToModel(entity));
+			}
+			return instituicao;
 		}
-		return instituicao;
-	}
-
-	@Override
-	public long buscarUnidadePrisionalPorProjeto(long idProjeto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 }

@@ -14,5 +14,6 @@ public interface ProjetoService {
 	public Projeto buscarProjetoPorId(long idProjeto);
 
 	public void editarProjeto(Projeto projeto);
-
+	
+	public long buscarUnidadePrisionalDoProjeto(long idProjeto);
 }
