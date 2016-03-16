@@ -57,7 +57,7 @@
 							<div class="form-group col-md-offset-3 col-md-6">
 								<label for="nome">Titulo do Questionário:</label> <input
 									type="text" class="form-control" id="nome" name="nome"
-									readonly="readonly" value=""
+									readonly="readonly" value="${questionario.descricao}"
 									placeholder="Digite o nome" required autofocus>
 							</div>
 						</div>
