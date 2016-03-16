@@ -12,6 +12,8 @@ public class Reeducando {
 	private String nome;
 
 	private String sexo;
+	
+	private String cidade;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar dataNascimento;
@@ -82,6 +84,14 @@ public class Reeducando {
 
 	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 }

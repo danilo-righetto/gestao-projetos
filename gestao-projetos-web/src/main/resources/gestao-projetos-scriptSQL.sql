@@ -2,6 +2,9 @@ INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_ADMINIS
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_COORDENADOR', 'COORDENADOR');
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_COLABORADOR', 'COLABORADOR');
 INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_USUARIO', 'USUARIO');
+INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_ESTAGIARIO', 'ESTAGIARIO');
+INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_AVALIADOR_INTERNO', 'AVALIADOR_INTERNO');
+INSERT INTO `gestao-projetos`.`perfil` (`id`, `descricao`) VALUES ('ROLE_AVALIADOR_EXTERNO', 'AVALIADOR_EXTERNO');
 
 INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('1', 'RESPOSTA UNICA');
 INSERT INTO `gestao-projetos`.`tipo_pergunta` (`ID`, `DESCRICAO`) VALUES ('2', 'RESPOSTA MULTIPLA');

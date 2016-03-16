@@ -36,6 +36,9 @@ public class PainelController {
 					|| g.getAuthority().equals("ROLE_COORDENADOR")
 					|| g.getAuthority().equals("ROLE_COLABORADOR")
 					|| g.getAuthority().equals("ROLE_REEDUCANDO")
+					|| g.getAuthority().equals("ROLE_ESTAGIARIO")
+					|| g.getAuthority().equals("ROLE_AVALIADOR_INTERNO")
+					|| g.getAuthority().equals("ROLE_AVALIADOR_EXTERNO")
 					|| g.getAuthority().equals("ROLE_USUARIO")) {
 				mav.setViewName("painel");
 				break;
