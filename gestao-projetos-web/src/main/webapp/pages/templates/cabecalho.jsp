@@ -125,8 +125,6 @@
 							class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li id="menu-indicadores"><a
-								href='<c:url value="/painel/indicadores/" />'>Indicadores</a></li>
 							<li id="menu-unidades"><a
 								href='<c:url value="/painel/unidades-prisionais/" />'>Unidades
 									Prisionais</a></li>

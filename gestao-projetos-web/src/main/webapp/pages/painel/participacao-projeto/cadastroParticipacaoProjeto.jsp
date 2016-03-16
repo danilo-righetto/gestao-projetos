@@ -10,7 +10,10 @@
 <title>Cadastro de Participação Projeto</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#coordenadores").hide();
+		var idCoodernador = "<c:out value='${coordernadorProjeto}'/>";
+		if (idCoodernador == null || idCoodernador == '') {
+			$("#coordenadores").hide();
+		}
 
 		$("input[name=idReeducandos]").on("click", function() {
 			var idReeducando = this.id;
@@ -74,8 +77,11 @@
 								required autofocus onchange="listarCoordenadores();">
 								<option value="" label="Selecione..." />
 								<c:forEach var="associada" items="${instituicoesAssociadas}">
-									<option value="${associada.instituicao.id}"
+									<option
+										${coordernadorProjeto.instituicao.id == associada.instituicao.id ? "selected='selected'" : ""}
+										value="${associada.instituicao.id}"
 										label="${associada.instituicao.razaosocial}" />
+
 								</c:forEach>
 							</select>
 						</div>
@@ -83,7 +89,10 @@
 							<label for="coordenador">Coordenador:</label> <select
 								id="coordenador" name="idCoordenador" class="form-control"
 								required>
-								<option value="" label="" />
+								<c:if test="${coordernadorProjeto ne null}">
+									<option value="${coordernadorProjeto.id}"
+										label="${coordernadorProjeto.nome}" />
+								</c:if>
 							</select>
 						</div>
 					</div>
@@ -105,9 +114,33 @@
 					<tbody id="tbody-reeducandos">
 						<c:forEach var="reeducando" items="${reeducandos}">
 							<tr class="text-center">
-								<td><input value="${reeducando.id}"
-									id="idReeducandos${reeducando.id}" name="idReeducandos"
-									type="checkbox" /></td>
+								<c:set var="encontrou" value="false"></c:set>
+								<c:set var="jaMarcado" value="false"></c:set>
+								<c:set var="funcao" value=""></c:set>
+								<c:forEach items="${reeducandosAssociados}" var="participacao">
+									<c:if test="${reeducando.id == participacao.reeducando.id}">
+										<c:set var="encontrou" value="true"></c:set>
+										<c:set var="funcao" value="${participacao.funcao}"></c:set>
+									</c:if>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${encontrou}">
+										<c:forEach items="${reeducandosAssociados}" var="participacao">
+											<c:if
+												test="${reeducando.id == participacao.reeducando.id && !jaMarcado}">
+												<td class="text-center"><input value="${reeducando.id}"
+													id="idReeducandos${reeducando.id}" name="idReeducandos"
+													type="checkbox" checked="checked" disabled /></td>
+												<c:set var="jaMarcado" value="true"></c:set>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<td class="text-center"><input value="${reeducando.id}"
+											id="idReeducandos${reeducando.id}" name="idReeducandos"
+											type="checkbox" /></td>
+									</c:otherwise>
+								</c:choose>
 								<td>${reeducando.id}</td>
 								<td>${reeducando.matricula}</td>
 								<td>${reeducando.nome}</td>
@@ -115,9 +148,13 @@
 								<td class="col-md-3"><select class='form-control'
 									id="funcao${reeducando.id}" name='funcoes' disabled>
 										<option value='' label='Selecione...' />
-										<option value='Reeducando Participante'
+										<option
+											${funcao  ne null && funcao eq 'Reeducando Participante' ? "selected":""}
+											value='Reeducando Participante'
 											label='REEDUCANDO PARTICIPANTE' />
-										<option value='Reeducando Monitor' label='REEDUCANDO MONITOR'></option>
+										<option
+											${funcao  ne null && funcao eq 'Reeducando Monitor' ? "selected":""}
+											value='Reeducando Monitor' label='REEDUCANDO MONITOR'></option>
 								</select></td>
 							</tr>
 						</c:forEach>
@@ -137,8 +174,31 @@
 					<tbody id="tbody-colaboradores">
 						<c:forEach var="colaborador" items="${colaboradores}">
 							<tr class="text-center">
-								<td><input value="${colaborador.id}" name="idColaboradores"
-									type="checkbox" /></td>
+								<c:set var="encontrou" value="false"></c:set>
+								<c:set var="jaMarcado" value="false"></c:set>
+								<c:forEach items="${colaboradoresAssociados}" var="participacao">
+									<c:if test="${colaborador.id == participacao.colaborador.id}">
+										<c:set var="encontrou" value="true"></c:set>
+									</c:if>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${encontrou}">
+										<c:forEach items="${colaboradoresAssociados}"
+											var="participacao">
+											<c:if
+												test="${colaborador.id == participacao.colaborador.id && !jaMarcado}">
+												<td class="text-center"><input
+													value="${colaborador.id}" name="idColaboradores"
+													type="checkbox" checked="checked" disabled /></td>
+												<c:set var="jaMarcado" value="true"></c:set>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<td><input value="${colaborador.id}"
+											name="idColaboradores" type="checkbox" /></td>
+									</c:otherwise>
+								</c:choose>
 								<td>${colaborador.id}</td>
 								<td>${colaborador.nome}</td>
 								<td>${colaborador.usuario}</td>

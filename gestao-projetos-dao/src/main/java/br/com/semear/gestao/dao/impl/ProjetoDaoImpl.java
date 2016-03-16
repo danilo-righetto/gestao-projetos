@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
+import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
+import br.com.semear.gestao.dao.entity.UsuarioEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -59,5 +61,27 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 		query.setParameter("idProjeto", idProjeto);
 		UnidadePrisionalEntity entity = (UnidadePrisionalEntity) query.getSingleResult();
 		return entity.getId();
+	}
+
+	@Override
+	public UsuarioEntity buscarCoodernadorPorIdProjeto(long idProjeto) {
+		Query query = em.createQuery("select p.coordenador from ProjetoEntity p where p.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		if(!query.getResultList().isEmpty()){
+			return (UsuarioEntity) query.getResultList().get(0);
+		}else{
+			return null;
+		}
+	}
+	
+	@Override
+	public InstituicaoEntity buscarInstituicaoDoCoodernadorPorIdProjeto(long idProjeto) {
+		Query query = em.createQuery("select p.coordenador.instituicao from ProjetoEntity p where p.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		if(!query.getResultList().isEmpty()){
+			return (InstituicaoEntity) query.getResultList().get(0);
+		}else{
+			return null;
+		}
 	}
 }

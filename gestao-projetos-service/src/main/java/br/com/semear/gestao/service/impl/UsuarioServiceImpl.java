@@ -212,7 +212,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
-		if (idInstituicoes != null) {
+		if (idInstituicoes != null && idInstituicoes.size() > 0) {
 			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
 			List<Usuario> colaboradores = new ArrayList<Usuario>();
 			for (UsuarioEntity u : lista) {

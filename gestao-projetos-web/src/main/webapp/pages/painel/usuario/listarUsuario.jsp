@@ -8,6 +8,20 @@
 	<script type="text/javascript">
 	$(function() {
 		$("#menu-usuarios").attr('class','active');
+		$("#tbUsuarios").dataTable( {
+	        "iDisplayLength": 5,
+	        "bPaginate": true,
+	        "bLengthChange": false,
+	        "bFilter": true,
+	        "bInfo": false,
+	        "bAutoWidth": true,
+	        "language": {
+	            "emptyTable": "Nenhuma informação cadastrada"
+	          }
+        
+	    });
+		$(".previous").text('Anterior');
+		$(".next").text('Próximo');
 	});
 	</script>
 </head>
@@ -16,7 +30,7 @@
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Usuarios</h4>
 			<div id="alertas"></div>
-			<table class="table table-responsive">
+			<table id="tbUsuarios" class="table table-responsive">
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>

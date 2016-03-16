@@ -8,4 +8,6 @@ public interface ParticipacaoReeducandoProjetoDAO {
 	public void cadastrar(ParticipacaoReeducandoProjetoEntity participacaoProjeto);
 
 	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos();
+
+	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos(long idProjeto);
 }

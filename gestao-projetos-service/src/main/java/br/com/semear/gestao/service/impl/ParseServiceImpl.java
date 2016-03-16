@@ -567,4 +567,36 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return model;
 	}
+
+	@Override
+	public ParticipacaoReeducandoProjeto parseToModel(	ParticipacaoReeducandoProjetoEntity entity) {
+		ParticipacaoReeducandoProjeto model = null;
+		if(entity != null){
+			model = new ParticipacaoReeducandoProjeto();
+			model.setId(entity.getId());
+			model.setProjeto(parseToModel(entity.getProjeto()));
+			model.setReeducando(parseToModel(entity.getReeducando()));
+			model.setDataEntrada(entity.getDataEntrada());
+			model.setDataSaida(entity.getDataSaida());
+			model.setMotivoSaida(entity.getMotivoSaida());
+			model.setFuncao(entity.getFuncao());
+		}
+
+		return model;
+	}
+
+	@Override
+	public ParticipacaoColaboradorProjeto parseToModel(ParticipacaoColaboradorProjetoEntity entity) {
+		ParticipacaoColaboradorProjeto model = null;
+		if(entity != null){
+			model = new ParticipacaoColaboradorProjeto();
+			model.setId(entity.getId());
+			model.setProjeto(parseToModel(entity.getProjeto()));
+			model.setColaborador(parseToModel(entity.getColaborador()));
+			model.setDataEntrada(entity.getDataEntrada());
+			model.setDataSaida(entity.getDataSaida());
+			model.setMotivoSaida(entity.getMotivoSaida());
+		}
+		return model;
+	}
 }

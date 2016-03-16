@@ -11,4 +11,6 @@ public interface ParticipacaoInstituicaoProjetoDAO {
 	public List<ParticipacaoInstituicaoProjetoEntity> listarParticipacaoInstituicoesProjeto(long idProjeto);
 
 	public List<Long> buscarInstituicoesAssociadas(long idProjeto);
+
+	public ParticipacaoInstituicaoProjetoEntity buscarParticipacaoPorProjetoEInstituicao(Long idProjeto, Long idInstituicao);
 }

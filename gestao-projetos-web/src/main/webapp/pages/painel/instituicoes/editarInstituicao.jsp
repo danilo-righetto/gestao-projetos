@@ -270,8 +270,7 @@
 						<h4 class="modal-title">Adicionar Unidade Prisional</h4>
 					</div>
 					<div class="modal-body">
-						<input type="hidden" name="idInstituicao"
-							value="${inst.id}" />
+						<input type="hidden" name="idInstituicao" value="${inst.id}" />
 						<div class="row">
 							<div class="form-group col-md-12">
 								<label>Selecione a Unidade Prisional:</label> <select
@@ -279,7 +278,17 @@
 									id="idUnidadePrisional" required>
 									<option value="">Selecione ...</option>
 									<c:forEach items="${unidadesPrisionais}" var="unidade">
-										<option value="${unidade.id}">${unidade.nome}</option>
+										<tr>
+											<c:set var="encontrou" value="false"></c:set>
+											<c:set var="jaMarcado" value="false"></c:set>
+											<c:forEach items="${unidades}" var="u">
+												<c:if test="${unidade.id == u.id}">
+													<c:set var="encontrou" value="true"></c:set>
+												</c:if>
+											</c:forEach>
+											<c:if test="${!encontrou}">
+												<option value="${unidade.id}">${unidade.nome}</option>
+											</c:if>
 									</c:forEach>
 								</select>
 							</div>
@@ -442,7 +451,8 @@
 				<!-- INICIO - Listagem dos USUARIOS VINCULADOS A INSTITUICAO -->
 				<div class="section">
 					<div class="container">
-						<h4 style="font-family: arial; color: #4DC1FF">Usuários da Instituição</h4>
+						<h4 style="font-family: arial; color: #4DC1FF">Usuários da
+							Instituição</h4>
 						<table class="table table-responsive">
 							<thead>
 								<tr>

@@ -106,4 +106,8 @@ public interface ParseService {
 	ParticipacaoInstituicaoProjetoEntity parseToEntity(ParticipacaoInstituicaoProjeto participacaoInstituicaoProjeto);
 
 	ParticipacaoInstituicaoProjeto parseToModel(ParticipacaoInstituicaoProjetoEntity p);
+
+	ParticipacaoReeducandoProjeto parseToModel(ParticipacaoReeducandoProjetoEntity p);
+
+	ParticipacaoColaboradorProjeto parseToModel(ParticipacaoColaboradorProjetoEntity p);
 }

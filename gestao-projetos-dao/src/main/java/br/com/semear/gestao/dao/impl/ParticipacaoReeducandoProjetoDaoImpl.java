@@ -31,4 +31,12 @@ public class ParticipacaoReeducandoProjetoDaoImpl implements ParticipacaoReeduca
 		Query query = em.createQuery("select pp from ParticipacaoProjetoEntity pp");
 		return query.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos(long idProjeto) {
+		Query query = em.createQuery("select pp from ParticipacaoReeducandoProjetoEntity pp where pp.projeto.id = :idProjeto");
+		query.setParameter("idProjeto",idProjeto);
+		return query.getResultList();
+	}
 }
