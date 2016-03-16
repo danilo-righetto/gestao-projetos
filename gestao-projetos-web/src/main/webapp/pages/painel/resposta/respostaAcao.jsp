@@ -9,43 +9,13 @@
 	$(function() {
 		$("#menu-usuarios").attr('class','active');
 	});
-	function validarUsuario(){
-		var usuario = $("#usuario").val();
-		$.post("/gestao-projetos/painel/usuarios/consultarUsuario?login="+usuario, function(existe) {
-			if(existe){
-				$("#alertadocdiv").remove();
-				var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-						+ "<span style='color: #000000'><strong>Alerta!</strong>"
-						+ "O e-mail informado já está sendo utilizado.</span></div>";
-				$("#alertas").append(alerta);
-				$("#usuario").val("").focus();
-			}else{
-				$("#alertadocdiv").remove();
-			}
-		});
-	}
-	
-	function verificaPerfil(){
-		var escolha = document.getElementById("perfil").value;
-		if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
-			document.getElementById("oculta1").style.display = "block";
-			$("#instituicao").attr("required","required");
-			$("#instituicao").removeAttr("disabled");
-		}else{
-			document.getElementById("oculta1").style.display = "none";
-			$("#instituicao").val("");
-			$("#instituicao").removeAttr("required");
-			$("#instituicao").attr("disabled","disabled");
-		}
-	}
 	
 	function popularCampos(){
 		var respostas = $("input[name=respostas]");
-		var i = 0;
-		for(i = 0; i < respostas.length; i++){
+		for(var i = 0; i < respostas.length; i++){
 			var idHidden = respostas[i].id;
 		var id = idHidden.replace('idresposta','');
-			var tipoPergunta = $("input[name=tipoPergunta"+id+"]").val();
+			var tipoPergunta = $("input[id=tipoPergunta"+id+"]").val();
 			if(tipoPergunta == 1){
 				var perguntarespostas = $("input[name=respostapergunta"+id+"]");
 				var p = 0;
@@ -53,10 +23,9 @@
 						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 					}
 			}else if(tipoPergunta == 2){
-				var perguntarespostas = $("input[name=respostapergunta"+id+"]");
-				var p = 0;
-					for(p = 0; p < perguntarespostas.length; p++){
-						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
+				var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
+					for(var p = 0; p < perguntarespostas.length; p++){
+						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+",");
 						console.info($("#"+idHidden).val());
 					}
 			}else if(tipoPergunta == 3){
@@ -66,7 +35,7 @@
 						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 					}
 			}else if(tipoPergunta == 4){
-				var perguntarespostas = $("input[type=checkbox,name=respostapergunta"+id+"]:checked").val();
+				var perguntarespostas = $("input[type=radio][name=respostapergunta"+id+"]:checked").val();
 				$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas);
 			}
 			
@@ -93,6 +62,7 @@
 							</div>
 						</div>
 				<div class="row">
+				<input type="hidden" name="idAcao" value="${questionario.acao.id}">
 				<!-- forEach -->
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
@@ -107,7 +77,7 @@
 							class="form-control" id="respostasunica${pergunta.id}" name="respostapergunta${pergunta.id}"
 							placeholder="Digite a resposta" required autofocus>
 							
-							<input type="hidden" id="idresposta${pergunta.id}" name="respostas" value="${pergunta.id}">
+							<input type="hidden" id="idresposta${pergunta.id}" name="respostas" value="${pergunta.id}#">
 							<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
 							</div>
 						</c:if>
@@ -117,14 +87,14 @@
 						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
 						    <div class="input-group">
 						      <span class="input-group-addon">
-						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.id}">
+						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
 						      </span>
 						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
 						        
 						    
 						    </div><!-- /input-group -->
 						  </c:forEach>
-						    	<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}">
+						    	<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 						    	<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
 						  </div><!-- /.col-lg-6 -->
 						</c:if>
@@ -134,7 +104,7 @@
 								<label>RESPOSTA:</label> <textarea
 								class="form-control" id="descricao"
 								placeholder="Digite uma Resposta" cols="10" rows="5" id="texto${pergunta.id}" name="respostapergunta${pergunta.id}" required></textarea>
-								<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}">
+								<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 								<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
 							</div>
 						</c:if>
@@ -144,9 +114,9 @@
 									<label>Responda: </label> 
 									<c:forEach items="${pergunta.alternativas}" var="alternativa">
 										<label><input
-										type="radio" id="alternativa${alternativa.perguntaAcao.id}" name="respostapergunta${pergunta.id}" value="${alternativa.id}" required>${alternativa.descricaoAlternativa}</label>
+										type="radio" id="alternativa${alternativa.perguntaAcao.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
 									</c:forEach>
-										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}">
+										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 										<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
 								</div>
 							</div>

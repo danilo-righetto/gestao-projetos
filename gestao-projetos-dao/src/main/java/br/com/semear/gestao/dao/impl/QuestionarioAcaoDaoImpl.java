@@ -122,4 +122,15 @@ public class QuestionarioAcaoDaoImpl implements QuestionarioAcaoDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public PerguntaAcaoEntity buscarPerguntaPorIdAcaoEiDPergunta(long idPergunta, long idAcao) {
+		Query query = em.createQuery("select p from PerguntaAcaoEntity p where p.id = :idPergunta and p.questionarioAcaoEntity.acao.id = :idAcao");
+		query.setParameter("idPergunta", idPergunta);
+		query.setParameter("idAcao", idAcao);
+		if(!query.getResultList().isEmpty()){
+			return (PerguntaAcaoEntity) query.getResultList().get(0);
+		}
+		return new PerguntaAcaoEntity();
+	}
+
 }
