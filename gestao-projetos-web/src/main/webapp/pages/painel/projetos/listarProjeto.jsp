@@ -57,6 +57,13 @@
 										<a style="margin-left:20px" href='<c:url value="/painel/questionarios/cadastro/${projeto.id}" />'>
 											<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
+										<a style="margin-left:20px" href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes" />'>
+											<span class="glyphicon glyphicon-th-list"></span>
+										</a>
+										<a style="margin-left:20px" href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes/cadastroParticipacaoProjeto" />'>
+											<span class="glyphicon glyphicon-user"></span>
+										</a>
+										
 									</td>
 										
 										

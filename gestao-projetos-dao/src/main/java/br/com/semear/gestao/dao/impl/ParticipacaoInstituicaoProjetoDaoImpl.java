@@ -22,18 +22,7 @@ public class ParticipacaoInstituicaoProjetoDaoImpl implements ParticipacaoInstit
 
 	@Override
 	public void cadastrarParticipacaoInstituicao(ParticipacaoInstituicaoProjetoEntity entity) {
-		long idProjeto = entity.getProjeto().getId();
-		long idInstituicao = entity.getInstituicao().getId();
-		Query query = em.createQuery(
-				"select p from ParticipacaoInstituicaoProjetoEntity p where p.projeto.id = :idProjeto and p.instituicao.id = :idInstituicao");
-		query.setParameter("idProjeto", idProjeto);
-		query.setParameter("idInstituicao", idInstituicao);
-
-		if (query.getResultList().isEmpty()) {
-			em.persist(entity);
-		} else {
-			em.merge(entity);
-		}
+		em.persist(entity);
 	}
 
 	@Override
@@ -42,10 +31,8 @@ public class ParticipacaoInstituicaoProjetoDaoImpl implements ParticipacaoInstit
 		Query query = em
 				.createQuery("select p from ParticipacaoInstituicaoProjetoEntity p where p.projeto.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
-		if (!query.getResultList().isEmpty()) {
-			return query.getResultList();
-		}
-		return null;
+
+		return query.getResultList();
 	}
 
 	@Override
@@ -54,8 +41,18 @@ public class ParticipacaoInstituicaoProjetoDaoImpl implements ParticipacaoInstit
 		Query query = em.createQuery(
 				"select p.instituicao.id from ParticipacaoInstituicaoProjetoEntity p where p.projeto.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
-		if (!query.getResultList().isEmpty()) {
-			return query.getResultList();
+		return query.getResultList();
+	}
+
+	@Override
+	public ParticipacaoInstituicaoProjetoEntity buscarParticipacaoPorProjetoEInstituicao(Long idProjeto, Long idInstituicao) {
+		Query query = em.createQuery(
+				"select p from ParticipacaoInstituicaoProjetoEntity p where p.projeto.id = :idProjeto and " +
+				"p.instituicao.id = :idInstituicao");
+		query.setParameter("idProjeto", idProjeto);
+		query.setParameter("idInstituicao", idInstituicao);
+		if(!query.getResultList().isEmpty()){
+			return (ParticipacaoInstituicaoProjetoEntity) query.getResultList().get(0);
 		}
 		return null;
 	}

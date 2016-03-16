@@ -3,6 +3,7 @@ package br.com.semear.gestao.service;
 import java.util.List;
 
 import br.com.semear.gestao.model.Projeto;
+import br.com.semear.gestao.model.Usuario;
 
 public interface ProjetoService {
 	public String cadastrarProjeto(Projeto projeto);
@@ -16,4 +17,6 @@ public interface ProjetoService {
 	public void editarProjeto(Projeto projeto);
 	
 	public long buscarUnidadePrisionalDoProjeto(long idProjeto);
+
+	public Usuario buscarCoodernadorPorIdProjeto(long idProjeto);
 }

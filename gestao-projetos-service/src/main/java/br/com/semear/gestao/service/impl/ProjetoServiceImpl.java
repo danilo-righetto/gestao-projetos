@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
+import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
+import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Projeto;
+import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.QuestionarioService;
@@ -84,6 +87,19 @@ public class ProjetoServiceImpl implements ProjetoService {
 	@Override
 	public long buscarUnidadePrisionalDoProjeto(long idProjeto) {
 		return projetoDAO.buscarUnidadePrisionalDoProjeto(idProjeto);
+	}
+
+	@Override
+	public Usuario buscarCoodernadorPorIdProjeto(long idProjeto) {
+		UsuarioEntity entity = projetoDAO.buscarCoodernadorPorIdProjeto(idProjeto);
+		InstituicaoEntity instEntity = projetoDAO.buscarInstituicaoDoCoodernadorPorIdProjeto(idProjeto);
+		if(entity != null){
+			Usuario coodernador = parseService.parseToModel(entity);
+			coodernador.setInstituicao(parseService.parseToModel(instEntity));
+			return coodernador;
+		}else{
+			return null;
+		}
 	}
 
 }

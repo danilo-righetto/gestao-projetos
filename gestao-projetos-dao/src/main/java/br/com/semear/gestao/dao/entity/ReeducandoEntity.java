@@ -1,7 +1,6 @@
 package br.com.semear.gestao.dao.entity;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,12 +41,6 @@ public class ReeducandoEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UNIDADE_PRISIONAL", nullable = false)
 	private UnidadePrisionalEntity unidadePrisional;
-
-	@ManyToMany(mappedBy = "reeducando", fetch = FetchType.LAZY)
-	private List<ParticipacaoReeducandoProjetoEntity> projetos;
-
-	@ManyToMany(mappedBy = "reeducando", fetch = FetchType.LAZY)
-	private List<ParticipacaoReeducandoAcaoEntity> acoes;
 
 	public long getId() {
 		return id;

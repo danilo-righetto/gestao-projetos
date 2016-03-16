@@ -1,5 +1,6 @@
 package br.com.semear.gestao.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,15 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.semear.gestao.dao.ParticipacaoInstituicaoProjetoDAO;
 import br.com.semear.gestao.dao.ParticipacaoReeducandoProjetoDAO;
+import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
-import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
 import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
+import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
 import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
@@ -50,32 +55,45 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	
 	@Inject
 	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
+	
+	@Inject
+	private ParticipacaoInstituicaoProjetoDAO participacaoInstituicaoProjetoDAO;
+	
+	@Inject
+	private InstituicaoService instituicaoService;
 
 	@Override
-	public void cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes){
-		ParticipacaoInstituicaoProjeto pip = new ParticipacaoInstituicaoProjeto();
-		Projeto projeto = new Projeto(idProjeto);
-		
-		pip.setDataEntrada(Calendar.getInstance());
-		pip.setProjeto(projeto);
-		
-		if(idInstituicoes != null){
-			for(Long id : idInstituicoes){
-				Instituicao instituicao = new Instituicao(id);
-				pip.setInstituicao(instituicao);
-				participacaoInstituicaoProjetoService.cadastrarParticipacaoInstituicao(pip);
+	public String cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes){
+		String msg = null;
+		try{
+			if(idInstituicoes != null){
+				for(Long id : idInstituicoes){
+					ParticipacaoInstituicaoProjetoEntity pip = participacaoInstituicaoProjetoDAO.buscarParticipacaoPorProjetoEInstituicao(idProjeto,id);
+					if(pip == null){
+						pip = new ParticipacaoInstituicaoProjetoEntity();
+						pip.setDataEntrada(Calendar.getInstance());
+						pip.setProjeto(new ProjetoEntity(idProjeto));
+						pip.setInstituicao(new InstituicaoEntity(id));
+						participacaoInstituicaoProjetoDAO.cadastrarParticipacaoInstituicao(pip);
+					}
+				}
 			}
+			msg = "OK";
+		}catch(Exception e){
+			msg = "NOK";
 		}
+		return msg;
 	}
 	
 	@Override
 	public void cadastrar(Long idProjeto, Long idCoordenador, Long[] idReeducandos, String[] funcoes,
 			Long[] idColaboradores) {
-		ParticipacaoReeducandoProjeto prp = new ParticipacaoReeducandoProjeto();
-		ParticipacaoColaboradorProjeto pcp = new ParticipacaoColaboradorProjeto();
-
 		Projeto projeto = projetoService.buscarProjetoPorId(idProjeto);
 		projeto.setCoordenador(new Usuario(idCoordenador));
+		projetoService.editarProjeto(projeto);
+		projeto = projetoService.buscarProjetoPorId(idProjeto);
+		ParticipacaoReeducandoProjeto prp = new ParticipacaoReeducandoProjeto();
+		ParticipacaoColaboradorProjeto pcp = new ParticipacaoColaboradorProjeto();
 
 		prp.setDataEntrada(Calendar.getInstance());
 		prp.setProjeto(projeto);
@@ -87,7 +105,7 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 		if (idReeducandos != null) {
 			for (Long id : idReeducandos) {
-				Reeducando reeducando = new Reeducando(id);
+				Reeducando reeducando = reeducandoService.buscarReeducandoPorId(id);
 				prp.setReeducando((reeducando));
 				while (iterator <= funcoes.length) {
 					prp.setFuncao(funcoes[iterator]);
@@ -104,7 +122,6 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 				participacaoColaboradorProjetoService.cadastrar(pcp);
 			}
 		}
-		projetoService.editarProjeto(projeto);
 	}
 
 	@Override
@@ -131,5 +148,15 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	@Override
 	public List<ParticipacaoInstituicaoProjeto> listarParticipacaoInstituicoesProjeto(long idProjeto) {
 		return participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto);
+	}
+
+	@Override
+	public List<ParticipacaoReeducandoProjeto> listarParticipacaoReeducandoProjeto(long idProjeto) {
+		List<ParticipacaoReeducandoProjetoEntity> entitys = participacaoReeducandoProjetoDAO.listarParticipacaoProjetos(idProjeto);
+		List<ParticipacaoReeducandoProjeto> reeducandos = new ArrayList<ParticipacaoReeducandoProjeto>();
+		for(ParticipacaoReeducandoProjetoEntity p : entitys){
+			reeducandos.add(parse.parseToModel(p));
+		}
+		return reeducandos;
 	}
 }
