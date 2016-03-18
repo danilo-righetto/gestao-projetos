@@ -22,6 +22,8 @@ public class InstituicaoController {
 	
 	private String colaborador = "ROLE_COLABORADOR";
 	private String coordenador = "ROLE_COORDENADOR";
+	private String avaliadorInterno = "ROLE_AVALIADOR_INTERNO";
+	private String avaliadorExterno = "ROLE_AVALIADOR_EXTERNO";
 	
 	@Inject
 	private InstituicaoService instituicaoService;
