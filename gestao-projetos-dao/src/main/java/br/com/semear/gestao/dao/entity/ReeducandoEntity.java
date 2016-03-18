@@ -29,6 +29,9 @@ public class ReeducandoEntity {
 
 	@Column(name = "SEXO")
 	private String sexo;
+	
+	@Column(name = "CIDADE")
+	private String cidade;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_NASCIMENTO")
@@ -96,5 +99,13 @@ public class ReeducandoEntity {
 
 	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 }

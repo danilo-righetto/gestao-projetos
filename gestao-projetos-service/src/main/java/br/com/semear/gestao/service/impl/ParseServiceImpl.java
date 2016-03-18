@@ -200,6 +200,7 @@ public class ParseServiceImpl implements ParseService {
 			reeducandoEn.setMatricula(reeducando.getMatricula());
 			reeducandoEn.setNome(reeducando.getNome());
 			reeducandoEn.setSexo(reeducando.getSexo());
+			reeducandoEn.setCidade(reeducando.getCidade());
 			reeducandoEn.setDataNascimento(reeducando.getDataNascimento());
 			reeducandoEn.setDataCadastro(reeducando.getDataCadastro());
 			reeducandoEn.setUnidadePrisional(parseToEntity(reeducando.getUnidadePrisional()));
@@ -295,6 +296,7 @@ public class ParseServiceImpl implements ParseService {
 			reeducando.setMatricula(reeducandoEn.getMatricula());
 			reeducando.setNome(reeducandoEn.getNome());
 			reeducando.setSexo(reeducandoEn.getSexo());
+			reeducando.setCidade(reeducandoEn.getCidade());
 			reeducando.setDataNascimento(reeducandoEn.getDataNascimento());
 			reeducando.setDataCadastro(reeducandoEn.getDataCadastro());
 			reeducando.setUnidadePrisional(parseToModel(reeducandoEn.getUnidadePrisional()));
