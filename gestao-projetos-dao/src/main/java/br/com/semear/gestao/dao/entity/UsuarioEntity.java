@@ -40,6 +40,22 @@ public class UsuarioEntity {
 	@JoinColumn(name = "INSTITUICAO", nullable = true)
 	private InstituicaoEntity instituicao;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATA_CADASTRO")
+	private Calendar dataCadastro;
+
+	@Column(name = "REALIZA_LOGIN", nullable = false)
+	private Boolean realizaLogin;
+
+	@OneToMany(mappedBy = "usuarioEntity", fetch = FetchType.LAZY)
+	private List<ProjetoEntity> projetos;
+
+	@OneToMany(mappedBy = "responsavel", fetch = FetchType.LAZY)
+	private List<TarefaProjetoEntity> responsavelTarefas;
+
+	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
+	private List<TarefaProjetoEntity> autorTarefas;
+
 	public InstituicaoEntity getInstituicao() {
 		return instituicao;
 	}
@@ -56,12 +72,6 @@ public class UsuarioEntity {
 		this.projetos = projetos;
 	}
 
-	@Column(name="REALIZA_LOGIN" ,nullable = false)
-	private Boolean realizaLogin;
-
-	@OneToMany(mappedBy = "usuarioEntity", fetch = FetchType.LAZY)
-	private List<ProjetoEntity> projetos;
-
 	public PerfilEntity getPerfil() {
 		return perfil;
 	}
@@ -77,9 +87,6 @@ public class UsuarioEntity {
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataCadastro;
 
 	public long getId() {
 		return id;
@@ -119,5 +126,21 @@ public class UsuarioEntity {
 
 	public void setRealizaLogin(Boolean realizaLogin) {
 		this.realizaLogin = realizaLogin;
+	}
+
+	public List<TarefaProjetoEntity> getResponsavelTarefas() {
+		return responsavelTarefas;
+	}
+
+	public void setResponsavelTarefas(List<TarefaProjetoEntity> responsavelTarefas) {
+		this.responsavelTarefas = responsavelTarefas;
+	}
+
+	public List<TarefaProjetoEntity> getAutorTarefas() {
+		return autorTarefas;
+	}
+
+	public void setAutorTarefas(List<TarefaProjetoEntity> autorTarefas) {
+		this.autorTarefas = autorTarefas;
 	}
 }

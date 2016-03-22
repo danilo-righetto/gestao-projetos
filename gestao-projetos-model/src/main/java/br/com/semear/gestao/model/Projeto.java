@@ -28,6 +28,10 @@ public class Projeto {
 	private Usuario coordenador;
 	
 	private UnidadePrisional unidadePrisional;
+	
+	private String objetivo;
+	
+	private String resultadosEsperados;
 
 	public Projeto(Long id) {
 		this.id = id;
@@ -115,5 +119,21 @@ public class Projeto {
 
 	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
+	}
+
+	public String getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+
+	public String getResultadosEsperados() {
+		return resultadosEsperados;
+	}
+
+	public void setResultadosEsperados(String resultadosEsperados) {
+		this.resultadosEsperados = resultadosEsperados;
 	}
 }

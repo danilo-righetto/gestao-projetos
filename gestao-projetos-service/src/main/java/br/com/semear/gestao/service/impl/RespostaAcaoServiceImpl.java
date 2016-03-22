@@ -25,6 +25,15 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	@Inject
 	private ParseService parseService;
 	
+	//@Inject
+	//private AcaoService acaoService;
+	
+	@Inject
+	private ParseService parse;
+	
+	//@Inject
+	//private RespostaAcaoService respostaAcaoService;
+	
 	@Inject
 	private RespostaAcaoDAO respostaAcaoDAO;
 	
@@ -78,6 +87,18 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 			respostas.add(parseService.parseToModel(q));
 		}
 		return respostas;
+	}
+
+	@Override
+	public void salvarRespostaAcao(List<RespostaAcao> respostas) {
+		RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
+		respostaAcao.setDataCadastro(Calendar.getInstance());
+		respostaAcao.setDataAlteracao(Calendar.getInstance());
+		respostaAcao.setDescricaoRespostaAcao(((RespostaAcaoEntity) respostas).getDescricaoRespostaAcao());
+		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
+		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
+		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
+		
 	}
 
 }

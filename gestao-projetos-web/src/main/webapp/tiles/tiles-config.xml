@@ -64,10 +64,28 @@
 			value="/pages/painel/projetos/listarProjeto.jsp" />
 	</definition>
 
-	<!-- Semear - Editar Usuario -->
+	<!-- Semear - Editar Projeto -->
 	<definition name="editarProjeto" extends="main">
 		<put-attribute name="conteudo"
 			value="/pages/painel/projetos/editarProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Cadastro Tarefa do Projeto -->
+	<definition name="cadastroTarefaProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/tarefas/cadastroTarefa.jsp"></put-attribute>
+	</definition>
+
+	<!-- Semear - Informações do Projeto -->
+	<definition name="informacoesProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/informacaoProjeto.jsp" />
+	</definition>
+
+	<!-- Semear - Informações do Projeto -->
+	<definition name="exibirInformacoes" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/exibirInformacoes.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Questionario -->
@@ -75,7 +93,7 @@
 		<put-attribute name="conteudo"
 			value="/pages/painel/questionarios/cadastroQuestionario.jsp" />
 	</definition>
-	
+
 	<!-- Semear - Cadastro de Questionario -->
 	<definition name="cadastroQuestionarioAcao" extends="main">
 		<put-attribute name="conteudo"
@@ -164,7 +182,7 @@
 		<put-attribute name="conteudo"
 			value="/pages/painel/unidade-prisional/listarUnidadesPrisionais.jsp" />
 	</definition>
-	
+
 	<!-- Semear - RESPOSTA QUESTIONARIO ACAO -->
 	<definition name="respostaAcao" extends="main">
 		<put-attribute name="conteudo"

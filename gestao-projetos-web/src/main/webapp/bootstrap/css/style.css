@@ -16,3 +16,8 @@
 	color: #fff;
 	border-color: #4DC1FF;
 }
+
+.info-projeto p {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
