@@ -43,4 +43,5 @@ public class AcaoDaoImpl implements AcaoDAO {
 		query.setParameter("idAcao", idAcao);
 		return (AcaoEntity) query.getSingleResult();
 	}
+
 }

@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
+import br.com.semear.gestao.dao.entity.AcaoEntity;
+import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -31,6 +33,7 @@ public class ProjetoServiceImpl implements ProjetoService {
 	@Inject
 	private ParseService parseService;
 	
+	@SuppressWarnings("unused")
 	@Inject
 	private QuestionarioService questionarioService;
 	
@@ -100,6 +103,15 @@ public class ProjetoServiceImpl implements ProjetoService {
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public void adicionarVinculoAcaoComProjeto(long idAcao, long idProjeto) {
+		AcaoRelProjetoEntity rel = new AcaoRelProjetoEntity();
+		rel.setAcao(new AcaoEntity(idAcao));
+		rel.setProjeto(new ProjetoEntity(idProjeto));
+		rel.setDataEntrada(Calendar.getInstance());
+		projetoDAO.adicionarVinculoAcaoComProjeto(rel);
 	}
 
 }
