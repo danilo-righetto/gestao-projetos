@@ -71,7 +71,7 @@
 										style="margin-left: 20px"
 										href='<c:url value="/painel/projetos/${projeto.id}/exibirInformacoes"></c:url>'
 										title="Informações"><span
-											class="glyphicon glyphicon-info-sign"></span></a> <a
+											class="glyphicon glyphicon-info-sign"></span></a><a
 										style="margin-left: 20px"
 										href='<c:url value="/painel/projetos/${projeto.id}/tarefas"></c:url>'
 										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a></td>

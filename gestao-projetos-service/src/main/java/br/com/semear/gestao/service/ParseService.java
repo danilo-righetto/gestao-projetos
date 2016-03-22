@@ -18,6 +18,7 @@ import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
 import br.com.semear.gestao.dao.entity.RespostaEntity;
+import br.com.semear.gestao.dao.entity.TarefaProjetoEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -39,6 +40,7 @@ import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Resposta;
 import br.com.semear.gestao.model.RespostaAcao;
+import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
 import br.com.semear.gestao.model.Usuario;
@@ -120,4 +122,8 @@ public interface ParseService {
 	InformacaoProjeto parseToModel(InformacaoProjetoEntity buscarInformacaoProjetoPorIdProjeto);
 
 	Resposta parseToModel(RespostaEntity entity);
+	
+	TarefaProjetoEntity parseToEntity(TarefaProjeto tarefa);
+
+	TarefaProjeto parseToModel(TarefaProjetoEntity tarefa);
 }

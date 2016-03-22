@@ -20,6 +20,7 @@ import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
 import br.com.semear.gestao.dao.entity.RespostaEntity;
+import br.com.semear.gestao.dao.entity.TarefaProjetoEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -41,6 +42,7 @@ import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Resposta;
 import br.com.semear.gestao.model.RespostaAcao;
+import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
 import br.com.semear.gestao.model.Usuario;
@@ -648,6 +650,44 @@ public class ParseServiceImpl implements ParseService {
 			model.setDataAlteracao(entity.getDataAlteracao());
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
 			model.setId(entity.getId());
+		}
+		return model;
+	}
+	
+	@Override
+	public TarefaProjetoEntity parseToEntity(TarefaProjeto model) {
+		TarefaProjetoEntity entity = null;
+		if (model != null) {
+			entity = new TarefaProjetoEntity();
+			entity.setId(model.getId());
+			entity.setDescricao(model.getDescricao());
+			entity.setProjeto(parseToEntity(model.getProjeto()));
+			entity.setResponsavel(parseToEntity(model.getResponsavel()));
+			entity.setAutor(parseToEntity(model.getAutor()));
+			entity.setStatus(model.getStatus());
+			entity.setDataCadastro(model.getDataCadastro());
+			entity.setDataInicio(model.getDataInicio());
+			entity.setPrevisaoTermino(model.getPrevisaoTermino());
+			entity.setDataTermino(model.getDataTermino());
+		}
+		return entity;
+	}
+
+	@Override
+	public TarefaProjeto parseToModel(TarefaProjetoEntity entity) {
+		TarefaProjeto model = null;
+		if (entity != null) {
+			model = new TarefaProjeto();
+			model.setId(entity.getId());
+			model.setDescricao(entity.getDescricao());
+			model.setProjeto(parseToModel(entity.getProjeto()));
+			model.setResponsavel(parseToModel(entity.getResponsavel()));
+			model.setAutor(parseToModel(entity.getAutor()));
+			model.setStatus(entity.getStatus());
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDataInicio(entity.getDataInicio());
+			model.setPrevisaoTermino(entity.getPrevisaoTermino());
+			model.setDataTermino(entity.getDataTermino());
 		}
 		return model;
 	}
