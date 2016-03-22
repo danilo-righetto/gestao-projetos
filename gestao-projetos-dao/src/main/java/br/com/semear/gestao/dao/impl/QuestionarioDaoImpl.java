@@ -111,4 +111,15 @@ public class QuestionarioDaoImpl implements QuestionarioDAO {
 		query.executeUpdate();		
 	}
 
+	@Override
+	public PerguntaEntity buscarPerguntaPorIdProjetoEiDPergunta(long idProjeto, long idPergunta) {
+		Query query = em.createQuery("select p from PerguntaEntity p where p.id = :idPergunta and p.questionarioEntity.projeto.id = :idProjeto");
+		query.setParameter("idPergunta", idPergunta);
+		query.setParameter("idProjeto", idProjeto);
+		if(!query.getResultList().isEmpty()){
+			return (PerguntaEntity) query.getResultList().get(0);
+		}
+		return new PerguntaEntity();
+	}
+
 }

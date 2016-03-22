@@ -1,6 +1,7 @@
 package br.com.semear.gestao.dao.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,7 +58,20 @@ public class ProjetoEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UNIDADE_PRISIONAL")
 	private UnidadePrisionalEntity unidadePrisional;
-	
+
+	@Column(name = "OBJETIVO")
+	private String objetivo;
+
+	@Column(name = "RESULTADOS_ESPERADOS")
+	private String resultadosEsperados;
+
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "projeto")
+	@JoinColumn(name = "INFORMACOES_ADICIONAIS")
+	private InformacaoProjetoEntity informacaoProjeto;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projeto")
+	private List<TarefaProjetoEntity> tarefas;
+
 	public ProjetoEntity() {
 
 	}
@@ -142,5 +158,37 @@ public class ProjetoEntity {
 
 	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
+	}
+
+	public String getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+
+	public String getResultadosEsperados() {
+		return resultadosEsperados;
+	}
+
+	public void setResultadosEsperados(String resultadosEsperados) {
+		this.resultadosEsperados = resultadosEsperados;
+	}
+
+	public InformacaoProjetoEntity getInformacaoProjeto() {
+		return informacaoProjeto;
+	}
+
+	public void setInformacaoProjeto(InformacaoProjetoEntity informacaoProjeto) {
+		this.informacaoProjeto = informacaoProjeto;
+	}
+
+	public List<TarefaProjetoEntity> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(List<TarefaProjetoEntity> tarefas) {
+		this.tarefas = tarefas;
 	}
 }

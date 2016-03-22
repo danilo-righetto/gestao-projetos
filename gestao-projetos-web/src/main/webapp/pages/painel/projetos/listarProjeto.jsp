@@ -1,30 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(function() {
-		$("#menu-projetos").attr('class','active');
-		$("#tbProjetos").dataTable( {
-	        "iDisplayLength": 5,
-	        "bPaginate": true,
-	        "bLengthChange": false,
-	        "bFilter": true,
-	        "bInfo": false,
-	        "bAutoWidth": true,
-	        "language": {
-	            "emptyTable": "Nenhuma informação cadastrada"
-	          }
-        
-	    });
+		$("#menu-projetos").attr('class', 'active');
+		$("#tbProjetos").dataTable({
+			"iDisplayLength" : 5,
+			"bPaginate" : true,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bInfo" : false,
+			"bAutoWidth" : true,
+			"language" : {
+				"emptyTable" : "Nenhuma informação cadastrada"
+			}
+
+		});
 		$(".previous").text('Anterior');
 		$(".next").text('Próximo');
-	    
+
 	});
-	</script>
+</script>
 </head>
 <body>
 	<div class="section">
@@ -35,8 +35,10 @@
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>
-						<td class="text-center"><span style="font-weight: bold;">Nome do Projeto</span></td>
-						<td class="text-center"><span style="font-weight: bold;">Data Inicio</span></td>
+						<td class="text-center"><span style="font-weight: bold;">Nome
+								do Projeto</span></td>
+						<td class="text-center"><span style="font-weight: bold;">Data
+								Inicio</span></td>
 						<td class="text-center"><span style="font-weight: bold;">Status</span></td>
 						<td class="text-center"><span style="font-weight: bold;">Ação</span></td>
 					</tr>
@@ -48,25 +50,32 @@
 								<tr>
 									<td class="text-center">${projeto.id}</td>
 									<td class="text-center">${projeto.nome}</td>
-									<td class="text-center"><fmt:formatDate value="${projeto.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
+									<td class="text-center"><fmt:formatDate
+											value="${projeto.dataInicio.time}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 									<td class="text-center">${projeto.status}</td>
-									<td class="text-center">
-										<a href="editar/${projeto.id}">
-											<span class="glyphicon glyphicon-pencil"> </span>
-										</a>
-										<a style="margin-left:20px" href='<c:url value="/painel/questionarios/cadastro/${projeto.id}" />'>
-											<span class="glyphicon glyphicon-list-alt"></span>
-										</a>
-										<a style="margin-left:20px" href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes" />'>
-											<span class="glyphicon glyphicon-th-list"></span>
-										</a>
-										<a style="margin-left:20px" href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes/cadastroParticipacaoProjeto" />'>
-											<span class="glyphicon glyphicon-user"></span>
-										</a>
-										
-									</td>
-										
-										
+									<td class="text-center"><a href="editar/${projeto.id}"
+										title="Editar"> <span class="glyphicon glyphicon-pencil">
+										</span>
+									</a> <a style="margin-left: 20px"
+										href='<c:url value="/painel/questionarios/cadastro/${projeto.id}" />'
+										title="Questionário"> <span
+											class="glyphicon glyphicon-list-alt"></span>
+									</a> <a style="margin-left: 20px"
+										href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes" />'
+										title="Instituições"> <span
+											class="glyphicon glyphicon-th-list"></span>
+									</a> <a style="margin-left: 20px"
+										href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes/cadastroParticipacaoProjeto" />'
+										title="Reeducandos e Colaboradores"> <span
+											class="glyphicon glyphicon-user"></span></a>
+
+											<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/projetos/${projeto.id}/exibirInformacoes"></c:url>'
+										title="Informações"><span
+											class="glyphicon glyphicon-info-sign"></span></a></td>
+
+
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -78,8 +87,9 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<br />
-			<a href='<c:url value="cadastro"></c:url>' style="float:right;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Novo Projeto</a>
+			<br /> <a href='<c:url value="cadastro"></c:url>'
+				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+				class="btn btn-default">Novo Projeto</a>
 		</div>
 	</div>
 	<div class="section" style="margin-top: 20px"></div>

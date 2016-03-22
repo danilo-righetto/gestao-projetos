@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.semear.gestao.dao.InformacaoProjetoDAO;
 import br.com.semear.gestao.dao.ProjetoDAO;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
+import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
@@ -29,6 +31,9 @@ public class ProjetoServiceImpl implements ProjetoService {
 
 	@Inject
 	private ProjetoDAO projetoDAO;
+	
+	@Inject
+	private InformacaoProjetoDAO informacoesProjetoDAO;
 
 	@Inject
 	private ParseService parseService;
@@ -113,5 +118,69 @@ public class ProjetoServiceImpl implements ProjetoService {
 		rel.setDataEntrada(Calendar.getInstance());
 		projetoDAO.adicionarVinculoAcaoComProjeto(rel);
 	}
+
+	@Override
+	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
+		if(informacaoProjeto.getId() == 0){
+			informacaoProjeto.setDataCadastro(Calendar.getInstance());
+		} else {
+			informacaoProjeto.setDataEdicao(Calendar.getInstance());
+		}
+		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
+	}
+
+//	@Override
+//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
+//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
+//		return info;
+//	}
+
+//	@Override
+//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
+//		if(informacaoProjeto.getId() == 0){
+//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
+//		} else {
+//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
+//		}
+//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
+//	}
+
+	@Override
+	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
+		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
+		return info;
+	}
+
+//	@Override
+//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
+//		if(informacaoProjeto.getId() == 0){
+//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
+//		} else {
+//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
+//		}
+//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
+//	}
+//
+//	@Override
+//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
+//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
+//		return info;
+//	}
+
+//	@Override
+//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
+//		if(informacaoProjeto.getId() == 0){
+//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
+//		} else {
+//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
+//		}
+//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
+//	}
+
+//	@Override
+//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
+//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
+//		return info;
+//	}
 
 }

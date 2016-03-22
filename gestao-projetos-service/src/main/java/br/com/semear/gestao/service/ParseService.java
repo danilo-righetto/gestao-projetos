@@ -3,6 +3,7 @@ package br.com.semear.gestao.service;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
+import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
@@ -16,12 +17,14 @@ import br.com.semear.gestao.dao.entity.QuestionarioAcaoEntity;
 import br.com.semear.gestao.dao.entity.QuestionarioEntity;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
+import br.com.semear.gestao.dao.entity.RespostaEntity;
 import br.com.semear.gestao.dao.entity.TipoPerguntaEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
+import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
 import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
@@ -34,6 +37,7 @@ import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.QuestionarioAcao;
 import br.com.semear.gestao.model.Reeducando;
+import br.com.semear.gestao.model.Resposta;
 import br.com.semear.gestao.model.RespostaAcao;
 import br.com.semear.gestao.model.TipoPergunta;
 import br.com.semear.gestao.model.UnidadePrisional;
@@ -110,4 +114,10 @@ public interface ParseService {
 	ParticipacaoReeducandoProjeto parseToModel(ParticipacaoReeducandoProjetoEntity p);
 
 	ParticipacaoColaboradorProjeto parseToModel(ParticipacaoColaboradorProjetoEntity p);
+
+	InformacaoProjetoEntity parseToEntity(InformacaoProjeto informacaoProjeto);
+
+	InformacaoProjeto parseToModel(InformacaoProjetoEntity buscarInformacaoProjetoPorIdProjeto);
+
+	Resposta parseToModel(RespostaEntity entity);
 }

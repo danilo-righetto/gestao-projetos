@@ -9,6 +9,22 @@ public class Reeducando {
 
 	private String matricula;
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	private String nome;
 
 	private String sexo;
@@ -21,6 +37,8 @@ public class Reeducando {
 	private Calendar dataCadastro;
 
 	private UnidadePrisional unidadePrisional;
+
+	private Usuario usuario;
 
 	public Reeducando(Long id) {
 		this.id = id;
@@ -85,13 +103,5 @@ public class Reeducando {
 	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
 	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
+	
 }

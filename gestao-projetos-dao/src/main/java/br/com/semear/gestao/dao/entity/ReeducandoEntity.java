@@ -2,6 +2,7 @@ package br.com.semear.gestao.dao.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,9 +43,14 @@ public class ReeducandoEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCadastro;
 
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UNIDADE_PRISIONAL", nullable = false)
 	private UnidadePrisionalEntity unidadePrisional;
+	
+	@JoinColumn(name="USUARIO")
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private UsuarioEntity usuario;
 
 	public long getId() {
 		return id;
@@ -51,6 +58,14 @@ public class ReeducandoEntity {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getMatricula() {
@@ -101,11 +116,11 @@ public class ReeducandoEntity {
 		this.unidadePrisional = unidadePrisional;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public UsuarioEntity getUsuario() {
+		return usuario;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
 	}
 }

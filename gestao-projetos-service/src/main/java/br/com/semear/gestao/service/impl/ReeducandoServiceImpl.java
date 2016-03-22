@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ReeducandoDAO;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
+import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.model.Perfil;
 import br.com.semear.gestao.model.Reeducando;
+import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ReeducandoService;
 
@@ -28,6 +31,16 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 
 	@Override
 	public void cadastrarReeducando(Reeducando reeducando) {
+		Usuario usuario = new Usuario();
+		usuario.setUsuario(reeducando.getMatricula() + "." + reeducando.getUnidadePrisional().getId() + "@iap.org.br");
+		usuario.setNome(reeducando.getNome());
+		usuario.setSenha("");
+		usuario.setPerfil(new Perfil("ROLE_REEDUCANDO"));
+		usuario.setInstituicao(new Instituicao());
+		usuario.setRealizaLogin(false);
+		usuario.setDataCadastro(Calendar.getInstance());
+
+		reeducando.setUsuario(usuario);
 		reeducando.setDataCadastro(Calendar.getInstance());
 		reeducandoDAO.cadastrarReeducando(parse.parseToEntity(reeducando));
 	}
@@ -69,7 +82,7 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idUnidadePrisional) {
 		List<ReeducandoEntity> lista = reeducandoDAO.listarReeducandosPorUnidadePrisional(idUnidadePrisional);
 		List<Reeducando> reeducandos = new ArrayList<Reeducando>();
-		for(ReeducandoEntity reeducandoEn : lista){
+		for (ReeducandoEntity reeducandoEn : lista) {
 			reeducandos.add(parse.parseToModel(reeducandoEn));
 		}
 		return reeducandos;

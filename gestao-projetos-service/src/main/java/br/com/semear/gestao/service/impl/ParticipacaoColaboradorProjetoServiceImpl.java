@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoColaboradorProjetoDAO;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
+import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
+import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
 import br.com.semear.gestao.service.UsuarioService;
@@ -43,5 +45,15 @@ public class ParticipacaoColaboradorProjetoServiceImpl implements ParticipacaoCo
 			colaboradores.add(parse.parseToModel(p));
 		}
 		return colaboradores;
+	}
+
+	@Override
+	public List<Usuario> buscarColaboradoresAssociados(Long idProjeto) {
+		List<UsuarioEntity> entitys = participacaoColaboradorProjetoDao.buscarColaboradoresAssociados(idProjeto);
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(UsuarioEntity usuario : entitys){
+			usuarios.add(parse.parseToModel(usuario));
+		}
+		return usuarios;
 	}
 }
