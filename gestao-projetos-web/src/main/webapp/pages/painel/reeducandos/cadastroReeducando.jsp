@@ -129,6 +129,10 @@
 								<option value="M">MASCULINO</option>
 							</select>
 						</div>
+						<div class="form-group col-md-2">
+							<label for="cidade">Cidade:</label> <input type="text"
+									class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required>
+						  </div>
 						<!-- datepicker  - INICIO -->
 
 						<div class="form-group col-md-2">

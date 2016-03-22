@@ -15,7 +15,7 @@ import br.com.semear.gestao.service.QuestionarioAcaoService;
 import br.com.semear.gestao.service.RespostaAcaoService;
 
 @Controller
-@RequestMapping("painel/respostas")
+@RequestMapping("painel/respostasacao")
 public class RespostaAcaoController {
 	ModelAndView mav = new ModelAndView();
 

@@ -6,8 +6,6 @@ import br.com.semear.gestao.model.RespostaAcao;
 import br.com.semear.gestao.model.Usuario;
 
 public interface RespostaAcaoService {
-	void salvarRespostaAcao(List<RespostaAcao> respostas);
-	
 	void alterarRespostaAcao(RespostaAcao resposta);
 	
 	void removerRespostaAcao(RespostaAcao resposta);
@@ -17,4 +15,6 @@ public interface RespostaAcaoService {
 	List<RespostaAcao> listarRespostas();
 
 	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario);
+
+	void salvarRespostaAcao(List<RespostaAcao> respostas);
 }

@@ -15,10 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Projeto;
+import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
+import br.com.semear.gestao.service.TarefaProjetoService;
 
 @Controller
 @RequestMapping("painel/projetos")
@@ -33,6 +35,9 @@ public class ProjetoController {
 	@Inject
 	private ParticipacaoProjetoService participacaoProjetoService;
 	
+	@Inject
+	private TarefaProjetoService tarefaProjetoService;
+	
 	private ModelAndView mav = new ModelAndView();
 
 	@RequestMapping("/")
@@ -44,7 +49,7 @@ public class ProjetoController {
 	}
 
 	@RequestMapping("/cadastro")
-	public ModelAndView formCadastro() {
+	public ModelAndView formCadastroProjeto() {
 		mav.clear();
 		mav.setViewName("cadastroProjeto");
 		mav.addObject("unidadesPrisionais", unidadePrisionalService.listaUnidades());
@@ -66,7 +71,7 @@ public class ProjetoController {
 	}
 
 	@RequestMapping(value = "editar/{idProjeto}")
-	public ModelAndView formEditar(@PathVariable("idProjeto") long idProjeto) {
+	public ModelAndView formEditarProjeto(@PathVariable("idProjeto") long idProjeto) {
 		mav.clear();
 		mav.setViewName("editarProjeto");
 		mav.addObject("projeto", projetoService.buscarProjetoPorId(idProjeto));
@@ -115,10 +120,43 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping("{idProjeto}/tarefas/cadastro")
-	public ModelAndView cadastroTarefa(@PathVariable Long idProjeto){
+	public ModelAndView formCadastroTarefa(@PathVariable Long idProjeto){
 		mav.clear();
 		mav.setViewName("cadastroTarefaProjeto");
 		mav.addObject("associados", participacaoProjetoService.buscarAssociadosProjeto(idProjeto));
 		return mav;
+	}
+	
+	@RequestMapping("tarefas/salvarTarefa")
+	public String salvarTarefa(TarefaProjeto tarefa, HttpSession session){
+		tarefa.setAutor((Usuario) session.getAttribute("usuario"));
+		tarefaProjetoService.cadastrar(tarefa);
+		return "redirect:/painel/projetos/";
+	}
+	
+	@RequestMapping("{idProjeto}/tarefas")
+	public ModelAndView listarTarefasProjeto(@PathVariable long idProjeto){
+		mav.clear();
+		mav.setViewName("listarTarefaProjeto");
+		mav.addObject("tarefas", tarefaProjetoService.listarTarefas(idProjeto));
+		return mav;
+	}
+	
+	@RequestMapping("{idProjeto}/tarefas/{idTarefa}/editar")
+	public ModelAndView formEditarTarefa(@PathVariable long idProjeto, @PathVariable long idTarefa){
+		mav.clear();
+		mav.setViewName("editarTarefaProjeto");
+		mav.addObject("tarefa", tarefaProjetoService.buscarTarefaPorId(idTarefa));
+		mav.addObject("associados", participacaoProjetoService.buscarAssociadosProjeto(idProjeto));
+		
+		return mav;
+	}
+	
+	@RequestMapping("tarefas/editarTarefa")
+	public String editarTarefa(@PathVariable long idProjeto, TarefaProjeto tarefa, HttpSession session){
+		tarefa.setAutor((Usuario) session.getAttribute("usuario"));
+		tarefaProjetoService.editar(tarefa);
+		
+		return "redirect:{idProjeto}/tarefas";
 	}
 }

@@ -186,6 +186,12 @@
 	<!-- Semear - RESPOSTA QUESTIONARIO ACAO -->
 	<definition name="respostaAcao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/resposta/respostaAcao.jsp" />
+			value="/pages/painel/respostaacao/respostaAcao.jsp" />
+	</definition>
+	
+	<!-- Semear - RESPOSTA QUESTIONARIO PROJETOS -->
+	<definition name="respostaProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/respostaprojeto/respostaProjeto.jsp" />
 	</definition>
 </tiles-definitions>

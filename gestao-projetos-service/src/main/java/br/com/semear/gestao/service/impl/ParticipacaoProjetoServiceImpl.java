@@ -19,7 +19,6 @@ import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
-import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
 import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
@@ -53,9 +52,6 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	@Inject
 	private ParticipacaoInstituicaoProjetoDAO participacaoInstituicaoProjetoDAO;
 	
-	@Inject
-	private InstituicaoService instituicaoService;
-
 	@Override
 	public String cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes){
 		String msg = null;

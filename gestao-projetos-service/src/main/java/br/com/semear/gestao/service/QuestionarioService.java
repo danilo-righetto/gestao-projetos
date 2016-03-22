@@ -19,4 +19,5 @@ public interface QuestionarioService {
 
 	String alterarQuestionario(Questionario questionario,	List<Pergunta> perguntasRemovidas);
 
+	Pergunta buscarPerguntaPorIdProjetoEiDPergunta(long idProjeto,long idAcao);
 }

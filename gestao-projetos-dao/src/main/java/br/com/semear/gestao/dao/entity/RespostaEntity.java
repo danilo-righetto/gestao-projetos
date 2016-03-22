@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "RESPOSTA")
+@Table(name = "RESPOSTA_PROJETO")
 public class RespostaEntity {
 	@Id
 	@GeneratedValue

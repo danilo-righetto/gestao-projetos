@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
+import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
@@ -83,5 +84,10 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public void adicionarVinculoAcaoComProjeto(AcaoRelProjetoEntity rel) {
+		em.persist(rel);
 	}
 }

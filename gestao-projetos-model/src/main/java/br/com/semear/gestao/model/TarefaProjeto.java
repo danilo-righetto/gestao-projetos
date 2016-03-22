@@ -2,6 +2,8 @@ package br.com.semear.gestao.model;
 
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TarefaProjeto {
 
 	private long id;
@@ -18,10 +20,13 @@ public class TarefaProjeto {
 
 	private Calendar dataCadastro;
 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataInicio;
 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar previsaoTermino;
 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataTermino;
 
 	public long getId() {

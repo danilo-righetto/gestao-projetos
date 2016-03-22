@@ -43,6 +43,7 @@ public class ReeducandoEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCadastro;
 
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UNIDADE_PRISIONAL", nullable = false)
 	private UnidadePrisionalEntity unidadePrisional;
@@ -57,6 +58,14 @@ public class ReeducandoEntity {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getMatricula() {
@@ -105,14 +114,6 @@ public class ReeducandoEntity {
 
 	public void setUnidadePrisional(UnidadePrisionalEntity unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
-	}
-	
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 
 	public UsuarioEntity getUsuario() {
