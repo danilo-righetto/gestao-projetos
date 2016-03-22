@@ -22,6 +22,8 @@ public class Reeducando {
 
 	private UnidadePrisional unidadePrisional;
 
+	private Usuario usuario;
+
 	public Reeducando(Long id) {
 		this.id = id;
 	}
@@ -85,7 +87,7 @@ public class Reeducando {
 	public void setUnidadePrisional(UnidadePrisional unidadePrisional) {
 		this.unidadePrisional = unidadePrisional;
 	}
-
+	
 	public String getCidade() {
 		return cidade;
 	}
@@ -94,4 +96,11 @@ public class Reeducando {
 		this.cidade = cidade;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoColaboradorProjetoDAO;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
+import br.com.semear.gestao.dao.entity.UsuarioEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -25,11 +26,24 @@ public class ParticipacaoColaboradorProjetoDaoImpl implements ParticipacaoColabo
 		em.persist(entity);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<ParticipacaoColaboradorProjetoEntity> listarParticipacaoProjetos(long idProjeto) {
-		Query query = em.createQuery("select pp from ParticipacaoColaboradorProjetoEntity pp where pp.projeto.id = :idProjeto");
-		query.setParameter("idProjeto",idProjeto);
+		Query query = em
+				.createQuery("select pp from ParticipacaoColaboradorProjetoEntity pp where pp.projeto.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
 		return query.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UsuarioEntity> buscarColaboradoresAssociados(Long idProjeto) {
+		Query query = em.createQuery(
+				"select p.colaborador from ParticipacaoColaboradorProjetoEntity p where p.projeto.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		if(!query.getResultList().isEmpty()){
+			return query.getResultList();
+		}
+		return null;
 	}
 }
