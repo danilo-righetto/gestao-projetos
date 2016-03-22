@@ -3,6 +3,7 @@ package br.com.semear.gestao.service;
 import java.util.List;
 
 import br.com.semear.gestao.model.RespostaAcao;
+import br.com.semear.gestao.model.Usuario;
 
 public interface RespostaAcaoService {
 	void salvarRespostaAcao(List<RespostaAcao> respostas);
@@ -14,4 +15,6 @@ public interface RespostaAcaoService {
 	RespostaAcao buscarRespostaAcaoPorId(long IdResposta);
 	
 	List<RespostaAcao> listarRespostas();
+
+	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario);
 }

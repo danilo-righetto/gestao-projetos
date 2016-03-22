@@ -1,9 +1,19 @@
 package br.com.semear.gestao.model;
 
 public class Perfil {
+	
 	private String id;
+	
 	private String descricao;
 	
+	
+	public Perfil(String id) {
+		this.id = id;
+	}
+	
+	public Perfil() {
+		
+	}
 	
 	public String getId() {
 		return id;

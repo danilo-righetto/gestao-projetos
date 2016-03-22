@@ -101,12 +101,22 @@
 								<label for="unidadePrisional">Unidade Prisional:</label> <input
 									class="form-control" id="unidadePrisional"
 									name="unidadePrisional.nome"
-									value="${projeto.unidadePrisional.nome}" readonly/>
+									value="${projeto.unidadePrisional.nome}" readonly />
 							</div>
 							<div class="form-group col-md-12">
 								<label for="descricao">Descrição</label>
 								<textarea class="form-control" cols="10" rows="5" id="descricao"
-									placeholder="Digite uma Descrição" name="descricao" required>${projeto.descricao}</textarea>
+									name="descricao" required>${projeto.descricao}</textarea>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="objetivo">Objetivo do Projeto:</label>
+								<textarea class="form-control" id="objetivo" name="objetivo"
+									rows="4" cols="5" required>${projeto.objetivo}</textarea>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="resultados">Resultados Esperados:</label>
+								<textarea class="form-control" id="resultados"
+									name="resultadosEsperados" rows="4" cols="5" required>${projeto.resultadosEsperados}</textarea>
 							</div>
 						</div>
 						<hr />

@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 </head>
-
 <script type="text/javascript">
 	$(function() {
 		var msg = "<c:out value='${msg}'/>";
@@ -104,10 +103,20 @@
 								</select>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="descricao">Descrição</label>
+								<label for="descricao">Descrição:</label>
 								<textarea class="form-control" id="descricao"
 									placeholder="Digite uma Descrição" cols="10" rows="5"
 									name="descricao" required></textarea>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="objetivo">Objetivo do Projeto:</label>
+								<textarea class="form-control" id="objetivo" name="objetivo"
+									rows="4" cols="5" required></textarea>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="resultados">Resultados Esperados:</label>
+								<textarea class="form-control" id="resultados"
+									name="resultadosEsperados" rows="4" cols="5" required></textarea>
 							</div>
 						</div>
 						<hr />

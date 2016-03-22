@@ -65,8 +65,8 @@ public class QuestionarioAcaoServiceImpl implements QuestionarioAcaoService {
 				}
 				return questionario;
 	}
-	
-	private List<PerguntaAcao> buscarPerguntasPorIdQuestionario(long idQuestionario) {
+	@Override
+	public List<PerguntaAcao> buscarPerguntasPorIdQuestionario(long idQuestionario) {
 		List<PerguntaAcaoEntity> entitys = questionarioAcaoDAO.buscarPerguntasPorIdQuestionario(idQuestionario);
 		List<PerguntaAcao> perguntas = new ArrayList<PerguntaAcao>();
 		for(PerguntaAcaoEntity p : entitys){
@@ -148,6 +148,12 @@ public class QuestionarioAcaoServiceImpl implements QuestionarioAcaoService {
 			alternativa.setPerguntaAcaoEntity(perguntaAcaoEntity);
 			questionarioAcaoDAO.salvarAlternativa(alternativa);
 		}
+	}
+
+	@Override
+	public PerguntaAcao buscarPerguntaPorIdAcaoEiDPergunta(int idPergunta,Long idAcao) {
+		PerguntaAcao pergunta = parseService.parseToModel(questionarioAcaoDAO.buscarPerguntaPorIdAcaoEiDPergunta(idPergunta,idAcao));
+		return pergunta;
 	}
 
 }

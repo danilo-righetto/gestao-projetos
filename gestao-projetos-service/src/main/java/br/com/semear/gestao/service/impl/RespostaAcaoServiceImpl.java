@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.RespostaAcaoDAO;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
+import br.com.semear.gestao.model.PerguntaAcao;
 import br.com.semear.gestao.model.RespostaAcao;
+import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
+import br.com.semear.gestao.service.QuestionarioAcaoService;
 import br.com.semear.gestao.service.RespostaAcaoService;
 
 @Service
@@ -33,17 +36,28 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	
 	@Inject
 	private RespostaAcaoDAO respostaAcaoDAO;
+	
+	@Inject
+	private QuestionarioAcaoService questionarioAcaoService;
 
 	@Override
-	public void salvarRespostaAcao(List<RespostaAcao> respostas) {
-		RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
-		respostaAcao.setDataCadastro(Calendar.getInstance());
-		respostaAcao.setDataAlteracao(Calendar.getInstance());
-		respostaAcao.setDescricaoRespostaAcao(((RespostaAcaoEntity) respostas).getDescricaoRespostaAcao());
-		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
-		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
-		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
-		
+	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario) {
+		if(respostas != null && respostas.length > 0 && idAcao != null){
+			for(int i =0; i < respostas.length;i++){
+				String[] respostaArray = respostas[i].split("#");
+				int idPergunta = Integer.parseInt(respostaArray[0].toString());
+				PerguntaAcao pergunta = questionarioAcaoService.buscarPerguntaPorIdAcaoEiDPergunta(idPergunta,idAcao);
+				String descricaoResposta = "";
+				descricaoResposta = respostaArray[1];
+				
+				RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
+				respostaAcao.setDataCadastro(Calendar.getInstance());
+				respostaAcao.setDescricaoRespostaAcao(descricaoResposta);
+				respostaAcao.setPerguntaAcaoEntity(parseService.parseToEntity(pergunta));
+				respostaAcao.setUsuarioEntity(parseService.parseToEntity(usuario));
+				respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
+			}
+		}
 	}
 
 	@Override
@@ -61,7 +75,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	@Override
 	public RespostaAcao buscarRespostaAcaoPorId(long IdResposta) {
 		RespostaAcaoEntity entity = respostaAcaoDAO.buscarRespostaAcaoPorId(IdResposta);
-		RespostaAcao respostaAcao = parse.parseToModel(entity);
+		RespostaAcao respostaAcao = parseService.parseToModel(entity);
 		return respostaAcao;
 	}
 
@@ -73,6 +87,18 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 			respostas.add(parseService.parseToModel(q));
 		}
 		return respostas;
+	}
+
+	@Override
+	public void salvarRespostaAcao(List<RespostaAcao> respostas) {
+		RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
+		respostaAcao.setDataCadastro(Calendar.getInstance());
+		respostaAcao.setDataAlteracao(Calendar.getInstance());
+		respostaAcao.setDescricaoRespostaAcao(((RespostaAcaoEntity) respostas).getDescricaoRespostaAcao());
+		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
+		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
+		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
+		
 	}
 
 }

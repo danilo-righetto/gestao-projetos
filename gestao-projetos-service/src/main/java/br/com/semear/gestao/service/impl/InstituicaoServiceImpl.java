@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.InstituicaoDAO;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
-import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.service.InstituicaoService;
 import br.com.semear.gestao.service.ParseService;

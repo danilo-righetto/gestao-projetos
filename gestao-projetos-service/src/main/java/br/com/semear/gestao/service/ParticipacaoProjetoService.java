@@ -2,7 +2,6 @@ package br.com.semear.gestao.service;
 
 import java.util.List;
 
-import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Reeducando;
@@ -12,7 +11,7 @@ public interface ParticipacaoProjetoService {
 	public void cadastrar(Long idProjeto, Long idCoordenador, Long[] idReeducandos, String[] funcoes,
 			Long[] idColaboradores);
 
-	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos();
+	public List<ParticipacaoReeducandoProjeto> listarParticipacaoProjetos();
 
 	public List<Usuario> listarCoPorInstituicao(long idInstituicao, String idPerfil);
 
@@ -25,4 +24,6 @@ public interface ParticipacaoProjetoService {
 	public List<ParticipacaoInstituicaoProjeto> listarParticipacaoInstituicoesProjeto(long idProjeto);
 
 	public List<ParticipacaoReeducandoProjeto> listarParticipacaoReeducandoProjeto(long idProjeto);
+
+	public List<Usuario> buscarAssociadosProjeto(Long idProjeto);
 }

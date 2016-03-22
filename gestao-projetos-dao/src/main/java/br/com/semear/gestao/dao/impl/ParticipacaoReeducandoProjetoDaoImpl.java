@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ParticipacaoReeducandoProjetoDAO;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
+import br.com.semear.gestao.dao.entity.UsuarioEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -32,11 +33,21 @@ public class ParticipacaoReeducandoProjetoDaoImpl implements ParticipacaoReeduca
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<ParticipacaoReeducandoProjetoEntity> listarParticipacaoProjetos(long idProjeto) {
-		Query query = em.createQuery("select pp from ParticipacaoReeducandoProjetoEntity pp where pp.projeto.id = :idProjeto");
-		query.setParameter("idProjeto",idProjeto);
+		Query query = em
+				.createQuery("select pp from ParticipacaoReeducandoProjetoEntity pp where pp.projeto.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
+		return query.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UsuarioEntity> buscarReeducandosAssociados(long idProjeto) {
+		Query query = em.createQuery(
+				"select p.reeducando.usuario from ParticipacaoReeducandoProjetoEntity p where p.projeto.id = :idProjeto");
+		query.setParameter("idProjeto", idProjeto);
 		return query.getResultList();
 	}
 }

@@ -3,6 +3,7 @@ package br.com.semear.gestao.service;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
+import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
@@ -22,6 +23,7 @@ import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
+import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
 import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
@@ -110,4 +112,8 @@ public interface ParseService {
 	ParticipacaoReeducandoProjeto parseToModel(ParticipacaoReeducandoProjetoEntity p);
 
 	ParticipacaoColaboradorProjeto parseToModel(ParticipacaoColaboradorProjetoEntity p);
+
+	InformacaoProjetoEntity parseToEntity(InformacaoProjeto informacaoProjeto);
+
+	InformacaoProjeto parseToModel(InformacaoProjetoEntity buscarInformacaoProjetoPorIdProjeto);
 }
