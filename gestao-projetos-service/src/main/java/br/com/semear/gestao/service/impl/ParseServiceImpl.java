@@ -356,7 +356,7 @@ public class ParseServiceImpl implements ParseService {
 		return model;
 
 	}
-
+	
 	@Override
 	public TipoPergunta parseToModel(TipoPerguntaEntity entity) {
 		TipoPergunta model = null;

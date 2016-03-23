@@ -121,9 +121,9 @@ public interface ParseService {
 
 	InformacaoProjeto parseToModel(InformacaoProjetoEntity buscarInformacaoProjetoPorIdProjeto);
 
-	Resposta parseToModel(RespostaEntity entity);
-	
 	TarefaProjetoEntity parseToEntity(TarefaProjeto tarefa);
 
 	TarefaProjeto parseToModel(TarefaProjetoEntity tarefa);
+
+	Resposta parseToModel(RespostaEntity entity);
 }

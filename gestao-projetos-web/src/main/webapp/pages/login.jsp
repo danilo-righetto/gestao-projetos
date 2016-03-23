@@ -24,12 +24,12 @@
 		<div class="container">
 			<div class="row">
 				<div style="margin-top:95px" class="hidden-xs hidden-sm">
-					<img src="/gestao-projetos/img/logo.jpg"
+					<img src="/gestao-projetos/img/logo_iap.png"
 						class="center-block img-responsive img-rounded" height="180px"
 						width="180px" style="margin-top: -8px;">
 				</div>
 				<div style="margin-top:20px" class="hidden-md hidden-lg">
-					<img src="/gestao-projetos/img/logo.jpg"
+					<img src="/gestao-projetos/img/logo_iap.png"
 						class="center-block img-responsive img-rounded" height="180px"
 						width="180px" style="margin-top: -8px;">
 				</div>
