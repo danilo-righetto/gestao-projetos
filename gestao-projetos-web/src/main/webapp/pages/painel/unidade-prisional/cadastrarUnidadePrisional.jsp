@@ -24,8 +24,8 @@
 								<label for="status">Status:</label><select class="form-control"
 									id="status" name="status" required>
 									<option value="" label="Selecione..." />
-									<option value="1" label="Ativada" />
-									<option value="0" label="Desativada" />
+									<option value="1" label="ATIVADA" />
+									<option value="0" label="DESATIVADA" />
 								</select>
 							</div>
 						</div>
