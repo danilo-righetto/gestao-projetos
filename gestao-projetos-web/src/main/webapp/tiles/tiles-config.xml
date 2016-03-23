@@ -70,10 +70,22 @@
 			value="/pages/painel/projetos/editarProjeto.jsp" />
 	</definition>
 
-	<!-- Semear - Cadastro Tarefa do Projeto -->
+	<!-- Semear - Cadastro Tarefas do Projeto -->
 	<definition name="cadastroTarefaProjeto" extends="main">
 		<put-attribute name="conteudo"
 			value="/pages/painel/tarefas/cadastroTarefa.jsp"></put-attribute>
+	</definition>
+
+	<!-- Semear - Editar Tarefas do Projeto -->
+	<definition name="editarTarefaProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/tarefas/editarTarefa.jsp"></put-attribute>
+	</definition>
+
+	<!-- Semear - Listar Tarefas do Projeto -->
+	<definition name="listarTarefaProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/tarefas/listarTarefa.jsp"></put-attribute>
 	</definition>
 
 	<!-- Semear - Informações do Projeto -->
@@ -186,6 +198,12 @@
 	<!-- Semear - RESPOSTA QUESTIONARIO ACAO -->
 	<definition name="respostaAcao" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/resposta/respostaAcao.jsp" />
+			value="/pages/painel/respostaacao/respostaAcao.jsp" />
+	</definition>
+	
+	<!-- Semear - RESPOSTA QUESTIONARIO PROJETOS -->
+	<definition name="respostaProjeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/respostaprojeto/respostaProjeto.jsp" />
 	</definition>
 </tiles-definitions>

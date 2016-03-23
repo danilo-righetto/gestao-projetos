@@ -12,4 +12,5 @@ public interface AcaoDAO {
 	public List<AcaoEntity> listarAcoes();
 
 	public AcaoEntity buscarAcaoPorId(long idAcao);
+	
 }

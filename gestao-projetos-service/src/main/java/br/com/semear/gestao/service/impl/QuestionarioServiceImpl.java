@@ -150,4 +150,10 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 		questionarioDAO.removerAlternativasPorIdPergunta(perguntaEntity.getId());
 	}
 
+	@Override
+	public Pergunta buscarPerguntaPorIdProjetoEiDPergunta(long idProjeto, long idPergunta) {
+		Pergunta pergunta = parseService.parseToModel(questionarioDAO.buscarPerguntaPorIdProjetoEiDPergunta(idPergunta,idProjeto));
+		return pergunta;
+	}
+
 }

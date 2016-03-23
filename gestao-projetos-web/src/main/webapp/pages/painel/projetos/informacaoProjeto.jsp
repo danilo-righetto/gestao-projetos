@@ -21,28 +21,26 @@
 			<form
 				action="<c:url value="/painel/projetos/salvarInformacoes"></c:url>"
 				method="POST" novalidate>
-				<div class="header text-center">
-					<h3 class="title-screen">Informações do Projeto</h3>
+				<input id="idProjeto" name="projeto.id" value="${idProjeto}"
+					type="hidden" required /> <input id="idInfo" name="id"
+					value="${info.id}" type="hidden" />
+				<div class="row">
+					<h3 class="text-center title-screen">Informações do Projeto</h3>
 				</div>
-				<div>
-					<input id="idProjeto" name="projeto.id" value="${idProjeto}"
-						type="hidden" required />
-				</div>
-				<div>
-					<input id="idInfo" name="id" value="${info.id}" type="hidden" />
-				</div>
-				<div class="form-group">
-					<textarea id="informacoes" class="form-control" name="informacoes"
-						rows="14" cols="10" required>${info.informacoes}</textarea>
-				</div>
-				<hr />
-				<div>
+				<div class="row">
+					<div class="form-group">
+						<textarea id="informacoes" class="form-control" name="informacoes"
+							rows="14" cols="10" required>${info.informacoes}</textarea>
+					</div>
+					<hr />
+					<div>
 					<a class="btn btn-default btn-return"
 						href='<c:url value="/painel/projetos/"></c:url>' type="button"><span
-						class="glyphicon glyphicon-remove"></span>Cancelar</a>
+						class="glyphicon glyphicon-remove"></span>	Cancelar</a>
 					<button class="btn btn-default btn-add" type="submit">
-						<span class="glyphicon glyphicon-ok"></span>Salvar
+						<span class="glyphicon glyphicon-ok"></span>	Salvar Informações
 					</button>
+				</div>
 				</div>
 			</form>
 		</div>
