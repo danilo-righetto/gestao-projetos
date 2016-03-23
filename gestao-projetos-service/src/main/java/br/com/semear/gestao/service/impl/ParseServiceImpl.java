@@ -356,22 +356,7 @@ public class ParseServiceImpl implements ParseService {
 		return model;
 
 	}
-
-	@Override
-	public RespostaAcao parseToModel(RespostaAcaoEntity entity) {
-		RespostaAcao model = null;
-		if (entity != null) {
-			model = new RespostaAcao();
-			model.setDataCadastro(entity.getDataCadastro());
-			model.setDescricaoRespostaAcao(entity.getDescricaoRespostaAcao());
-			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
-			model.setDataAlteracao(entity.getDataAlteracao());
-			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
-			model.setId(entity.getId());
-		}
-		return model;
-	}
-
+	
 	@Override
 	public TipoPergunta parseToModel(TipoPerguntaEntity entity) {
 		TipoPergunta model = null;
