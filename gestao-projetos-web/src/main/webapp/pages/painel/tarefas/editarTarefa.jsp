@@ -85,7 +85,7 @@
 								href='<c:url value="/painel/projetos/${idProjeto}/tarefas"></c:url>'><span
 								class="glyphicon glyphicon-remove"></span>Cancelar</a>
 							<button class="btn btn-default btn-add" type="submit">
-								<span class="glyphicon glyphicon-ok"></span>Cadastrar Tarefa
+								<span class="glyphicon glyphicon-ok"></span>Salvar
 							</button>
 						</div>
 					</form>
