@@ -41,9 +41,6 @@ public class ParticipacaoColaboradorProjetoDaoImpl implements ParticipacaoColabo
 		Query query = em.createQuery(
 				"select p.colaborador from ParticipacaoColaboradorProjetoEntity p where p.projeto.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
-		if(!query.getResultList().isEmpty()){
-			return query.getResultList();
-		}
-		return null;
+		return query.getResultList();
 	}
 }

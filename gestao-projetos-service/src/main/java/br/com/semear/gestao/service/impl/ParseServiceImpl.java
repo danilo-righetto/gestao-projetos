@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
+import br.com.semear.gestao.dao.entity.ColaboradorEntity;
 import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
@@ -27,6 +28,7 @@ import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
+import br.com.semear.gestao.model.Colaborador;
 import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
@@ -78,6 +80,7 @@ public class ParseServiceImpl implements ParseService {
 		InstituicaoEntity instituicaoEn = null;
 		if (instituicao != null) {
 			instituicaoEn = new InstituicaoEntity();
+			instituicaoEn.setId(instituicao.getId());
 			instituicaoEn.setNomefantasia(instituicao.getNomefantasia() != null
 					? instituicao.getNomefantasia().toUpperCase() : instituicao.getRazaosocial().toUpperCase());
 			instituicaoEn.setRazaosocial(
@@ -117,8 +120,8 @@ public class ParseServiceImpl implements ParseService {
 			usuarioEn.setPerfil(parseToEntity(usuario.getPerfil()));
 			usuarioEn.setDataCadastro(usuario.getDataCadastro());
 			usuarioEn.setRealizaLogin(usuario.getRealizaLogin());
+			usuarioEn.setInstituicao(parseToEntity(usuario.getInstituicao()));
 		}
-
 		return usuarioEn;
 	}
 
@@ -356,7 +359,7 @@ public class ParseServiceImpl implements ParseService {
 		return model;
 
 	}
-	
+
 	@Override
 	public TipoPergunta parseToModel(TipoPerguntaEntity entity) {
 		TipoPergunta model = null;
@@ -508,19 +511,6 @@ public class ParseServiceImpl implements ParseService {
 		return entity;
 	}
 
-	@Override
-	public AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity entity) {
-		AlternativaPerguntaAcao model = null;
-		if (entity != null) {
-			model = new AlternativaPerguntaAcao();
-			model.setDataCadastro(entity.getDataCadastro());
-			model.setDescricaoAlternativa(entity.getDescricaoAlternativaAcao());
-			model.setId(entity.getId());
-			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
-		}
-
-		return model;
-	}
 
 	public ParticipacaoColaboradorProjetoEntity parseToEntity(ParticipacaoColaboradorProjeto model) {
 		ParticipacaoColaboradorProjetoEntity entity = null;
@@ -597,7 +587,7 @@ public class ParseServiceImpl implements ParseService {
 	@Override
 	public InformacaoProjetoEntity parseToEntity(InformacaoProjeto model) {
 		InformacaoProjetoEntity entity = null;
-		if(model != null){
+		if (model != null) {
 			entity = new InformacaoProjetoEntity();
 			entity.setId(model.getId());
 			entity.setProjeto(parseToEntity(model.getProjeto()));
@@ -612,7 +602,7 @@ public class ParseServiceImpl implements ParseService {
 	@Override
 	public InformacaoProjeto parseToModel(InformacaoProjetoEntity entity) {
 		InformacaoProjeto model = null;
-		if(entity != null){
+		if (entity != null) {
 			model = new InformacaoProjeto();
 			model.setId(entity.getId());
 			model.setProjeto(parseToModel(entity.getProjeto()));
@@ -623,7 +613,7 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return model;
 	}
-	
+
 	@Override
 	public RespostaAcao parseToModel(RespostaAcaoEntity entity) {
 		RespostaAcao model = null;
@@ -634,6 +624,10 @@ public class ParseServiceImpl implements ParseService {
 			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
 			model.setDataAlteracao(entity.getDataAlteracao());
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
+			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setReeducando(parseToModel(entity.getReeducandoEntity()));
+			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setAcao(parseToModel(entity.getAcao()));
 			model.setId(entity.getId());
 		}
 		return model;
@@ -649,11 +643,13 @@ public class ParseServiceImpl implements ParseService {
 			model.setPergunta(parseToModel(entity.getPerguntaEntity()));
 			model.setDataAlteracao(entity.getDataAlteracao());
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
+			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setReeducando(parseToModel(entity.getReeducandoEntity()));
 			model.setId(entity.getId());
 		}
 		return model;
 	}
-	
+
 	@Override
 	public TarefaProjetoEntity parseToEntity(TarefaProjeto model) {
 		TarefaProjetoEntity entity = null;
@@ -688,6 +684,61 @@ public class ParseServiceImpl implements ParseService {
 			model.setDataInicio(entity.getDataInicio());
 			model.setPrevisaoTermino(entity.getPrevisaoTermino());
 			model.setDataTermino(entity.getDataTermino());
+		}
+		return model;
+	}
+	
+	@Override
+	public AlternativaPerguntaAcao parseToModel(AlternativaPerguntaAcaoEntity entity) {
+		AlternativaPerguntaAcao model = null;
+		if (entity != null) {
+			model = new AlternativaPerguntaAcao();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoAlternativa(entity.getDescricaoAlternativaAcao());
+			model.setId(entity.getId());
+			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
+		}
+
+		return model;
+	}
+
+	@Override
+	public AlternativaPergunta parseToModel(AlternativaPerguntaEntity entity) {
+		AlternativaPergunta model = null;
+		if (entity != null) {
+			model = new AlternativaPergunta();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoAlternativa(entity.getDescricaoAlternativa());
+			model.setId(entity.getId());
+			model.setPergunta(parseToModel(entity.getPerguntaEntity()));
+		}
+		return model;
+	}
+
+	@Override
+	public ColaboradorEntity parseToEntity(Colaborador model) {
+		ColaboradorEntity entity = null;
+		if (model != null) {
+			entity = new ColaboradorEntity();
+			entity.setId(model.getId());
+			entity.setNome(model.getNome());
+			entity.setEmail(model.getEmail());
+			entity.setUsuario(parseToEntity(model.getUsuario()));
+			entity.setParceiro(parseToEntity(model.getParceiro()));
+		}
+		return entity;
+	}
+
+	@Override
+	public Colaborador parseToModel(ColaboradorEntity entity) {
+		Colaborador model = null;
+		if(entity != null){
+			model = new Colaborador();
+			model.setId(entity.getId());
+			model.setNome(entity.getNome());
+			model.setEmail(entity.getEmail());
+			model.setUsuario(parseToModel(entity.getUsuario()));
+			model.setParceiro(parseToModel(entity.getParceiro()));
 		}
 		return model;
 	}

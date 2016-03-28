@@ -14,7 +14,7 @@ public interface RespostaAcaoService {
 	
 	List<RespostaAcao> listarRespostas();
 
-	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario);
+	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String respostaStatus);
 
 	void salvarRespostaAcao(List<RespostaAcao> respostas);
 }

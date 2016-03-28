@@ -51,6 +51,9 @@ public class AcaoEntity {
 
 	@ManyToMany(mappedBy = "acao", fetch = FetchType.LAZY)
 	private List<ParticipacaoReeducandoAcaoEntity> participacoes;
+	
+	@ManyToMany(mappedBy = "acao", fetch = FetchType.LAZY)
+	private List<RespostaAcaoEntity> respostas;
 
 	public AcaoEntity(long idAcao) {
 		// TODO Auto-generated constructor stub

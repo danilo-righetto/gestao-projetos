@@ -16,16 +16,56 @@
 			"bInfo" : false,
 			"bAutoWidth" : true,
 			"language" : {
-				"emptyTable" : "Nenhuma informação cadastrada"
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"search" : "Pesquisar:",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
 			}
-
 		});
-		$(".previous").text('Anterior');
-		$(".next").text('Próximo');
 	});
+
+	function concluirTarefa(idTarefa, descricao){
+		$("#bodyConcluir p").remove();
+		$("#bodyConcluir").append("<p>Deseja realmente concluir a tarefa "+idTarefa+" - "+descricao+"?</p>");
+		$("#idtarefa").val(idTarefa);
+		$("#modalConcluirTarefa").modal({
+			keyboard : false,
+			backdrop : 'static'
+		});
+	}
 </script>
 </head>
 <body>
+	<!-- MODAL CONCLUIR TAREFA INICIO -->
+	<div class="modal fade" id="modalConcluirTarefa" tabindex="-1"
+		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+		<form action='<c:url value="/painel/projetos/concluirTarefa" />'>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Concluir Tarefa</h4>
+					</div>
+					<div class="modal-body" id="bodyConcluir">
+						<p></p>
+						<input type="hidden" id="idtarefa" name="idTarefa">
+					</div>
+					<div class="modal-footer">
+						<button type="button"
+							style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+							class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<input type="submit"
+							style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+							class="btn btn-default" value="Concluir">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- MODAL CONCLUIR TAREFA FIM -->
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Tarefas</h4>
@@ -55,10 +95,15 @@
 									<td><fmt:formatDate value="${tarefa.previsaoTermino.time}"
 											pattern="dd/MM/yyyy"></fmt:formatDate></td>
 									<td>${tarefa.status}</td>
-									<td><a
+									<td><a style="margin-left: 10px"
 										href='<c:url value="/painel/projetos/${tarefa.projeto.id}/tarefas/${tarefa.id}/editar"></c:url>'
 										title="Editar"> <span class="glyphicon glyphicon-pencil">
-										</span></a>
+										</span></a> <c:if test="${tarefa.status ne 'Concluido' }">
+											<a style="margin-left: 10px;"
+												onclick="concluirTarefa(${tarefa.id},'${tarefa.descricao}');"
+												href="#" title="Concluir Tarefa"> <span
+												class="glyphicon glyphicon-play-circle"> </span></a>
+										</c:if>
 								</tr>
 							</c:forEach>
 						</c:when>

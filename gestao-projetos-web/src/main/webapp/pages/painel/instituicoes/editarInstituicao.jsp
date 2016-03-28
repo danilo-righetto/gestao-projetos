@@ -10,19 +10,6 @@
 		$("#menu-instituicoes").attr('class', 'active');
 	});
 </script>
-<script type="text/javascript"
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
-	type="text/css">
-<script type="text/javascript"
-	src="/gestao-projetos/bootstrap/js/jquery.mask.js"></script>
-</head>
-
 <script type="text/javascript">
 	$(function() {
 		$("#menu-instituicoes").attr('class', 'active');
@@ -31,24 +18,6 @@
 		$('#telefoneFixo').mask('(00) 0000-0000');
 		$('#telefone').mask('(00) 0000-00009');
 	});
-
-	function escolheValidacao() {
-		var escolha = document.getElementById("tipopessoa").value;
-		if (escolha == "fisica") {
-			var rg = document.getElementById("tipoDocumento").value;
-			if (rg == "rg") {
-				validarDocumentoInst();
-			} else if (rg == "cpf") {
-				if (validarCPF()) {
-					validarDocumentoInst();
-				}
-			}
-		} else if (escolha == "juridica") {
-			if (validaCNPJ()) {
-				validarDocumentoInst();
-			}
-		}
-	}
 
 	function mascaraRG() {
 		var rg = document.getElementById("tipoDocumento").value;
@@ -89,171 +58,7 @@
 			$('#nomefantasia').attr('required', 'required');
 		}
 	}
-
-	function validarCPF() {
-		var escolhapessoa = document.getElementById("tipopessoa").value;
-		if (escolhapessoa == "fisica") {
-			var cpf = $('#documento').val();
-			cpf = cpf.replace(/[^\d]+/g, '');
-			if (cpf == '')
-				return false;
-			// Elimina CPFs invalidos conhecidos    
-			if (cpf.length != 11 || cpf == "00000000000"
-					|| cpf == "11111111111" || cpf == "22222222222"
-					|| cpf == "33333333333" || cpf == "44444444444"
-					|| cpf == "55555555555" || cpf == "66666666666"
-					|| cpf == "77777777777" || cpf == "88888888888"
-					|| cpf == "99999999999") {
-				$("#alertadocdiv").remove();
-				var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-						+ "<span style='color: #000000'><strong>Alerta!</strong>"
-						+ "O CPF informado  é inválido.</span></div>";
-				$("#alertas").append(alerta);
-				$("#documento").val("");
-				$("#documento").focus();
-				return false;
-			}
-			// Valida 1o digito 
-			add = 0;
-			for ( var i = 0; i < 9; i++)
-				add += parseInt(cpf.charAt(i)) * (10 - i);
-			rev = 11 - (add % 11);
-			if (rev == 10 || rev == 11)
-				rev = 0;
-			if (rev != parseInt(cpf.charAt(9))) {
-				$("#alertadocdiv").remove();
-				var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-						+ "<span style='color: #000000'><strong>Alerta!</strong>"
-						+ "O CPF informado  é inválido.</span></div>";
-				$("#alertas").append(alerta);
-				$("#documento").val("");
-				$("#documento").focus();
-				return false;
-			}
-			// Valida 2o digito 
-			add = 0;
-			for (i = 0; i < 10; i++)
-				add += parseInt(cpf.charAt(i)) * (11 - i);
-			rev = 11 - (add % 11);
-			if (rev == 10 || rev == 11)
-				rev = 0;
-			if (rev != parseInt(cpf.charAt(10))) {
-				$("#alertadocdiv").remove();
-				var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-						+ "<span style='color: #000000'><strong>Alerta!</strong>"
-						+ "O CPF informado  é inválido.</span></div>";
-				$("#alertas").append(alerta);
-				$("#documento").val("");
-				$("#documento").focus();
-				return false;
-			}
-			$("#alertadocdiv").remove();
-			return true;
-		}
-	}
-
-	function validaCNPJ() {
-		var cnpj = document.getElementById("documento").value;
-		cnpj = cnpj.replace(/[^\d]+/g, '');
-
-		if (cnpj == '')
-			return false;
-
-		if (cnpj.length != 14) {
-			$("#alertadocdiv").remove();
-			var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-					+ "<span style='color: #000000'><strong>Alerta!</strong>"
-					+ "O CNPJ informado  é inválido.</span></div>";
-			$("#alertas").append(alerta);
-			//$("#documento").val("");
-			$("#documento").focus();
-			return false;
-		}
-
-		// Elimina CNPJs invalidos conhecidos
-		if (cnpj == "00000000000000" || cnpj == "11111111111111"
-				|| cnpj == "22222222222222" || cnpj == "33333333333333"
-				|| cnpj == "44444444444444" || cnpj == "55555555555555"
-				|| cnpj == "66666666666666" || cnpj == "77777777777777"
-				|| cnpj == "88888888888888" || cnpj == "99999999999999") {
-			$("#alertadocdiv").remove();
-			var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-					+ "<span style='color: #000000'><strong>Alerta!</strong>"
-					+ "O CNPJ informado  é inválido.</span></div>";
-			$("#alertas").append(alerta);
-			$("#documento").val("");
-			$("#documento").focus();
-			return false;
-		}
-
-		// Valida DVs
-		tamanho = cnpj.length - 2;
-		numeros = cnpj.substring(0, tamanho);
-		digitos = cnpj.substring(tamanho);
-		soma = 0;
-		pos = tamanho - 7;
-		for ( var i = tamanho; i >= 1; i--) {
-			soma += numeros.charAt(tamanho - i) * pos--;
-			if (pos < 2)
-				pos = 9;
-		}
-		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-		if (resultado != digitos.charAt(0)) {
-			$("#alertadocdiv").remove();
-			var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-					+ "<span style='color: #000000'><strong>Alerta!</strong>"
-					+ "O CNPJ informado  é inválido.</span></div>";
-			$("#alertas").append(alerta);
-			$("#documento").val("");
-			$("#documento").focus();
-			return false;
-		}
-		tamanho = tamanho + 1;
-		numeros = cnpj.substring(0, tamanho);
-		soma = 0;
-		pos = tamanho - 7;
-		for (i = tamanho; i >= 1; i--) {
-			soma += numeros.charAt(tamanho - i) * pos--;
-			if (pos < 2)
-				pos = 9;
-		}
-		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-		if (resultado != digitos.charAt(1)) {
-			$("#alertadocdiv").remove();
-			var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-					+ "<span style='color: #000000'><strong>Alerta!</strong>"
-					+ "O CNPJ informado  é inválido.</span></div>";
-			$("#alertas").append(alerta);
-			//$("#documento").val("");
-			$("#documento").focus();
-			return false;
-		}
-		$("#alertadocdiv").remove();
-		return true;
-
-	}
-
-	function validarDocumentoInst() {
-		var documento = $("#documento").val();
-		$
-				.post(
-						"/gestao-projetos/painel/instituicoes/consultarInstituicao?documento="
-								+ documento,
-						function(existe) {
-							if (existe) {
-								$("#alertadocdiv").remove();
-								var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-										+ "<span style='color: #000000'><strong>Alerta!</strong>"
-										+ "O Documento informado já está sendo utilizado.</span></div>";
-								$("#alertas").append(alerta);
-								$("#documento").val("").focus();
-							} else {
-								$("#alertadocdiv").remove();
-							}
-						});
-	}
 </script>
-
 <body>
 	<!-- MODAL ADICIONAR UNIDADE PRISIONAL INICIO -->
 	<div class="modal fade" id="modalUnidadePrisional" tabindex="-1"
@@ -372,9 +177,9 @@
 					</div>
 					<div class="form-group col-md-3">
 						<label for="documento">Número do Documento:</label> <input
-							onblur="escolheValidacao();" type="text" class="form-control"
-							id="documento" value="${inst.documento}" name="documento"
-							readonly="readonly" placeholder="Digite o documento">
+							type="text" class="form-control" id="documento"
+							value="${inst.documento}" name="documento" readonly="readonly"
+							placeholder="Digite o documento">
 					</div>
 					<div class="form-group col-md-2">
 						<label for="cep">CEP:</label> <input type="text"

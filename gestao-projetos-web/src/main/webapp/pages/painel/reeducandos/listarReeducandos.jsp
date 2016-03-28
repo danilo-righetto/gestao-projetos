@@ -8,6 +8,25 @@
 <script type="text/javascript">
 	$(function() {
 		$("#menu-reeducandos").attr('class', 'active');
+		$("#tbReeducandos").dataTable({
+			"iDisplayLength" : 5,
+			"bPaginate" : true,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bInfo" : false,
+			"bAutoWidth" : true,
+			"language" : {
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"search" : "Pesquisar:",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
+			}
+
+		});
 	});
 </script>
 </head>
@@ -16,7 +35,7 @@
 		<div class="container">
 			<h4 class="title-screen">Reeducandos</h4>
 			<div id="alertas"></div>
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="tbReeducandos">
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>

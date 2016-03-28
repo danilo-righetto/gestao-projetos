@@ -103,6 +103,34 @@
 								</select>
 							</div>
 							<div class="form-group col-md-12">
+								<div class="row">
+									<div class="col-md-2">
+										<label>Dias de Evento:</label>
+									</div>
+									<div class="col-md-1">
+										<label>Seg:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Ter:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Qua:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Qui:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Sex:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Sáb:</label> <input name="diaEvento" type="checkbox">
+									</div>
+									<div class="col-md-1">
+										<label>Dom:</label> <input name="diaEvento" type="checkbox">
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
 								<label for="descricao">Descrição:</label>
 								<textarea class="form-control" id="descricao"
 									placeholder="Digite uma Descrição" cols="10" rows="5"

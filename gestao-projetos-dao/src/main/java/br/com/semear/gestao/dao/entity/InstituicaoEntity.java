@@ -1,11 +1,15 @@
 package br.com.semear.gestao.dao.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,15 +17,15 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "INSTITUICAO")
 public class InstituicaoEntity {
-	
+
 	public InstituicaoEntity(long id) {
 		this.id = id;
 	}
-	
-	public InstituicaoEntity(){
-		
+
+	public InstituicaoEntity() {
+
 	}
-	
+
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -68,15 +72,18 @@ public class InstituicaoEntity {
 
 	@Column(name = "RESPONSAVEL")
 	private String responsavel;
-	
+
 	@Column(name = "STATUS")
 	private String status;
 
 	@Column(name = "DATA_CADASTRO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCadastro;
-	
-	/**GETTERS AND SETTERS*/
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parceiro", cascade = CascadeType.REFRESH)
+	private List<ColaboradorEntity> colaboradores;
+
+	/** GETTERS AND SETTERS */
 
 	public String getStatus() {
 		return status;
@@ -209,8 +216,16 @@ public class InstituicaoEntity {
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public List<ColaboradorEntity> getColaboradores() {
+		return colaboradores;
+	}
+
+	public void setColaboradores(List<ColaboradorEntity> colaboradores) {
+		this.colaboradores = colaboradores;
 	}
 }

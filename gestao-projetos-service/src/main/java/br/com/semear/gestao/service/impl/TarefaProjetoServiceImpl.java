@@ -61,11 +61,29 @@ public class TarefaProjetoServiceImpl implements TarefaProjetoService {
 
 	@Override
 	public void editar(TarefaProjeto tarefa) {
-		Usuario autor = usuarioService.buscarUsuarioPorId(tarefa.getAutor().getId());
-		Usuario responsavel = usuarioService.buscarUsuarioPorId(tarefa.getResponsavel().getId());
+		TarefaProjetoEntity entity = tarefaProjetoDAO.buscarTarefaPorId(tarefa.getId());
+		if(entity != null){
+			Usuario responsavel = usuarioService.buscarUsuarioPorId(tarefa.getResponsavel().getId());
+			entity.setDataInicio(tarefa.getDataInicio());
+			entity.setDescricao(tarefa.getDescricao());
+			entity.setPrevisaoTermino(tarefa.getPrevisaoTermino());
+			entity.setResponsavel(parse.parseToEntity(responsavel));
+			tarefaProjetoDAO.editar(entity);
+		}
+	}
 
-		tarefa.setAutor(autor);
-		tarefa.setResponsavel(responsavel);
-		tarefaProjetoDAO.editar(parse.parseToEntity(tarefa));
+	@Override
+	public TarefaProjeto concluirTarefa(long idTarefa) {
+		TarefaProjetoEntity entity = tarefaProjetoDAO.buscarTarefaPorId(idTarefa);
+		TarefaProjeto tarefa = null;
+		if(entity != null){
+			entity.setDataTermino(Calendar.getInstance());
+			entity.setStatus("Concluido");
+			tarefaProjetoDAO.editar(entity);
+			tarefa = parse.parseToModel(entity);
+		}else{
+			tarefa = new TarefaProjeto();
+		}
+		return tarefa;
 	}
 }

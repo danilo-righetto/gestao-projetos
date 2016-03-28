@@ -65,37 +65,6 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-md-3">
-								<label for="status">Status:</label><select class="form-control"
-									id="status" name="status" required>
-									<c:choose>
-										<c:when test="${tarefa.status == 'aberto'}">
-											<option value="Aberto" selected>ABERTO</option>
-											<option value="Em andamento">EM ANDAMENTO</option>
-											<option value="Encerrado">ENCERRADO</option>
-											<option value="Concluido">CONCLUIDO</option>
-										</c:when>
-										<c:when test="${tarefa.status == 'Em andamento'}">
-											<option value="Aberto">ABERTO</option>
-											<option value="Em andamento" selected>EM ANDAMENTO</option>
-											<option value="Encerrado">ENCERRADO</option>
-											<option value="Concluido">CONCLUIDO</option>
-										</c:when>
-										<c:when test="${tarefa.status == 'Encerrado'}">
-											<option value="Aberto">ABERTO</option>
-											<option value="Em andamento">EM ANDAMENTO</option>
-											<option value="Encerrado" selected>ENCERRADO</option>
-											<option value="Concluido">CONCLUIDO</option>
-										</c:when>
-										<c:when test="${tarefa.status == 'Concluido'}">
-											<option value="Aberto">ABERTO</option>
-											<option value="Em andamento">EM ANDAMENTO</option>
-											<option value="Encerrado">ENCERRADO</option>
-											<option value="Concluido" selected>CONCLUIDO</option>
-										</c:when>
-									</c:choose>
-								</select>
-							</div>
 							<div class="form-group col-md-2">
 								<label for="dataInicio">Data Inicio:</label><input
 									class="form-control data" id="dataInicio" name="dataInicio"
@@ -109,12 +78,6 @@
 									value='<fmt:formatDate value="${tarefa.previsaoTermino.time}"/>'
 									required />
 							</div>
-							<div class="form-group col-md-3">
-								<label for="dataTermino">Data Término:</label><input
-									class="form-control data" id="dataTermino" name="dataTermino"
-									value='<fmt:formatDate value="${tarefa.dataTermino.time}"/>'
-									required />
-							</div>
 						</div>
 						<div style="margin-top: 50px;">
 							<hr />
@@ -122,7 +85,7 @@
 								href='<c:url value="/painel/projetos/${idProjeto}/tarefas"></c:url>'><span
 								class="glyphicon glyphicon-remove"></span>Cancelar</a>
 							<button class="btn btn-default btn-add" type="submit">
-								<span class="glyphicon glyphicon-ok"></span>Cadastrar Tarefa
+								<span class="glyphicon glyphicon-ok"></span>Salvar
 							</button>
 						</div>
 					</form>

@@ -10,8 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Questionario;
 import br.com.semear.gestao.model.Usuario;
+import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.QuestionarioService;
+import br.com.semear.gestao.service.ReeducandoService;
 import br.com.semear.gestao.service.RespostaProjetoService;
 
 @Controller
@@ -24,19 +26,52 @@ public class RespostaProjetoController {
 	private ProjetoService projetoService;
 	
 	@Inject
+	private ReeducandoService reeducandoService;
+	
+	@Inject
+	private ParticipacaoProjetoService participacaoProjetoService;
+	
+	@Inject
 	private QuestionarioService questionarioService;
 	
 	@Inject
 	private RespostaProjetoService respostaService;
 	
-	@RequestMapping("/{idProjeto}")
-	public ModelAndView formCadastro(@PathVariable("idProjeto") long idProjeto){
+	private String statusProjeto = "";
+	
+	@RequestMapping("/I/{idProjeto}")
+	public ModelAndView formCadastroInicio(@PathVariable("idProjeto") long idProjeto){
 		try {
+			statusProjeto = "INICIO";
 			mav.clear();
 			Questionario questionario = questionarioService.buscarQuestionarioPorIdProjeto(idProjeto);
 			mav.setViewName("respostaProjeto");
 			mav.addObject("questionario",questionario);
 			mav.addObject("tiposPerguntas",questionarioService.listarTiposDePerguntas());
+			mav.addObject("reeducandos", reeducandoService.listarReeducandos());
+			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
+			mav.addObject("status", statusProjeto);
+			
+		} catch (Exception e) {
+			mav.clear();
+			mav.setViewName("redirect:/404");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/F/{idProjeto}")
+	public ModelAndView formCadastroFim(@PathVariable("idProjeto") long idProjeto){
+		try {
+			statusProjeto = "FIM";
+			mav.clear();
+			Questionario questionario = questionarioService.buscarQuestionarioPorIdProjeto(idProjeto);
+			mav.setViewName("respostaProjeto");
+			mav.addObject("questionario",questionario);
+			mav.addObject("tiposPerguntas",questionarioService.listarTiposDePerguntas());
+			mav.addObject("reeducandos", reeducandoService.listarReeducandos());
+			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
+			mav.addObject("status", statusProjeto);
 			
 		} catch (Exception e) {
 			mav.clear();
@@ -47,9 +82,10 @@ public class RespostaProjetoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session){
+	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session, Long reeducando, String respostaStatus){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao);
-		return "redirect:/painel/respostasProjeto/"+idProjeto;
+		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao,reeducando,respostaStatus);
+		//return "redirect:/painel/respostasProjeto/"+idProjeto;
+		return "redirect:/painel/";
 	}
 }

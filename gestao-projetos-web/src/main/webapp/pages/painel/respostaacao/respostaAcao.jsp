@@ -7,7 +7,7 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-usuarios").attr('class','active');
+		$("#menu-acoes").attr('class','active');
 	});
 	
 	function popularCampos(){
@@ -49,10 +49,10 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Ação</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Resposta -  Questionário Ação: ${questionario.acao.nome}</h4>
 			<hr />
 			<div id="alertas"></div>
-			<form action="salvarResposta" method="POST" role="form" id="formResposta">
+			<form action="/gestao-projetos/painel/respostasacao/salvarResposta" method="POST" role="form" id="formResposta">
 			<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
 								<label for="nome">Titulo do Questionário:</label> <input
@@ -64,6 +64,22 @@
 				<div class="row">
 				<input type="hidden" name="idAcao" value="${questionario.acao.id}">
 				<!-- forEach -->
+				<!-- Reeducando - Resposta - INICIO -->
+				<div class="form-group col-md-4">
+							<label for="reeducando">Reeducando:</label> <select
+								id="reeducando" name="reeducando"
+								class="form-control" required>
+								<option value="" label="Selecione..." />
+								<c:if test="${not empty reeducandos}">
+								<c:forEach var="reeducando" items="${reeducandos}">
+										<option value="${reeducando.id}"
+											label="${reeducando.nome}" />
+								</c:forEach>
+								</c:if>
+							</select>
+						</div>
+				<!-- Reeducando - Resposta - FIM -->
+				<input type="hidden" name="respostaStatus" value="${status}">
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
 					<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">

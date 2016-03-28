@@ -16,13 +16,16 @@
 			"bInfo" : false,
 			"bAutoWidth" : true,
 			"language" : {
-				"emptyTable" : "Nenhuma informação cadastrada"
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"search" : "Pesquisar:",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
 			}
-
 		});
-		$(".previous").text('Anterior');
-		$(".next").text('Próximo');
-
 	});
 </script>
 </head>
@@ -74,7 +77,17 @@
 											class="glyphicon glyphicon-info-sign"></span></a><a
 										style="margin-left: 20px"
 										href='<c:url value="/painel/projetos/${projeto.id}/tarefas"></c:url>'
-										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a></td>
+										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a>
+										<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasprojeto/I/${projeto.id}"></c:url>'
+										title="Resposta Inicio"><span class="glyphicon glyphicon-copy"></span></a>
+										<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasprojeto/F/${projeto.id}"></c:url>'
+										title="Resposta Fim"><span class="
+glyphicon glyphicon-paste"></span></a>
+										</td>
 
 
 								</tr>

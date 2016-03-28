@@ -7,7 +7,7 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-usuarios").attr('class','active');
+		$("#menu-projetos").attr('class','active');
 	});
 	
 	function popularCampos(){
@@ -25,7 +25,7 @@
 			}else if(tipoPergunta == 2){
 				var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
 					for(var p = 0; p < perguntarespostas.length; p++){
-						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+",");
+						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 						console.info($("#"+idHidden).val());
 					}
 			}else if(tipoPergunta == 3){
@@ -49,10 +49,10 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Ação</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Resposta -  Questionário Projeto: ${questionario.projeto.nome}</h4>
 			<hr />
 			<div id="alertas"></div>
-			<form action="salvarResposta" method="POST" role="form" id="formResposta">
+			<form action="/gestao-projetos/painel/respostasprojeto/salvarResposta" method="POST" role="form" id="formResposta">
 			<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
 								<label for="nome">Titulo do Questionário:</label> <input
@@ -62,14 +62,30 @@
 							</div>
 						</div>
 				<div class="row">
-				<input type="hidden" name="idAcao" value="${questionario.acao.id}">
+				<input type="hidden" name="idProjeto" value="${questionario.projeto.id}">
+				<!-- Reeducando - Resposta - INICIO -->
+				<div class="form-group col-md-4">
+							<label for="reeducando">Reeducando:</label> <select
+								id="reeducando" name="reeducando"
+								class="form-control" required>
+								<option value="" label="Selecione..." />
+								<c:if test="${not empty reeducandos}">
+								<c:forEach var="reeducando" items="${reeducandos}">
+										<option value="${reeducando.id}"
+											label="${reeducando.nome}" />
+								</c:forEach>
+								</c:if>
+							</select>
+						</div>
+				<!-- Reeducando - Resposta - FIM -->
+				<input type="hidden" name="respostaStatus" value="${status}">
 				<!-- forEach -->
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
 					<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
 					<div>
 						<div class="form-group col-md-12" style="margin-top: 10px;">
-								<label for="nome">${index.index+1}): ${pergunta.descricaoPerguntaAcao}</label>
+								<label for="nome">${index.index+1}): ${pergunta.descricaoPergunta}</label>
 						</div>
 						<c:if test="${pergunta.tipoPergunta.id eq 1}">
 							<div class="form-group col-md-12">
@@ -111,10 +127,10 @@
 						<c:if test="${pergunta.tipoPergunta.id eq 4}">
 							<div class="form-group col-md-12">
 									 <div class="radio">
-									<label>Responda: </label> 
+									<label>Responda:</label> 
 									<c:forEach items="${pergunta.alternativas}" var="alternativa">
 										<label><input
-										type="radio" id="alternativa${alternativa.perguntaAcao.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
+										type="radio" id="alternativa${alternativa.pergunta.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
 									</c:forEach>
 										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 										<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">

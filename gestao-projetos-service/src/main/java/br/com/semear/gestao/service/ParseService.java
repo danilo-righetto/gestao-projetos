@@ -3,6 +3,7 @@ package br.com.semear.gestao.service;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
+import br.com.semear.gestao.dao.entity.ColaboradorEntity;
 import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
 import br.com.semear.gestao.dao.entity.InstituicaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
@@ -25,6 +26,7 @@ import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
+import br.com.semear.gestao.model.Colaborador;
 import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
@@ -126,4 +128,10 @@ public interface ParseService {
 	TarefaProjeto parseToModel(TarefaProjetoEntity tarefa);
 
 	Resposta parseToModel(RespostaEntity entity);
+
+	AlternativaPergunta parseToModel(AlternativaPerguntaEntity a);
+
+	ColaboradorEntity parseToEntity(Colaborador colaborador);
+
+	Colaborador parseToModel(ColaboradorEntity colaborador);
 }

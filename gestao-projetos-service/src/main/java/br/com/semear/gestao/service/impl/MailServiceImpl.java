@@ -20,49 +20,70 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import br.com.semear.gestao.service.MailService;
 
-@PropertySources(
-		{
-			@PropertySource("classpath:/application.properties")
-		})
+@PropertySources({ @PropertySource("classpath:/application.properties") })
 
 @Service
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class MailServiceImpl implements MailService {
-	
+
 	@Autowired(required = false)
 	private JavaMailSenderImpl mail;
 
 	@Autowired
 	private VelocityEngine velocityEngine;
-	
+
 	@Value("${email-remetente}")
 	private String remetente;
-	
+
 	@Value("${email-adm}")
 	private String emailAdm;
-	
+
 	@Value("${url}")
 	private String link;
-	
+
 	private String templateEmailEsqueceuSenha = "esqueceu-senha.vm";
+
+	private String templateEmailNovaSenha = "nova-senha.vm";
 
 	@Override
 	public void enviarEmailNovaSenha(final String email, final String hash) {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
-				MimeMessageHelper message = new MimeMessageHelper(mimeMessage,
-						true);
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
 
 				message.setTo(email);
-				message.setSubject("[Sistema - Gest„o de Projetos] - SolicitaÁ„o de senha");
+				message.setSubject("[Sistema - Gest√£o de Projetos] - Solicita√ß√£o de senha");
 				message.setFrom(remetente);
-				
-				Map<String, Object> objects = new HashMap<String, Object>();
-                objects.put("url",link+"redefinir-senha/"+hash );
 
-				final String text = VelocityEngineUtils
-						.mergeTemplateIntoString(velocityEngine,
-								templateEmailEsqueceuSenha, "ISO-8859-1", objects);
+				Map<String, Object> objects = new HashMap<String, Object>();
+				objects.put("url", link + "redefinir-senha/" + hash);
+
+				final String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,
+						templateEmailEsqueceuSenha, "ISO-8859-1", objects);
+				message.setText(text, true);
+			}
+		};
+		mail.send(preparator);
+	}
+
+	@Override
+	public void enviarEmailSenhaCriada(final String email, final String senha) {
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+
+				message.setTo(email);
+				message.setSubject("[Sistema - Gest√£o de Projetos] - Acesso ao Sistema");
+				message.setFrom(remetente);
+
+				Map<String, Object> objects = new HashMap<String, Object>();
+				objects.put("usuario", email);
+				objects.put("senha", senha);
+
+				final String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, templateEmailNovaSenha,
+						"ISO-8859-1", objects);
 				message.setText(text, true);
 			}
 		};

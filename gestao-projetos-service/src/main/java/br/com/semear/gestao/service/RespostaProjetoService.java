@@ -14,7 +14,7 @@ public interface RespostaProjetoService {
 	
 	List<Resposta> listarRespostas();
 
-	void salvarResposta(String[] respostas, Long idProjeto, Usuario usuario);
+	void salvarResposta(String[] respostas, Long idProjeto, Usuario usuario, Long reeducando, String respostaStatus);
 
 	void salvarResposta(List<Resposta> respostas);
 }
