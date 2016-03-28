@@ -62,7 +62,7 @@
 							</div>
 							<div class="form-group col-md-2">
 								<label for="previsao">Previsão Término:</label><input
-									class="form-control data" id="previsao" name="previsao"
+									class="form-control data" id="previsao" name="previsaoTermino"
 									required />
 							</div>
 						</div>

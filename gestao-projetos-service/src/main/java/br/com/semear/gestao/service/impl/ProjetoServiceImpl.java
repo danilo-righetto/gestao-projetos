@@ -19,10 +19,11 @@ import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Projeto;
+import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ProjetoService;
-import br.com.semear.gestao.service.QuestionarioService;
+import br.com.semear.gestao.service.TarefaProjetoService;
 import br.com.semear.gestao.service.UsuarioService;
 
 @Service
@@ -38,12 +39,11 @@ public class ProjetoServiceImpl implements ProjetoService {
 	@Inject
 	private ParseService parseService;
 	
-	@SuppressWarnings("unused")
-	@Inject
-	private QuestionarioService questionarioService;
-	
 	@Inject
 	private UsuarioService usuarioService;
+	
+	@Inject
+	private TarefaProjetoService tarefaProjetoService;
 
 	@Override
 	public String cadastrarProjeto(Projeto novoProjeto) {
@@ -129,58 +129,32 @@ public class ProjetoServiceImpl implements ProjetoService {
 		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
 	}
 
-//	@Override
-//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
-//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
-//		return info;
-//	}
-
-//	@Override
-//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
-//		if(informacaoProjeto.getId() == 0){
-//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
-//		} else {
-//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
-//		}
-//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
-//	}
-
 	@Override
 	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
 		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
 		return info;
 	}
 
-//	@Override
-//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
-//		if(informacaoProjeto.getId() == 0){
-//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
-//		} else {
-//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
-//		}
-//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
-//	}
-//
-//	@Override
-//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
-//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
-//		return info;
-//	}
-
-//	@Override
-//	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto) {
-//		if(informacaoProjeto.getId() == 0){
-//			informacaoProjeto.setDataCadastro(Calendar.getInstance());
-//		} else {
-//			informacaoProjeto.setDataEdicao(Calendar.getInstance());
-//		}
-//		informacoesProjetoDAO.cadastrar(parseService.parseToEntity(informacaoProjeto));
-//	}
-
-//	@Override
-//	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto) {
-//		InformacaoProjeto info = parseService.parseToModel(informacoesProjetoDAO.buscarInformacaoProjetoPorIdProjeto(idProjeto));
-//		return info;
-//	}
-
+	@Override
+	public List<Integer> calcularProgresso(List<Projeto> projetos) {
+		List<Integer> progressos = new ArrayList<Integer>();
+		if(projetos != null && !projetos.isEmpty()){
+			for(Projeto p : projetos){
+				List<TarefaProjeto> tarefas = tarefaProjetoService.listarTarefas(p.getId());
+				if(tarefas != null && !tarefas.isEmpty()){
+					int tarefasConcluidas = 0;
+					for(TarefaProjeto t : tarefas){
+						if(t.getStatus().toUpperCase().equals("CONCLUIDO")){
+							tarefasConcluidas++;
+						}
+					}
+					int progresso = (tarefasConcluidas * 100) / tarefas.size();
+					progressos.add(progresso);
+				}else{
+					progressos.add(0);
+				}
+			}
+		}
+		return progressos;
+	}
 }

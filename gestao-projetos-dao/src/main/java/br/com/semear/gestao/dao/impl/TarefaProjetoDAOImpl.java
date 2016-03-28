@@ -28,19 +28,18 @@ public class TarefaProjetoDAOImpl implements TarefaProjetoDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<TarefaProjetoEntity> listarTarefasProjeto(long idProjeto) {
-		Query query = em.createQuery("select t from TarefaProjetoEntity t where t.projeto.id = :idProjeto");
+		Query query = em
+				.createQuery("select t from TarefaProjetoEntity t where t.projeto.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
-		if (!query.getResultList().isEmpty()) {
-			return query.getResultList();
-		}
-		return null;
+		return query.getResultList();
 	}
 
 	@Override
 	public TarefaProjetoEntity buscarTarefaPorId(long idTarefa) {
-		Query query = em.createQuery("select t from TarefaProjetoEntity t where t.id = :idTarefa");
+		Query query = em
+				.createQuery("select t from TarefaProjetoEntity t where t.id = :idTarefa");
 		query.setParameter("idTarefa", idTarefa);
-		if(!query.getResultList().isEmpty()){
+		if (!query.getResultList().isEmpty()) {
 			return (TarefaProjetoEntity) query.getSingleResult();
 		}
 		return null;

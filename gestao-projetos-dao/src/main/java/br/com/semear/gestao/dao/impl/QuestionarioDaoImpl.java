@@ -122,4 +122,12 @@ public class QuestionarioDaoImpl implements QuestionarioDAO {
 		return new PerguntaEntity();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AlternativaPerguntaEntity> buscarAlternativasPorIdPergunta(long id) {
+		Query query = em.createQuery("select a from AlternativaPerguntaEntity a where a.perguntaEntity.id = :id");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
 }

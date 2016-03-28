@@ -47,7 +47,7 @@
 		method="POST">
 		<div class="section">
 			<div class="container">
-				<h4 class="title-screen">Instituições</h4>
+				<h4 class="title-screen">Associar Instituições ao Projeto</h4>
 				<div id="alertas"></div>
 				<table class="table table-responsive">
 					<thead>
@@ -58,7 +58,7 @@
 								style="font-weight: bold;">Tipo de Pessoa</span></td>
 							<td><span style="font-weight: bold;">Cidade</span></td>
 							<td class="hidden-xs hidden-sm"><span
-								style="font-weight: bold;">E-mail</span></td>
+								style="font-weight: bold;">Razão Social</span></td>
 							<td class="hidden-xs hidden-sm"><span
 								style="font-weight: bold;">Responsável</span></td>
 						</tr>
@@ -95,9 +95,9 @@
 										</c:choose>
 										<td class="text-center">${instituicao.id}</td>
 										<td class="text-center hidden-xs hidden-sm">${(instituicao.tipoDocumento
-											== "cnpj" ? 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
+											== "CNPJ" ? 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
 										<td class="text-center">${instituicao.cidade}</td>
-										<td class="text-center hidden-xs hidden-sm">${instituicao.email}</td>
+										<td class="text-center hidden-xs hidden-sm">${instituicao.razaosocial}</td>
 										<td class="text-center hidden-xs hidden-sm">${instituicao.responsavel}</td>
 									</tr>
 								</c:forEach>

@@ -691,4 +691,17 @@ public class ParseServiceImpl implements ParseService {
 		}
 		return model;
 	}
+
+	@Override
+	public AlternativaPergunta parseToModel(AlternativaPerguntaEntity entity) {
+		AlternativaPergunta model = null;
+		if (entity != null) {
+			model = new AlternativaPergunta();
+			model.setDataCadastro(entity.getDataCadastro());
+			model.setDescricaoAlternativa(entity.getDescricaoAlternativa());
+			model.setId(entity.getId());
+			model.setPergunta(parseToModel(entity.getPerguntaEntity()));
+		}
+		return model;
+	}
 }

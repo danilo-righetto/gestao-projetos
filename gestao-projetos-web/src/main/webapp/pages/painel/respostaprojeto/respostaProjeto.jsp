@@ -7,7 +7,7 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-usuarios").attr('class','active');
+		$("#menu-projetos").attr('class','active');
 	});
 	
 	function popularCampos(){
@@ -25,7 +25,7 @@
 			}else if(tipoPergunta == 2){
 				var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
 					for(var p = 0; p < perguntarespostas.length; p++){
-						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+",");
+						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 						console.info($("#"+idHidden).val());
 					}
 			}else if(tipoPergunta == 3){
@@ -49,7 +49,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Ação</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Questionário do Projeto - ${questionario.projeto.nome}</h4>
 			<hr />
 			<div id="alertas"></div>
 			<form action="salvarResposta" method="POST" role="form" id="formResposta">
@@ -62,14 +62,14 @@
 							</div>
 						</div>
 				<div class="row">
-				<input type="hidden" name="idAcao" value="${questionario.acao.id}">
+				<input type="hidden" name="idProjeto" value="${questionario.projeto.id}">
 				<!-- forEach -->
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
 					<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
 					<div>
 						<div class="form-group col-md-12" style="margin-top: 10px;">
-								<label for="nome">${index.index+1}): ${pergunta.descricaoPerguntaAcao}</label>
+								<label for="nome">${index.index+1}): ${pergunta.descricaoPergunta}</label>
 						</div>
 						<c:if test="${pergunta.tipoPergunta.id eq 1}">
 							<div class="form-group col-md-12">
@@ -87,7 +87,7 @@
 						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
 						    <div class="input-group">
 						      <span class="input-group-addon">
-						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
+						        <input type="radio" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
 						      </span>
 						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
 						        
@@ -114,7 +114,7 @@
 									<label>Responda: </label> 
 									<c:forEach items="${pergunta.alternativas}" var="alternativa">
 										<label><input
-										type="radio" id="alternativa${alternativa.perguntaAcao.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
+										type="radio" id="alternativa${alternativa.pergunta.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
 									</c:forEach>
 										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 										<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">

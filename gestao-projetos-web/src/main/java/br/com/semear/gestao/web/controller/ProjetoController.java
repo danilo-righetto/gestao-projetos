@@ -17,8 +17,11 @@ import br.com.semear.gestao.model.InformacaoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.Usuario;
+import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
+import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
+import br.com.semear.gestao.service.QuestionarioService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
 import br.com.semear.gestao.service.TarefaProjetoService;
 
@@ -37,6 +40,15 @@ public class ProjetoController {
 	
 	@Inject
 	private TarefaProjetoService tarefaProjetoService;
+
+	@Inject
+	private QuestionarioService questionarioService;
+	
+	@Inject
+	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
+	
+	@Inject
+	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
 	
 	private ModelAndView mav = new ModelAndView();
 
@@ -45,6 +57,34 @@ public class ProjetoController {
 		mav.clear();
 		mav.setViewName("listar-projetos");
 		mav.addObject("projetos", projetoService.listarTodosProjetos());
+		return mav;
+	}
+	
+	@RequestMapping("/{idProjeto}/detalhar")
+	public ModelAndView detalharProjeto(@PathVariable("idProjeto") long idProjeto) {
+		try {
+			List<Long> instituicoesAssociadas = participacaoInstituicaoProjetoService.buscarInstituicoesAssociadas(idProjeto);
+			mav.clear();
+			mav.setViewName("detalhar-projeto");
+			mav.addObject("projeto", projetoService.buscarProjetoPorId(idProjeto));
+			mav.addObject("questionario",questionarioService.buscarQuestionarioPorIdProjeto(idProjeto));
+			mav.addObject("instituicoes", participacaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+			mav.addObject("coordernadorProjeto", projetoService.buscarCoodernadorPorIdProjeto(idProjeto));
+			mav.addObject("instituicoesAssociadas", participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+			
+			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
+			mav.addObject("reeducandos", participacaoProjetoService.listarReeducandosPorUnidadePrisional(idProjeto));
+			mav.addObject("colaboradoresAssociados",
+					participacaoColaboradorProjetoService.listarParticipacaoProjetos(idProjeto));
+			
+			mav.addObject("colaboradores",
+					participacaoProjetoService.listarColaboradoresDasInstituicoes(instituicoesAssociadas, "ROLE_COLABORADOR"));
+			
+			mav.addObject("tarefas", tarefaProjetoService.listarTarefas(idProjeto));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 
@@ -131,7 +171,7 @@ public class ProjetoController {
 	public String salvarTarefa(TarefaProjeto tarefa, HttpSession session){
 		tarefa.setAutor((Usuario) session.getAttribute("usuario"));
 		tarefaProjetoService.cadastrar(tarefa);
-		return "redirect:/painel/projetos/";
+		return "redirect:/painel/projetos/"+tarefa.getProjeto().getId()+"/tarefas";
 	}
 	
 	@RequestMapping("{idProjeto}/tarefas")
@@ -153,10 +193,14 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping("tarefas/editarTarefa")
-	public String editarTarefa(@PathVariable long idProjeto, TarefaProjeto tarefa, HttpSession session){
-		tarefa.setAutor((Usuario) session.getAttribute("usuario"));
+	public String editarTarefa(TarefaProjeto tarefa){
 		tarefaProjetoService.editar(tarefa);
-		
-		return "redirect:{idProjeto}/tarefas";
+		return "redirect:/painel/projetos/"+tarefa.getProjeto().getId()+"/tarefas";
+	}
+	
+	@RequestMapping("concluirTarefa")
+	public String concluirTarefa(long idTarefa){
+		TarefaProjeto tarefa = tarefaProjetoService.concluirTarefa(idTarefa);
+		return "redirect:/painel/projetos/"+tarefa.getProjeto().getId()+"/tarefas";
 	}
 }

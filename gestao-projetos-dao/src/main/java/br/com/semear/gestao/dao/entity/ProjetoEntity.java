@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,6 +29,7 @@ public class ProjetoEntity {
 	@Column(name = "NOME")
 	private String nome;
 
+	@Lob
 	@Column(name = "DESCRICAO")
 	private String descricao;
 
@@ -59,9 +61,11 @@ public class ProjetoEntity {
 	@JoinColumn(name = "UNIDADE_PRISIONAL")
 	private UnidadePrisionalEntity unidadePrisional;
 
+	@Lob
 	@Column(name = "OBJETIVO")
 	private String objetivo;
 
+	@Lob
 	@Column(name = "RESULTADOS_ESPERADOS")
 	private String resultadosEsperados;
 
