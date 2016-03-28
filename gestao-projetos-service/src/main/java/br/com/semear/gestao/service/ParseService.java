@@ -126,4 +126,6 @@ public interface ParseService {
 	TarefaProjeto parseToModel(TarefaProjetoEntity tarefa);
 
 	Resposta parseToModel(RespostaEntity entity);
+
+	AlternativaPergunta parseToModel(AlternativaPerguntaEntity a);
 }

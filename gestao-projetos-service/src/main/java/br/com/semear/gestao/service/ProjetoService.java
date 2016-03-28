@@ -26,4 +26,6 @@ public interface ProjetoService {
 	public void cadastrarInformacoesAdicionais(InformacaoProjeto informacaoProjeto);
 
 	public InformacaoProjeto buscarInformacaoProjetoPorIdProjeto(Long idProjeto);
+
+	public List<Integer> calcularProgresso(List<Projeto> projetos);
 }

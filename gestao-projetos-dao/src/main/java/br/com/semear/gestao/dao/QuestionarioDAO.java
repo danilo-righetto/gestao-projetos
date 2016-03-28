@@ -35,4 +35,6 @@ public interface QuestionarioDAO {
 	
 	PerguntaEntity buscarPerguntaPorIdProjetoEiDPergunta(long idProjeto,long idAcao);
 
+	List<AlternativaPerguntaEntity> buscarAlternativasPorIdPergunta(long id);
+
 }

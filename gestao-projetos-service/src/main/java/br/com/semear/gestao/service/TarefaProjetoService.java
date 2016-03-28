@@ -12,4 +12,6 @@ public interface TarefaProjetoService {
 	public TarefaProjeto buscarTarefaPorId(long idTarefa);
 
 	public void editar(TarefaProjeto tarefa);
+
+	public TarefaProjeto concluirTarefa(long idTarefa);
 }

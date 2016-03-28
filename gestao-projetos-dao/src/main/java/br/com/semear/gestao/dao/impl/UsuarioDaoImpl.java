@@ -39,7 +39,7 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UsuarioEntity> listarUsuarios() {
-		Query query = em.createQuery("select u from UsuarioEntity u");
+		Query query = em.createQuery("select u from UsuarioEntity u where u.perfil.id != 'ROLE_REEDUCANDO'");
 		return query.getResultList();
 	}
 
