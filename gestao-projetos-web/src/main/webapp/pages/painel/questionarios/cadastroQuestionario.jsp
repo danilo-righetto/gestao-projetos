@@ -169,7 +169,7 @@
 										type="text" class="form-control"
 										id="inputQtdAlternativasMultipla"
 										name="inputQtdAlternativasMultipla"
-										onblur="validarQtdAlternativasMultipla()"
+										onkeyup="validarQtdAlternativasMultipla()"
 										placeholder="Quantidade de alternativas">
 								</div>
 								<div class="row col-md-12" id="divAlternativasRespostaMultipla"

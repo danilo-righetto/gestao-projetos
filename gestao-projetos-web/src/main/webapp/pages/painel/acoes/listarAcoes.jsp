@@ -6,7 +6,27 @@
 <html lang="pt-br">
 <head>
 <script type="text/javascript">
-	$("#menu-acoes").attr('class', 'active');
+	$(function() {
+		$("#menu-acoes").attr('class', 'active');
+		$("#tbAcoes").dataTable({
+			"iDisplayLength" : 5,
+			"bPaginate" : true,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bInfo" : false,
+			"bAutoWidth" : true,
+			"language" : {
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"search" : "Pesquisar:",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
+			}
+		});
+	})
 </script>
 </head>
 <body>
@@ -14,7 +34,7 @@
 		<div class="container">
 			<h4 class="title-screen">Ações</h4>
 			<div id="alertas"></div>
-			<table class="table table-responsive">
+			<table id="tbAcoes" class="table table-responsive">
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>
@@ -38,12 +58,11 @@
 									<td class="text-center">${acao.status}</td>
 									<td class="text-center"><a
 										href='<c:url value="/painel/acoes/editar/${acao.id}"></c:url>'><span
-											class="glyphicon glyphicon-pencil"></span></a>
-											
-											<a style="margin-left:20px" href='<c:url value="/painel/questionariosacao/cadastro/${acao.id}" />'>
+											class="glyphicon glyphicon-pencil"></span></a> <a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/questionariosacao/cadastro/${acao.id}" />'>
 											<span class="glyphicon glyphicon-list-alt"></span>
-										</a>
-											</td>
+									</a></td>
 								</tr>
 							</c:forEach>
 						</c:when>
