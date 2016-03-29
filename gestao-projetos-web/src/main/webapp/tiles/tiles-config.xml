@@ -30,8 +30,23 @@
 	</definition>
 
 	<!-- Semear - Painel -->
-	<definition name="painel" extends="main">
-		<put-attribute name="conteudo" value="/pages/painel/painel.jsp" />
+	<definition name="painel-administrador" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/painel-administrador.jsp" />
+	</definition>
+	
+	<!-- Semear - Painel -->
+	<definition name="painel-coordenador" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/painel-coordenador.jsp" />
+	</definition>
+	
+	<!-- Semear - Painel -->
+	<definition name="painel-colaborador" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/painel-colaborador.jsp" />
+	</definition>
+	
+	<!-- Semear - Painel -->
+	<definition name="painel-estagiario" extends="main">
+		<put-attribute name="conteudo" value="/pages/painel/painel-estagiario.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Usuario -->
@@ -68,6 +83,12 @@
 	<definition name="editarProjeto" extends="main">
 		<put-attribute name="conteudo"
 			value="/pages/painel/projetos/editarProjeto.jsp" />
+	</definition>
+	
+	<!-- Semear - Detalhar Proejeto -->
+	<definition name="detalhar-projeto" extends="main">
+		<put-attribute name="conteudo"
+			value="/pages/painel/projetos/detalhar.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro Tarefas do Projeto -->

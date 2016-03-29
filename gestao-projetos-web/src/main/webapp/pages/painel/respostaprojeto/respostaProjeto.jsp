@@ -7,7 +7,7 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-usuarios").attr('class','active');
+		$("#menu-projetos").attr('class','active');
 	});
 	
 	function popularCampos(){
@@ -25,7 +25,7 @@
 			}else if(tipoPergunta == 2){
 				var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
 					for(var p = 0; p < perguntarespostas.length; p++){
-						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+",");
+						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 						console.info($("#"+idHidden).val());
 					}
 			}else if(tipoPergunta == 3){
@@ -49,7 +49,11 @@
 <body>
 	<div class="section">
 		<div class="container">
+<<<<<<< HEAD
 			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Projeto</h4>
+=======
+			<h4 style="font-family: arial; color: #4DC1FF">Questionário do Projeto - ${questionario.projeto.nome}</h4>
+>>>>>>> 0a0288b01dcf0ceb3ca862d404e853775dbbe9a7
 			<hr />
 			<div id="alertas"></div>
 			<form action="salvarResposta" method="POST" role="form" id="formResposta">
@@ -87,7 +91,7 @@
 						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
 						    <div class="input-group">
 						      <span class="input-group-addon">
-						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
+						        <input type="radio" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
 						      </span>
 						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
 						        

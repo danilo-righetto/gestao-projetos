@@ -50,7 +50,7 @@ public class RespostaProjetoController {
 	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
 		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao);
-		return "redirect:/painel/";
 		//return "redirect:/painel/respostasProjeto/"+idProjeto;
+		return "redirect:/painel/respostasprojeto/"+idProjeto;
 	}
 }

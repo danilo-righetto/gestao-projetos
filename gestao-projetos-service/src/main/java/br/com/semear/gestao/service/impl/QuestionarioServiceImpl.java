@@ -72,13 +72,13 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 		for(PerguntaEntity p : entitys){
 			p.setAlternativas(questionarioDAO.buscarAlternativasPorIdPergunta(p.getId()));
 			Pergunta pergunta = parseService.parseToModel(p);
-			for(AlternativaPerguntaEntity a:p.getAlternativas()){
+			for(AlternativaPerguntaEntity a :p.getAlternativas()){
 				pergunta.getAlternativas().add(parseService.parseToModel(a));
 			}
-			//perguntas.add(parseService.parseToModel(p));
+
 			perguntas.add(pergunta);
 		}
-		return perguntas;
+		return perguntas;		
 	}
 
 	@Override

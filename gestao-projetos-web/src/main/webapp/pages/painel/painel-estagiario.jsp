@@ -7,20 +7,11 @@
 <head>
 </head>
   <body>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center text-success">Painel Administrador</h1>
-			<h1 class="text-center text-success">Seja bem vindo <c:out value="${usuario.nome}" /></h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- BARRA DE STATUS -->
+    <!-- INICIO DA BARRA DE PROGRESSO DOS PROJETOS -->
      <div class="section">
       <div class="container">
         <div class="row">
+        <h4 style="font-family: arial; color: #4DC1FF">ESTAGIARIO: </h4>
           <div class="col-md-12">
 			<!-- INICIO - PROJETO 01 -->
 	        <h4 style="font-family: arial; color: #4DC1FF">Status - Projeto: </h4>
@@ -42,8 +33,7 @@
         </div>
       </div>
     </div>
-    <!-- INICIO - Lista de Coordenadores sem Projeto e sem Ação -->
-	<!-- FIM - Lista de Coordenadores sem Projeto e sem Ação -->
+    <!-- FIM DA BARRA DE PROGRESSO DOS PROJETOS  -->
     <div class="section" style="margin-top:240px">
     </div>
 </body>

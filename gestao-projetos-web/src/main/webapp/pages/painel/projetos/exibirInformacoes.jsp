@@ -14,12 +14,12 @@
 			<div>
 				<a class="btn btn-default btn-return"
 					href='<c:url value="/painel/projetos/"></c:url>'><span
-					class="glyphicon glyphicon-arrow-left"></span></a> 
-					
-					<a
-					class="btn btn-default btn-add"
-					href='<c:url value="/painel/projetos/${idProjeto}/adicionarInformacoes"></c:url>'>EDITAR
-				</a>
+					class="glyphicon glyphicon-arrow-left"></span></a>
+				<c:if test="${usuario.perfil.id eq 'ROLE_ADMINISTRADOR'}">
+					<a class="btn btn-default btn-add"
+						href='<c:url value="/painel/projetos/${idProjeto}/adicionarInformacoes"></c:url>'>EDITAR
+					</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

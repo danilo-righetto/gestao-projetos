@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 public class TarefaProjetoEntity {
 
 	@Id
+	@Column(name = "ID")
 	@GeneratedValue
 	private long id;
 
