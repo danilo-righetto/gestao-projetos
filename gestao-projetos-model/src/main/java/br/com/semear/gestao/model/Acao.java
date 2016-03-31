@@ -24,6 +24,14 @@ public class Acao {
 
 	private Usuario usuario;
 
+	public Acao(Long idAcao) {
+		this.id = idAcao;
+	}
+	
+	public Acao() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId() {
 		return id;
 	}

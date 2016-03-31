@@ -77,7 +77,17 @@
 											class="glyphicon glyphicon-info-sign"></span></a><a
 										style="margin-left: 20px"
 										href='<c:url value="/painel/projetos/${projeto.id}/tarefas"></c:url>'
-										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a></td>
+										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a>
+										<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasprojeto/I/${projeto.id}"></c:url>'
+										title="Resposta Inicio"><span class="glyphicon glyphicon-copy"></span></a>
+										<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasprojeto/F/${projeto.id}"></c:url>'
+										title="Resposta Fim"><span class="
+glyphicon glyphicon-paste"></span></a>
+										</td>
 
 
 								</tr>

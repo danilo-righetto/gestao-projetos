@@ -187,7 +187,7 @@
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Questionário</h4>
+				Questionário da Ação</h4>
 			<hr />
 			<c:if test="${mensagem != null && mensagem ne ''}">
 				<c:if test="${mensagem eq 'ADD'}">
@@ -226,7 +226,7 @@
 						method="POST" role="form">
 						<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
-								<label for="nome">Titulo do Questionário:</label> <input
+								<label for="nome">Titulo do Questionário da Ação:</label> <input
 									type="text" class="form-control" id="nome" name="nome"
 									readonly="readonly" value="${questionario.descricao}"
 									placeholder="Digite o nome" required autofocus>

@@ -62,7 +62,17 @@
 										style="margin-left: 20px"
 										href='<c:url value="/painel/questionariosacao/cadastro/${acao.id}" />'>
 											<span class="glyphicon glyphicon-list-alt"></span>
-									</a></td>
+									</a>
+									<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasacao/I/${acao.id}"></c:url>'
+										title="Resposta Inicio"><span class="glyphicon glyphicon-copy"></span></a>
+										<a
+										style="margin-left: 20px"
+										href='<c:url value="/painel/respostasacao/F/${acao.id}"></c:url>'
+										title="Resposta Fim"><span class="
+glyphicon glyphicon-paste"></span></a>
+									</td>
 								</tr>
 							</c:forEach>
 						</c:when>
