@@ -49,7 +49,11 @@
 <body>
 	<div class="section">
 		<div class="container">
+<<<<<<< HEAD
+			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Projeto</h4>
+=======
 			<h4 style="font-family: arial; color: #4DC1FF">Questionário do Projeto - ${questionario.projeto.nome}</h4>
+>>>>>>> 0a0288b01dcf0ceb3ca862d404e853775dbbe9a7
 			<hr />
 			<div id="alertas"></div>
 			<form action="salvarResposta" method="POST" role="form" id="formResposta">
@@ -111,7 +115,7 @@
 						<c:if test="${pergunta.tipoPergunta.id eq 4}">
 							<div class="form-group col-md-12">
 									 <div class="radio">
-									<label>Responda: </label> 
+									<label>Responda:</label> 
 									<c:forEach items="${pergunta.alternativas}" var="alternativa">
 										<label><input
 										type="radio" id="alternativa${alternativa.pergunta.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>

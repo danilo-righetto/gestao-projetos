@@ -84,6 +84,8 @@ public class ProjetoServiceImpl implements ProjetoService {
 		entity.setDescricao(projeto.getDescricao());
 		entity.setNome(projeto.getNome());
 		entity.setStatus(projeto.getStatus());
+		entity.setObjetivo(projeto.getObjetivo());
+		entity.setResultadosEsperados(projeto.getResultadosEsperados());
 		
 		if(projeto.getCoordenador() != null && projeto.getCoordenador().getId() > 0){
 			projeto.setCoordenador(usuarioService.buscarUsuarioPorId(projeto.getCoordenador().getId()));

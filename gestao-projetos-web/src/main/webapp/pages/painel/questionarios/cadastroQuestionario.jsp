@@ -25,13 +25,15 @@
 			"bInfo" : false,
 			"bAutoWidth" : true,
 			"language" : {
-				"emptyTable" : "Nenhuma informação cadastrada"
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
 			}
-
 		});
-		$(".previous").text('Anterior');
-		$(".next").text('Próximo');
-
 	});
 
 	function validarTipoPergunta() {
