@@ -60,7 +60,7 @@
 							<div class="form-group col-md-3">
 								<label for="dataTermino">Data Termino:</label> <input
 									type="text" class="form-control data" id="dataTermino"
-									name="dataTermino" placeholder="Selecione a Data" required>
+									name="dataTermino" placeholder="Selecione a Data">
 							</div>
 							<div class="form-group col-md-12">
 								<label for="descricao">Descrição:</label>
