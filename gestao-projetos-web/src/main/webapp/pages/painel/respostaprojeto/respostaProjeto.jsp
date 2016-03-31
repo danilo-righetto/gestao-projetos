@@ -49,14 +49,10 @@
 <body>
 	<div class="section">
 		<div class="container">
-<<<<<<< HEAD
-			<h4 style="font-family: arial; color: #4DC1FF">Resposta Questionário Projeto</h4>
-=======
-			<h4 style="font-family: arial; color: #4DC1FF">Questionário do Projeto - ${questionario.projeto.nome}</h4>
->>>>>>> 0a0288b01dcf0ceb3ca862d404e853775dbbe9a7
+			<h4 style="font-family: arial; color: #4DC1FF">Resposta -  Questionário Projeto: ${questionario.projeto.nome}</h4>
 			<hr />
 			<div id="alertas"></div>
-			<form action="salvarResposta" method="POST" role="form" id="formResposta">
+			<form action="/gestao-projetos/painel/respostasprojeto/salvarResposta" method="POST" role="form" id="formResposta">
 			<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
 								<label for="nome">Titulo do Questionário:</label> <input
@@ -67,6 +63,22 @@
 						</div>
 				<div class="row">
 				<input type="hidden" name="idProjeto" value="${questionario.projeto.id}">
+				<!-- Reeducando - Resposta - INICIO -->
+				<div class="form-group col-md-4">
+							<label for="reeducando">Reeducando:</label> <select
+								id="reeducando" name="reeducando"
+								class="form-control" required>
+								<option value="" label="Selecione..." />
+								<c:if test="${not empty reeducandos}">
+								<c:forEach var="reeducando" items="${reeducandos}">
+										<option value="${reeducando.id}"
+											label="${reeducando.nome}" />
+								</c:forEach>
+								</c:if>
+							</select>
+						</div>
+				<!-- Reeducando - Resposta - FIM -->
+				<input type="hidden" name="respostaStatus" value="${status}">
 				<!-- forEach -->
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
@@ -91,7 +103,7 @@
 						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
 						    <div class="input-group">
 						      <span class="input-group-addon">
-						        <input type="radio" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
+						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
 						      </span>
 						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
 						        

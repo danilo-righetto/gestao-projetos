@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.RespostaAcaoDAO;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
+import br.com.semear.gestao.model.Acao;
 import br.com.semear.gestao.model.PerguntaAcao;
+import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.RespostaAcao;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
@@ -41,7 +43,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	private QuestionarioAcaoService questionarioAcaoService;
 
 	@Override
-	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario) {
+	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String respostaStatus) {
 		if(respostas != null && respostas.length > 0 && idAcao != null){
 			for(int i =0; i < respostas.length;i++){
 				String[] respostaArray = respostas[i].split("#");
@@ -52,9 +54,12 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 				
 				RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
 				respostaAcao.setDataCadastro(Calendar.getInstance());
+				respostaAcao.setAcao(parseService.parseToEntity(new Acao(idAcao)));
 				respostaAcao.setDescricaoRespostaAcao(descricaoResposta);
 				respostaAcao.setPerguntaAcaoEntity(parseService.parseToEntity(pergunta));
 				respostaAcao.setUsuarioEntity(parseService.parseToEntity(usuario));
+				respostaAcao.setReeducandoEntity(parseService.parseToEntity(new Reeducando(reeducando)));
+				respostaAcao.setRespostaStatus(respostaStatus);
 				respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
 			}
 		}
@@ -97,6 +102,9 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 		respostaAcao.setDescricaoRespostaAcao(((RespostaAcaoEntity) respostas).getDescricaoRespostaAcao());
 		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
 		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
+		respostaAcao.setRespostaStatus(((RespostaAcaoEntity)respostas).getRespostaStatus());
+		respostaAcao.setReeducandoEntity(parse.parseToEntity(((RespostaAcao) respostas).getReeducando()));
+		respostaAcao.setAcao(parse.parseToEntity(((RespostaAcao) respostas).getAcao()));
 		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
 		
 	}

@@ -11,7 +11,23 @@ public class RespostaAcao {
 	private Calendar dataCadastro;
 	private Calendar dataAlteracao;
 	private Usuario usuario;
+	private Acao acao;
+	private Reeducando reeducando;
+	private String respostaStatus;
 	
+	public Acao getAcao() {
+		return acao;
+	}
+	public void setAcao(Acao acao) {
+		this.acao = acao;
+	}
+	
+	public Reeducando getReeducando() {
+		return reeducando;
+	}
+	public void setReeducando(Reeducando reeducando) {
+		this.reeducando = reeducando;
+	}
 	private List<RespostaAcao> respostas = new ArrayList<RespostaAcao>();
 	
 	public long getId() {
@@ -55,6 +71,12 @@ public class RespostaAcao {
 	}
 	public void setRespostas(List<RespostaAcao> respostas) {
 		this.respostas = respostas;
+	}
+	public String getRespostaStatus() {
+		return respostaStatus;
+	}
+	public void setRespostaStatus(String respostaStatus) {
+		this.respostaStatus = respostaStatus;
 	}
 	
 	
