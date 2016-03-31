@@ -12,8 +12,8 @@ public interface UsuarioDAO {
 	public List<UsuarioEntity> listarUsuarios();
 
 	public UsuarioEntity buscarUsuarioPorId(long idUsuario);
-	
-	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil);
+
+	public List<UsuarioEntity> buscarUsuarioPorParceiro(long idParceiro, String idPerfil);
 
 	public void editarUsuario(UsuarioEntity entity);
 
@@ -22,8 +22,8 @@ public interface UsuarioDAO {
 	public void alterarSenha(UsuarioEntity usuario, String encode);
 
 	public UsuarioEntity buscarDadosDoUsuarioAtivo(String email);
-	
-	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao);
-	
-	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil);
+
+	public List<UsuarioEntity> buscarUsuarioPorParceiro(long idParceiro);
+
+	public List<UsuarioEntity> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil);
 }

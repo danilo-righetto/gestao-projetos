@@ -7,9 +7,9 @@ import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.ColaboradorEntity;
 import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
-import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoParceiroProjetoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
@@ -30,9 +30,9 @@ import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.Colaborador;
 import br.com.semear.gestao.model.InformacaoProjeto;
-import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
-import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
+import br.com.semear.gestao.model.ParticipacaoParceiroProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoAcao;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Perfil;
@@ -73,39 +73,39 @@ public class ParseServiceImpl implements ParseService {
 		return projetoEn;
 	}
 
-	// Instituicao
+	// Parceiro
 
 	@Override
-	public InstituicaoEntity parseToEntity(Instituicao instituicao) {
-		InstituicaoEntity instituicaoEn = null;
-		if (instituicao != null) {
-			instituicaoEn = new InstituicaoEntity();
-			instituicaoEn.setId(instituicao.getId());
-			instituicaoEn.setNomefantasia(instituicao.getNomefantasia() != null
-					? instituicao.getNomefantasia().toUpperCase() : instituicao.getRazaosocial().toUpperCase());
-			instituicaoEn.setRazaosocial(
-					instituicao.getRazaosocial() != null ? instituicao.getRazaosocial().toUpperCase() : "");
-			instituicaoEn
-					.setDocumento(instituicao.getDocumento() != null ? instituicao.getDocumento().toUpperCase() : "");
-			instituicaoEn.setTipoDocumento(
-					instituicao.getTipoDocumento() != null ? instituicao.getTipoDocumento().toUpperCase() : "");
-			instituicaoEn.setLogradouro(
-					instituicao.getLogradouro() != null ? instituicao.getLogradouro().toUpperCase() : "");
-			instituicaoEn.setNumero(instituicao.getNumero() != null ? instituicao.getNumero().toUpperCase() : "");
-			instituicaoEn.setComplemento(
-					instituicao.getComplemento() != null ? instituicao.getComplemento().toUpperCase() : "");
-			instituicaoEn.setBairro(instituicao.getBairro() != null ? instituicao.getBairro().toUpperCase() : "");
-			instituicaoEn.setCep(instituicao.getCep() != null ? instituicao.getCep().toUpperCase() : "");
-			instituicaoEn.setUf(instituicao.getUf() != null ? instituicao.getUf().toUpperCase() : "");
-			instituicaoEn.setCidade(instituicao.getCidade() != null ? instituicao.getCidade().toUpperCase() : "");
-			instituicaoEn.setTelefone(instituicao.getTelefone() != null ? instituicao.getTelefone().toUpperCase() : "");
-			instituicaoEn.setEmail(instituicao.getEmail() != null ? instituicao.getEmail().toLowerCase() : "");
-			instituicaoEn.setResponsavel(
-					instituicao.getResponsavel() != null ? instituicao.getResponsavel().toUpperCase() : "");
-			instituicaoEn.setStatus(instituicao.getStatus());
-			instituicaoEn.setDataCadastro(instituicao.getDataCadastro());
+	public ParceiroEntity parseToEntity(Parceiro parceiro) {
+		ParceiroEntity parceiroEn = null;
+		if (parceiro != null) {
+			parceiroEn = new ParceiroEntity();
+			parceiroEn.setId(parceiro.getId());
+			parceiroEn.setNomefantasia(parceiro.getNomefantasia() != null
+					? parceiro.getNomefantasia().toUpperCase() : parceiro.getRazaosocial().toUpperCase());
+			parceiroEn.setRazaosocial(
+					parceiro.getRazaosocial() != null ? parceiro.getRazaosocial().toUpperCase() : "");
+			parceiroEn
+					.setDocumento(parceiro.getDocumento() != null ? parceiro.getDocumento().toUpperCase() : "");
+			parceiroEn.setTipoDocumento(
+					parceiro.getTipoDocumento() != null ? parceiro.getTipoDocumento().toUpperCase() : "");
+			parceiroEn.setLogradouro(
+					parceiro.getLogradouro() != null ? parceiro.getLogradouro().toUpperCase() : "");
+			parceiroEn.setNumero(parceiro.getNumero() != null ? parceiro.getNumero().toUpperCase() : "");
+			parceiroEn.setComplemento(
+					parceiro.getComplemento() != null ? parceiro.getComplemento().toUpperCase() : "");
+			parceiroEn.setBairro(parceiro.getBairro() != null ? parceiro.getBairro().toUpperCase() : "");
+			parceiroEn.setCep(parceiro.getCep() != null ? parceiro.getCep().toUpperCase() : "");
+			parceiroEn.setUf(parceiro.getUf() != null ? parceiro.getUf().toUpperCase() : "");
+			parceiroEn.setCidade(parceiro.getCidade() != null ? parceiro.getCidade().toUpperCase() : "");
+			parceiroEn.setTelefone(parceiro.getTelefone() != null ? parceiro.getTelefone().toUpperCase() : "");
+			parceiroEn.setEmail(parceiro.getEmail() != null ? parceiro.getEmail().toLowerCase() : "");
+			parceiroEn.setResponsavel(
+					parceiro.getResponsavel() != null ? parceiro.getResponsavel().toUpperCase() : "");
+			parceiroEn.setStatus(parceiro.getStatus());
+			parceiroEn.setDataCadastro(parceiro.getDataCadastro());
 		}
-		return instituicaoEn;
+		return parceiroEn;
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class ParseServiceImpl implements ParseService {
 			usuarioEn.setPerfil(parseToEntity(usuario.getPerfil()));
 			usuarioEn.setDataCadastro(usuario.getDataCadastro());
 			usuarioEn.setRealizaLogin(usuario.getRealizaLogin());
-			usuarioEn.setInstituicao(parseToEntity(usuario.getInstituicao()));
+			usuarioEn.setParceiro(parseToEntity(usuario.getParceiro()));
 		}
 		return usuarioEn;
 	}
@@ -166,32 +166,32 @@ public class ParseServiceImpl implements ParseService {
 	}
 
 	@Override
-	public Instituicao parseToModel(InstituicaoEntity entity) {
-		Instituicao instituicao = null;
+	public Parceiro parseToModel(ParceiroEntity entity) {
+		Parceiro parceiro = null;
 		if (entity != null) {
-			instituicao = new Instituicao();
-			instituicao.setId(entity.getId());
-			instituicao.setNomefantasia((entity.getNomefantasia() != null ? entity.getNomefantasia().toUpperCase()
+			parceiro = new Parceiro();
+			parceiro.setId(entity.getId());
+			parceiro.setNomefantasia((entity.getNomefantasia() != null ? entity.getNomefantasia().toUpperCase()
 					: entity.getRazaosocial().toUpperCase()));
-			instituicao.setRazaosocial((entity.getRazaosocial() != null ? entity.getRazaosocial().toUpperCase() : ""));
-			instituicao.setDocumento((entity.getDocumento() != null ? entity.getDocumento().toUpperCase() : ""));
-			instituicao.setTipoDocumento(
+			parceiro.setRazaosocial((entity.getRazaosocial() != null ? entity.getRazaosocial().toUpperCase() : ""));
+			parceiro.setDocumento((entity.getDocumento() != null ? entity.getDocumento().toUpperCase() : ""));
+			parceiro.setTipoDocumento(
 					(entity.getTipoDocumento() != null ? entity.getTipoDocumento().toUpperCase() : ""));
-			instituicao.setLogradouro((entity.getLogradouro() != null ? entity.getLogradouro().toUpperCase() : ""));
-			instituicao.setNumero((entity.getNumero() != null ? entity.getNumero().toUpperCase() : ""));
-			instituicao.setComplemento((entity.getComplemento() != null ? entity.getComplemento().toUpperCase() : ""));
-			instituicao.setBairro((entity.getBairro() != null ? entity.getBairro().toUpperCase() : ""));
-			instituicao.setCep((entity.getCep() != null ? entity.getCep().toUpperCase() : ""));
-			instituicao.setUf((entity.getUf() != null ? entity.getUf().toUpperCase() : ""));
-			instituicao.setCidade((entity.getCidade() != null ? entity.getCidade().toUpperCase() : ""));
-			instituicao.setTelefone((entity.getTelefone() != null ? entity.getTelefone().toUpperCase() : ""));
-			instituicao.setEmail((entity.getEmail() != null ? entity.getEmail().toLowerCase() : ""));
-			instituicao.setResponsavel((entity.getResponsavel() != null ? entity.getResponsavel() : ""));
-			instituicao.setDataCadastro(entity.getDataCadastro());
-			instituicao.setStatus(entity.getStatus());
+			parceiro.setLogradouro((entity.getLogradouro() != null ? entity.getLogradouro().toUpperCase() : ""));
+			parceiro.setNumero((entity.getNumero() != null ? entity.getNumero().toUpperCase() : ""));
+			parceiro.setComplemento((entity.getComplemento() != null ? entity.getComplemento().toUpperCase() : ""));
+			parceiro.setBairro((entity.getBairro() != null ? entity.getBairro().toUpperCase() : ""));
+			parceiro.setCep((entity.getCep() != null ? entity.getCep().toUpperCase() : ""));
+			parceiro.setUf((entity.getUf() != null ? entity.getUf().toUpperCase() : ""));
+			parceiro.setCidade((entity.getCidade() != null ? entity.getCidade().toUpperCase() : ""));
+			parceiro.setTelefone((entity.getTelefone() != null ? entity.getTelefone().toUpperCase() : ""));
+			parceiro.setEmail((entity.getEmail() != null ? entity.getEmail().toLowerCase() : ""));
+			parceiro.setResponsavel((entity.getResponsavel() != null ? entity.getResponsavel() : ""));
+			parceiro.setDataCadastro(entity.getDataCadastro());
+			parceiro.setStatus(entity.getStatus());
 		}
 
-		return instituicao;
+		return parceiro;
 	}
 
 	@Override
@@ -527,26 +527,26 @@ public class ParseServiceImpl implements ParseService {
 	}
 
 	@Override
-	public ParticipacaoInstituicaoProjetoEntity parseToEntity(ParticipacaoInstituicaoProjeto model) {
-		ParticipacaoInstituicaoProjetoEntity entity = null;
+	public ParticipacaoParceiroProjetoEntity parseToEntity(ParticipacaoParceiroProjeto model) {
+		ParticipacaoParceiroProjetoEntity entity = null;
 		if (model != null) {
-			entity = new ParticipacaoInstituicaoProjetoEntity();
+			entity = new ParticipacaoParceiroProjetoEntity();
 			entity.setId(model.getId());
 			entity.setProjeto(parseToEntity(model.getProjeto()));
-			entity.setInstituicao(parseToEntity(model.getInstituicao()));
+			entity.setParceiro(parseToEntity(model.getParceiro()));
 			entity.setDataEntrada(model.getDataEntrada());
 		}
 		return entity;
 	}
 
 	@Override
-	public ParticipacaoInstituicaoProjeto parseToModel(ParticipacaoInstituicaoProjetoEntity entity) {
-		ParticipacaoInstituicaoProjeto model = null;
+	public ParticipacaoParceiroProjeto parseToModel(ParticipacaoParceiroProjetoEntity entity) {
+		ParticipacaoParceiroProjeto model = null;
 		if (entity != null) {
-			model = new ParticipacaoInstituicaoProjeto();
+			model = new ParticipacaoParceiroProjeto();
 			model.setId(entity.getId());
 			model.setProjeto(parseToModel(entity.getProjeto()));
-			model.setInstituicao(parseToModel(entity.getInstituicao()));
+			model.setParceiro(parseToModel(entity.getParceiro()));
 			model.setDataEntrada(entity.getDataEntrada());
 		}
 		return model;

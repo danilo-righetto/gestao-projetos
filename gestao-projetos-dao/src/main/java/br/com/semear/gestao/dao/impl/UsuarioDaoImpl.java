@@ -1,7 +1,6 @@
 package br.com.semear.gestao.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -90,10 +89,10 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
+	public List<UsuarioEntity> buscarUsuarioPorParceiro(long idParceiro, String idPerfil) {
 		Query query = em.createQuery(
-				"select u from UsuarioEntity u where u.instituicao.id = :idInstituicao and u.perfil.id = :idPerfil");
-		query.setParameter("idInstituicao", idInstituicao);
+				"select u from UsuarioEntity u where u.parceiro.id = :idParceiro and u.perfil.id = :idPerfil");
+		query.setParameter("idParceiro", idParceiro);
 		query.setParameter("idPerfil", idPerfil);
 		if (!query.getResultList().isEmpty()) {
 			return query.getResultList();
@@ -103,18 +102,18 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UsuarioEntity> buscarUsuarioPorInstituicao(long idInstituicao) {
-		Query query = em.createQuery("select u from UsuarioEntity u where u.instituicao.id = :idInstituicao");
-		query.setParameter("idInstituicao", idInstituicao);
+	public List<UsuarioEntity> buscarUsuarioPorParceiro(long idParceiro) {
+		Query query = em.createQuery("select u from UsuarioEntity u where u.parceiro.id = :idParceiro");
+		query.setParameter("idParceiro", idParceiro);
 		return query.getResultList();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UsuarioEntity> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
+	public List<UsuarioEntity> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
 		Query query = em.createQuery(
-				"select u from UsuarioEntity u where u.instituicao.id in(:idInstituicoes) and u.perfil.id = :idPerfil order by u.nome");
-		query.setParameter("idInstituicoes", idInstituicoes);
+				"select u from UsuarioEntity u where u.parceiro.id in(:idParceiros) and u.perfil.id = :idPerfil order by u.nome");
+		query.setParameter("idParceiros", idParceiros);
 		query.setParameter("idPerfil", idPerfil);
 		return query.getResultList();
 	}

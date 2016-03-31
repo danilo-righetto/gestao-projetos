@@ -14,9 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "UNIDADE_REL_INSTITUICAO")
-public class UnidadeRelInstituicaoEntity {
-	
+@Table(name = "UNIDADE_REL_PARCEIRO")
+public class UnidadeRelParceiroEntity {
+
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -27,8 +27,8 @@ public class UnidadeRelInstituicaoEntity {
 	private UnidadePrisionalEntity unidadePrisional;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "INSTITUICAO", nullable = false)
-	private InstituicaoEntity instituicao;
+	@JoinColumn(name = "PARCEIRO", nullable = false)
+	private ParceiroEntity parceiro;
 
 	@Column(name = "DATA_ENTRADA")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -50,12 +50,12 @@ public class UnidadeRelInstituicaoEntity {
 		this.unidadePrisional = unidadePrisional;
 	}
 
-	public InstituicaoEntity getInstituicao() {
-		return instituicao;
+	public ParceiroEntity getParceiro() {
+		return parceiro;
 	}
 
-	public void setInstituicao(InstituicaoEntity instituicao) {
-		this.instituicao = instituicao;
+	public void setParceiro(ParceiroEntity parceiro) {
+		this.parceiro = parceiro;
 	}
 
 	public Calendar getDataEntrada() {

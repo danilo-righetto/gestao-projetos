@@ -16,13 +16,13 @@ function verificaPerfil(){
 	var escolha = document.getElementById("perfil").value;
 	if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
 		document.getElementById("oculta1").style.display = "block";
-		$("#instituicao").attr("required","required");
-		$("#instituicao").removeAttr("disabled");
+		$("#parceiro").attr("required","required");
+		$("#parceiro").removeAttr("disabled");
 	}else{
 		document.getElementById("oculta1").style.display = "none";
-		$("#instituicao").val("");
-		$("#instituicao").removeAttr("required");
-		$("#instituicao").attr("disabled","disabled");
+		$("#parceiro").val("");
+		$("#parceiro").removeAttr("required");
+		$("#parceiro").attr("disabled","disabled");
 	}
 }
 </script>
@@ -66,14 +66,14 @@ function verificaPerfil(){
 							</c:forEach>
 						</select>
 					</div>
-					<!-- Instituição - Usuario -->
+					<!-- Parceiro - Usuario -->
 					<div class="form-group col-md-3" id="oculta1">
-						<label for="instituicao">Instituição:</label> <select id="instituicao"
-							class="form-control" name="instituicao.id" required>
+						<label for="parceiro">Parceiro:</label> <select id="parceiro"
+							class="form-control" name="parceiro.id" required>
 							<option value="">Selecione ...</option>
-							<c:forEach items="${inst}" var="instituicao">
-										<option value="${instituicao.id}" ${(instituicao.id == user.instituicao.id ? 
-								'selected' : '')}>${instituicao.razaosocial}</option>
+							<c:forEach items="${parceiros}" var="parceiro">
+										<option value="${parceiro.id}" ${(parceiro.id == user.parceiro.id ? 
+								'selected' : '')}>${parceiro.razaosocial}</option>
 							</c:forEach>
 						</select>
 					</div>

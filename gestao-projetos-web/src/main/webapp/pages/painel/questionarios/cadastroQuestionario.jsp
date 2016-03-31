@@ -25,12 +25,15 @@
 			"bInfo" : false,
 			"bAutoWidth" : true,
 			"language" : {
-				"emptyTable" : "Nenhuma informação cadastrada"
+				"emptyTable" : "Nenhuma informação cadastrada",
+				"paginate" : {
+					"first" : "Primeira",
+					"last" : "Última",
+					"next" : "Próximo",
+					"previous" : "Anterior"
+				}
 			}
-
 		});
-		$(".previous").text('Anterior');
-		$(".next").text('Próximo');
 
 		$('#form-add-pergunta').on('keyup keypress', function(e) {
 			  var keyCode = e.keyCode || e.which;
@@ -39,7 +42,7 @@
 			    return false;
 			  }
 			});
-
+		
 	});
 
 	function validarTipoPergunta() {
@@ -177,7 +180,7 @@
 										type="text" class="form-control"
 										id="inputQtdAlternativasMultipla"
 										name="inputQtdAlternativasMultipla"
-										onblur="validarQtdAlternativasMultipla()"
+										onkeyup="validarQtdAlternativasMultipla()"
 										placeholder="Quantidade de alternativas">
 								</div>
 								<div class="row col-md-12" id="divAlternativasRespostaMultipla"
@@ -215,9 +218,9 @@
 					<a href='<c:url value="/painel/projetos/" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Ir para a lista de projetos</a> <a
-						href='<c:url value="/painel/participacao-projetos/${idProjeto}/instituicoes" />'
+						href='<c:url value="/painel/participacao-projetos/${idProjeto}/parceiros" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-						class="btn btn-default">Associar Instituições</a>
+						class="btn btn-default">Associar Parceiros</a>
 				</div>
 			</div>
 		</div>
@@ -226,7 +229,7 @@
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Questionário</h4>
+				Questionário do Projeto</h4>
 			<hr />
 			<c:if test="${mensagem != null && mensagem ne ''}">
 				<c:if test="${mensagem eq 'ADD'}">
@@ -265,7 +268,7 @@
 						method="POST" role="form">
 						<div class="row">
 							<div class="form-group col-md-offset-3 col-md-6">
-								<label for="nome">Titulo do Questionário:</label> <input
+								<label for="nome">Titulo do Questionário do Projeto:</label> <input
 									type="text" class="form-control" id="nome" name="nome"
 									readonly="readonly" value="${questionario.descricao}"
 									placeholder="Digite o nome" required autofocus>

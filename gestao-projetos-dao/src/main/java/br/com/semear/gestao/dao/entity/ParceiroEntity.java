@@ -15,14 +15,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "INSTITUICAO")
-public class InstituicaoEntity {
+@Table(name = "PARCEIRO")
+public class ParceiroEntity {
 
-	public InstituicaoEntity(long id) {
+	public ParceiroEntity(long id) {
 		this.id = id;
 	}
 
-	public InstituicaoEntity() {
+	public ParceiroEntity() {
 
 	}
 

@@ -158,7 +158,7 @@ textarea {
 				<br />
 			</div>
 			<div class="row">
-				<h4 class="title-screen">Instituições Associadas</h4>
+				<h4 class="title-screen">Parceiros Associados</h4>
 				<div id="alertas"></div>
 				<table class="table table-responsive">
 					<thead>
@@ -175,15 +175,15 @@ textarea {
 					</thead>
 					<tbody>
 						<c:choose>
-							<c:when test="${not empty instituicoes}">
-								<c:forEach items="${instituicoes}" var="instituicao">
+							<c:when test="${not empty parceiros}">
+								<c:forEach items="${parceiros}" var="parceiro">
 									<tr>
-										<td class="text-center">${instituicao.id}</td>
-										<td class="text-center hidden-xs hidden-sm">${(instituicao.instituicao.tipoDocumento
+										<td class="text-center">${parceiro.id}</td>
+										<td class="text-center hidden-xs hidden-sm">${(parceiro.parceiro.tipoDocumento
 											== "CNPJ" ? 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
-										<td class="text-center">${instituicao.instituicao.cidade}</td>
-										<td class="text-center hidden-xs hidden-sm">${instituicao.instituicao.razaosocial}</td>
-										<td class="text-center hidden-xs hidden-sm">${instituicao.instituicao.responsavel}</td>
+										<td class="text-center">${parceiro.parceiro.cidade}</td>
+										<td class="text-center hidden-xs hidden-sm">${parceiro.parceiro.razaosocial}</td>
+										<td class="text-center hidden-xs hidden-sm">${parceiro.parceiro.responsavel}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -202,16 +202,16 @@ textarea {
 						Projeto</h4>
 					<div class="col-md-offset-3">
 						<div class="form-group col-md-4">
-							<label for="instituicao">Instituição:</label> <select
-								disabled="disabled" id="instituicao" name="instituicao"
+							<label for="parceiro">Parceiro:</label> <select
+								disabled="disabled" id="parceiro" name="parceiro"
 								class="form-control" required autofocus
 								onchange="listarCoordenadores();">
 								<option value="" label="Selecione..." />
-								<c:forEach var="associada" items="${instituicoesAssociadas}">
+								<c:forEach var="associada" items="${parceirosAssociadas}">
 									<option
-										${coordernadorProjeto.instituicao.id == associada.instituicao.id ? "selected='selected'" : ""}
-										value="${associada.instituicao.id}"
-										label="${associada.instituicao.razaosocial}" />
+										${coordernadorProjeto.parceiro.id == associada.parceiro.id ? "selected='selected'" : ""}
+										value="${associada.parceiro.id}"
+										label="${associada.parceiro.razaosocial}" />
 
 								</c:forEach>
 							</select>

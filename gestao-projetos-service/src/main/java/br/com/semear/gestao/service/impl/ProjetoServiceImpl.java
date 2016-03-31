@@ -14,7 +14,7 @@ import br.com.semear.gestao.dao.InformacaoProjetoDAO;
 import br.com.semear.gestao.dao.ProjetoDAO;
 import br.com.semear.gestao.dao.entity.AcaoEntity;
 import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.InformacaoProjeto;
@@ -102,10 +102,10 @@ public class ProjetoServiceImpl implements ProjetoService {
 	@Override
 	public Usuario buscarCoodernadorPorIdProjeto(long idProjeto) {
 		UsuarioEntity entity = projetoDAO.buscarCoodernadorPorIdProjeto(idProjeto);
-		InstituicaoEntity instEntity = projetoDAO.buscarInstituicaoDoCoodernadorPorIdProjeto(idProjeto);
+		ParceiroEntity instEntity = projetoDAO.buscarParceiroDoCoodernadorPorIdProjeto(idProjeto);
 		if(entity != null){
 			Usuario coodernador = parseService.parseToModel(entity);
-			coodernador.setInstituicao(parseService.parseToModel(instEntity));
+			coodernador.setParceiro(parseService.parseToModel(instEntity));
 			return coodernador;
 		}else{
 			return null;

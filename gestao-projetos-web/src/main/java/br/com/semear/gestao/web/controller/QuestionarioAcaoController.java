@@ -111,7 +111,7 @@ public class QuestionarioAcaoController {
 				novaPergunta.getAlternativas().add(alternativaSim);
 				
 				AlternativaPerguntaAcao alternativaNao = new AlternativaPerguntaAcao();
-				alternativaNao.setDescricaoAlternativa("Não");
+				alternativaNao.setDescricaoAlternativa("NÃ£o");
 				novaPergunta.getAlternativas().add(alternativaNao);
 			}
 			

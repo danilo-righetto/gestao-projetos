@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Colaborador;
-import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.service.ColaboradorService;
-import br.com.semear.gestao.service.InstituicaoService;
-import br.com.semear.gestao.service.ProjetoService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
 import br.com.semear.gestao.service.UsuarioService;
 
 @Controller
-@RequestMapping("/painel/instituicoes")
-public class InstituicaoController {
+@RequestMapping("/painel/parceiros")
+public class ParceiroController {
 	private ModelAndView mav = new ModelAndView();
 
 	private String colaborador = "ROLE_COLABORADOR";
@@ -28,10 +27,7 @@ public class InstituicaoController {
 	private String avaliadorExterno = "ROLE_AVALIADOR_EXTERNO";
 
 	@Inject
-	private InstituicaoService instituicaoService;
-
-	@Inject
-	private ProjetoService projetoService;
+	private ParceiroService parceiroService;
 
 	@Inject
 	private UnidadePrisionalService unidadePrisionalService;
@@ -43,61 +39,61 @@ public class InstituicaoController {
 	private ColaboradorService colaboradorService;
 
 	@RequestMapping("/")
-	public ModelAndView listaDeInstituicoes() {
+	public ModelAndView listaDeParceiros() {
 		mav.clear();
-		mav.setViewName("listarInstituicoes");
-		mav.addObject("instituicoes", instituicaoService.listarInstituicoes());
+		mav.setViewName("listarParceiros");
+		mav.addObject("parceiros", parceiroService.listarParceiros());
 		return mav;
 	}
 
 	@RequestMapping("cadastro")
-	public ModelAndView index() {
+	public ModelAndView frmCadastroParceiro() {
 		mav.clear();
-		mav.setViewName("cadastroInstituicao");
+		mav.setViewName("cadastroParceiro");
 		return mav;
 	}
 
-	@RequestMapping(value = "salvarInstituicao", method = RequestMethod.POST)
-	public ModelAndView salvarInstituicao(Instituicao instituicao) {
+	@RequestMapping(value = "salvarParceiro", method = RequestMethod.POST)
+	public ModelAndView salvarParceiro(Parceiro parceiro) {
 		mav.clear();
-		mav.setViewName("cadastroInstituicao");
-		mav.addObject("msg", instituicaoService.cadastrarInstituicao(instituicao));
-		mav.addObject("idInstituicao", instituicao.getId());
+		mav.setViewName("cadastroParceiro");
+		mav.addObject("msg", parceiroService.cadastrarParceiro(parceiro));
+		mav.addObject("idParceiro", parceiro.getId());
 		return mav;
 	}
 
-	@RequestMapping(value = "editarInstituicao", method = RequestMethod.POST)
-	public String editarInstituicao(Instituicao instituicao) {
-		instituicaoService.editarInstituicao(instituicao);
-		return "redirect:/painel/instituicoes/";
+	@RequestMapping(value = "editarParceiro", method = RequestMethod.POST)
+	public String editarParceiro(Parceiro parceiro) {
+		parceiroService.editarParceiro(parceiro);
+		return "redirect:/painel/parceiros/";
 	}
 
-	@RequestMapping(value = "editar/{idInstituicao}")
-	public ModelAndView formEditar(@PathVariable("idInstituicao") long idInstituicao) {
+	@RequestMapping(value = "editar/{idParceiro}")
+	public ModelAndView formEditarParceiro(@PathVariable("idParceiro") long idParceiro) {
 		mav.clear();
-		mav.setViewName("editarInstituicao");
-		mav.addObject("inst", instituicaoService.buscarInstituicaoPorId(idInstituicao));
-		mav.addObject("users", usuarioService.buscarUsuarioPorInstituicao(idInstituicao));
-		mav.addObject("unidades", unidadePrisionalService.buscarUnidadePrisionalPorInstituicao(idInstituicao));
+		mav.setViewName("editarParceiro");
+		mav.addObject("parceiro", parceiroService.buscarParceiroPorId(idParceiro));
+		mav.addObject("users", usuarioService.buscarUsuarioPorParceiro(idParceiro));
+		mav.addObject("unidades", unidadePrisionalService.buscarUnidadePrisionalPorParceiro(idParceiro));
 		mav.addObject("unidadesPrisionais", unidadePrisionalService.listarUnidadesPorStatus(true));
 		return mav;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "consultarInstituicao", method = RequestMethod.POST)
-	public boolean consultarInstituicao(String documento) {
+	@RequestMapping(value = "consultarParceiro", method = RequestMethod.POST)
+	public boolean consultarParceiro(String documento) {
 		boolean documentoExiste = false;
 
-		if (instituicaoService.buscarInstituicaoPorDocumento(documento) != null) {
+		if (parceiroService.buscarParceiroPorDocumento(documento) != null) {
 			documentoExiste = true;
 		}
 		return documentoExiste;
 	}
 
 	@RequestMapping(value = "adicionarUnidade", method = RequestMethod.POST)
-	public String adicionarUnidade(long idInstituicao, long idUnidadePrisional) {
-		unidadePrisionalService.adicionarVinculoInstituicaoComUnidadePrisional(idInstituicao, idUnidadePrisional);
-		return "redirect:/painel/instituicoes/editar/" + idInstituicao;
+	public String adicionarUnidade(long idParceiro, long idUnidadePrisional) {
+		unidadePrisionalService.adicionarVinculoParceiroComUnidadePrisional(idParceiro, idUnidadePrisional);
+		return "redirect:/painel/parceiros/editar/" + idParceiro;
 	}
 
 	@RequestMapping("{idParceiro}/colaboradores/cadastro")

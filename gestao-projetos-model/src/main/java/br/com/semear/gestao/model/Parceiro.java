@@ -2,7 +2,7 @@ package br.com.semear.gestao.model;
 
 import java.util.Calendar;
 
-public class Instituicao {
+public class Parceiro {
 	private long id;
 	private String nomefantasia;
 	private String razaosocial;
@@ -21,11 +21,11 @@ public class Instituicao {
 	private String status;
 	private Calendar dataCadastro;
 	
-	public Instituicao(Long id) {
+	public Parceiro(Long id) {
 		this.id = id;
 	}
 	
-	public Instituicao() {
+	public Parceiro() {
 		
 	}
 	

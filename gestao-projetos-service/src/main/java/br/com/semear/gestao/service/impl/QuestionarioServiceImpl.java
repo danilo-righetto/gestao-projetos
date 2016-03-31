@@ -42,7 +42,7 @@ public class QuestionarioServiceImpl implements QuestionarioService {
 	public void criarQuestionarioProjeto(ProjetoEntity projeto) {
 		QuestionarioEntity questionario = new QuestionarioEntity();
 		questionario.setDataCadastro(Calendar.getInstance());
-		questionario.setDescricao("QUESTION¡RIO DO PROJETO "+projeto.getNome().toUpperCase());
+		questionario.setDescricao("QUESTION√ÅRIO DO PROJETO "+projeto.getNome().toUpperCase());
 		questionario.setProjeto(projeto);
 		questionarioDAO.salvarQuestionario(questionario);
 	}
