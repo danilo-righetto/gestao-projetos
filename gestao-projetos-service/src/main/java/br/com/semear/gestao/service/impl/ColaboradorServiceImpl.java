@@ -14,13 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.semear.gestao.dao.ColaboradorDAO;
 import br.com.semear.gestao.dao.entity.ColaboradorEntity;
 import br.com.semear.gestao.model.Colaborador;
-import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ColaboradorService;
-import br.com.semear.gestao.service.InstituicaoService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.MailService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
+import br.com.semear.gestao.service.UtilService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -33,26 +34,29 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 	private ParseService parse;
 
 	@Inject
+	private UtilService util;
+
+	@Inject
 	private MailService mailService;
 
 	@Inject
 	private ColaboradorDAO colaboradorDAO;
 
 	@Inject
-	private InstituicaoService instituicaoService;
+	private ParceiroService parceiroService;
 
 	@Inject
 	private UsuarioService usuarioService;
 
 	@Override
 	public void cadastrar(Colaborador colaborador) {
-		String senha = geradorSenha(8);
-		Instituicao parceiro = instituicaoService.buscarInstituicaoPorId(colaborador.getParceiro().getId());
+		String senha = util.gerarSenha();
+		Parceiro parceiro = parceiroService.buscarParceiroPorId(colaborador.getParceiro().getId());
 		Usuario usuario = new Usuario();
 		usuario.setNome(colaborador.getNome());
 		usuario.setUsuario(colaborador.getEmail());
 		usuario.setPerfil(colaborador.getUsuario().getPerfil());
-		usuario.setInstituicao(parceiro);
+		usuario.setParceiro(parceiro);
 		usuario.setRealizaLogin(true);
 		usuario.setDataCadastro(Calendar.getInstance());
 
@@ -66,8 +70,8 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 	@Override
 	public void editar(Colaborador colaborador) {
 		Usuario usuario = usuarioService.buscarUsuarioPorId(colaborador.getUsuario().getId());
-		Instituicao parceiro = instituicaoService.buscarInstituicaoPorId(colaborador.getParceiro().getId());
-		
+		Parceiro parceiro = parceiroService.buscarParceiroPorId(colaborador.getParceiro().getId());
+
 		usuario.setNome(colaborador.getNome());
 		usuario.setUsuario(colaborador.getEmail());
 		usuario.setPerfil(colaborador.getUsuario().getPerfil());
@@ -77,26 +81,13 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 	}
 
 	@Override
-	public List<Colaborador> listarColaboradores(long idInstituicao) {
-		List<ColaboradorEntity> lista = colaboradorDAO.listarColaboradores(idInstituicao);
+	public List<Colaborador> listarColaboradores(long idParceiro) {
+		List<ColaboradorEntity> lista = colaboradorDAO.listarColaboradores(idParceiro);
 		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 		for (ColaboradorEntity colaborador : lista) {
 			colaboradores.add(parse.parseToModel(colaborador));
 		}
 		return colaboradores;
-	}
-
-	public String geradorSenha(int qtd) {
-		char[] rnd = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-				'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-				'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-				'Z' };
-		String senha = new String();
-		for (int i = 0; i < 8; i++) {
-			Integer pchar = (int) (Math.random() * rnd.length);
-			senha += (rnd[pchar]);
-		}
-		return senha;
 	}
 
 	@Override

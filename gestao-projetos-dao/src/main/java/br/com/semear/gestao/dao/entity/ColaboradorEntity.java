@@ -32,7 +32,7 @@ public class ColaboradorEntity {
 
 	@JoinColumn(name = "PARCEIRO")
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private InstituicaoEntity parceiro;
+	private ParceiroEntity parceiro;
 
 	public long getId() {
 		return id;
@@ -66,11 +66,11 @@ public class ColaboradorEntity {
 		this.usuario = usuario;
 	}
 
-	public InstituicaoEntity getParceiro() {
+	public ParceiroEntity getParceiro() {
 		return parceiro;
 	}
 
-	public void setParceiro(InstituicaoEntity parceiro) {
+	public void setParceiro(ParceiroEntity parceiro) {
 		this.parceiro = parceiro;
 	}
 }

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ProjetoDAO;
 import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -76,11 +76,11 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 	}
 	
 	@Override
-	public InstituicaoEntity buscarInstituicaoDoCoodernadorPorIdProjeto(long idProjeto) {
-		Query query = em.createQuery("select p.coordenador.instituicao from ProjetoEntity p where p.id = :idProjeto");
+	public ParceiroEntity buscarParceiroDoCoodernadorPorIdProjeto(long idProjeto) {
+		Query query = em.createQuery("select p.coordenador.parceiro from ProjetoEntity p where p.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
 		if(!query.getResultList().isEmpty()){
-			return (InstituicaoEntity) query.getResultList().get(0);
+			return (ParceiroEntity) query.getResultList().get(0);
 		}else{
 			return null;
 		}

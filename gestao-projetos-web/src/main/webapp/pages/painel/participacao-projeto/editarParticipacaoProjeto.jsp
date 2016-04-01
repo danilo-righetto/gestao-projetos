@@ -25,14 +25,14 @@
 								type="hidden" />
 						</div>
 						<div class="form-group col-md-4">
-							<label for="instituicao">Instituição:</label> <input
-								id="instituicao" name="razaosocial" class="form-control"
-								value="${instituicao.razaosocial}" required autofocus />
+							<label for="parceiro">Parceiro:</label> <input
+								id="parceiro" name="razaosocial" class="form-control"
+								value="${parceiro.razaosocial}" required autofocus />
 							<!-- MONTAR MODAL
 								<option value="" label="Selecione..." />
-								<c:forEach var="instituicao" items="${instituicoesDaUnidade}">
-									<option value="${instituicao.id}"
-										label="${instituicao.razaosocial}" />
+								<c:forEach var="parceiro" items="${parceirosDaUnidade}">
+									<option value="${parceiro.id}"
+										label="${parceiro.razaosocial}" />
 								</c:forEach>
 								 -->
 						</div>

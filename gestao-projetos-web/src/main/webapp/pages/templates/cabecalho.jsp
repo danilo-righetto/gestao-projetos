@@ -112,8 +112,8 @@
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
 					<li id="menu-acoes"><a
 						href='<c:url value="/painel/acoes/" />'>Ações</a></li>
-					<li id="menu-instituicoes"><a
-						href='<c:url value="/painel/instituicoes/" />'>Instituições</a>
+					<li id="menu-parceiros"><a
+						href='<c:url value="/painel/parceiros/" />'>Parceiros</a>
 					</li>
 					<li id="menu-reeducandos"><a
 						href='<c:url value="/painel/reeducandos/" />'>Reeducandos</a>

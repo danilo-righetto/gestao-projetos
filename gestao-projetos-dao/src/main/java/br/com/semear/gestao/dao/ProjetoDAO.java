@@ -3,7 +3,7 @@ package br.com.semear.gestao.dao;
 import java.util.List;
 
 import br.com.semear.gestao.dao.entity.AcaoRelProjetoEntity;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 
@@ -22,7 +22,7 @@ public interface ProjetoDAO {
 
 	public UsuarioEntity buscarCoodernadorPorIdProjeto(long idProjeto);
 
-	InstituicaoEntity buscarInstituicaoDoCoodernadorPorIdProjeto(long idProjeto);
+	ParceiroEntity buscarParceiroDoCoodernadorPorIdProjeto(long idProjeto);
 	
 	public void adicionarVinculoAcaoComProjeto(AcaoRelProjetoEntity rel);
 }

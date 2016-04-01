@@ -8,7 +8,7 @@ public class Usuario {
 	private String usuario;
 	private String senha;
 	private Perfil perfil;
-	private Instituicao instituicao;
+	private Parceiro parceiro;
 	private Calendar dataCadastro;
 	private boolean realizaLogin;
 
@@ -76,11 +76,11 @@ public class Usuario {
 		this.realizaLogin = realizaLogin;
 	}
 
-	public Instituicao getInstituicao() {
-		return instituicao;
+	public Parceiro getParceiro() {
+		return parceiro;
 	}
 
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
+	public void setParceiro(Parceiro parceiro) {
+		this.parceiro = parceiro;
 	}
 }

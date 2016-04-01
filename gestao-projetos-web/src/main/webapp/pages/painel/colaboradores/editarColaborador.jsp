@@ -12,7 +12,7 @@
 			<h4 class="title-screen">Editar Colaborador</h4>
 			<hr />
 			<form
-				action='<c:url value="/painel/instituicoes/${idParceiro}/editarColaborador"></c:url>'
+				action='<c:url value="/painel/parceiros/${idParceiro}/editarColaborador"></c:url>'
 				method="POST">
 				<div>
 					<input id="parceiro" name="parceiro.id" value="${idParceiro}"
@@ -59,7 +59,7 @@
 					</div>
 					<div class="row">
 						<a class="btn btn-default btn-return"
-							href='<c:url value="/painel/instituicoes/${idParceiro}/colaboradores"></c:url>'>Cancelar</a>
+							href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores"></c:url>'>Cancelar</a>
 						<button class="btn btn-default btn-add" type="submit">Salvar
 							Colaborador</button>
 					</div>

@@ -14,13 +14,13 @@
 	$(function() {
 		var msg = "<c:out value='${msg}'/>";
 		if (msg == 'OK') {
-			$("#modalInstituicaoAdicionada").modal({
+			$("#modalParceiroAdicionada").modal({
 				keyboard : false,
 				backdrop : 'static'
 			});
 		}
 
-		$("#menu-instituicoes").attr('class', 'active');
+		$("#menu-parceiros").attr('class', 'active');
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
 		$('#cep').mask('00000-000');
 		$('#telefoneFixo').mask('(00) 0000-0000');
@@ -240,7 +240,7 @@
 		var documento = $("#documento").val();
 		$
 				.post(
-						"/gestao-projetos/painel/instituicoes/consultarInstituicao?documento="
+						"/gestao-projetos/painel/parceiros/consultarParceiro?documento="
 								+ documento,
 						function(existe) {
 							if (existe) {
@@ -258,8 +258,8 @@
 </script>
 
 <body>
-	<!-- MODAL INSTITUICAO ADICIONADA INICIO -->
-	<div class="modal fade" id="modalInstituicaoAdicionada" tabindex="-1"
+	<!-- MODAL PARCEIRO ADICIONADA INICIO -->
+	<div class="modal fade" id="modalParceiroAdicionada" tabindex="-1"
 		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -270,17 +270,17 @@
 					<p>O que deseja fazer agora?</p>
 				</div>
 				<div class="modal-footer">
-					<a href='<c:url value="/painel/instituicoes/" />'
+					<a href='<c:url value="/painel/parceiros/" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-						class="btn btn-default">Ir para a lista de instituições</a> <a
-						href='<c:url value="/painel/instituicoes/editar/${idInstituicao}" />'
+						class="btn btn-default">Ir para a lista de parceiros</a> <a
+						href='<c:url value="/painel/parceiros/editar/${idParceiro}" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Informar unidades</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- MODAL INSTITUICAO ADICIONADA FIM -->
+	<!-- MODAL PARCEIRO ADICIONADA FIM -->
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
@@ -288,7 +288,7 @@
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
-					<form action="salvarInstituicao" method="POST" role="form">
+					<form action="salvarParceiro" method="POST" role="form">
 						<div id="alertas"></div>
 						<div class="form-group col-md-2">
 							<label for="tipopessoa">Tipo de Pessoa:</label> <select
@@ -386,7 +386,7 @@
 
 							<hr />
 							<div class="form-group col-xs-offset-0">
-								<a href='<c:url value="/painel/instituicoes/" />'
+								<a href='<c:url value="/painel/parceiros/" />'
 									style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 									class="btn btn-default"><span
 									class="glyphicon glyphicon-remove"></span> Cancelar</a>

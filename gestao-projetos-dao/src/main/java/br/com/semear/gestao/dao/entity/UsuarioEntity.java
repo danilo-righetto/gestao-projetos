@@ -35,10 +35,10 @@ public class UsuarioEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PERFIL", nullable = false)
 	private PerfilEntity perfil;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "INSTITUICAO", nullable = true)
-	private InstituicaoEntity instituicao;
+	@JoinColumn(name = "PARCEIRO", nullable = true)
+	private ParceiroEntity parceiro;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATA_CADASTRO")
@@ -56,12 +56,12 @@ public class UsuarioEntity {
 	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
 	private List<TarefaProjetoEntity> autorTarefas;
 
-	public InstituicaoEntity getInstituicao() {
-		return instituicao;
+	public ParceiroEntity getParceiro() {
+		return parceiro;
 	}
 
-	public void setInstituicao(InstituicaoEntity instituicao) {
-		this.instituicao = instituicao;
+	public void setParceiro(ParceiroEntity parceiro) {
+		this.parceiro = parceiro;
 	}
 
 	public List<ProjetoEntity> getProjetos() {

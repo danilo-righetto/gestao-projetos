@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 	$(function() {
-		$("#menu-instituicoes").attr('class', 'active');
+		$("#menu-parceiros").attr('class', 'active');
 		$("#tbColaboradores").dataTable({
 			"iDisplayLength" : 5,
 			"bPaginate" : true,
@@ -51,7 +51,7 @@
 									<td class="hidden-xs hidden-sm">${colaborador.nome}</td>
 									<td class="hidden-xs hidden-sm">${colaborador.email}</td>
 									<td><a
-										href='<c:url value="/painel/instituicoes/${idParceiro}/colaboradores/${colaborador.id}/editar"></c:url>'><span
+										href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores/${colaborador.id}/editar"></c:url>'><span
 											class="glyphicon glyphicon-pencil"></span></a></td>
 								</tr>
 							</c:forEach>
@@ -66,10 +66,10 @@
 			</table>
 			<div>
 				<a class="btn btn-default btn-return"
-					href='<c:url value="/painel/instituicoes/"></c:url>'><span
+					href='<c:url value="/painel/parceiros/"></c:url>'><span
 					class="glyphicon glyphicon-arrow-left"></span></a> <a
 					class="btn btn-default btn-add"
-					href='<c:url value="/painel/instituicoes/${idParceiro}/colaboradores/cadastro"></c:url>'>Adicionar
+					href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores/cadastro"></c:url>'>Adicionar
 					Colaborador </a>
 			</div>
 

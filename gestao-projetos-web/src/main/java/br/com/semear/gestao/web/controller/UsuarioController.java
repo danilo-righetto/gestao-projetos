@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Usuario;
-import br.com.semear.gestao.service.InstituicaoService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.PerfilService;
 import br.com.semear.gestao.service.UsuarioService;
 
@@ -24,7 +24,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@Inject
-	private InstituicaoService instituicaoService;
+	private ParceiroService parceiroService;
 	
 	@Inject
 	private PerfilService perfilService;
@@ -45,7 +45,7 @@ public class UsuarioController {
 		mav.clear();
 		mav.setViewName("cadastroUsuario");
 		mav.addObject("listaperfil", perfilService.listarPerfil());
-		mav.addObject("instituicoes", instituicaoService.listarInstituicoes());
+		mav.addObject("parceiros", parceiroService.listarParceiros());
 		return mav;
 	}
 	
@@ -86,7 +86,7 @@ public class UsuarioController {
 		mav.setViewName("editarUsuario");
 		mav.addObject("listaperfil", perfilService.listarPerfil());
 		mav.addObject("user", usuarioService.buscarUsuarioPorId(idUsuario));
-		mav.addObject("inst", instituicaoService.listarInstituicoes());
+		mav.addObject("parceiros", parceiroService.listarParceiros());
 		return mav;
 	}
 	

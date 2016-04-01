@@ -6,18 +6,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.ReeducandoDAO;
 import br.com.semear.gestao.dao.entity.ReeducandoEntity;
-import br.com.semear.gestao.model.Instituicao;
 import br.com.semear.gestao.model.Perfil;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.ReeducandoService;
+import br.com.semear.gestao.service.UtilService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -29,14 +30,19 @@ public class ReeducandoServiceImpl implements ReeducandoService {
 	@Inject
 	private ParseService parse;
 
+	@Inject
+	private PasswordEncoder passwordEncoder;
+
+	@Inject
+	private UtilService util;
+
 	@Override
 	public void cadastrarReeducando(Reeducando reeducando) {
 		Usuario usuario = new Usuario();
 		usuario.setUsuario(reeducando.getMatricula() + "." + reeducando.getUnidadePrisional().getId() + "@iap.org.br");
 		usuario.setNome(reeducando.getNome());
-		usuario.setSenha("");
+		usuario.setSenha(passwordEncoder.encode((util.gerarSenha())));
 		usuario.setPerfil(new Perfil("ROLE_REEDUCANDO"));
-		usuario.setInstituicao(new Instituicao());
 		usuario.setRealizaLogin(false);
 		usuario.setDataCadastro(Calendar.getInstance());
 

@@ -7,8 +7,8 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-instituicoes").attr('class', 'active');
-		$("#tbInstituicoes").dataTable({
+		$("#menu-parceiros").attr('class', 'active');
+		$("#tbParceiros").dataTable({
 			"iDisplayLength" : 5,
 			"bPaginate" : true,
 			"bLengthChange" : false,
@@ -32,9 +32,9 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Instituições</h4>
+			<h4 style="font-family: arial; color: #4DC1FF">Parceiros</h4>
 			<div id="alertas"></div>
-			<table id="tbInstituicoes" class="table table-responsive">
+			<table id="tbParceiros" class="table table-responsive">
 				<thead>
 					<tr>
 						<td class="text-center"><span style="font-weight: bold;">#</span></td>
@@ -50,18 +50,18 @@
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${not empty instituicoes}">
-							<c:forEach items="${instituicoes}" var="instituicao">
+						<c:when test="${not empty parceiros}">
+							<c:forEach items="${parceiros}" var="parceiro">
 								<tr class="text-center">
-									<td>${instituicao.id}</td>
-									<td class="hidden-xs hidden-sm">${(instituicao.tipoDocumento == "CNPJ" ?
+									<td>${parceiro.id}</td>
+									<td class="hidden-xs hidden-sm">${(parceiro.tipoDocumento == "CNPJ" ?
 									 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
-									<td>${instituicao.cidade}</td>
-									<td class="hidden-xs hidden-sm">${instituicao.email}</td>
-									<td class="hidden-xs hidden-sm">${instituicao.responsavel}</td>
-									<td><a href="editar/${instituicao.id}"><span
+									<td>${parceiro.cidade}</td>
+									<td class="hidden-xs hidden-sm">${parceiro.email}</td>
+									<td class="hidden-xs hidden-sm">${parceiro.responsavel}</td>
+									<td><a href="editar/${parceiro.id}"><span
 											class="glyphicon glyphicon-pencil"></span></a> <a
-										href="${instituicao.id}/colaboradores"><span
+										href="${parceiro.id}/colaboradores"><span
 											class="glyphicon glyphicon-user"></span></a></td>
 								</tr>
 							</c:forEach>
@@ -76,7 +76,7 @@
 			</table>
 			<a href='<c:url value="cadastro"></c:url>'
 				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Nova Instituição</a>
+				class="btn btn-default">Novo Parceiro</a>
 		</div>
 	</div>
 	<div class="section" style="margin-top: 20px"></div>

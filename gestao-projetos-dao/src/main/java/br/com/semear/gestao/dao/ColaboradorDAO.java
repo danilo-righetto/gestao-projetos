@@ -10,7 +10,7 @@ public interface ColaboradorDAO {
 
 	public void editar(ColaboradorEntity entity);
 
-	public List<ColaboradorEntity> listarColaboradores(long idInstituicao);
+	public List<ColaboradorEntity> listarColaboradores(long idParceiro);
 
 	public ColaboradorEntity buscarColaboradorPorId(long idColaborador);
 }

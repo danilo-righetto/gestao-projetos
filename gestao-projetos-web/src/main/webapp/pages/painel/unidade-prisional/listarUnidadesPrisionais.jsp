@@ -53,10 +53,10 @@
 									<td class="text-center">${unidade.id}</td>
 									<td class="text-center">${unidade.nome}</td>
 									<c:if test="${unidade.status == true}">
-										<td class="text-center">Ativada</td>
+										<td class="text-center">ATIVADA</td>
 									</c:if>
 									<c:if test="${unidade.status == false}">
-										<td class="text-center">Desativada</td>
+										<td class="text-center">DESATIVADA</td>
 									</c:if>
 									<td class="text-center"><a href="editar/${unidade.id}"><span
 											class="glyphicon glyphicon-pencil"></span></a></td>

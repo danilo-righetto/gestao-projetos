@@ -12,7 +12,7 @@ public class LoginController {
 	@RequestMapping("/")
 	public String login(HttpServletRequest request){
 		
-		/**VERIFICA SE EXISTE SESS√O PARA O USUARIO, CASO EXISTA REDIRECIONA PARA O PAINEL, SEN√O VAI PARA TELA DE LOGIN*/
+		/**VERIFICA SE EXISTE SESS√ÉO PARA O USUARIO, CASO EXISTA REDIRECIONA PARA O PAINEL, SEN√ÉO VAI PARA TELA DE LOGIN*/
 		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")){
 			return "redirect:/painel";
 		}

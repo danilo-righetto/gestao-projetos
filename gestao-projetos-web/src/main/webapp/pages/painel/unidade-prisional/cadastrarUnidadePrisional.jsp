@@ -17,7 +17,7 @@
 						<div class="row">
 							<div class="form-group col-md-5">
 								<label for="nome">Nome:</label><input class="form-control"
-									id="nome" name="nome" placeholder="Nome da Instituição"
+									id="nome" name="nome" placeholder="Nome do Parceiro"
 									required autofocus />
 							</div>
 							<div class="form-group col-md-3">

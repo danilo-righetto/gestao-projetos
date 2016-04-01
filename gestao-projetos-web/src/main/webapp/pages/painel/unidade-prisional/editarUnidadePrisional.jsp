@@ -32,12 +32,12 @@
 									id="status" name="status" required>
 									<c:choose>
 										<c:when test="${unidadePrisional.status == true}">
-											<option value="true" label="Ativada" selected />
-											<option value="false" label="Desativada" />
+											<option value="true" label="ATIVADA" selected />
+											<option value="false" label="DESATIVADA" />
 										</c:when>
 										<c:when test="${unidadePrisional.status == false}">
-											<option value="true" label="Ativada" />
-											<option value="false" label="Desativada" selected />
+											<option value="true" label="ATIVADA" />
+											<option value="false" label="DESATIVADA" selected />
 										</c:when>
 									</c:choose>
 

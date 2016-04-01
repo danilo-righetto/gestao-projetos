@@ -7,12 +7,12 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-instituicoes").attr('class', 'active');
+		$("#menu-parceiros").attr('class', 'active');
 	});
 </script>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-instituicoes").attr('class', 'active');
+		$("#menu-parceiros").attr('class', 'active');
 		$('#documentoCNPJ').mask('00.000.000/0000-00');
 		$('#cep').mask('00000-000');
 		$('#telefoneFixo').mask('(00) 0000-0000');
@@ -65,7 +65,7 @@
 		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<form id="form-add-pergunta" method="POST"
-				action='<c:url value="/painel/instituicoes/adicionarUnidade" />'>
+				action='<c:url value="/painel/parceiros/adicionarUnidade" />'>
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -75,7 +75,7 @@
 						<h4 class="modal-title">Adicionar Unidade Prisional</h4>
 					</div>
 					<div class="modal-body">
-						<input type="hidden" name="idInstituicao" value="${inst.id}" />
+						<input type="hidden" name="idParceiro" value="${parceiro.id}" />
 						<div class="row">
 							<div class="form-group col-md-12">
 								<label>Selecione a Unidade Prisional:</label> <select
@@ -115,13 +115,13 @@
 	<div class="section">
 		<div class="container">
 			<h4 style="font-family: arial; color: #4DC1FF">Edição de
-				Instituição</h4>
+				Parceiro</h4>
 			<hr />
 			<div id="alertas"></div>
 			<form
-				action='<c:url value="/painel/instituicoes/editarInstituicao"></c:url>'
+				action='<c:url value="/painel/parceiros/editarParceiro"></c:url>'
 				method="POST" role="form">
-				<input type="hidden" name="id" value="${inst.id}">
+				<input type="hidden" name="id" value="${parceiro.id}">
 				<div class="row">
 					<div class="form-group col-md-2">
 						<label for="tipopessoa">Tipo de Pessoa:</label> <select
@@ -129,41 +129,41 @@
 							onchange="ocultarCNPJ();" disabled="disabled">
 							<option value="">Selecione ...</option>
 							<option value="fisica"
-								${(inst.tipoDocumento == "CPF" ? 
+								${(parceiro.tipoDocumento == "CPF" ? 
 								'selected' : '')}>Pessoa
 								Fisica</option>
 							<option value="juridica"
-								${(inst.tipoDocumento == "CNPJ" ? 
+								${(parceiro.tipoDocumento == "CNPJ" ? 
 								'selected' : '')}>Pessoa
 								Juridica</option>
 						</select>
 					</div>
 					<c:choose>
-						<c:when test="${(inst.tipoDocumento == 'CPF')}">
+						<c:when test="${(parceiro.tipoDocumento == 'CPF')}">
 							<div class="form-group col-md-5" id="fisica1"
-								${(inst.tipoDocumento == "CPF" ? 
+								${(parceiro.tipoDocumento == "CPF" ? 
 								'style="display: block;' : '')}>
 								<label for="razaosocial">Nome Completo:</label> <input
 									type="text" class="form-control" id="nomecompleto"
-									value="${inst.razaosocial}" name="razaosocial"
+									value="${parceiro.razaosocial}" name="razaosocial"
 									placeholder="Digite o nome" autofocus>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="form-group col-md-5" id="jurudico2"
-								${(inst.tipoDocumento == "CNPJ" ? 
+								${(parceiro.tipoDocumento == "CNPJ" ? 
 								'' : 'style="display: none;"')}>
 								<label for="razaosocial">Razão Social:</label> <input
 									type="text" class="form-control" id="razaosocial"
-									value="${inst.razaosocial}" name="razaosocial"
+									value="${parceiro.razaosocial}" name="razaosocial"
 									placeholder="Digite a razao social" autofocus>
 							</div>
 							<div class="form-group col-md-5" id="jurudico1"
-								${(inst.tipoDocumento == "CNPJ" ? 
+								${(parceiro.tipoDocumento == "CNPJ" ? 
 								'' : 'style="display: none;"')}>
 								<label for="nomefantasia">Nome Fantasia:</label> <input
 									type="text" class="form-control" id="nomefantasia"
-									value="${inst.nomefantasia}" name="nomefantasia"
+									value="${parceiro.nomefantasia}" name="nomefantasia"
 									placeholder="Digite o nome" autofocus>
 							</div>
 						</c:otherwise>
@@ -172,72 +172,72 @@
 						<label for="tipoDocumento">Tipo do Documento</label> <select
 							class="form-control" name="tipoDocumento" id="tipoDocumento"
 							onchange="mascaraRG();" disabled="disabled">
-							<option value="${inst.tipoDocumento}" id="${inst.tipoDocumento}">${inst.tipoDocumento}</option>
+							<option value="${parceiro.tipoDocumento}" id="${parceiro.tipoDocumento}">${parceiro.tipoDocumento}</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="documento">Número do Documento:</label> <input
 							type="text" class="form-control" id="documento"
-							value="${inst.documento}" name="documento" readonly="readonly"
+							value="${parceiro.documento}" name="documento" readonly="readonly"
 							placeholder="Digite o documento">
 					</div>
 					<div class="form-group col-md-2">
 						<label for="cep">CEP:</label> <input type="text"
-							class="form-control" id="cep" name="cep" value="${inst.cep}"
+							class="form-control" id="cep" name="cep" value="${parceiro.cep}"
 							placeholder="Digite o cep" required autofocus>
 					</div>
 					<div class="form-group col-md-5">
 						<label for="logradouro">Logradouro:</label> <input type="text"
-							class="form-control" id="logradouro" value="${inst.logradouro}"
+							class="form-control" id="logradouro" value="${parceiro.logradouro}"
 							name="logradouro" placeholder="Digite o logradouro" required
 							autofocus>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="numero">Número:</label> <input type="text"
 							class="form-control" id="numero" name="numero"
-							value="${inst.numero}" placeholder="Digite o numero" required
+							value="${parceiro.numero}" placeholder="Digite o numero" required
 							autofocus>
 					</div>
 					<div class="form-group col-md-4">
 						<label for="complemento">Complemento:</label> <input type="text"
 							class="form-control" id="complemento" name="complemento"
-							value="${inst.complemento}" placeholder="Digite o complemento"
+							value="${parceiro.complemento}" placeholder="Digite o complemento"
 							autofocus>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="bairro">Bairro:</label> <input type="text"
 							class="form-control" id="bairro" name="bairro"
-							value="${inst.bairro}" placeholder="Digite o bairro" required
+							value="${parceiro.bairro}" placeholder="Digite o bairro" required
 							autofocus>
 					</div>
 
 					<div class="form-group col-md-1">
 						<label for="uf">UF:</label> <input type="text"
-							class="form-control" id="uf" name="uf" value="${inst.uf}"
+							class="form-control" id="uf" name="uf" value="${parceiro.uf}"
 							placeholder="Digite o uf" required autofocus>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="cidade">Cidade:</label> <input type="text"
 							class="form-control" id="cidade" name="cidade"
-							value="${inst.cidade}" placeholder="Digite a cidade" required
+							value="${parceiro.cidade}" placeholder="Digite a cidade" required
 							autofocus>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="telefone">Telefone:</label> <input type="text"
 							class="form-control" id="telefone" name="telefone"
-							value="${inst.telefone}" placeholder="Digite o telefone" required
+							value="${parceiro.telefone}" placeholder="Digite o telefone" required
 							autofocus>
 					</div>
 					<div class="form-group col-md-4">
 						<label for="email">Email:</label> <input type="email"
 							class="form-control" id="email" name="email"
-							value="${inst.email}" placeholder="Digite o E-mail" required
+							value="${parceiro.email}" placeholder="Digite o E-mail" required
 							autofocus>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="responsavel">Responsável:</label> <input type="text"
 							class="form-control" id="responsavel" name="responsavel"
-							value="${inst.responsavel}"
+							value="${parceiro.responsavel}"
 							placeholder="Digite o nome do responsavel" required autofocus>
 					</div>
 					<div class="form-group col-md-2">
@@ -245,15 +245,15 @@
 							name="status" id=status required>
 							<option value="">Selecione ...</option>
 							<option value="INATIVO"
-								${(inst.status == "INATIVO" ? 
+								${(parceiro.status == "INATIVO" ? 
 								'selected' : '')}>Inativo</option>
 							<option value="ATIVO"
-								${(inst.status == "ATIVO" ? 
+								${(parceiro.status == "ATIVO" ? 
 								'selected' : '')}>Ativo</option>
 						</select>
 					</div>
 				</div>
-				<!-- INICIO - Listagem dos USUARIOS VINCULADOS A INSTITUICAO -->
+				<!-- INICIO - Listagem dos USUARIOS VINCULADOS A PARCEIRO -->
 				<div class="section">
 					<div class="container">
 						<h4 style="font-family: arial; color: #4DC1FF">Usuários da
@@ -295,7 +295,7 @@
 						</table>
 					</div>
 				</div>
-				<!-- FIM - Listagem dos USUARIOS VINCULADOS A INSTITUICAO -->
+				<!-- FIM - Listagem dos USUARIOS VINCULADOS A PARCEIRO -->
 				<!-- INICIO - Listagem de unidades-->
 				<div class="section">
 					<div class="container">
@@ -346,7 +346,7 @@
 				<hr />
 				<div class="form-group col-md-12">
 					<div class="form-group col-xs-offset-0">
-						<a href='<c:url value="/painel/instituicoes/" />'
+						<a href='<c:url value="/painel/parceiros/" />'
 							style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 							class="btn btn-default"><span
 							class="glyphicon glyphicon-remove"></span> Cancelar</a>
