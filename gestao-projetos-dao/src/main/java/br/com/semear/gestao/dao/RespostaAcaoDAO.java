@@ -15,5 +15,7 @@ public interface RespostaAcaoDAO {
 	
 	List<RespostaAcaoEntity> listarRespostas();
 	
+	List<RespostaAcaoEntity> listarRespostasReeducandoPorAcaoTipo(long idReeducando, Long idAcao, String tipo);
+	
 	//void salvarAlternativa(AlternativaPerguntaEntity alternativa);
 }

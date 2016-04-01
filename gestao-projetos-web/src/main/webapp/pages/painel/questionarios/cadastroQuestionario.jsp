@@ -265,7 +265,24 @@
 									placeholder="Digite o nome" required autofocus>
 							</div>
 						</div>
-						<h4 style="font-family: arial; color: #4DC1FF">Perguntas</h4>
+						
+						<!-- Reeducando - Resposta - INICIO -->
+						<div class="form-group col-md-offset-4 col-md-4">
+									<label for="statusQuestionario">Esse questionário refere-se ao:</label> <select
+										id="statusQuestionario" name="statusQuestionario"
+										class="form-control" required>
+										<option value="" label="Selecione..." />
+												<option value="INICIO"
+													label="Inicio do Projeto" />
+												<option value="FIM"
+													label="Fim do Projeto" />
+									</select>
+								</div>
+						<!-- Reeducando - Resposta - FIM -->
+						<br /><br />
+						<div class="row">
+						<h4 style="font-family: arial; color: #4DC1FF; margin-top: 50px;">Perguntas</h4>
+						</div>
 						<div class="row">
 
 							<table class="table table-responsive" id="tbPerguntas">
