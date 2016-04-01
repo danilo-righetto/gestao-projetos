@@ -10,7 +10,7 @@ public class Colaborador {
 
 	private Usuario usuario;
 	
-	private Instituicao parceiro;
+	private Parceiro parceiro;
 
 	public long getId() {
 		return id;
@@ -44,11 +44,11 @@ public class Colaborador {
 		this.usuario = usuario;
 	}
 
-	public Instituicao getParceiro() {
+	public Parceiro getParceiro() {
 		return parceiro;
 	}
 
-	public void setParceiro(Instituicao parceiro) {
+	public void setParceiro(Parceiro parceiro) {
 		this.parceiro = parceiro;
 	}
 }

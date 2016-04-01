@@ -18,7 +18,7 @@ import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.TarefaProjeto;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
-import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
+import br.com.semear.gestao.service.ParticipacaoParceiroProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 import br.com.semear.gestao.service.QuestionarioService;
@@ -45,7 +45,7 @@ public class ProjetoController {
 	private QuestionarioService questionarioService;
 	
 	@Inject
-	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
+	private ParticipacaoParceiroProjetoService participacaoParceiroProjetoService;
 	
 	@Inject
 	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
@@ -63,14 +63,14 @@ public class ProjetoController {
 	@RequestMapping("/{idProjeto}/detalhar")
 	public ModelAndView detalharProjeto(@PathVariable("idProjeto") long idProjeto) {
 		try {
-			List<Long> instituicoesAssociadas = participacaoInstituicaoProjetoService.buscarInstituicoesAssociadas(idProjeto);
+			List<Long> parceirosAssociadas = participacaoParceiroProjetoService.buscarParceirosAssociadas(idProjeto);
 			mav.clear();
 			mav.setViewName("detalhar-projeto");
 			mav.addObject("projeto", projetoService.buscarProjetoPorId(idProjeto));
 			mav.addObject("questionario",questionarioService.buscarQuestionarioPorIdProjeto(idProjeto));
-			mav.addObject("instituicoes", participacaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+			mav.addObject("parceiros", participacaoProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
 			mav.addObject("coordernadorProjeto", projetoService.buscarCoodernadorPorIdProjeto(idProjeto));
-			mav.addObject("instituicoesAssociadas", participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+			mav.addObject("parceirosAssociadas", participacaoParceiroProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
 			
 			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
 			mav.addObject("reeducandos", participacaoProjetoService.listarReeducandosPorUnidadePrisional(idProjeto));
@@ -78,7 +78,7 @@ public class ProjetoController {
 					participacaoColaboradorProjetoService.listarParticipacaoProjetos(idProjeto));
 			
 			mav.addObject("colaboradores",
-					participacaoProjetoService.listarColaboradoresDasInstituicoes(instituicoesAssociadas, "ROLE_COLABORADOR"));
+					participacaoProjetoService.listarColaboradoresDasParceiros(parceirosAssociadas, "ROLE_COLABORADOR"));
 			
 			mav.addObject("tarefas", tarefaProjetoService.listarTarefas(idProjeto));
 		}

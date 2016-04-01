@@ -9,7 +9,7 @@ public interface ColaboradorService {
 
 	public void editar(Colaborador colaborador);
 
-	public List<Colaborador> listarColaboradores(long idInstituicao);
+	public List<Colaborador> listarColaboradores(long idParceiro);
 
 	public Colaborador buscarColaboradorPorId(long idColaborador);
 }

@@ -34,6 +34,17 @@
 				}
 			}
 		});
+		$(".previous").text('Anterior');
+		$(".next").text('Próximo');
+
+		$('#form-add-pergunta').on('keyup keypress', function(e) {
+			  var keyCode = e.keyCode || e.which;
+			  if (keyCode === 13) { 
+			    e.preventDefault();
+			    return false;
+			  }
+			});
+
 	});
 
 	function validarTipoPergunta() {
@@ -209,9 +220,9 @@
 					<a href='<c:url value="/painel/projetos/" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Ir para a lista de projetos</a> <a
-						href='<c:url value="/painel/participacao-projetos/${idProjeto}/instituicoes" />'
+						href='<c:url value="/painel/participacao-projetos/${idProjeto}/parceiros" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-						class="btn btn-default">Associar Instituições</a>
+						class="btn btn-default">Associar Parceiros</a>
 				</div>
 			</div>
 		</div>

@@ -4,12 +4,12 @@ import java.util.Calendar;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class ParticipacaoInstituicaoProjeto {
+public class ParticipacaoParceiroProjeto {
 	private long id;
 
 	private Projeto projeto;
 
-	private Instituicao instituicao;
+	private Parceiro parceiro;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar dataEntrada;
@@ -30,12 +30,12 @@ public class ParticipacaoInstituicaoProjeto {
 		this.projeto = projeto;
 	}
 
-	public Instituicao getInstituicao() {
-		return instituicao;
+	public Parceiro getParceiro() {
+		return parceiro;
 	}
 
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
+	public void setParceiro(Parceiro parceiro) {
+		this.parceiro = parceiro;
 	}
 
 	public Calendar getDataEntrada() {

@@ -178,22 +178,22 @@
 			value="/pages/painel/reeducandos/listarReeducandos.jsp" />
 	</definition>
 
-	<!-- Semear - Cadastro de Instituicao -->
-	<definition name="cadastroInstituicao" extends="main">
+	<!-- Semear - Cadastro de Parceiro -->
+	<definition name="cadastroParceiro" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/instituicoes/cadastroInstituicao.jsp" />
+			value="/pages/painel/parceiros/cadastroParceiro.jsp" />
 	</definition>
 
-	<!-- Semear - Lista de Instituicoes -->
-	<definition name="listarInstituicoes" extends="main">
+	<!-- Semear - Lista de Parceiros -->
+	<definition name="listarParceiros" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/instituicoes/listarInstituicoes.jsp" />
+			value="/pages/painel/parceiros/listarParceiros.jsp" />
 	</definition>
 
-	<!-- Semear - Edição de Instituicoes -->
-	<definition name="editarInstituicao" extends="main">
+	<!-- Semear - Edição de Parceiros -->
+	<definition name="editarParceiro" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/instituicoes/editarInstituicao.jsp" />
+			value="/pages/painel/parceiros/editarParceiro.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Participação Projeto -->
@@ -201,9 +201,9 @@
 		<put-attribute name="conteudo"
 			value="/pages/painel/participacao-projeto/cadastroParticipacaoProjeto.jsp" />
 	</definition>
-	<definition name="associarProjetoInstituicao" extends="main">
+	<definition name="associarProjetoParceiro" extends="main">
 		<put-attribute name="conteudo"
-			value="/pages/painel/participacao-projeto/associarProjetoInstituicao.jsp" />
+			value="/pages/painel/participacao-projeto/associarProjetoParceiro.jsp" />
 	</definition>
 
 	<!-- Semear - Cadastro de Unidade Prisional -->

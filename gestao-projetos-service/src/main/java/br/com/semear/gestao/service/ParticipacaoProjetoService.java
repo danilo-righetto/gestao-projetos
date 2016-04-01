@@ -2,7 +2,7 @@ package br.com.semear.gestao.service;
 
 import java.util.List;
 
-import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
+import br.com.semear.gestao.model.ParticipacaoParceiroProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
@@ -13,15 +13,15 @@ public interface ParticipacaoProjetoService {
 
 	public List<ParticipacaoReeducandoProjeto> listarParticipacaoProjetos();
 
-	public List<Usuario> listarCoPorInstituicao(long idInstituicao, String idPerfil);
+	public List<Usuario> listarCoPorParceiro(long idParceiro, String idPerfil);
 
 	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idUnidadePrisional);
 
-	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> instituicoesAssociadas, String idPerfil);
+	public List<Usuario> listarColaboradoresDasParceiros(List<Long> parceirosAssociadas, String idPerfil);
 
-	public String cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes);
+	public String cadastrarParticipacaoParceiro(Long idProjeto, Long[] idParceiros);
 
-	public List<ParticipacaoInstituicaoProjeto> listarParticipacaoInstituicoesProjeto(long idProjeto);
+	public List<ParticipacaoParceiroProjeto> listarParticipacaoParceirosProjeto(long idProjeto);
 
 	public List<ParticipacaoReeducandoProjeto> listarParticipacaoReeducandoProjeto(long idProjeto);
 

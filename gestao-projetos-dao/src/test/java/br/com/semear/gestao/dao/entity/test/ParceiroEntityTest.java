@@ -1,5 +1,5 @@
 package br.com.semear.gestao.dao.entity.test;
 
-public class InstituicaoEntityTest {
+public class ParceiroEntityTest {
 
 }

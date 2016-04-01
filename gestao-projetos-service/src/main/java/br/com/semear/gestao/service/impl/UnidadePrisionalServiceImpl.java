@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.UnidadePrisionalDAO;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
-import br.com.semear.gestao.dao.entity.UnidadeRelInstituicaoEntity;
+import br.com.semear.gestao.dao.entity.UnidadeRelParceiroEntity;
 import br.com.semear.gestao.model.UnidadePrisional;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
@@ -59,8 +59,8 @@ public class UnidadePrisionalServiceImpl implements UnidadePrisionalService {
 	}
 
 	@Override
-	public List<UnidadePrisional> buscarUnidadePrisionalPorInstituicao(long idInstituicao) {
-		List<UnidadePrisionalEntity> lista = unidadePrisionalDAO.buscarUnidadePrisionalPorInstituicao(idInstituicao);
+	public List<UnidadePrisional> buscarUnidadePrisionalPorParceiro(long idParceiro) {
+		List<UnidadePrisionalEntity> lista = unidadePrisionalDAO.buscarUnidadePrisionalPorParceiro(idParceiro);
 		List<UnidadePrisional> unidadesPrisionais = new ArrayList<UnidadePrisional>();
 		for (UnidadePrisionalEntity u : lista) {
 			unidadesPrisionais.add(parse.parseToModel(u));
@@ -79,12 +79,12 @@ public class UnidadePrisionalServiceImpl implements UnidadePrisionalService {
 	}
 
 	@Override
-	public void adicionarVinculoInstituicaoComUnidadePrisional(long idInstituicao, long idUnidadePrisional) {
-		UnidadeRelInstituicaoEntity rel = new UnidadeRelInstituicaoEntity();
-		rel.setInstituicao(new InstituicaoEntity(idInstituicao));
+	public void adicionarVinculoParceiroComUnidadePrisional(long idParceiro, long idUnidadePrisional) {
+		UnidadeRelParceiroEntity rel = new UnidadeRelParceiroEntity();
+		rel.setParceiro(new ParceiroEntity(idParceiro));
 		rel.setUnidadePrisional(new UnidadePrisionalEntity(idUnidadePrisional));
 		rel.setDataEntrada(Calendar.getInstance());
-		unidadePrisionalDAO.adicionarVinculoInstituicaoComUnidadePrisional(rel);
+		unidadePrisionalDAO.adicionarVinculoParceiroComUnidadePrisional(rel);
 		
 	}
 }

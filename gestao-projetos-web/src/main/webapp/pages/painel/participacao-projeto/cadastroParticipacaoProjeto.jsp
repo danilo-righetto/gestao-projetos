@@ -31,13 +31,13 @@
 </script>
 <script type="text/javascript">
 	function listarCoordenadores() {
-		var idInstituicao = $("#instituicao").val();
-		if (idInstituicao != "") {
+		var idParceiro = $("#parceiro").val();
+		if (idParceiro != "") {
 			$("#coordenadores").show();
 			$
 					.post(
 							"/gestao-projetos/painel/participacao-projetos/listarCoordenadores/"
-									+ idInstituicao + "/ROLE_COORDENADOR",
+									+ idParceiro + "/ROLE_COORDENADOR",
 							function(listaCoordenadores) {
 								$("#coordenador option").remove();
 								var coordenador = "<option value='' label='Selecione...' />";
@@ -72,15 +72,15 @@
 								type="hidden" />
 						</div>
 						<div class="form-group col-md-4">
-							<label for="instituicao">Instituição:</label> <select
-								id="instituicao" name="instituicao" class="form-control"
+							<label for="parceiro">Parceiro:</label> <select
+								id="parceiro" name="parceiro" class="form-control"
 								required autofocus onchange="listarCoordenadores();">
 								<option value="" label="Selecione..." />
-								<c:forEach var="associada" items="${instituicoesAssociadas}">
+								<c:forEach var="associada" items="${parceirosAssociadas}">
 									<option
-										${coordernadorProjeto.instituicao.id == associada.instituicao.id ? "selected='selected'" : ""}
-										value="${associada.instituicao.id}"
-										label="${associada.instituicao.razaosocial}" />
+										${coordernadorProjeto.parceiro.id == associada.parceiro.id ? "selected='selected'" : ""}
+										value="${associada.parceiro.id}"
+										label="${associada.parceiro.razaosocial}" />
 
 								</c:forEach>
 							</select>

@@ -33,10 +33,10 @@ public class ColaboradorDaoImpl implements ColaboradorDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ColaboradorEntity> listarColaboradores(long idInstituicao) {
+	public List<ColaboradorEntity> listarColaboradores(long idParceiro) {
 		Query query = em
-				.createQuery("select c from ColaboradorEntity c where c.usuario.instituicao.id = :idInstituicao");
-		query.setParameter("idInstituicao", idInstituicao);
+				.createQuery("select c from ColaboradorEntity c where c.usuario.parceiro.id = :idParceiro");
+		query.setParameter("idParceiro", idParceiro);
 		if (!query.getResultList().isEmpty()) {
 			return query.getResultList();
 		}

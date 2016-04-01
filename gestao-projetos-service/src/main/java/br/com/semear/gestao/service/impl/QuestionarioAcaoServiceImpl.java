@@ -42,7 +42,7 @@ public class QuestionarioAcaoServiceImpl implements QuestionarioAcaoService {
 	public void criarQuestionarioAcao(AcaoEntity acao) {
 		QuestionarioAcaoEntity questionarioAcao = new QuestionarioAcaoEntity();
 		questionarioAcao.setDataCadastro(Calendar.getInstance());
-		questionarioAcao.setDescricao("QUESTION¡RIO DA ACAO "+acao.getNome().toUpperCase());
+		questionarioAcao.setDescricao("QUESTION√ÅRIO DA ACAO "+acao.getNome().toUpperCase());
 		questionarioAcao.setAcao(acao);
 		questionarioAcaoDAO.salvarQuestionario(questionarioAcao);
 	}

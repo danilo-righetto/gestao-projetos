@@ -62,7 +62,7 @@ public class PainelController {
 			valido = true;
 		}
 		else if(perfil.equals("ROLE_COORDENADOR")){
-			//TODO:BUSCA TODOS OS PROJETOS ONDE O USU¡RIO E O COODERNADOR
+			//TODO:BUSCA TODOS OS PROJETOS ONDE O USU√ÅRIO E O COODERNADOR
 			this.mav.setViewName("painel-coordenador");
 			valido = true;
 		}

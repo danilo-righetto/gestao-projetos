@@ -14,9 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Usuario;
-import br.com.semear.gestao.service.InstituicaoService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
-import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
+import br.com.semear.gestao.service.ParticipacaoParceiroProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
 
@@ -29,24 +29,24 @@ public class ParticipacaoProjetoController {
 	private ParticipacaoProjetoService participacaoProjetoService;
 	
 	@Inject
-	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
+	private ParticipacaoParceiroProjetoService participacaoParceiroProjetoService;
 	
 	@Inject
 	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
 
 	@Inject
-	private InstituicaoService instituicaoService;
+	private ParceiroService parceiroService;
 
 	@Inject
 	private ProjetoService projetoService;
 	
-	@RequestMapping("{idProjeto}/instituicoes/cadastroParticipacaoProjeto")
+	@RequestMapping("{idProjeto}/parceiros/cadastroParticipacaoProjeto")
 	public ModelAndView frmCadastro(@PathVariable("idProjeto") long idProjeto) {
-		List<Long> instituicoesAssociadas = participacaoInstituicaoProjetoService.buscarInstituicoesAssociadas(idProjeto);
+		List<Long> parceirosAssociadas = participacaoParceiroProjetoService.buscarParceirosAssociadas(idProjeto);
 		mav.clear();
 		mav.setViewName("cadastroParticipacaoProjeto");
 		mav.addObject("coordernadorProjeto", projetoService.buscarCoodernadorPorIdProjeto(idProjeto));
-		mav.addObject("instituicoesAssociadas", participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+		mav.addObject("parceirosAssociadas", participacaoParceiroProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
 		
 		mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
 		mav.addObject("reeducandos", participacaoProjetoService.listarReeducandosPorUnidadePrisional(idProjeto));
@@ -54,17 +54,17 @@ public class ParticipacaoProjetoController {
 				participacaoColaboradorProjetoService.listarParticipacaoProjetos(idProjeto));
 		
 		mav.addObject("colaboradores",
-				participacaoProjetoService.listarColaboradoresDasInstituicoes(instituicoesAssociadas, "ROLE_COLABORADOR"));
+				participacaoProjetoService.listarColaboradoresDasParceiros(parceirosAssociadas, "ROLE_COLABORADOR"));
 		
 		return mav;
 	}
 	
-	@RequestMapping("{idProjeto}/instituicoes/salvarParticipacaoInstituicaoProjeto")
-	public String salvarParticipacaoInstituicaoProjeto(@PathVariable("idProjeto") long idProjeto, Long[] idInstituicoes,
+	@RequestMapping("{idProjeto}/parceiros/salvarParticipacaoParceiroProjeto")
+	public String salvarParticipacaoParceiroProjeto(@PathVariable("idProjeto") long idProjeto, Long[] idParceiros,
 			RedirectAttributes redirectAttributes) {
-		String msg = participacaoProjetoService.cadastrarParticipacaoInstituicao(idProjeto, idInstituicoes);
+		String msg = participacaoProjetoService.cadastrarParticipacaoParceiro(idProjeto, idParceiros);
 		redirectAttributes.addFlashAttribute("msg", msg);
-		return "redirect:/painel/participacao-projetos/"+idProjeto+"/instituicoes";
+		return "redirect:/painel/participacao-projetos/"+idProjeto+"/parceiros";
 	}
 
 	@RequestMapping("/salvarParticipacaoProjeto")
@@ -74,22 +74,22 @@ public class ParticipacaoProjetoController {
 		return "redirect:/painel/projetos/";
 	}
 
-	@RequestMapping("{idProjeto}/instituicoes")
-	public ModelAndView formAssociarInstituicao(@PathVariable("idProjeto") long idProjeto, @ModelAttribute("msg") String msg) {
+	@RequestMapping("{idProjeto}/parceiros")
+	public ModelAndView formAssociarParceiro(@PathVariable("idProjeto") long idProjeto, @ModelAttribute("msg") String msg) {
 		Projeto projeto = projetoService.buscarProjetoPorId(idProjeto);
 		mav.clear();
-		mav.setViewName("associarProjetoInstituicao");
+		mav.setViewName("associarProjetoParceiro");
 		mav.addObject("msg", msg);
-		mav.addObject("instituicoes",
-				instituicaoService.buscarInstituicaoPorUnidade(projeto.getUnidadePrisional().getId()));
-		mav.addObject("participacoes", participacaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto));
+		mav.addObject("parceiros",
+				parceiroService.buscarParceiroPorUnidade(projeto.getUnidadePrisional().getId()));
+		mav.addObject("participacoes", participacaoProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
 		return mav;
 	}
 
 	@ResponseBody
-	@RequestMapping("/listarCoordenadores/{idInstituicao}/{idPerfil}")
-	public List<Usuario> listarCoordenadores(@PathVariable("idInstituicao") long idInstituicao,
+	@RequestMapping("/listarCoordenadores/{idParceiro}/{idPerfil}")
+	public List<Usuario> listarCoordenadores(@PathVariable("idParceiro") long idParceiro,
 			@PathVariable("idPerfil") String idPerfil) {
-		return participacaoProjetoService.listarCoPorInstituicao(idInstituicao, idPerfil);
+		return participacaoProjetoService.listarCoPorParceiro(idParceiro, idPerfil);
 	}
 }

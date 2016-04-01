@@ -64,11 +64,11 @@
 										title="Questionário"> <span
 											class="glyphicon glyphicon-list-alt"></span>
 									</a> <a style="margin-left: 20px"
-										href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes" />'
-										title="Instituições"> <span
+										href='<c:url value="/painel/participacao-projetos/${projeto.id}/parceiros" />'
+										title="Parceiros"> <span
 											class="glyphicon glyphicon-th-list"></span>
 									</a> <a style="margin-left: 20px"
-										href='<c:url value="/painel/participacao-projetos/${projeto.id}/instituicoes/cadastroParticipacaoProjeto" />'
+										href='<c:url value="/painel/participacao-projetos/${projeto.id}/parceiros/cadastroParticipacaoProjeto" />'
 										title="Reeducandos e Colaboradores"> <span
 											class="glyphicon glyphicon-user"></span></a> <a
 										style="margin-left: 20px"

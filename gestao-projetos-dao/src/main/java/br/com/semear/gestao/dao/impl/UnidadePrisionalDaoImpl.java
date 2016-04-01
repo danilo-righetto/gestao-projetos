@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.UnidadePrisionalDAO;
 import br.com.semear.gestao.dao.entity.UnidadePrisionalEntity;
-import br.com.semear.gestao.dao.entity.UnidadeRelInstituicaoEntity;
+import br.com.semear.gestao.dao.entity.UnidadeRelParceiroEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -52,9 +52,9 @@ public class UnidadePrisionalDaoImpl implements UnidadePrisionalDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UnidadePrisionalEntity> buscarUnidadePrisionalPorInstituicao(long idInstituicao) {
-		Query query = em.createQuery("select u.unidadePrisional from UnidadeRelInstituicaoEntity u where u.instituicao.id = :idInstituicao");
-		query.setParameter("idInstituicao", idInstituicao);
+	public List<UnidadePrisionalEntity> buscarUnidadePrisionalPorParceiro(long idParceiro) {
+		Query query = em.createQuery("select u.unidadePrisional from UnidadeRelParceiroEntity u where u.parceiro.id = :idParceiro");
+		query.setParameter("idParceiro", idParceiro);
 		return query.getResultList();
 	}
 
@@ -67,7 +67,7 @@ public class UnidadePrisionalDaoImpl implements UnidadePrisionalDAO {
 	}
 
 	@Override
-	public void adicionarVinculoInstituicaoComUnidadePrisional(UnidadeRelInstituicaoEntity rel) {
+	public void adicionarVinculoParceiroComUnidadePrisional(UnidadeRelParceiroEntity rel) {
 		em.persist(rel);
 	}
 }

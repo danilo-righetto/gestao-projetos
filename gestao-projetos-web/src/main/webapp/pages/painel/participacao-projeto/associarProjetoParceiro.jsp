@@ -14,12 +14,12 @@
 				backdrop : 'static'
 			});
 		}
-		$("#menu-instituicoes").attr('class', 'active');
+		$("#menu-parceiros").attr('class', 'active');
 	});
 </script>
 </head>
 <body>
-<!-- MODAL ASSOCIACAO INSTITUICAO INICIO -->
+<!-- MODAL ASSOCIACAO PARCEIRO INICIO -->
 	<div class="modal fade" id="modalAssociacaoAdicionado" tabindex="-1"
 		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -34,20 +34,20 @@
 					<a href='<c:url value="/painel/projetos/" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Ir para a lista de projetos</a> <a
-						href='<c:url value="/painel/participacao-projetos/${idProjeto}/instituicoes/cadastroParticipacaoProjeto" />'
+						href='<c:url value="/painel/participacao-projetos/${idProjeto}/parceiros/cadastroParticipacaoProjeto" />'
 						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
 						class="btn btn-default">Informar Participantes</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- MODAL ASSOCIACAO INSTITUICAO ADICIONADO FIM -->
+	<!-- MODAL ASSOCIACAO PARCEIRO ADICIONADO FIM -->
 	<form
-		action='<c:url value="/painel/participacao-projetos/${idProjeto}/instituicoes/salvarParticipacaoInstituicaoProjeto"></c:url>'
+		action='<c:url value="/painel/participacao-projetos/${idProjeto}/parceiros/salvarParticipacaoParceiroProjeto"></c:url>'
 		method="POST">
 		<div class="section">
 			<div class="container">
-				<h4 class="title-screen">Associar Instituições ao Projeto</h4>
+				<h4 class="title-screen">Associar Parceiros ao Projeto</h4>
 				<div id="alertas"></div>
 				<table class="table table-responsive">
 					<thead>
@@ -65,13 +65,13 @@
 					</thead>
 					<tbody>
 						<c:choose>
-							<c:when test="${not empty instituicoes}">
-								<c:forEach items="${instituicoes}" var="instituicao">
+							<c:when test="${not empty parceiros}">
+								<c:forEach items="${parceiros}" var="parceiro">
 									<tr>
 										<c:set var="encontrou" value="false"></c:set>
 										<c:set var="jaMarcado" value="false"></c:set>
 										<c:forEach items="${participacoes}" var="participacao">
-											<c:if test="${instituicao.id == participacao.instituicao.id}">
+											<c:if test="${parceiro.id == participacao.parceiro.id}">
 												<c:set var="encontrou" value="true"></c:set>
 											</c:if>
 										</c:forEach>
@@ -79,9 +79,9 @@
 											<c:when test="${encontrou}">
 												<c:forEach items="${participacoes}" var="participacao">
 													<c:if
-														test="${instituicao.id == participacao.instituicao.id && !jaMarcado}">
+														test="${parceiro.id == participacao.parceiro.id && !jaMarcado}">
 														<td class="text-center"><input
-															value="${instituicao.id}" name="idInstituicoes"
+															value="${parceiro.id}" name="idParceiros"
 															type="checkbox" checked="checked" disabled /></td>
 														<c:set var="jaMarcado" value="true"></c:set>
 													</c:if>
@@ -89,16 +89,16 @@
 											</c:when>
 											<c:otherwise>
 												<td class="text-center"><input
-													value="${instituicao.id}" name="idInstituicoes"
+													value="${parceiro.id}" name="idParceiros"
 													type="checkbox" /></td>
 											</c:otherwise>
 										</c:choose>
-										<td class="text-center">${instituicao.id}</td>
-										<td class="text-center hidden-xs hidden-sm">${(instituicao.tipoDocumento
+										<td class="text-center">${parceiro.id}</td>
+										<td class="text-center hidden-xs hidden-sm">${(parceiro.tipoDocumento
 											== "CNPJ" ? 'Pessoa Juridica' : 'Pessoa Fisica')}</td>
-										<td class="text-center">${instituicao.cidade}</td>
-										<td class="text-center hidden-xs hidden-sm">${instituicao.razaosocial}</td>
-										<td class="text-center hidden-xs hidden-sm">${instituicao.responsavel}</td>
+										<td class="text-center">${parceiro.cidade}</td>
+										<td class="text-center hidden-xs hidden-sm">${parceiro.razaosocial}</td>
+										<td class="text-center hidden-xs hidden-sm">${parceiro.responsavel}</td>
 									</tr>
 								</c:forEach>
 							</c:when>

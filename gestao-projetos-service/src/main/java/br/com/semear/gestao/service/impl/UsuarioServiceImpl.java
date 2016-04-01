@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.semear.gestao.dao.RecuperaSenhaDAO;
 import br.com.semear.gestao.dao.UsuarioDAO;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
 import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
@@ -53,8 +53,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuario.setDataCadastro(Calendar.getInstance());
 		UsuarioEntity user = parseService.parseToEntity(usuario);
-		if (usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0) {
-			user.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+		if (usuario.getParceiro() != null && usuario.getParceiro().getId() > 0) {
+			user.setParceiro(new ParceiroEntity(usuario.getParceiro().getId()));
 		}
 		usuarioDAO.cadastrarUsuario(user);
 	}
@@ -78,7 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario buscarUsuarioPorId(long idUsuario) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorId(idUsuario);
 		Usuario usuario = parseService.parseToModel(entity);
-		usuario.setInstituicao(parseService.parseToModel(entity.getInstituicao()));
+		usuario.setParceiro(parseService.parseToModel(entity.getParceiro()));
 		return usuario;
 	}
 
@@ -88,10 +88,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (entity != null) {
 			entity.setNome(usuario.getNome().toUpperCase());
 			entity.setPerfil(new PerfilEntity(usuario.getPerfil().getId()));
-			if (usuario.getInstituicao() != null && usuario.getInstituicao().getId() > 0) {
-				entity.setInstituicao(new InstituicaoEntity(usuario.getInstituicao().getId()));
+			if (usuario.getParceiro() != null && usuario.getParceiro().getId() > 0) {
+				entity.setParceiro(new ParceiroEntity(usuario.getParceiro().getId()));
 			} else {
-				entity.setInstituicao(null);
+				entity.setParceiro(null);
 			}
 			entity.setRealizaLogin(usuario.getRealizaLogin());
 			usuarioDAO.editarUsuario(entity);
@@ -191,8 +191,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao, String idPerfil) {
-		List<UsuarioEntity> entitys = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
+	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro, String idPerfil) {
+		List<UsuarioEntity> entitys = usuarioDAO.buscarUsuarioPorParceiro(idParceiro, idPerfil);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for (UsuarioEntity i : entitys) {
 			usuarios.add(parseService.parseToModel(i));
@@ -201,8 +201,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> buscarUsuarioPorInstituicao(long idInstituicao) {
-		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorInstituicao(idInstituicao);
+	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro) {
+		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorParceiro(idParceiro);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for (UsuarioEntity i : entity) {
 			usuarios.add(parseService.parseToModel(i));
@@ -211,9 +211,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
-		if (idInstituicoes != null && idInstituicoes.size() > 0) {
-			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
+	public List<Usuario> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
+		if (idParceiros != null && idParceiros.size() > 0) {
+			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasParceiros(idParceiros, idPerfil);
 			List<Usuario> colaboradores = new ArrayList<Usuario>();
 			for (UsuarioEntity u : lista) {
 				colaboradores.add(parseService.parseToModel(u));

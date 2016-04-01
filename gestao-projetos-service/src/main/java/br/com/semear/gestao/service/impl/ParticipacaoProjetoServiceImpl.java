@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.semear.gestao.dao.ParticipacaoInstituicaoProjetoDAO;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
-import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
+import br.com.semear.gestao.dao.ParticipacaoParceiroProjetoDAO;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoParceiroProjetoEntity;
 import br.com.semear.gestao.dao.entity.ProjetoEntity;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
-import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
+import br.com.semear.gestao.model.ParticipacaoParceiroProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Projeto;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParticipacaoColaboradorProjetoService;
-import br.com.semear.gestao.service.ParticipacaoInstituicaoProjetoService;
+import br.com.semear.gestao.service.ParticipacaoParceiroProjetoService;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ParticipacaoReeducandoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
@@ -47,24 +47,24 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
 	
 	@Inject
-	private ParticipacaoInstituicaoProjetoService participacaoInstituicaoProjetoService;
+	private ParticipacaoParceiroProjetoService participacaoParceiroProjetoService;
 	
 	@Inject
-	private ParticipacaoInstituicaoProjetoDAO participacaoInstituicaoProjetoDAO;
+	private ParticipacaoParceiroProjetoDAO participacaoParceiroProjetoDAO;
 	
 	@Override
-	public String cadastrarParticipacaoInstituicao(Long idProjeto, Long[] idInstituicoes){
+	public String cadastrarParticipacaoParceiro(Long idProjeto, Long[] idParceiros){
 		String msg = null;
 		try{
-			if(idInstituicoes != null){
-				for(Long id : idInstituicoes){
-					ParticipacaoInstituicaoProjetoEntity pip = participacaoInstituicaoProjetoDAO.buscarParticipacaoPorProjetoEInstituicao(idProjeto,id);
+			if(idParceiros != null){
+				for(Long id : idParceiros){
+					ParticipacaoParceiroProjetoEntity pip = participacaoParceiroProjetoDAO.buscarParticipacaoPorProjetoEParceiro(idProjeto,id);
 					if(pip == null){
-						pip = new ParticipacaoInstituicaoProjetoEntity();
+						pip = new ParticipacaoParceiroProjetoEntity();
 						pip.setDataEntrada(Calendar.getInstance());
 						pip.setProjeto(new ProjetoEntity(idProjeto));
-						pip.setInstituicao(new InstituicaoEntity(id));
-						participacaoInstituicaoProjetoDAO.cadastrarParticipacaoInstituicao(pip);
+						pip.setParceiro(new ParceiroEntity(id));
+						participacaoParceiroProjetoDAO.cadastrarParticipacaoParceiro(pip);
 					}
 				}
 			}
@@ -120,8 +120,8 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	}
 
 	@Override
-	public List<Usuario> listarCoPorInstituicao(long idInstituicao, String idPerfil) {
-		return usuarioService.buscarUsuarioPorInstituicao(idInstituicao, idPerfil);
+	public List<Usuario> listarCoPorParceiro(long idParceiro, String idPerfil) {
+		return usuarioService.buscarUsuarioPorParceiro(idParceiro, idPerfil);
 	}
 
 	@Override
@@ -131,13 +131,13 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasInstituicoes(List<Long> idInstituicoes, String idPerfil) {
-		return usuarioService.listarColaboradoresDasInstituicoes(idInstituicoes, idPerfil);
+	public List<Usuario> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
+		return usuarioService.listarColaboradoresDasParceiros(idParceiros, idPerfil);
 	}
 
 	@Override
-	public List<ParticipacaoInstituicaoProjeto> listarParticipacaoInstituicoesProjeto(long idProjeto) {
-		return participacaoInstituicaoProjetoService.listarParticipacaoInstituicoesProjeto(idProjeto);
+	public List<ParticipacaoParceiroProjeto> listarParticipacaoParceirosProjeto(long idProjeto) {
+		return participacaoParceiroProjetoService.listarParticipacaoParceirosProjeto(idProjeto);
 	}
 
 	@Override

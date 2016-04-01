@@ -5,9 +5,9 @@ import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.AlternativaPerguntaEntity;
 import br.com.semear.gestao.dao.entity.ColaboradorEntity;
 import br.com.semear.gestao.dao.entity.InformacaoProjetoEntity;
-import br.com.semear.gestao.dao.entity.InstituicaoEntity;
+import br.com.semear.gestao.dao.entity.ParceiroEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoColaboradorProjetoEntity;
-import br.com.semear.gestao.dao.entity.ParticipacaoInstituicaoProjetoEntity;
+import br.com.semear.gestao.dao.entity.ParticipacaoParceiroProjetoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoAcaoEntity;
 import br.com.semear.gestao.dao.entity.ParticipacaoReeducandoProjetoEntity;
 import br.com.semear.gestao.dao.entity.PerfilEntity;
@@ -28,9 +28,9 @@ import br.com.semear.gestao.model.AlternativaPergunta;
 import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.Colaborador;
 import br.com.semear.gestao.model.InformacaoProjeto;
-import br.com.semear.gestao.model.Instituicao;
+import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.model.ParticipacaoColaboradorProjeto;
-import br.com.semear.gestao.model.ParticipacaoInstituicaoProjeto;
+import br.com.semear.gestao.model.ParticipacaoParceiroProjeto;
 import br.com.semear.gestao.model.ParticipacaoReeducandoAcao;
 import br.com.semear.gestao.model.ParticipacaoReeducandoProjeto;
 import br.com.semear.gestao.model.Perfil;
@@ -51,7 +51,7 @@ import br.com.semear.gestao.model.Usuario;
 public interface ParseService {
 	ProjetoEntity parseToEntity(Projeto projeto);
 	
-	InstituicaoEntity parseToEntity(Instituicao instituicao);
+	ParceiroEntity parseToEntity(Parceiro parceiro);
 	
 	UsuarioEntity parseToEntity(Usuario usuario);
 	
@@ -59,7 +59,7 @@ public interface ParseService {
 
 	Usuario parseToModel(UsuarioEntity entity);
 	
-	Instituicao parseToModel(InstituicaoEntity entity);
+	Parceiro parseToModel(ParceiroEntity entity);
 
 	Perfil parseToModel(PerfilEntity entity);
 
@@ -111,9 +111,9 @@ public interface ParseService {
 
 	ParticipacaoReeducandoAcaoEntity parseToEntity(ParticipacaoReeducandoAcao participacaoAcao);
 
-	ParticipacaoInstituicaoProjetoEntity parseToEntity(ParticipacaoInstituicaoProjeto participacaoInstituicaoProjeto);
+	ParticipacaoParceiroProjetoEntity parseToEntity(ParticipacaoParceiroProjeto participacaoParceiroProjeto);
 
-	ParticipacaoInstituicaoProjeto parseToModel(ParticipacaoInstituicaoProjetoEntity p);
+	ParticipacaoParceiroProjeto parseToModel(ParticipacaoParceiroProjetoEntity p);
 
 	ParticipacaoReeducandoProjeto parseToModel(ParticipacaoReeducandoProjetoEntity p);
 
