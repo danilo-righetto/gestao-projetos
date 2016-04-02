@@ -40,6 +40,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 122px;"></div>
 </body>
 </html>

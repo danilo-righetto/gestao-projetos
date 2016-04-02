@@ -114,8 +114,7 @@
 	<!-- MODAL ADICIONAR UNIDADE PRISIONAL FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Edição de
-				Parceiro</h4>
+			<h4 class="title-screen">Edição de Parceiro</h4>
 			<hr />
 			<div id="alertas"></div>
 			<form
@@ -172,14 +171,15 @@
 						<label for="tipoDocumento">Tipo do Documento</label> <select
 							class="form-control" name="tipoDocumento" id="tipoDocumento"
 							onchange="mascaraRG();" disabled="disabled">
-							<option value="${parceiro.tipoDocumento}" id="${parceiro.tipoDocumento}">${parceiro.tipoDocumento}</option>
+							<option value="${parceiro.tipoDocumento}"
+								id="${parceiro.tipoDocumento}">${parceiro.tipoDocumento}</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="documento">Número do Documento:</label> <input
 							type="text" class="form-control" id="documento"
-							value="${parceiro.documento}" name="documento" readonly="readonly"
-							placeholder="Digite o documento">
+							value="${parceiro.documento}" name="documento"
+							readonly="readonly" placeholder="Digite o documento">
 					</div>
 					<div class="form-group col-md-2">
 						<label for="cep">CEP:</label> <input type="text"
@@ -188,9 +188,9 @@
 					</div>
 					<div class="form-group col-md-5">
 						<label for="logradouro">Logradouro:</label> <input type="text"
-							class="form-control" id="logradouro" value="${parceiro.logradouro}"
-							name="logradouro" placeholder="Digite o logradouro" required
-							autofocus>
+							class="form-control" id="logradouro"
+							value="${parceiro.logradouro}" name="logradouro"
+							placeholder="Digite o logradouro" required autofocus>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="numero">Número:</label> <input type="text"
@@ -201,8 +201,8 @@
 					<div class="form-group col-md-4">
 						<label for="complemento">Complemento:</label> <input type="text"
 							class="form-control" id="complemento" name="complemento"
-							value="${parceiro.complemento}" placeholder="Digite o complemento"
-							autofocus>
+							value="${parceiro.complemento}"
+							placeholder="Digite o complemento" autofocus>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="bairro">Bairro:</label> <input type="text"
@@ -225,8 +225,8 @@
 					<div class="form-group col-md-2">
 						<label for="telefone">Telefone:</label> <input type="text"
 							class="form-control" id="telefone" name="telefone"
-							value="${parceiro.telefone}" placeholder="Digite o telefone" required
-							autofocus>
+							value="${parceiro.telefone}" placeholder="Digite o telefone"
+							required autofocus>
 					</div>
 					<div class="form-group col-md-4">
 						<label for="email">Email:</label> <input type="email"
@@ -256,8 +256,7 @@
 				<!-- INICIO - Listagem dos USUARIOS VINCULADOS A PARCEIRO -->
 				<div class="section">
 					<div class="container">
-						<h4 style="font-family: arial; color: #4DC1FF">Usuários da
-							Instituição</h4>
+						<h4 class="title-screen">Usuários da Instituição</h4>
 						<table class="table table-responsive">
 							<thead>
 								<tr>
@@ -333,10 +332,8 @@
 							</tbody>
 						</table>
 						<br />
-						<button type="button"
-							style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-							class="btn btn-default" data-toggle="modal"
-							data-target="#modalUnidadePrisional">
+						<button type="button" class="btn btn-default btn-add"
+							data-toggle="modal" data-target="#modalUnidadePrisional">
 							<span class="glyphicon glyphicon-plus"></span> Adicionar Unidade
 							Prisional
 						</button>
@@ -347,12 +344,9 @@
 				<div class="form-group col-md-12">
 					<div class="form-group col-xs-offset-0">
 						<a href='<c:url value="/painel/parceiros/" />'
-							style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-							class="btn btn-default"><span
+							class="btn btn-default btn-return"><span
 							class="glyphicon glyphicon-remove"></span> Cancelar</a>
-						<button type="submit"
-							style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-							class="btn btn-default">
+						<button type="submit" class="btn btn-default btn-add">
 							<span class="glyphicon glyphicon-ok"></span> Salvar Instituição
 						</button>
 					</div>

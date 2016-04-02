@@ -47,6 +47,5 @@
 			</form>
 		</div>
 	</div>
-	<div class="section" style="margin-top: -23px; padding-top: 0;"></div>
 </body>
 </html>

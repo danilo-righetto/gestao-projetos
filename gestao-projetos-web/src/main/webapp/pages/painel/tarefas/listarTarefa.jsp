@@ -68,7 +68,7 @@
 	<!-- MODAL CONCLUIR TAREFA FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Tarefas</h4>
+			<h4 class="title-screen">Tarefas</h4>
 			<div id="alertas"></div>
 			<table class="table table-responsive" id="tbTarefas">
 				<thead>
@@ -117,10 +117,8 @@
 			</table>
 			<br /> <a
 				href='<c:url value="/painel/projetos/${idProjeto}/tarefas/cadastro"></c:url>'
-				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Nova Tarefa</a>
+				class="btn btn-default btn-add">Nova Tarefa</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
 </body>
 </html>

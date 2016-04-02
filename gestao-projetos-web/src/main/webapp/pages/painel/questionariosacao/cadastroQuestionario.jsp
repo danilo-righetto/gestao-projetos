@@ -27,13 +27,13 @@
 			}
 		});
 		$('#form-add-pergunta').on('keyup keypress', function(e) {
-			  var keyCode = e.keyCode || e.which;
-			  if (keyCode === 13) { 
-			    e.preventDefault();
-			    return false;
-			  }
-			});
-		
+			var keyCode = e.keyCode || e.which;
+			if (keyCode === 13) {
+				e.preventDefault();
+				return false;
+			}
+		});
+
 	});
 
 	function validarTipoPergunta() {
@@ -196,8 +196,7 @@
 	<!-- MODAL ADICIONAR PERGUNTA FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Questionário da Ação</h4>
+			<h4 class="title-screen">Cadastro de Questionário da Ação</h4>
 			<hr />
 			<c:if test="${mensagem != null && mensagem ne ''}">
 				<c:if test="${mensagem eq 'ADD'}">
@@ -242,7 +241,7 @@
 									placeholder="Digite o nome" required autofocus>
 							</div>
 						</div>
-						<h4 style="font-family: arial; color: #4DC1FF">Perguntas</h4>
+						<h4 class="title-screen">Perguntas</h4>
 						<div class="row">
 
 							<table class="table table-responsive" id="tbPerguntas">
@@ -291,10 +290,8 @@
 								</tbody>
 							</table>
 							<br />
-							<button type="button"
-								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default" data-toggle="modal"
-								data-target="#modalPergunta">
+							<button type="button" class="btn btn-default btn-add"
+								data-toggle="modal" data-target="#modalPergunta">
 								<span class="glyphicon glyphicon-plus"></span> Adicionar
 								Pergunta
 							</button>
@@ -302,13 +299,10 @@
 						<hr />
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/acoes/" />'
-								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default"><span
+								class="btn btn-default btn-return"><span
 								class="glyphicon glyphicon-remove" style="margin-top: 1px"></span>
 								Cancelar</a>
-							<button type="submit"
-								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">
+							<button type="submit" class="btn btn-default btn-add">
 								<span class="glyphicon glyphicon-ok" style="margin-top: 1px">
 								</span> Salvar Questionário
 							</button>
@@ -318,6 +312,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top: -2px"></div>
 </body>
 </html>

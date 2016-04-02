@@ -153,7 +153,6 @@
 		</div>
 	</div>
 	<!-- Formulario de Cadastro - FIM -->
-	<div class="section" style="margin-top: 60px;"></div>
 </body>
 <script type="text/javascript">
 	$(".data").datepicker(

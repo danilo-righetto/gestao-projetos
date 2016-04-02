@@ -60,8 +60,7 @@
 	<!-- MODAL PROJETO ADICIONADO FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Projeto</h4>
+			<h4 class="title-screen">Cadastro de Projeto</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
@@ -150,12 +149,9 @@
 						<hr />
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/projetos/" />'
-								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default"><span
+								class="btn btn-default btn-return"><span
 								class="glyphicon glyphicon-remove"></span> Cancelar</a>
-							<button type="submit"
-								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">
+							<button type="submit" class="btn btn-default btn-add">
 								<span class="glyphicon glyphicon-ok"></span> Salvar Projeto
 							</button>
 						</div>
@@ -164,6 +160,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top: -2px"></div>
 </body>
 </html>

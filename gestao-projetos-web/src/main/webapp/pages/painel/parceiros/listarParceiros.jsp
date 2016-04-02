@@ -32,7 +32,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Parceiros</h4>
+			<h4 class="title-screen">Parceiros</h4>
 			<div id="alertas"></div>
 			<table id="tbParceiros" class="table table-responsive">
 				<thead>
@@ -75,10 +75,8 @@
 				</tbody>
 			</table>
 			<a href='<c:url value="cadastro"></c:url>'
-				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Novo Parceiro</a>
+				class="btn btn-default btn-add">Novo Parceiro</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
 </body>
 </html>

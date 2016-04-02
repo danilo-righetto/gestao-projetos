@@ -172,7 +172,6 @@
 		</div>
 	</div>
 	<!-- Formulario de Edição - FIM -->
-	<div class="section" style="margin-top: 60px;"></div>
 </body>
 <script>
 	$(".data").datepicker(

@@ -48,6 +48,5 @@
 		</div>
 	</div>
 	<!-- FIM DA BARRA DE PROGRESSO DOS PROJETOS  -->
-	<div class="section" style="margin-top: 240px"></div>
 </body>
 </html>

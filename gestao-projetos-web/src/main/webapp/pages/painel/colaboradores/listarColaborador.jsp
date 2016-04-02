@@ -72,7 +72,6 @@
 					href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores/cadastro"></c:url>'>Adicionar
 					Colaborador </a>
 			</div>
-
 		</div>
 	</div>
 </body>

@@ -31,7 +31,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Edição de Projeto</h4>
+			<h4 class="title-screen">Edição de Projeto</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
@@ -122,17 +122,14 @@
 						<hr />
 						<div class="form-group col-xs-offset-0">
 							<a href='<c:url value="/painel/projetos/" />'
-								style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Cancelar</a>
-							<button type="submit"
-								style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-								class="btn btn-default">Salvar Projeto</button>
+								class="btn btn-default btn-return">Cancelar</a>
+							<button type="submit" class="btn btn-default btn-add">Salvar
+								Projeto</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top: -2px"></div>
 </body>
 </html>

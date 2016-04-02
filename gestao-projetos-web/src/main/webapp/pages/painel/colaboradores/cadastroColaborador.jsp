@@ -5,7 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	$(function() {
+		// Action on Click
+		$("#btnSalvar").click(function() {
+			$.isLoading({
+					    text: "Carregando...",
+			});
+		});
+	});
+</script>
 </head>
+
 <body>
 	<div class="section">
 		<div class="container">
@@ -41,8 +52,8 @@
 					<div class="row">
 						<a class="btn btn-default btn-return"
 							href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores"></c:url>'>Cancelar</a>
-						<button class="btn btn-default btn-add" type="submit">Salvar
-							Colaborador</button>
+						<button id="btnSalvar" class="btn btn-default btn-add"
+							type="submit">Salvar Colaborador</button>
 					</div>
 				</div>
 			</form>
