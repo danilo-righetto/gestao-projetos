@@ -1,18 +1,18 @@
 <html>
 	<body>
 		<p>
-		Seu cadastro ao Sistema do <b>Instituto AÃ§Ã£o Pela Paz</b> acaba de ser realizado com sucesso!<br>
+		Seu cadastro ao Sistema do <b>Instituto Ação Pela Paz</b> acaba de ser realizado com sucesso!<br>
 		Utilize os dados abaixo para realizar o login no Sistema.<br>
 		Usuario: $usuario<br>
 		Senha: $senha 
 		</p>
 		<p>
-			<b>ATENÃ‡ÃƒO!</b>
-			Para sua maior seguranÃ§a recomendamos que vocÃª troque sua senha assim que possÃ­vel.
+			<b>ATENÇÃO</b>
+			Para sua maior segurança recomendamos que você troque sua senha assim que possível.
 		</p>
 		<p>
 			Atenciosamente,<br/>
-			Sistema GestÃ£o de Projetos.
+			Sistema Gestão de Projetos.
 		</p>
 	</body>
 <html>

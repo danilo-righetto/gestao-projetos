@@ -1,17 +1,17 @@
 <html>
 	<body>
 		<p>
-		OlÃ¡, nÃ³s recebemos o seu pedido de troca de senha.<br>
+		Olá, nós recebemos o seu pedido de troca de senha.<br>
 		Para criar uma nova senha acesse o <a href="$url">link</a>.<br>
-		Caso vocÃª nÃ£o tenha feito esta solicitaÃ§Ã£o, ignore este e-mail.
+		Caso vocÃª não tenha feito esta solicitação, ignore este e-mail.
 		</p>
 		<p>
-			<b>AtenÃ§Ã£o</b>
-			VocÃª deve trocar sua senha o quanto antes, senÃ£o este link nÃ£o serÃ¡ mais vÃ¡lido.
+			<b>Atenção</b>
+			Você deve trocar sua senha o quanto antes, senão esta solicitção não será mais válida..
 		</p>
 		<p>
 			Atenciosamente,<br/>
-			Sistema GestÃ£o de Projetos.
+			Sistema Gestão de Projetos.
 		</p>
 	</body>
 <html>
