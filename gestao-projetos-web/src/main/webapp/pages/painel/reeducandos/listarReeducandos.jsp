@@ -75,10 +75,8 @@
 				</tbody>
 			</table>
 			<a href='<c:url value="cadastro"></c:url>'
-				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Novo Reeducando</a>
+				class="btn btn-default btn-add">Novo Reeducando</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 130px"></div>
 </body>
 </html>

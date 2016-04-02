@@ -52,4 +52,17 @@ public class RespostaAcaoDaoImpl implements RespostaAcaoDAO{
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RespostaAcaoEntity> listarRespostasReeducandoPorAcaoTipo(long idReeducando, Long idAcao, String tipo) {
+		Query query = em.createQuery("select q from RespostaAcaoEntity q where q.reeducandoEntity.id = :idReeducando and q.acao.id = :idAcao and q.tipo = :tipo");
+		query.setParameter("idReeducando", idReeducando);
+		query.setParameter("idAcao", idAcao);
+		query.setParameter("tipo", tipo);
+//		if(!query.getResultList().isEmpty()){
+//			return (RespostaAcaoEntity) query.getResultList().get(0);
+//		}
+		return query.getResultList();
+	}
+
 }

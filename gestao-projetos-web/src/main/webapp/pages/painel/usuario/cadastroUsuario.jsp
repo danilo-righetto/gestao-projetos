@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,35 +7,39 @@
 <head>
 <script type="text/javascript">
 	$(function() {
-		$("#menu-usuarios").attr('class','active');
+		$("#menu-usuarios").attr('class', 'active');
 	});
-	function validarUsuario(){
+	function validarUsuario() {
 		var usuario = $("#usuario").val();
-		$.post("/gestao-projetos/painel/usuarios/consultarUsuario?login="+usuario, function(existe) {
-			if(existe){
-				$("#alertadocdiv").remove();
-				var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
-						+ "<span style='color: #000000'><strong>Alerta!</strong>"
-						+ "O e-mail informado já está sendo utilizado.</span></div>";
-				$("#alertas").append(alerta);
-				$("#usuario").val("").focus();
-			}else{
-				$("#alertadocdiv").remove();
-			}
-		});
+		$
+				.post(
+						"/gestao-projetos/painel/usuarios/consultarUsuario?login="
+								+ usuario,
+						function(existe) {
+							if (existe) {
+								$("#alertadocdiv").remove();
+								var alerta = "<div id='alertadocdiv' class='alert alert-warning'>"
+										+ "<span style='color: #000000'><strong>Alerta!</strong>"
+										+ "O e-mail informado já está sendo utilizado.</span></div>";
+								$("#alertas").append(alerta);
+								$("#usuario").val("").focus();
+							} else {
+								$("#alertadocdiv").remove();
+							}
+						});
 	}
-	
-	function verificaPerfil(){
+
+	function verificaPerfil() {
 		var escolha = document.getElementById("perfil").value;
-		if(escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR"){
+		if (escolha == "ROLE_COORDENADOR" || escolha == "ROLE_COLABORADOR") {
 			document.getElementById("oculta1").style.display = "block";
-			$("#parceiro").attr("required","required");
+			$("#parceiro").attr("required", "required");
 			$("#parceiro").removeAttr("disabled");
-		}else{
+		} else {
 			document.getElementById("oculta1").style.display = "none";
 			$("#parceiro").val("");
 			$("#parceiro").removeAttr("required");
-			$("#parceiro").attr("disabled","disabled");
+			$("#parceiro").attr("disabled", "disabled");
 		}
 	}
 </script>
@@ -43,8 +47,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-					Usuario</h4>
+			<h4 class="title-screen">Cadastro de Usuario</h4>
 			<hr />
 			<div id="alertas"></div>
 			<form action="salvarUsuario" method="POST" role="form">
@@ -55,18 +58,18 @@
 							placeholder="Digite o nome" required autofocus>
 					</div>
 					<div class="form-group col-md-4">
-						<label>Usuario:</label> <input onblur="validarUsuario();" type="email"
-							class="form-control" id="usuario"
+						<label>Usuario:</label> <input onblur="validarUsuario();"
+							type="email" class="form-control" id="usuario"
 							placeholder="Digite o nome do usuario" name="usuario" required>
 					</div>
 					<div class="form-group col-md-offset-2 col-md-4">
-						<label>Senha:</label> <input type="password"
-							class="form-control" id="senha" placeholder="Digite a senha"
-							name="senha" required>
+						<label>Senha:</label> <input type="password" class="form-control"
+							id="senha" placeholder="Digite a senha" name="senha" required>
 					</div>
 					<div class="form-group col-md-4">
 						<label for="perfil">Perfil:</label> <select id="perfil"
-							class="form-control" name="perfil.id" onchange="verificaPerfil();" required>
+							class="form-control" name="perfil.id"
+							onchange="verificaPerfil();" required>
 							<option value="">Selecione ...</option>
 							<c:forEach items="${listaperfil}" var="perfil">
 								<option value="${perfil.id}">${perfil.descricao}</option>
@@ -95,13 +98,15 @@
 				</div>
 				<hr />
 				<div class="form-group col-xs-offset-0">
-					<a href='<c:url value="/painel/usuarios/" />' style="float:left;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Cancelar</a>
-					<button type="submit" style="float:right;background-color:#4DC1FF;color:#fff;border-color:#4DC1FF" class="btn btn-default">Salvar Usuário</button>
+					<a href='<c:url value="/painel/usuarios/" />'
+						style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Cancelar</a>
+					<button type="submit"
+						style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Salvar Usuário</button>
 				</div>
 			</form>
 		</div>
 	</div>
-	<div class="section" style="margin-top:20px">
-    </div>
 </body>
 </html>

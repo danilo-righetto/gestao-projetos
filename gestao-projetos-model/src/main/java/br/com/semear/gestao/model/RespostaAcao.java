@@ -13,8 +13,14 @@ public class RespostaAcao {
 	private Usuario usuario;
 	private Acao acao;
 	private Reeducando reeducando;
-	private String respostaStatus;
+	private String tipo;
 	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	public Acao getAcao() {
 		return acao;
 	}
@@ -71,12 +77,6 @@ public class RespostaAcao {
 	}
 	public void setRespostas(List<RespostaAcao> respostas) {
 		this.respostas = respostas;
-	}
-	public String getRespostaStatus() {
-		return respostaStatus;
-	}
-	public void setRespostaStatus(String respostaStatus) {
-		this.respostaStatus = respostaStatus;
 	}
 	
 	

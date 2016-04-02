@@ -33,7 +33,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Usuarios</h4>
+			<h4 class="title-screen">Usuarios</h4>
 			<div id="alertas"></div>
 			<table id="tbUsuarios" class="table table-responsive">
 				<thead>
@@ -74,10 +74,8 @@
 				</tbody>
 			</table>
 			<a href='<c:url value="cadastro"></c:url>'
-				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Novo Usuário</a>
+				class="btn btn-default btn-add">Novo Usuário</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
 </body>
 </html>

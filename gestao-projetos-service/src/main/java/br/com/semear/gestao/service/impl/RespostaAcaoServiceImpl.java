@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.semear.gestao.dao.QuestionarioAcaoDAO;
 import br.com.semear.gestao.dao.RespostaAcaoDAO;
+import br.com.semear.gestao.dao.entity.AlternativaPerguntaAcaoEntity;
 import br.com.semear.gestao.dao.entity.RespostaAcaoEntity;
 import br.com.semear.gestao.model.Acao;
+import br.com.semear.gestao.model.AlternativaPerguntaAcao;
 import br.com.semear.gestao.model.PerguntaAcao;
 import br.com.semear.gestao.model.Reeducando;
 import br.com.semear.gestao.model.RespostaAcao;
@@ -40,10 +43,13 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	private RespostaAcaoDAO respostaAcaoDAO;
 	
 	@Inject
+	private QuestionarioAcaoDAO questionarioAcaoDAO;
+	
+	@Inject
 	private QuestionarioAcaoService questionarioAcaoService;
 
 	@Override
-	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String respostaStatus) {
+	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo) {
 		if(respostas != null && respostas.length > 0 && idAcao != null){
 			for(int i =0; i < respostas.length;i++){
 				String[] respostaArray = respostas[i].split("#");
@@ -59,7 +65,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 				respostaAcao.setPerguntaAcaoEntity(parseService.parseToEntity(pergunta));
 				respostaAcao.setUsuarioEntity(parseService.parseToEntity(usuario));
 				respostaAcao.setReeducandoEntity(parseService.parseToEntity(new Reeducando(reeducando)));
-				respostaAcao.setRespostaStatus(respostaStatus);
+				respostaAcao.setTipo(tipo);
 				respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
 			}
 		}
@@ -102,11 +108,28 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 		respostaAcao.setDescricaoRespostaAcao(((RespostaAcaoEntity) respostas).getDescricaoRespostaAcao());
 		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
 		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
-		respostaAcao.setRespostaStatus(((RespostaAcaoEntity)respostas).getRespostaStatus());
+		respostaAcao.setTipo(((RespostaAcaoEntity)respostas).getTipo());
 		respostaAcao.setReeducandoEntity(parse.parseToEntity(((RespostaAcao) respostas).getReeducando()));
 		respostaAcao.setAcao(parse.parseToEntity(((RespostaAcao) respostas).getAcao()));
 		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
 		
 	}
+
+	@Override
+	public List<RespostaAcao> listarRespostasReeducandoPorAcaoTipo(long idReeducando, Long idAcao, String tipo) {
+		List<RespostaAcaoEntity> lista = respostaAcaoDAO.listarRespostasReeducandoPorAcaoTipo(idReeducando, idAcao, tipo);
+		List<RespostaAcao> respostaAcao = new ArrayList<RespostaAcao>();
+		for (RespostaAcaoEntity entity : lista) {
+			RespostaAcao resposta = parse.parseToModel(entity);
+			List<AlternativaPerguntaAcaoEntity> alternativasEntity = questionarioAcaoDAO.buscarAlternativasPorIdPergunta(resposta.getPerguntaAcao().getId());
+			for(AlternativaPerguntaAcaoEntity a : alternativasEntity){
+				AlternativaPerguntaAcao alternativa = parse.parseToModel(a);
+				resposta.getPerguntaAcao().getAlternativas().add(alternativa);
+			}
+			respostaAcao.add(resposta);
+		}
+		return respostaAcao;
+	}
+
 
 }

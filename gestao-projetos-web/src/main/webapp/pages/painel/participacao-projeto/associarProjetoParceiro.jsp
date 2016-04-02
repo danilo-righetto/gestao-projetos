@@ -115,7 +115,6 @@
 				<button class="btn btn-default btn-add">Salvar Associação</button>
 			</div>
 		</div>
-		<div class="section" style="margin-top: 20px"></div>
 	</form>
 </body>
 </html>

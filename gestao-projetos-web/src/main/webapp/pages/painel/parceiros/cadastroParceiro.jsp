@@ -9,7 +9,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <script type="text/javascript">
 	$(function() {
 		var msg = "<c:out value='${msg}'/>";
@@ -283,8 +282,7 @@
 	<!-- MODAL PARCEIRO ADICIONADA FIM -->
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Cadastro de
-				Instituição</h4>
+			<h4 class="title-screen">Cadastro de Instituição</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
@@ -378,21 +376,14 @@
 								placeholder="Digite o nome do responsavel" required>
 						</div>
 						<div class="form-group"></div>
-						<br />
-						<br />
-						<br />
-						<br />
+						<br /> <br /> <br /> <br />
 						<div class="form-group col-md-12">
-
 							<hr />
 							<div class="form-group col-xs-offset-0">
 								<a href='<c:url value="/painel/parceiros/" />'
-									style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-									class="btn btn-default"><span
+									class="btn btn-default btn-return"><span
 									class="glyphicon glyphicon-remove"></span> Cancelar</a>
-								<button type="submit"
-									style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-									class="btn btn-default">
+								<button type="submit" class="btn btn-default btn-add">
 									<span class="glyphicon glyphicon-ok"></span> Salvar Instituição
 								</button>
 							</div>
@@ -402,7 +393,5 @@
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>

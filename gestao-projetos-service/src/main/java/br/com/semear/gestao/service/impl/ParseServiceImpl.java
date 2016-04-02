@@ -624,9 +624,9 @@ public class ParseServiceImpl implements ParseService {
 			model.setPerguntaAcao(parseToModel(entity.getPerguntaAcaoEntity()));
 			model.setDataAlteracao(entity.getDataAlteracao());
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
-			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setTipo(entity.getTipo());
 			model.setReeducando(parseToModel(entity.getReeducandoEntity()));
-			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setTipo(entity.getTipo());
 			model.setAcao(parseToModel(entity.getAcao()));
 			model.setId(entity.getId());
 		}

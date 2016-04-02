@@ -45,13 +45,20 @@ public class RespostaAcaoEntity {
 	@JoinColumn(name = "REEDUCANDO", nullable = false)
 	private ReeducandoEntity reeducandoEntity;
 	
-	@Column(name = "RESPOSTA_STATUS")
-	private String respostaStatus;
+	@Column(name = "TIPO")
+	private String tipo;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ACAO")
 	private AcaoEntity acao;
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 	public AcaoEntity getAcao() {
 		return acao;
@@ -67,14 +74,6 @@ public class RespostaAcaoEntity {
 
 	public void setReeducandoEntity(ReeducandoEntity reeducandoEntity) {
 		this.reeducandoEntity = reeducandoEntity;
-	}
-
-	public String getRespostaStatus() {
-		return respostaStatus;
-	}
-
-	public void setRespostaStatus(String respostaStatus) {
-		this.respostaStatus = respostaStatus;
 	}
 
 	public long getId() {

@@ -1,15 +1,19 @@
 package br.com.semear.gestao.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.QuestionarioAcao;
-import br.com.semear.gestao.model.Reeducando;
+import br.com.semear.gestao.model.RespostaAcao;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.AcaoService;
 import br.com.semear.gestao.service.QuestionarioAcaoService;
@@ -21,6 +25,7 @@ import br.com.semear.gestao.service.RespostaAcaoService;
 public class RespostaAcaoController {
 	ModelAndView mav = new ModelAndView();
 
+	@SuppressWarnings("unused")
 	@Inject
 	private AcaoService acaoService;
 	
@@ -46,6 +51,7 @@ public class RespostaAcaoController {
 			mav.addObject("tiposPerguntas",questionarioAcaoService.listarTiposDePerguntas());
 			mav.addObject("reeducandos", reeducandoService.listarReeducandos());
 			mav.addObject("status", statusAcao);
+			mav.addObject("respostas", respostaAcaoService.listarRespostas());
 			
 		} catch (Exception e) {
 			mav.clear();
@@ -76,9 +82,18 @@ public class RespostaAcaoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String respostaStatus){
+	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String tipo){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,respostaStatus);
+		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,tipo);
 		return "redirect:/painel/";
+	}
+	
+	//Consulta Reeducando por Ação e TIPO
+	
+	@ResponseBody
+	@RequestMapping(value = "consultarReeducando", method = RequestMethod.POST)
+	public List<RespostaAcao> consultarReeducando(long idReeducando, Long idAcao, String tipo) {
+		List<RespostaAcao> respostas = respostaAcaoService.listarRespostasReeducandoPorAcaoTipo(idReeducando, idAcao, tipo);
+			return respostas;
 	}
 }

@@ -13,8 +13,12 @@ public interface RespostaAcaoService {
 	RespostaAcao buscarRespostaAcaoPorId(long IdResposta);
 	
 	List<RespostaAcao> listarRespostas();
+	
+	//List<RespostaAcao> listarRespostasPorReeducando(long idReeducando);
 
-	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String respostaStatus);
+	void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo);
 
 	void salvarRespostaAcao(List<RespostaAcao> respostas);
+	
+	List<RespostaAcao> listarRespostasReeducandoPorAcaoTipo(long idReeducando, Long idAcao, String tipo);
 }

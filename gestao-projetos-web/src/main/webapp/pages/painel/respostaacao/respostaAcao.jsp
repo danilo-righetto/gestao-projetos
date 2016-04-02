@@ -25,7 +25,7 @@
 			}else if(tipoPergunta == 2){
 				var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
 					for(var p = 0; p < perguntarespostas.length; p++){
-						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+",");
+						$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value);
 						console.info($("#"+idHidden).val());
 					}
 			}else if(tipoPergunta == 3){
@@ -43,6 +43,41 @@
 		}
 		$("#formResposta").submit();
 		
+	}
+	
+	function consultarReeducando() {
+		var idReeducando = $("#reeducando").val();
+		var idAcao = '<c:out value = "${questionario.acao.id}"/>';
+		var tipo = '<c:out value = "${status}"/>';
+		$
+				.post(
+						"/gestao-projetos/painel/respostasacao/consultarReeducando?idReeducando="
+								+ idReeducando + "&idAcao=" + idAcao + "&tipo=" + tipo,
+						function(respostas) {
+							if (respostas.length > 0) {
+							$(respostas).each(function(r){
+								if(respostas[r].perguntaAcao.tipoPergunta.id == 1){
+									$("#respostasunica"+respostas[r].perguntaAcao.id).val(respostas[r].descricaoRespostaAcao);
+								}else if(respostas[r].perguntaAcao.tipoPergunta.id == 2){
+									for(var a = 0; a < respostas[r].perguntaAcao.alternativas.length; a++){
+										if(respostas[r].perguntaAcao.alternativas[a].descricaoAlternativa == respostas[r].descricaoRespostaAcao){
+									$("#multipla"+respostas[r].perguntaAcao.alternativas[a].id).attr("checked","checked");
+										}
+									}
+								}else if(respostas[r].perguntaAcao.tipoPergunta.id == 3){
+									$("#texto"+respostas[r].perguntaAcao.id).html(respostas[r].descricaoRespostaAcao);
+								}else if(respostas[r].perguntaAcao.tipoPergunta.id == 4){
+									for(var a = 0; a < respostas[r].perguntaAcao.alternativas.length; a++){
+										if(respostas[r].perguntaAcao.alternativas[a].descricaoAlternativa == respostas[r].descricaoRespostaAcao){
+									$("#alternativa"+respostas[r].perguntaAcao.alternativas[a].id).attr("checked","checked");
+										}
+									}
+								}
+							});
+							} else {
+								alert("Que pena. Não temos uma lista de Reeducandos");
+							}
+						});
 	}
 </script>
 </head>
@@ -68,7 +103,7 @@
 				<div class="form-group col-md-4">
 							<label for="reeducando">Reeducando:</label> <select
 								id="reeducando" name="reeducando"
-								class="form-control" required>
+								class="form-control" onchange="consultarReeducando();" required>
 								<option value="" label="Selecione..." />
 								<c:if test="${not empty reeducandos}">
 								<c:forEach var="reeducando" items="${reeducandos}">
@@ -79,7 +114,8 @@
 							</select>
 						</div>
 				<!-- Reeducando - Resposta - FIM -->
-				<input type="hidden" name="respostaStatus" value="${status}">
+				
+				<input type="hidden" name="tipo" value="${status}">
 				<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>
 					<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
@@ -103,7 +139,7 @@
 						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
 						    <div class="input-group">
 						      <span class="input-group-addon">
-						        <input type="checkbox" name="respostapergunta${pergunta.id}" id="multipla${pergunta.id}" aria-label="..." value="${alternativa.descricaoAlternativa}">
+						        <input type="radio" name="respostapergunta${pergunta.id}" id="multipla${alternativa.id}" aria-label="..." value="${alternativa.descricaoAlternativa}" required>
 						      </span>
 						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
 						        
@@ -118,7 +154,7 @@
 						<c:if test="${pergunta.tipoPergunta.id eq 3}">
 							<div class="form-group col-md-12">
 								<label>RESPOSTA:</label> <textarea
-								class="form-control" id="descricao"
+								class="form-control"
 								placeholder="Digite uma Resposta" cols="10" rows="5" id="texto${pergunta.id}" name="respostapergunta${pergunta.id}" required></textarea>
 								<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 								<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
@@ -130,7 +166,7 @@
 									<label>Responda: </label> 
 									<c:forEach items="${pergunta.alternativas}" var="alternativa">
 										<label><input
-										type="radio" id="alternativa${alternativa.perguntaAcao.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
+										type="radio" id="alternativa${alternativa.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
 									</c:forEach>
 										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
 										<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">

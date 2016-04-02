@@ -32,7 +32,7 @@
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Projetos</h4>
+			<h4 class="title-screen">Projetos</h4>
 			<div id="alertas"></div>
 			<table class="table table-responsive" id="tbProjetos">
 				<thead>
@@ -78,16 +78,14 @@
 										style="margin-left: 20px"
 										href='<c:url value="/painel/projetos/${projeto.id}/tarefas"></c:url>'
 										title="Tarefas"><span class="glyphicon glyphicon-pushpin"></span></a>
-										<a
-										style="margin-left: 20px"
+										<a style="margin-left: 20px"
 										href='<c:url value="/painel/respostasprojeto/I/${projeto.id}"></c:url>'
-										title="Resposta Inicio"><span class="glyphicon glyphicon-copy"></span></a>
-										<a
+										title="Resposta Inicio"><span
+											class="glyphicon glyphicon-copy"></span></a> <a
 										style="margin-left: 20px"
 										href='<c:url value="/painel/respostasprojeto/F/${projeto.id}"></c:url>'
-										title="Resposta Fim"><span class="
-glyphicon glyphicon-paste"></span></a>
-										</td>
+										title="Resposta Fim"><span
+											class="glyphicon glyphicon-paste"></span></a></td>
 
 
 								</tr>
@@ -102,10 +100,8 @@ glyphicon glyphicon-paste"></span></a>
 				</tbody>
 			</table>
 			<br /> <a href='<c:url value="cadastro"></c:url>'
-				style="float: right; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-				class="btn btn-default">Novo Projeto</a>
+				class="btn btn-default btn-add">Novo Projeto</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
 </body>
 </html>

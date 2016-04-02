@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,6 +8,10 @@
 <style type="text/css">
 textarea {
 	resize: none;
+}
+
+footer div {
+	position: relative !important;
 }
 </style>
 </head>
@@ -36,7 +41,7 @@ textarea {
 <body>
 	<div class="section">
 		<div class="container">
-			<h4 style="font-family: arial; color: #4DC1FF">Detalhar Projeto</h4>
+			<h4 class="title-screen">Detalhar Projeto</h4>
 			<hr />
 			<div class="row">
 				<div class="col-md-12">
@@ -114,7 +119,7 @@ textarea {
 				</div>
 			</div>
 			<div class="row">
-				<h4 style="font-family: arial; color: #4DC1FF">Perguntas</h4>
+				<h4 class="title-screen">Perguntas</h4>
 				<table class="table table-responsive" id="tbPerguntas">
 					<thead>
 						<tr>
@@ -324,8 +329,7 @@ textarea {
 			<div class="row">
 				<div class="form-group col-xs-offset-0">
 					<a href='<c:url value="/painel/" />'
-						style="float: left; background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
-						class="btn btn-default">Voltar</a>
+						class="btn btn-default btn-return">Voltar</a>
 				</div>
 			</div>
 		</div>

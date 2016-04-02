@@ -88,6 +88,5 @@ glyphicon glyphicon-paste"></span></a>
 				class="btn btn-default btn-add">Nova Ação</a>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 20px"></div>
 </body>
 </html>

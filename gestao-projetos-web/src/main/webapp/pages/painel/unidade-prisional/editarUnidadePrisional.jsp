@@ -48,14 +48,12 @@
 							<hr />
 							<a class="btn btn-default btn-return"
 								href="/gestao-projetos/painel/unidades-prisionais/">Cancelar</a>
-							<button class="btn btn-default btn-add" type="submit"
-								style="float: right;">Cadastrar</button>
+							<button class="btn btn-default btn-add" type="submit">Cadastrar</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="section" style="margin-top: 122px;"></div>
 </body>
 </html>
