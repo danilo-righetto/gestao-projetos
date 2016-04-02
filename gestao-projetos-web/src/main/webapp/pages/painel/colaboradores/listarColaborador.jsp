@@ -64,6 +64,7 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<br />
 			<div>
 				<a class="btn btn-default btn-return"
 					href='<c:url value="/painel/parceiros/"></c:url>'><span
@@ -72,6 +73,7 @@
 					href='<c:url value="/painel/parceiros/${idParceiro}/colaboradores/cadastro"></c:url>'>Adicionar
 					Colaborador </a>
 			</div>
+
 		</div>
 	</div>
 </body>

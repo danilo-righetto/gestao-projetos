@@ -14,46 +14,35 @@
 <!-- JS -->
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/jquery.min.js"></script>
-
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/bootstrap.min.js"></script>
-
 <script type="text/javascript"
 	src='<c:url value="/bootstrap/js/jquery.mask.min.js" />'></script>
-
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript"
 	src="/gestao-projetos/bootstrap/js/jquery.dataTables.min.js"></script>
-
+	
+	<script type="text/javascript"
+	src="/gestao-projetos/bootstrap/js/jquery.isloading.js"></script>
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css"
 	href="/gestao-projetos/bootstrap/css/jquery-ui.min.css" />
-
-<link href="/gestao-projetos/bootstrap/font-awesome.min.css"
+<link
+	href="/gestao-projetos/bootstrap/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
-
+	<link
+	href="/gestao-projetos/bootstrap/font-awesome.css"
+	rel="stylesheet" type="text/css">
 <link href="/gestao-projetos/bootstrap/css/index.css" rel="stylesheet"
 	type="text/css">
-
-<link rel="stylesheet" type="text/css"
-	href="/gestao-projetos/bootstrap/css/bootstrap.css" />
-
 <link href="/gestao-projetos/bootstrap/css/style.css" rel="stylesheet"
 	type="text/css">
 
 <link href="/gestao-projetos/bootstrap/css/jquery.dataTables.min.css"
 	rel="stylesheet" type="text/css">
-
-<link href="/gestao-projetos/bootstrap/is-loading/style.css"
-	rel="stylesheet" type="text/css">
-
-<script type="text/javascript"
-	src="/gestao-projetos/bootstrap/is-loading/jquery.isloading.min.js">
-	
-</script>
 
 <style type="text/css">
 #menu li a {
@@ -98,6 +87,19 @@
 	
 }
 </style>
+
+<script type="text/javascript">
+
+function abrirLoading(textoDinamico){
+	$.isLoading({
+		text : textoDinamico
+	});
+}
+function fecharLoading(){
+	 $.isLoading( "hide" );
+}
+
+</script>
 <title>Sistema Gestão de Projetos</title>
 </head>
 <body>
@@ -127,11 +129,14 @@
 				<ul id="menu" class="nav navbar-nav navbar-left">
 					<li id="menu-projetos"><a
 						href='<c:url value="/painel/projetos/" />'>Projetos</a></li>
-					<li id="menu-acoes"><a href='<c:url value="/painel/acoes/" />'>Ações</a></li>
+					<li id="menu-acoes"><a
+						href='<c:url value="/painel/acoes/" />'>Ações</a></li>
 					<li id="menu-parceiros"><a
-						href='<c:url value="/painel/parceiros/" />'>Parceiros</a></li>
+						href='<c:url value="/painel/parceiros/" />'>Parceiros</a>
+					</li>
 					<li id="menu-reeducandos"><a
-						href='<c:url value="/painel/reeducandos/" />'>Reeducandos</a></li>
+						href='<c:url value="/painel/reeducandos/" />'>Reeducandos</a>
+					</li>
 					<li id="menu-usuarios"><a
 						href='<c:url value="/painel/usuarios/" />'>Usuários</a></li>
 					<li id="menu-configuracoes" class="dropdown"><a href="#"
