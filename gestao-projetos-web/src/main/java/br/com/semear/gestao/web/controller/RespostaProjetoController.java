@@ -1,14 +1,19 @@
 package br.com.semear.gestao.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.semear.gestao.model.Questionario;
+import br.com.semear.gestao.model.Resposta;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ParticipacaoProjetoService;
 import br.com.semear.gestao.service.ProjetoService;
@@ -51,6 +56,7 @@ public class RespostaProjetoController {
 			mav.addObject("reeducandos", reeducandoService.listarReeducandos());
 			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
 			mav.addObject("status", statusProjeto);
+			mav.addObject("respostas", respostaService.listarRespostas());
 			
 		} catch (Exception e) {
 			mav.clear();
@@ -82,10 +88,17 @@ public class RespostaProjetoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session, Long reeducando, String respostaStatus){
+	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session, Long reeducando, String tipo){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao,reeducando,respostaStatus);
+		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao,reeducando,tipo);
 		//return "redirect:/painel/respostasProjeto/"+idProjeto;
 		return "redirect:/painel/";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "consultarReeducando", method = RequestMethod.POST)
+	public List<Resposta> consultarReeducando(long idReeducando, Long idProjeto, String tipo) {
+		List<Resposta> respostas = respostaService.listarRespostasReeducandoPorProjetoTipo(idReeducando, idProjeto, tipo);
+			return respostas;
 	}
 }

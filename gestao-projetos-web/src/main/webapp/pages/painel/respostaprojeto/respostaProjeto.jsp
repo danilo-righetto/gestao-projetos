@@ -55,6 +55,41 @@
 		$("#formResposta").submit();
 
 	}
+	
+	function consultarReeducando() {
+		var idReeducando = $("#reeducando").val();
+		var idProjeto = '<c:out value = "${questionario.projeto.id}"/>';
+		var tipo = '<c:out value = "${status}"/>';
+		$
+				.post(
+						"/gestao-projetos/painel/respostasprojeto/consultarReeducando?idReeducando="
+								+ idReeducando + "&idProjeto=" + idProjeto + "&tipo=" + tipo,
+						function(respostas) {
+							if (respostas.length > 0) {
+							$(respostas).each(function(r){
+								if(respostas[r].pergunta.tipoPergunta.id == 1){
+									$("#respostasunica"+respostas[r].pergunta.id).val(respostas[r].descricaoResposta);
+								}else if(respostas[r].pergunta.tipoPergunta.id == 2){
+									for(var a = 0; a < respostas[r].pergunta.alternativas.length; a++){
+										if(respostas[r].pergunta.alternativas[a].descricaoAlternativa == respostas[r].descricaoResposta){
+									$("#multipla"+respostas[r].pergunta.alternativas[a].id).attr("checked","checked");
+										}
+									}
+								}else if(respostas[r].pergunta.tipoPergunta.id == 3){
+									$("#texto"+respostas[r].pergunta.id).html(respostas[r].descricaoResposta);
+								}else if(respostas[r].pergunta.tipoPergunta.id == 4){
+									for(var a = 0; a < respostas[r].pergunta.alternativas.length; a++){
+										if(respostas[r].pergunta.alternativas[a].descricaoAlternativa == respostas[r].descricaoResposta){
+									$("#alternativa"+respostas[r].pergunta.alternativas[a].id).attr("checked","checked");
+										}
+									}
+								}
+							});
+							} else {
+								//alert("Que pena. Não temos uma lista de Reeducandos");
+							}
+						});
+	}
 </script>
 </head>
 <body>
@@ -79,110 +114,86 @@
 					<input type="hidden" name="idProjeto"
 						value="${questionario.projeto.id}">
 					<!-- Reeducando - Resposta - INICIO -->
-					<div class="form-group col-md-4">
-						<label for="reeducando">Reeducando:</label> <select
-							id="reeducando" name="reeducando" class="form-control" required>
-							<option value="" label="Selecione..." />
-							<c:if test="${not empty reeducandos}">
+						<div class="form-group col-md-4">
+							<label for="reeducando">Reeducando:</label> <select
+								id="reeducando" name="reeducando"
+								class="form-control" onchange="consultarReeducando();" required>
+								<option value="" label="Selecione..." />
+								<c:if test="${not empty reeducandos}">
 								<c:forEach var="reeducando" items="${reeducandos}">
-									<option value="${reeducando.id}" label="${reeducando.nome}" />
+										<option value="${reeducando.id}"
+											label="${reeducando.nome}" />
 								</c:forEach>
-							</c:if>
-						</select>
-					</div>
-					<!-- Reeducando - Resposta - FIM -->
-					<input type="hidden" name="respostaStatus" value="${status}">
+								</c:if>
+							</select>
+						</div>
+				<!-- Reeducando - Resposta - FIM -->
+					<input type="hidden" name="tipo" value="${status}">
 					<!-- forEach -->
-					<c:forEach items="${questionario.perguntas}" var="pergunta"
-						varStatus="index">
-						<c:choose>
-							<c:when
-								test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
-								<div>
-									<div class="form-group col-md-12" style="margin-top: 10px;">
-										<label for="nome">${index.index+1}):
-											${pergunta.descricaoPergunta}</label>
-									</div>
-									<c:if test="${pergunta.tipoPergunta.id eq 1}">
-										<div class="form-group col-md-12">
-											<label for="nome">RESPOSTA:</label> <input type="text"
-												class="form-control" id="respostasunica${pergunta.id}"
-												name="respostapergunta${pergunta.id}"
-												placeholder="Digite a resposta" required autofocus>
-
-											<input type="hidden" id="idresposta${pergunta.id}"
-												name="respostas" value="${pergunta.id}#"> <input
-												type="hidden" name="tipoPergunta"
-												id="tipoPergunta${pergunta.id}"
-												value="${pergunta.tipoPergunta.id}">
-										</div>
-									</c:if>
-									<c:if test="${pergunta.tipoPergunta.id eq 2}">
-										<div class="col-md-12">
-											<label>RESPOSTA:</label>
-											<c:forEach items="${pergunta.alternativas}" var="alternativa">
-												<div class="input-group">
-													<span class="input-group-addon"> <input
-														type="checkbox" name="respostapergunta${pergunta.id}"
-														id="multipla${pergunta.id}" aria-label="..."
-														value="${alternativa.descricaoAlternativa}">
-													</span> <input type="text" class="form-control" id=""
-														aria-label="..."
-														value="${alternativa.descricaoAlternativa}" disabled>
-
-
-												</div>
-												<!-- /input-group -->
-											</c:forEach>
-											<input type="hidden" name="respostas"
-												id="idresposta${pergunta.id}" value="${pergunta.id}#">
-											<input type="hidden" name="tipoPergunta"
-												id="tipoPergunta${pergunta.id}"
-												value="${pergunta.tipoPergunta.id}">
-										</div>
-										<!-- /.col-lg-6 -->
-									</c:if>
-
-									<c:if test="${pergunta.tipoPergunta.id eq 3}">
-										<div class="form-group col-md-12">
-											<label>RESPOSTA:</label>
-											<textarea class="form-control" id="descricao"
-												placeholder="Digite uma Resposta" cols="10" rows="5"
-												id="texto${pergunta.id}"
-												name="respostapergunta${pergunta.id}" required></textarea>
-											<input type="hidden" name="respostas"
-												id="idresposta${pergunta.id}" value="${pergunta.id}#">
-											<input type="hidden" name="tipoPergunta"
-												id="tipoPergunta${pergunta.id}"
-												value="${pergunta.tipoPergunta.id}">
-										</div>
-									</c:if>
-									<c:if test="${pergunta.tipoPergunta.id eq 4}">
-										<div class="form-group col-md-12">
-											<div class="radio">
-												<label>Responda:</label>
-												<c:forEach items="${pergunta.alternativas}"
-													var="alternativa">
-													<label><input type="radio"
-														id="alternativa${alternativa.pergunta.id}"
-														name="respostapergunta${pergunta.id}"
-														value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
-												</c:forEach>
-												<input type="hidden" name="respostas"
-													id="idresposta${pergunta.id}" value="${pergunta.id}#">
-												<input type="hidden" name="tipoPergunta"
-													id="tipoPergunta${pergunta.id}"
-													value="${pergunta.tipoPergunta.id}">
-											</div>
-										</div>
-									</c:if>
+					<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
+				<c:choose>
+					<c:when test="${pergunta.tipoPergunta.descricao ne null or not empty pergunta.tipoPergunta.descricao}">
+					<div>
+						<div class="form-group col-md-12" style="margin-top: 10px;">
+								<label for="nome">${index.index+1}): ${pergunta.descricaoPergunta}</label>
+						</div>
+						<c:if test="${pergunta.tipoPergunta.id eq 1}">
+							<div class="form-group col-md-12">
+								<label for="nome">RESPOSTA:</label> <input type="text"
+							class="form-control" id="respostasunica${pergunta.id}" name="respostapergunta${pergunta.id}"
+							placeholder="Digite a resposta" required autofocus>
+							
+							<input type="hidden" id="idresposta${pergunta.id}" name="respostas" value="${pergunta.id}#">
+							<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
+							</div>
+						</c:if>
+						<c:if test="${pergunta.tipoPergunta.id eq 2}">
+							<div class="col-md-12">
+						  <label>RESPOSTA:</label>
+						  <c:forEach items="${pergunta.alternativas}" var="alternativa">
+						    <div class="input-group">
+						      <span class="input-group-addon">
+						        <input type="radio" name="respostapergunta${pergunta.id}" id="multipla${alternativa.id}" aria-label="..." value="${alternativa.descricaoAlternativa}" required>
+						      </span>
+						        <input type="text" class="form-control" id="" aria-label="..." value="${alternativa.descricaoAlternativa}" disabled>
+						        
+						    
+						    </div><!-- /input-group -->
+						  </c:forEach>
+						    	<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
+						    	<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
+						  </div><!-- /.col-lg-6 -->
+						</c:if>
+						
+						<c:if test="${pergunta.tipoPergunta.id eq 3}">
+							<div class="form-group col-md-12">
+								<label>RESPOSTA:</label> <textarea
+								class="form-control"
+								placeholder="Digite uma Resposta" cols="10" rows="5" id="texto${pergunta.id}" name="respostapergunta${pergunta.id}" required></textarea>
+								<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
+								<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
+							</div>
+						</c:if>
+						<c:if test="${pergunta.tipoPergunta.id eq 4}">
+							<div class="form-group col-md-12">
+									 <div class="radio">
+									<label>Responda: </label> 
+									<c:forEach items="${pergunta.alternativas}" var="alternativa">
+										<label><input
+										type="radio" id="alternativa${alternativa.id}" name="respostapergunta${pergunta.id}" value="${alternativa.descricaoAlternativa}" required>${alternativa.descricaoAlternativa}</label>
+									</c:forEach>
+										<input type="hidden" name="respostas" id="idresposta${pergunta.id}" value="${pergunta.id}#">
+										<input type="hidden" name="tipoPergunta" id="tipoPergunta${pergunta.id}" value="${pergunta.tipoPergunta.id}">
 								</div>
-							</c:when>
-							<c:otherwise>
-								<h1>TEMOS UM PROBLEMA</h1>
-							</c:otherwise>
-						</c:choose>
-
+							</div>
+						</c:if>
+							</div>				
+					</c:when>
+					<c:otherwise>
+						<h1>TEMOS UM PROBLEMA</h1>
+					</c:otherwise>
+				</c:choose>
+						
 					</c:forEach>
 					<!-- forEach - FIM -->
 				</div>
@@ -199,5 +210,7 @@
 		</div>
 	</div>
 	</div>
+	<div class="section" style="margin-top:20px">
+    </div>
 </body>
 </html>

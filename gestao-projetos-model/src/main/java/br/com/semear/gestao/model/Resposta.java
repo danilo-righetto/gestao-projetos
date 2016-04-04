@@ -13,8 +13,14 @@ public class Resposta {
 	private Usuario usuario;
 	private Projeto projeto;
 	private Reeducando reeducando;
-	private String respostaStatus;
+	private String tipo;
 	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -72,12 +78,5 @@ public class Resposta {
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
-	public String getRespostaStatus() {
-		return respostaStatus;
-	}
-	public void setRespostaStatus(String respostaStatus) {
-		this.respostaStatus = respostaStatus;
-	}
-	
 	
 }

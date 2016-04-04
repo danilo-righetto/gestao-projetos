@@ -51,5 +51,16 @@ public class RespostaProjetoDaoImpl implements RespostaProjetoDAO {
 		Query query = em.createQuery("select q from RespostaEntity q");
 		return query.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RespostaEntity> listarRespostasReeducandoPorProjetoTipo(long idReeducando, Long idProjeto,
+			String tipo) {
+		Query query = em.createQuery("select q from RespostaEntity q where q.reeducandoEntity.id = :idReeducando and q.projeto.id = :idProjeto and q.tipo = :tipo");
+		query.setParameter("idReeducando", idReeducando);
+		query.setParameter("idProjeto", idProjeto);
+		query.setParameter("tipo", tipo);
+		return query.getResultList();
+	}
 	
 }

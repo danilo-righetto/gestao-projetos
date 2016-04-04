@@ -643,7 +643,7 @@ public class ParseServiceImpl implements ParseService {
 			model.setPergunta(parseToModel(entity.getPerguntaEntity()));
 			model.setDataAlteracao(entity.getDataAlteracao());
 			model.setUsuario(parseToModel(entity.getUsuarioEntity()));
-			model.setRespostaStatus(entity.getRespostaStatus());
+			model.setTipo(entity.getTipo());
 			model.setReeducando(parseToModel(entity.getReeducandoEntity()));
 			model.setId(entity.getId());
 		}

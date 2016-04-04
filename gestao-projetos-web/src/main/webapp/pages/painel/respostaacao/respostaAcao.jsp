@@ -75,7 +75,7 @@
 								}
 							});
 							} else {
-								alert("Que pena. Não temos uma lista de Reeducandos");
+								//alert("Que pena. Não temos uma lista de Reeducandos");
 							}
 						});
 	}

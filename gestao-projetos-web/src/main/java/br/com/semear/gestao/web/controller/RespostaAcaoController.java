@@ -88,7 +88,6 @@ public class RespostaAcaoController {
 		return "redirect:/painel/";
 	}
 	
-	//Consulta Reeducando por Ação e TIPO
 	
 	@ResponseBody
 	@RequestMapping(value = "consultarReeducando", method = RequestMethod.POST)

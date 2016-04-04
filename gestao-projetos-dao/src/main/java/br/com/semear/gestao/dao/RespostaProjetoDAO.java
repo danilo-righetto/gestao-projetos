@@ -14,4 +14,6 @@ public interface RespostaProjetoDAO {
 	RespostaEntity buscarRespostaProjetoPorId(long IdResposta);
 	
 	List<RespostaEntity> listarRespostas();
+	
+	List<RespostaEntity> listarRespostasReeducandoPorProjetoTipo(long idReeducando, Long idProjeto, String tipo);
 }

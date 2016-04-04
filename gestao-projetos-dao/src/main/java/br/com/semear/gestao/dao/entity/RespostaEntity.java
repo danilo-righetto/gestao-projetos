@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.semear.gestao.model.Projeto;
-
 @Entity
 @Table(name = "RESPOSTA_PROJETO")
 public class RespostaEntity {
@@ -48,19 +46,25 @@ public class RespostaEntity {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJETO", nullable = false)
-	private ProjetoEntity projetoEntity;
+	private ProjetoEntity projeto;
 	
-	@Column(name = "RESPOSTA_STATUS")
-	private String respostaStatus;
+	@Column(name = "TIPO")
+	private String tipo;
 	
-	
-
-	public ProjetoEntity getProjetoEntity() {
-		return projetoEntity;
+	public ProjetoEntity getProjeto() {
+		return projeto;
 	}
 
-	public void setProjetoEntity(ProjetoEntity projetoEntity) {
-		this.projetoEntity = projetoEntity;
+	public void setProjeto(ProjetoEntity projeto) {
+		this.projeto = projeto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public ReeducandoEntity getReeducandoEntity() {
@@ -69,14 +73,6 @@ public class RespostaEntity {
 
 	public void setReeducandoEntity(ReeducandoEntity reeducandoEntity) {
 		this.reeducandoEntity = reeducandoEntity;
-	}
-
-	public String getRespostaStatus() {
-		return respostaStatus;
-	}
-
-	public void setRespostaStatus(String respostaStatus) {
-		this.respostaStatus = respostaStatus;
 	}
 
 	public long getId() {
