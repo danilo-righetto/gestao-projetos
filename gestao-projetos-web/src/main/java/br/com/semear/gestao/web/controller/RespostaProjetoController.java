@@ -88,9 +88,9 @@ public class RespostaProjetoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session, Long reeducando, String tipo){
+	public String salvarResposta(String []respostas,Long idProjeto,HttpSession session, Long reeducando, String tipo, String respostaStatus){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao,reeducando,tipo);
+		respostaService.salvarResposta(respostas,idProjeto,usuarioSessao,reeducando,tipo,respostaStatus);
 		//return "redirect:/painel/respostasProjeto/"+idProjeto;
 		return "redirect:/painel/";
 	}

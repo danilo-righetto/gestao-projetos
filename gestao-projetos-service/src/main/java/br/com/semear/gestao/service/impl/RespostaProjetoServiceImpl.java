@@ -69,7 +69,7 @@ public class RespostaProjetoServiceImpl implements RespostaProjetoService {
 	}
 
 	@Override
-	public void salvarResposta(String[] respostas, Long idProjeto, Usuario usuario, Long reeducando, String tipo) {
+	public void salvarResposta(String[] respostas, Long idProjeto, Usuario usuario, Long reeducando, String tipo, String respostaStatus) {
 		if(respostas != null && respostas.length > 0 && idProjeto != null){
 			for(int i =0; i < respostas.length;i++){
 				String[] respostaArray = respostas[i].split("#");
@@ -86,6 +86,7 @@ public class RespostaProjetoServiceImpl implements RespostaProjetoService {
 				resposta.setUsuarioEntity(parseService.parseToEntity(usuario));
 				resposta.setReeducandoEntity(parseService.parseToEntity(new Reeducando(reeducando)));
 				resposta.setTipo(tipo);
+				resposta.setRespostaStatus(respostaStatus);
 				respostaProjetoDAO.salvarResposta(resposta);
 			}
 		}
@@ -101,6 +102,7 @@ public class RespostaProjetoServiceImpl implements RespostaProjetoService {
 		resposta.setPerguntaEntity(parseService.parseToEntity(((Resposta) respostas).getPergunta()));
 		resposta.setUsuarioEntity(parseService.parseToEntity(((Resposta) respostas).getUsuario()));
 		resposta.setTipo(((RespostaEntity)respostas).getTipo());
+		resposta.setRespostaStatus(((RespostaEntity)respostas).getRespostaStatus());
 		resposta.setReeducandoEntity(parseService.parseToEntity(((Resposta) respostas).getReeducando()));
 		resposta.setProjeto(parseService.parseToEntity(((Resposta) respostas).getProjeto()));
 		respostaProjetoDAO.salvarResposta(resposta);

@@ -51,6 +51,17 @@ public class RespostaEntity {
 	@Column(name = "TIPO")
 	private String tipo;
 	
+	@Column(name = "RESPOSTA_STATUS")
+	private String respostaStatus;
+	
+	public String getRespostaStatus() {
+		return respostaStatus;
+	}
+
+	public void setRespostaStatus(String respostaStatus) {
+		this.respostaStatus = respostaStatus;
+	}
+
 	public ProjetoEntity getProjeto() {
 		return projeto;
 	}

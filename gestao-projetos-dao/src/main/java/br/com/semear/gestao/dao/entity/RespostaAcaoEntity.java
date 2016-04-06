@@ -52,6 +52,17 @@ public class RespostaAcaoEntity {
 	@JoinColumn(name = "ACAO")
 	private AcaoEntity acao;
 	
+	@Column(name = "RESPOSTA_STATUS")
+	private String respostaStatus;
+	
+	public String getRespostaStatus() {
+		return respostaStatus;
+	}
+
+	public void setRespostaStatus(String respostaStatus) {
+		this.respostaStatus = respostaStatus;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}

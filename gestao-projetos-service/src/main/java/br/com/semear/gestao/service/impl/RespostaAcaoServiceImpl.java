@@ -49,7 +49,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	private QuestionarioAcaoService questionarioAcaoService;
 
 	@Override
-	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo) {
+	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo, String respostaStatus, Long idResposta) {
 		if(respostas != null && respostas.length > 0 && idAcao != null){
 			for(int i =0; i < respostas.length;i++){
 				String[] respostaArray = respostas[i].split("#");
@@ -57,8 +57,12 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 				PerguntaAcao pergunta = questionarioAcaoService.buscarPerguntaPorIdAcaoEiDPergunta(idPergunta,idAcao);
 				String descricaoResposta = "";
 				descricaoResposta = respostaArray[1];
+				idResposta = Long.valueOf(respostaArray[2]);
 				
 				RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
+				if(idResposta != 0){
+					respostaAcao.setId(idResposta);
+				}
 				respostaAcao.setDataCadastro(Calendar.getInstance());
 				respostaAcao.setAcao(parseService.parseToEntity(new Acao(idAcao)));
 				respostaAcao.setDescricaoRespostaAcao(descricaoResposta);
@@ -66,6 +70,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 				respostaAcao.setUsuarioEntity(parseService.parseToEntity(usuario));
 				respostaAcao.setReeducandoEntity(parseService.parseToEntity(new Reeducando(reeducando)));
 				respostaAcao.setTipo(tipo);
+				respostaAcao.setRespostaStatus(respostaStatus);
 				respostaAcaoDAO.salvarRespostaAcao(respostaAcao);
 			}
 		}
@@ -109,6 +114,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 		respostaAcao.setPerguntaAcaoEntity(parse.parseToEntity(((RespostaAcao) respostas).getPerguntaAcao()));
 		respostaAcao.setUsuarioEntity(parse.parseToEntity(((RespostaAcao) respostas).getUsuario()));
 		respostaAcao.setTipo(((RespostaAcaoEntity)respostas).getTipo());
+		respostaAcao.setRespostaStatus(((RespostaAcaoEntity)respostas).getRespostaStatus());
 		respostaAcao.setReeducandoEntity(parse.parseToEntity(((RespostaAcao) respostas).getReeducando()));
 		respostaAcao.setAcao(parse.parseToEntity(((RespostaAcao) respostas).getAcao()));
 		respostaAcaoDAO.salvarRespostaAcao(respostaAcao);

@@ -14,7 +14,14 @@ public class Resposta {
 	private Projeto projeto;
 	private Reeducando reeducando;
 	private String tipo;
+	private String respostaStatus;
 	
+	public String getRespostaStatus() {
+		return respostaStatus;
+	}
+	public void setRespostaStatus(String respostaStatus) {
+		this.respostaStatus = respostaStatus;
+	}
 	public String getTipo() {
 		return tipo;
 	}

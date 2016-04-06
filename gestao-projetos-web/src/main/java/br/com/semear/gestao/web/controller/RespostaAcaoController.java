@@ -72,6 +72,7 @@ public class RespostaAcaoController {
 			mav.addObject("tiposPerguntas",questionarioAcaoService.listarTiposDePerguntas());
 			mav.addObject("reeducandos", reeducandoService.listarReeducandos());
 			mav.addObject("status", statusAcao);
+			mav.addObject("respostas", respostaAcaoService.listarRespostas());
 			
 		} catch (Exception e) {
 			mav.clear();
@@ -82,9 +83,9 @@ public class RespostaAcaoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String tipo){
+	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String tipo, String respostaStatus, Long idResposta){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,tipo);
+		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,tipo,respostaStatus,idResposta);
 		return "redirect:/painel/";
 	}
 	
@@ -92,7 +93,7 @@ public class RespostaAcaoController {
 	@ResponseBody
 	@RequestMapping(value = "consultarReeducando", method = RequestMethod.POST)
 	public List<RespostaAcao> consultarReeducando(long idReeducando, Long idAcao, String tipo) {
-		List<RespostaAcao> respostas = respostaAcaoService.listarRespostasReeducandoPorAcaoTipo(idReeducando, idAcao, tipo);
-			return respostas;
+		List<RespostaAcao> respostasReeducando = respostaAcaoService.listarRespostasReeducandoPorAcaoTipo(idReeducando, idAcao, tipo);
+			return respostasReeducando;
 	}
 }

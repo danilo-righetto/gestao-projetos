@@ -21,7 +21,8 @@ public class RespostaAcaoDaoImpl implements RespostaAcaoDAO{
 
 	@Override
 	public void salvarRespostaAcao(RespostaAcaoEntity resposta) {
-		em.persist(resposta);
+		//em.persist(resposta);
+		em.merge(resposta);
 	}
 
 	@Override
@@ -59,9 +60,6 @@ public class RespostaAcaoDaoImpl implements RespostaAcaoDAO{
 		query.setParameter("idReeducando", idReeducando);
 		query.setParameter("idAcao", idAcao);
 		query.setParameter("tipo", tipo);
-//		if(!query.getResultList().isEmpty()){
-//			return (RespostaAcaoEntity) query.getResultList().get(0);
-//		}
 		return query.getResultList();
 	}
 
