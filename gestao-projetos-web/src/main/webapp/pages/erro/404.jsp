@@ -60,7 +60,7 @@
 			<div class="conteudo">
 				<div class="navegacao container-fluid text-center">
 					<div class="pull" style="color:#4DC1FF">
-						<h2>404 - Página não encotnrada</h2>
+						<h2>404 - Página não encontrada</h2>
 						<h2>A página solicitada não foi encontrada</h2>	
 					</div>
 				</div>

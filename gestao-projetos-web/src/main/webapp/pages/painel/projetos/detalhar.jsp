@@ -6,16 +6,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <style type="text/css">
-textarea {
-	resize: none;
-}
-
 footer div {
 	position: relative !important;
 }
 </style>
 </head>
-
 <script type="text/javascript">
 	$(function() {
 		$("#menu-projetos").attr('class', 'active');
@@ -47,7 +42,7 @@ footer div {
 				<div class="col-md-12">
 					<input type="hidden" name="id" value="${projeto.id}">
 					<div class="row">
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-3 col-xs-6">
 							<label for="nome">Nome:</label> <input type="text"
 								class="form-control" id="nome" name="nome"
 								value="${projeto.nome}" placeholder="Digite o nome" required
@@ -212,11 +207,11 @@ footer div {
 								class="form-control" required autofocus
 								onchange="listarCoordenadores();">
 								<option value="" label="Selecione..." />
-								<c:forEach var="associada" items="${parceirosAssociadas}">
+								<c:forEach var="associado" items="${parceirosAssociados}">
 									<option
-										${coordernadorProjeto.parceiro.id == associada.parceiro.id ? "selected='selected'" : ""}
-										value="${associada.parceiro.id}"
-										label="${associada.parceiro.razaosocial}" />
+										${coordernadorProjeto.parceiro.id == associado.parceiro.id ? "selected='selected'" : ""}
+										value="${associado.parceiro.id}"
+										label="${associado.parceiro.razaosocial}" />
 
 								</c:forEach>
 							</select>

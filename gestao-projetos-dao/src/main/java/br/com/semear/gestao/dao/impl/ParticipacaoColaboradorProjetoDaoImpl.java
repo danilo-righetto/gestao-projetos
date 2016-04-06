@@ -28,19 +28,21 @@ public class ParticipacaoColaboradorProjetoDaoImpl implements ParticipacaoColabo
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ParticipacaoColaboradorProjetoEntity> listarParticipacaoProjetos(long idProjeto) {
-		Query query = em
-				.createQuery("select pp from ParticipacaoColaboradorProjetoEntity pp where pp.projeto.id = :idProjeto");
+	public List<UsuarioEntity> listarColaboradoresDoProjeto(long idProjeto, String idPerfil) {
+		Query query = em.createQuery("select p.colaborador from ParticipacaoColaboradorProjetoEntity p "
+				+ "where p.projeto.id = :idProjeto and p.colaborador.perfil.id = :idPerfil");
 		query.setParameter("idProjeto", idProjeto);
+		query.setParameter("idPerfil", idPerfil);
 		return query.getResultList();
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<UsuarioEntity> buscarColaboradoresAssociados(Long idProjeto) {
-		Query query = em.createQuery(
-				"select p.colaborador from ParticipacaoColaboradorProjetoEntity p where p.projeto.id = :idProjeto");
-		query.setParameter("idProjeto", idProjeto);
-		return query.getResultList();
-	}
+//	@Override
+//	@SuppressWarnings("unchecked")
+//	public List<UsuarioEntity> listarAssociadosDoProjeto(Long idProjeto, String idPerfil) {
+//		Query query = em.createQuery("select p.colaborador from ParticipacaoColaboradorProjetoEntity p "
+//				+ "where p.projeto.id = :idProjeto and p.colaborador.perfil.id = :idPerfil");
+//		query.setParameter("idProjeto", idProjeto);
+//		query.setParameter("idPerfil", idPerfil);
+//		return query.getResultList();
+//	}
 }

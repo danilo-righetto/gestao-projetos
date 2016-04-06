@@ -65,7 +65,7 @@ public class ProjetoDaoImpl implements ProjetoDAO {
 	}
 
 	@Override
-	public UsuarioEntity buscarCoodernadorPorIdProjeto(long idProjeto) {
+	public UsuarioEntity buscarCoordenadorPorIdProjeto(long idProjeto) {
 		Query query = em.createQuery("select p.coordenador from ProjetoEntity p where p.id = :idProjeto");
 		query.setParameter("idProjeto", idProjeto);
 		if(!query.getResultList().isEmpty()){

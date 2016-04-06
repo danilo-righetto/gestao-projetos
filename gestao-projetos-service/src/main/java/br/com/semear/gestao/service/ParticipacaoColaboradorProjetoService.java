@@ -8,8 +8,7 @@ import br.com.semear.gestao.model.Usuario;
 public interface ParticipacaoColaboradorProjetoService {
 	public void cadastrar(ParticipacaoColaboradorProjeto colaboradorProjeto);
 
-	public List<ParticipacaoColaboradorProjeto> listarParticipacaoProjetos(long idProjeto);
+	public List<Usuario> listarColaboradoresDoProjeto(long idProjeto, String idPerfil);
 
-	public List<Usuario> buscarColaboradoresAssociados(Long idProjeto);
-
+	public List<Usuario> listarAssociadosDoProjeto(Long idProjeto);
 }

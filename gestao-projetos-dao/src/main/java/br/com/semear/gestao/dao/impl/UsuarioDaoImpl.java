@@ -110,7 +110,7 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UsuarioEntity> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
+	public List<UsuarioEntity> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil) {
 		Query query = em.createQuery(
 				"select u from UsuarioEntity u where u.parceiro.id in(:idParceiros) and u.perfil.id = :idPerfil order by u.nome");
 		query.setParameter("idParceiros", idParceiros);

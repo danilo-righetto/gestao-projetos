@@ -10,7 +10,7 @@
 <title>Cadastro de Participação Projeto</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var idCoodernador = "<c:out value='${coordernadorProjeto}'/>";
+		var idCoodernador = "<c:out value='${coordenadorProjeto}'/>";
 		if (idCoodernador == null || idCoodernador == '') {
 			$("#coordenadores").hide();
 		}
@@ -39,12 +39,20 @@
 							"/gestao-projetos/painel/participacao-projetos/listarCoordenadores/"
 									+ idParceiro + "/ROLE_COORDENADOR",
 							function(listaCoordenadores) {
+								var atual = $("#coordenador option").val();
 								$("#coordenador option").remove();
-								var coordenador = "<option value='' label='Selecione...' />";
+								var coordenador = "";
 								$(listaCoordenadores)
 										.each(
 												function(i) {
-													coordenador += "<option value='"+ listaCoordenadores[i].id +"' label='"+ listaCoordenadores[i].nome +"' />";
+													if (listaCoordenadores[i] != null
+															&& listaCoordenadores[i].id != 0) {
+														if(listaCoordenadores[i].id == atual){
+														coordenador += "<option value='"+ listaCoordenadores[i].id +"' label='"+ listaCoordenadores[i].nome +"' selected/>";
+														} else {
+															coordenador += "<option value='"+ listaCoordenadores[i].id +"' label='"+ listaCoordenadores[i].nome +"'/>";
+														}
+													}
 												});
 								$("#coordenador").append(coordenador);
 							})
@@ -72,27 +80,24 @@
 								type="hidden" />
 						</div>
 						<div class="form-group col-md-4">
-							<label for="parceiro">Parceiro:</label> <select
-								id="parceiro" name="parceiro" class="form-control"
-								required autofocus onchange="listarCoordenadores();">
+							<label for="parceiro">Parceiro:</label> <select id="parceiro"
+								name="parceiro" class="form-control"
+								onchange="listarCoordenadores();" required>
 								<option value="" label="Selecione..." />
-								<c:forEach var="associada" items="${parceirosAssociadas}">
+								<c:forEach var="associado" items="${parceirosAssociados}">
 									<option
-										${coordernadorProjeto.parceiro.id == associada.parceiro.id ? "selected='selected'" : ""}
-										value="${associada.parceiro.id}"
-										label="${associada.parceiro.razaosocial}" />
-
+										${coordenadorProjeto.parceiro.id == associado.parceiro.id ? "selected='selected'" : ""}
+										value="${associado.parceiro.id}"
+										label="${associado.parceiro.razaosocial}" />
 								</c:forEach>
 							</select>
 						</div>
 						<div class="form-group col-md-4" id="coordenadores">
 							<label for="coordenador">Coordenador:</label> <select
-								id="coordenador" name="idCoordenador" class="form-control"
-								required>
-								<c:if test="${coordernadorProjeto ne null}">
-									<option value="${coordernadorProjeto.id}"
-										label="${coordernadorProjeto.nome}" />
-								</c:if>
+								id="coordenador" name="idCoordenador" class="form-control" onfocus="listarCoordenadores();"
+								required autofocus>
+								<option value="${coordenadorProjeto.id}"
+									label="${coordenadorProjeto.nome}" selected />
 							</select>
 						</div>
 					</div>
@@ -176,17 +181,17 @@
 							<tr class="text-center">
 								<c:set var="encontrou" value="false"></c:set>
 								<c:set var="jaMarcado" value="false"></c:set>
-								<c:forEach items="${colaboradoresAssociados}" var="participacao">
-									<c:if test="${colaborador.id == participacao.colaborador.id}">
+								<c:forEach items="${colaboradoresAssociados}" var="associado">
+									<c:if test="${colaborador.id == associado.id}">
 										<c:set var="encontrou" value="true"></c:set>
 									</c:if>
 								</c:forEach>
 								<c:choose>
 									<c:when test="${encontrou}">
 										<c:forEach items="${colaboradoresAssociados}"
-											var="participacao">
+											var="associado">
 											<c:if
-												test="${colaborador.id == participacao.colaborador.id && !jaMarcado}">
+												test="${colaborador.id == associado.id && !jaMarcado}">
 												<td class="text-center"><input
 													value="${colaborador.id}" name="idColaboradores"
 													type="checkbox" checked="checked" disabled /></td>

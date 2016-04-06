@@ -45,21 +45,22 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 	@Inject
 	private ParticipacaoColaboradorProjetoService participacaoColaboradorProjetoService;
-	
+
 	@Inject
 	private ParticipacaoParceiroProjetoService participacaoParceiroProjetoService;
-	
+
 	@Inject
 	private ParticipacaoParceiroProjetoDAO participacaoParceiroProjetoDAO;
-	
+
 	@Override
-	public String cadastrarParticipacaoParceiro(Long idProjeto, Long[] idParceiros){
+	public String cadastrarParticipacaoParceiro(Long idProjeto, Long[] idParceiros) {
 		String msg = null;
-		try{
-			if(idParceiros != null){
-				for(Long id : idParceiros){
-					ParticipacaoParceiroProjetoEntity pip = participacaoParceiroProjetoDAO.buscarParticipacaoPorProjetoEParceiro(idProjeto,id);
-					if(pip == null){
+		try {
+			if (idParceiros != null) {
+				for (Long id : idParceiros) {
+					ParticipacaoParceiroProjetoEntity pip = participacaoParceiroProjetoDAO
+							.buscarParticipacaoPorProjetoEParceiro(idProjeto, id);
+					if (pip == null) {
 						pip = new ParticipacaoParceiroProjetoEntity();
 						pip.setDataEntrada(Calendar.getInstance());
 						pip.setProjeto(new ProjetoEntity(idProjeto));
@@ -69,12 +70,12 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 				}
 			}
 			msg = "OK";
-		}catch(Exception e){
+		} catch (Exception e) {
 			msg = "NOK";
 		}
 		return msg;
 	}
-	
+
 	@Override
 	public void cadastrar(Long idProjeto, Long idCoordenador, Long[] idReeducandos, String[] funcoes,
 			Long[] idColaboradores) {
@@ -90,7 +91,7 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 
 		pcp.setDataEntrada(Calendar.getInstance());
 		pcp.setProjeto(projeto);
-		
+
 		int iterator = 0;
 
 		if (idReeducandos != null) {
@@ -107,8 +108,8 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 		}
 		if (idColaboradores != null) {
 			for (Long id : idColaboradores) {
-				Usuario colaborador = new Usuario(id);
-				pcp.setColaborador(colaborador);
+				Usuario usuario = new Usuario(id);
+				pcp.setColaborador(usuario);
 				participacaoColaboradorProjetoService.cadastrar(pcp);
 			}
 		}
@@ -120,8 +121,8 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	}
 
 	@Override
-	public List<Usuario> listarCoPorParceiro(long idParceiro, String idPerfil) {
-		return usuarioService.buscarUsuarioPorParceiro(idParceiro, idPerfil);
+	public List<Usuario> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil) {
+		return usuarioService.listarCoordenadoresDoParceiro(idParceiro, idPerfil);
 	}
 
 	@Override
@@ -131,8 +132,8 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
-		return usuarioService.listarColaboradoresDasParceiros(idParceiros, idPerfil);
+	public List<Usuario> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil) {
+		return usuarioService.listarColaboradoresDosParceiros(idParceiros, idPerfil);
 	}
 
 	@Override
@@ -146,12 +147,7 @@ public class ParticipacaoProjetoServiceImpl implements ParticipacaoProjetoServic
 	}
 
 	@Override
-	public List<Usuario> buscarAssociadosProjeto(Long idProjeto) {
-		List<Usuario> usuarios = participacaoColaboradorProjetoService.buscarColaboradoresAssociados(idProjeto);
-		List<Usuario> reeducandos = participacaoReeducandoProjetoService.buscarReeducandosAssociados(idProjeto);
-
-		usuarios.addAll(reeducandos);
-		
-		return usuarios;
+	public List<Usuario> listarAssociadosDoProjeto(Long idProjeto) {
+		return participacaoColaboradorProjetoService.listarAssociadosDoProjeto(idProjeto);
 	}
 }

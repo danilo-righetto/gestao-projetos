@@ -8,7 +8,7 @@ import br.com.semear.gestao.dao.entity.UsuarioEntity;
 public interface ParticipacaoColaboradorProjetoDAO {
 	public void cadastrar(ParticipacaoColaboradorProjetoEntity entity);
 
-	public List<ParticipacaoColaboradorProjetoEntity> listarParticipacaoProjetos(long idProjeto);
+	public List<UsuarioEntity> listarColaboradoresDoProjeto(long idProjeto, String idPerfil);
 
-	public List<UsuarioEntity> buscarColaboradoresAssociados(Long idProjeto);
+//	public List<UsuarioEntity> listarAssociadosDoProjeto(Long idProjeto, String idPerfil);
 }

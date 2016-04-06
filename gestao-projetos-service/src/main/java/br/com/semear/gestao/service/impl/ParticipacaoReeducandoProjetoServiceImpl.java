@@ -56,9 +56,9 @@ public class ParticipacaoReeducandoProjetoServiceImpl implements ParticipacaoRee
 
 	@Override
 	public List<Usuario> buscarReeducandosAssociados(Long idProjeto) {
-		List<UsuarioEntity> entitys = participacaoReeducandoProjetoDAO.buscarReeducandosAssociados(idProjeto);
+		List<UsuarioEntity> lista = participacaoReeducandoProjetoDAO.buscarReeducandosAssociados(idProjeto);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		for (UsuarioEntity usuario : entitys) {
+		for (UsuarioEntity usuario : lista) {
 			usuarios.add(parse.parseToModel(usuario));
 		}
 		return usuarios;

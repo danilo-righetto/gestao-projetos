@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
+<style type="text/css">
+footer div {
+	position: relative !important;
+}
+</style>
 </head>
-
 <script type="text/javascript">
 	$(function() {
 		$("#menu-projetos").attr('class', 'active');

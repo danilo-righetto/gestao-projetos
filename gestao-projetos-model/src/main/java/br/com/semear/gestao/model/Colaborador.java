@@ -12,6 +12,14 @@ public class Colaborador {
 	
 	private Parceiro parceiro;
 
+	public Colaborador(Long id) {
+		this.id = id;
+	}
+	
+	public Colaborador() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId() {
 		return id;
 	}

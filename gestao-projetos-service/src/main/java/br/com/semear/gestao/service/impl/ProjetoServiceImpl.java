@@ -100,12 +100,12 @@ public class ProjetoServiceImpl implements ProjetoService {
 	}
 
 	@Override
-	public Usuario buscarCoodernadorPorIdProjeto(long idProjeto) {
-		UsuarioEntity entity = projetoDAO.buscarCoodernadorPorIdProjeto(idProjeto);
-		ParceiroEntity instEntity = projetoDAO.buscarParceiroDoCoodernadorPorIdProjeto(idProjeto);
+	public Usuario buscarCoordenadorPorIdProjeto(long idProjeto) {
+		UsuarioEntity entity = projetoDAO.buscarCoordenadorPorIdProjeto(idProjeto);
+		ParceiroEntity parceiroEntity = projetoDAO.buscarParceiroDoCoodernadorPorIdProjeto(idProjeto);
 		if(entity != null){
 			Usuario coodernador = parseService.parseToModel(entity);
-			coodernador.setParceiro(parseService.parseToModel(instEntity));
+			coodernador.setParceiro(parseService.parseToModel(parceiroEntity));
 			return coodernador;
 		}else{
 			return null;

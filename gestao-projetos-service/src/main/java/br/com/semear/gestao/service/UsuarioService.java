@@ -13,8 +13,6 @@ public interface UsuarioService {
 
 	public Usuario buscarUsuarioPorId(long idUsuario);
 	
-	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro, String idPerfil);
-
 	public void editarUsuario(Usuario usuario);
 
 	public String enviarEmailNovaSenha(String email);
@@ -27,7 +25,9 @@ public interface UsuarioService {
 
 	String geraHash(String valor);
 
-	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro);
+//	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro);
 
-	public List<Usuario> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil);
+	public List<Usuario> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil);
+
+	public List<Usuario> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil);
 }

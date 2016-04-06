@@ -26,19 +26,19 @@ public class Projeto {
 	private Usuario usuario;
 
 	private Usuario coordenador;
-	
+
 	private UnidadePrisional unidadePrisional;
-	
+
 	private String objetivo;
-	
+
 	private String resultadosEsperados;
 
 	public Projeto(Long id) {
 		this.id = id;
 	}
-	
+
 	public Projeto() {
-		
+
 	}
 
 	public long getId() {

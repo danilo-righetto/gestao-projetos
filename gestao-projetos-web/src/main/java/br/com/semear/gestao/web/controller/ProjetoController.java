@@ -63,22 +63,21 @@ public class ProjetoController {
 	@RequestMapping("/{idProjeto}/detalhar")
 	public ModelAndView detalharProjeto(@PathVariable("idProjeto") long idProjeto) {
 		try {
-			List<Long> parceirosAssociadas = participacaoParceiroProjetoService.buscarParceirosAssociadas(idProjeto);
+			List<Long> parceirosAssociados = participacaoParceiroProjetoService.buscarParceirosAssociados(idProjeto);
 			mav.clear();
 			mav.setViewName("detalhar-projeto");
 			mav.addObject("projeto", projetoService.buscarProjetoPorId(idProjeto));
 			mav.addObject("questionario",questionarioService.buscarQuestionarioPorIdProjeto(idProjeto));
 			mav.addObject("parceiros", participacaoProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
-			mav.addObject("coordernadorProjeto", projetoService.buscarCoodernadorPorIdProjeto(idProjeto));
-			mav.addObject("parceirosAssociadas", participacaoParceiroProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
-			
+			mav.addObject("coordernadorProjeto", projetoService.buscarCoordenadorPorIdProjeto(idProjeto));
+			mav.addObject("parceirosAssociados", participacaoParceiroProjetoService.listarParticipacaoParceirosProjeto(idProjeto));
 			mav.addObject("reeducandosAssociados", participacaoProjetoService.listarParticipacaoReeducandoProjeto(idProjeto));
 			mav.addObject("reeducandos", participacaoProjetoService.listarReeducandosPorUnidadePrisional(idProjeto));
 			mav.addObject("colaboradoresAssociados",
-					participacaoColaboradorProjetoService.listarParticipacaoProjetos(idProjeto));
+					participacaoColaboradorProjetoService.listarColaboradoresDoProjeto(idProjeto, "ROLE_COLABORADOR"));
 			
 			mav.addObject("colaboradores",
-					participacaoProjetoService.listarColaboradoresDasParceiros(parceirosAssociadas, "ROLE_COLABORADOR"));
+					participacaoProjetoService.listarColaboradoresDosParceiros(parceirosAssociados, "ROLE_COLABORADOR"));
 			
 			mav.addObject("tarefas", tarefaProjetoService.listarTarefas(idProjeto));
 		}
@@ -163,7 +162,7 @@ public class ProjetoController {
 	public ModelAndView formCadastroTarefa(@PathVariable Long idProjeto){
 		mav.clear();
 		mav.setViewName("cadastroTarefaProjeto");
-		mav.addObject("associados", participacaoProjetoService.buscarAssociadosProjeto(idProjeto));
+		mav.addObject("associados", participacaoProjetoService.listarAssociadosDoProjeto(idProjeto));
 		return mav;
 	}
 	
@@ -187,7 +186,7 @@ public class ProjetoController {
 		mav.clear();
 		mav.setViewName("editarTarefaProjeto");
 		mav.addObject("tarefa", tarefaProjetoService.buscarTarefaPorId(idTarefa));
-		mav.addObject("associados", participacaoProjetoService.buscarAssociadosProjeto(idProjeto));
+		mav.addObject("associados", participacaoProjetoService.listarAssociadosDoProjeto(idProjeto));
 		
 		return mav;
 	}

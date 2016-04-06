@@ -17,8 +17,8 @@ import br.com.semear.gestao.model.Colaborador;
 import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.ColaboradorService;
-import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.MailService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
 import br.com.semear.gestao.service.UtilService;
@@ -93,5 +93,28 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 	@Override
 	public Colaborador buscarColaboradorPorId(long idColaborador) {
 		return parse.parseToModel(colaboradorDAO.buscarColaboradorPorId(idColaborador));
+	}
+
+//	@Override
+//	public List<Colaborador> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil) {
+//		List<ColaboradorEntity> entity = colaboradorDAO.listarCoordenadoresDoParceiro(idParceiro, idPerfil);
+//		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+//		for (ColaboradorEntity i : entity) {
+//			colaboradores.add(parse.parseToModel(i));
+//		}
+//		return colaboradores;
+//	}
+
+	@Override
+	public List<Colaborador> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil) {
+		if (idParceiros != null && idParceiros.size() > 0) {
+			List<ColaboradorEntity> lista = colaboradorDAO.listarColaboradoresDosParceiros(idParceiros, idPerfil);
+			List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+			for (ColaboradorEntity u : lista) {
+				colaboradores.add(parse.parseToModel(u));
+			}
+			return colaboradores;
+		}
+		return null;
 	}
 }

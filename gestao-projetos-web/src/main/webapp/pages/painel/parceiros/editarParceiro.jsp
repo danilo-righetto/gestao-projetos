@@ -253,48 +253,6 @@
 						</select>
 					</div>
 				</div>
-				<!-- INICIO - Listagem dos USUARIOS VINCULADOS A PARCEIRO -->
-				<div class="section">
-					<div class="container">
-						<h4 class="title-screen">Usuários da Instituição</h4>
-						<table class="table table-responsive">
-							<thead>
-								<tr>
-									<td class="text-center"><span style="font-weight: bold;">#</span></td>
-									<td class="text-center hidden-xs hidden-sm"><span
-										style="font-weight: bold;">Nome</span></td>
-									<td class="text-center"><span style="font-weight: bold;">Usuário</span></td>
-									<td class="text-center hidden-xs hidden-sm"><span
-										style="font-weight: bold;">Realiza Login</span></td>
-									<td class="text-center hidden-xs hidden-sm"><span
-										style="font-weight: bold;">Perfil</span></td>
-								</tr>
-							</thead>
-							<tbody>
-								<c:choose>
-									<c:when test="${not empty users}">
-										<c:forEach items="${users}" var="user">
-											<tr>
-												<td class="text-center">${user.id}</td>
-												<td class="text-center hidden-xs hidden-sm">${user.nome}</td>
-												<td class="text-center">${user.usuario}</td>
-												<td class="text-center hidden-xs hidden-sm">${(user.realizaLogin
-													== true ? 'Sim' : 'Não')}</td>
-												<td class="text-center hidden-xs hidden-sm">${user.perfil.descricao}</td>
-											</tr>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<tr>
-											<td colspan="6">Não há dados a serem exibidos</td>
-										</tr>
-									</c:otherwise>
-								</c:choose>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- FIM - Listagem dos USUARIOS VINCULADOS A PARCEIRO -->
 				<!-- INICIO - Listagem de unidades-->
 				<div class="section">
 					<div class="container">

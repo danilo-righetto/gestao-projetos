@@ -34,6 +34,5 @@
 		</div>
 	</div>
 	<!-- FIM DA BARRA DE PROGRESSO DOS PROJETOS  -->
-	</div>
 </body>
 </html>

@@ -13,4 +13,8 @@ public interface ColaboradorDAO {
 	public List<ColaboradorEntity> listarColaboradores(long idParceiro);
 
 	public ColaboradorEntity buscarColaboradorPorId(long idColaborador);
+
+	public List<ColaboradorEntity> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil);
+
+	public List<ColaboradorEntity> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil);
 }

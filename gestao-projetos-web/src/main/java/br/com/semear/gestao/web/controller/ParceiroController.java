@@ -14,7 +14,6 @@ import br.com.semear.gestao.model.Parceiro;
 import br.com.semear.gestao.service.ColaboradorService;
 import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.UnidadePrisionalService;
-import br.com.semear.gestao.service.UsuarioService;
 
 @Controller
 @RequestMapping("/painel/parceiros")
@@ -31,9 +30,6 @@ public class ParceiroController {
 
 	@Inject
 	private UnidadePrisionalService unidadePrisionalService;
-
-	@Inject
-	private UsuarioService usuarioService;
 
 	@Inject
 	private ColaboradorService colaboradorService;
@@ -73,7 +69,6 @@ public class ParceiroController {
 		mav.clear();
 		mav.setViewName("editarParceiro");
 		mav.addObject("parceiro", parceiroService.buscarParceiroPorId(idParceiro));
-		mav.addObject("users", usuarioService.buscarUsuarioPorParceiro(idParceiro));
 		mav.addObject("unidades", unidadePrisionalService.buscarUnidadePrisionalPorParceiro(idParceiro));
 		mav.addObject("unidadesPrisionais", unidadePrisionalService.listarUnidadesPorStatus(true));
 		return mav;

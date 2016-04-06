@@ -25,5 +25,5 @@ public interface UsuarioDAO {
 
 	public List<UsuarioEntity> buscarUsuarioPorParceiro(long idParceiro);
 
-	public List<UsuarioEntity> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil);
+	public List<UsuarioEntity> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil);
 }

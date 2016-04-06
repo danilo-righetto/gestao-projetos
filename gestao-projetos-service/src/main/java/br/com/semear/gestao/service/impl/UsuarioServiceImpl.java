@@ -21,6 +21,7 @@ import br.com.semear.gestao.dao.entity.RequisicaoSenhaEntity;
 import br.com.semear.gestao.dao.entity.UsuarioEntity;
 import br.com.semear.gestao.model.Usuario;
 import br.com.semear.gestao.service.MailService;
+import br.com.semear.gestao.service.ParceiroService;
 import br.com.semear.gestao.service.ParseService;
 import br.com.semear.gestao.service.UsuarioService;
 
@@ -39,7 +40,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Inject
 	private PasswordEncoder passwordEncoder;
-
+	
+	@Inject
+	private ParceiroService parceiroService;
+	
 	@Override
 	public Usuario buscarUsuarioPorLogin(String login) {
 		UsuarioEntity entity = usuarioDAO.buscarUsuarioPorLogin(login);
@@ -52,10 +56,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void cadastrarUsuario(Usuario usuario) {
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuario.setDataCadastro(Calendar.getInstance());
-		UsuarioEntity user = parseService.parseToEntity(usuario);
 		if (usuario.getParceiro() != null && usuario.getParceiro().getId() > 0) {
-			user.setParceiro(new ParceiroEntity(usuario.getParceiro().getId()));
+			usuario.setParceiro(parceiroService.buscarParceiroPorId(usuario.getParceiro().getId()));
 		}
+		UsuarioEntity user = parseService.parseToEntity(usuario);
 		usuarioDAO.cadastrarUsuario(user);
 	}
 
@@ -191,7 +195,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro, String idPerfil) {
+	public List<Usuario> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil) {
 		List<UsuarioEntity> entitys = usuarioDAO.buscarUsuarioPorParceiro(idParceiro, idPerfil);
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for (UsuarioEntity i : entitys) {
@@ -200,20 +204,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarios;
 	}
 
-	@Override
-	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro) {
-		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorParceiro(idParceiro);
-		List<Usuario> usuarios = new ArrayList<Usuario>();
-		for (UsuarioEntity i : entity) {
-			usuarios.add(parseService.parseToModel(i));
-		}
-		return usuarios;
-	}
+//	@Override
+//	public List<Usuario> buscarUsuarioPorParceiro(long idParceiro) {
+//		List<UsuarioEntity> entity = usuarioDAO.buscarUsuarioPorParceiro(idParceiro);
+//		List<Usuario> usuarios = new ArrayList<Usuario>();
+//		for (UsuarioEntity i : entity) {
+//			usuarios.add(parseService.parseToModel(i));
+//		}
+//		return usuarios;
+//	}
 
 	@Override
-	public List<Usuario> listarColaboradoresDasParceiros(List<Long> idParceiros, String idPerfil) {
+	public List<Usuario> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil) {
 		if (idParceiros != null && idParceiros.size() > 0) {
-			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDasParceiros(idParceiros, idPerfil);
+			List<UsuarioEntity> lista = usuarioDAO.listarColaboradoresDosParceiros(idParceiros, idPerfil);
 			List<Usuario> colaboradores = new ArrayList<Usuario>();
 			for (UsuarioEntity u : lista) {
 				colaboradores.add(parseService.parseToModel(u));

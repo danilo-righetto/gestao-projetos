@@ -20,7 +20,7 @@ public interface ProjetoDAO {
 
 	public long buscarUnidadePrisionalDoProjeto(long idProjeto);
 
-	public UsuarioEntity buscarCoodernadorPorIdProjeto(long idProjeto);
+	public UsuarioEntity buscarCoordenadorPorIdProjeto(long idProjeto);
 
 	ParceiroEntity buscarParceiroDoCoodernadorPorIdProjeto(long idProjeto);
 	

@@ -59,7 +59,7 @@ public class ParticipacaoParceiroProjetoServiceImpl implements ParticipacaoParce
 	}
 
 	@Override
-	public List<Long> buscarParceirosAssociadas(long idProjeto) {
+	public List<Long> buscarParceirosAssociados(long idProjeto) {
 		List<Long> parceirosAssociadas = participacaoParceiroProjetoDAO.buscarParceirosAssociados(idProjeto);
 		return parceirosAssociadas;
 	}

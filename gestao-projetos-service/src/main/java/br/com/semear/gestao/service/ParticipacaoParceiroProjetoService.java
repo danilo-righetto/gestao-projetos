@@ -10,5 +10,5 @@ public interface ParticipacaoParceiroProjetoService {
 
 	public List<ParticipacaoParceiroProjeto> listarParticipacaoParceirosProjeto(long idProjeto);
 
-	public List<Long> buscarParceirosAssociadas(long idProjeto);
+	public List<Long> buscarParceirosAssociados(long idProjeto);
 }

@@ -13,11 +13,11 @@ public interface ParticipacaoProjetoService {
 
 	public List<ParticipacaoReeducandoProjeto> listarParticipacaoProjetos();
 
-	public List<Usuario> listarCoPorParceiro(long idParceiro, String idPerfil);
+	public List<Usuario> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil);
 
 	public List<Reeducando> listarReeducandosPorUnidadePrisional(long idUnidadePrisional);
 
-	public List<Usuario> listarColaboradoresDasParceiros(List<Long> parceirosAssociadas, String idPerfil);
+	public List<Usuario> listarColaboradoresDosParceiros(List<Long> parceirosAssociadas, String idPerfil);
 
 	public String cadastrarParticipacaoParceiro(Long idProjeto, Long[] idParceiros);
 
@@ -25,5 +25,5 @@ public interface ParticipacaoProjetoService {
 
 	public List<ParticipacaoReeducandoProjeto> listarParticipacaoReeducandoProjeto(long idProjeto);
 
-	public List<Usuario> buscarAssociadosProjeto(Long idProjeto);
+	public List<Usuario> listarAssociadosDoProjeto(Long idProjeto);
 }

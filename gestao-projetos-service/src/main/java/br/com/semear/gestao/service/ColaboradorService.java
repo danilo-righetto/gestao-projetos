@@ -12,4 +12,8 @@ public interface ColaboradorService {
 	public List<Colaborador> listarColaboradores(long idParceiro);
 
 	public Colaborador buscarColaboradorPorId(long idColaborador);
+
+//	public List<Colaborador> listarCoordenadoresDoParceiro(long idParceiro, String idPerfil);
+
+	public List<Colaborador> listarColaboradoresDosParceiros(List<Long> idParceiros, String idPerfil);
 }

@@ -19,7 +19,7 @@ public interface ProjetoService {
 	
 	public long buscarUnidadePrisionalDoProjeto(long idProjeto);
 
-	public Usuario buscarCoodernadorPorIdProjeto(long idProjeto);
+	public Usuario buscarCoordenadorPorIdProjeto(long idProjeto);
 	
 	public void adicionarVinculoAcaoComProjeto(long idAcao, long idProjeto);
 
