@@ -21,7 +21,7 @@ public class RespostaProjetoDaoImpl implements RespostaProjetoDAO {
 
 	@Override
 	public void salvarResposta(RespostaEntity resposta) {
-		em.persist(resposta);
+		em.merge(resposta);
 	}
 
 	@Override

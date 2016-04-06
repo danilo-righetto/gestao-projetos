@@ -98,7 +98,7 @@ public class RespostaProjetoController {
 	@ResponseBody
 	@RequestMapping(value = "consultarReeducando", method = RequestMethod.POST)
 	public List<Resposta> consultarReeducando(long idReeducando, Long idProjeto, String tipo) {
-		List<Resposta> respostas = respostaService.listarRespostasReeducandoPorProjetoTipo(idReeducando, idProjeto, tipo);
-			return respostas;
+		List<Resposta> respostasReeducando = respostaService.listarRespostasReeducandoPorProjetoTipo(idReeducando, idProjeto, tipo);
+			return respostasReeducando;
 	}
 }

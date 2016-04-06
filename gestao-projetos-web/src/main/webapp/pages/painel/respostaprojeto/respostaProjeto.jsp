@@ -10,77 +10,179 @@
 		$("#menu-projetos").attr('class', 'active');
 	});
 
-	function popularCampos() {
+	function popularCampos(){
+		var idReeducando = $("#reeducando").val();
+		var idProjeto = '<c:out value = "${questionario.projeto.id}"/>';
+		var tipo = '<c:out value = "${status}"/>';
+		console.info("idProjeto: "+idProjeto);
+		
+		var testeArray = new Array();
+		var respostasArray = new Array();
+		var respostaStatus = $("#respostaStatus").val();
 		var respostas = $("input[name=respostas]");
-		for (var i = 0; i < respostas.length; i++) {
-			var idHidden = respostas[i].id;
-			var id = idHidden.replace('idresposta', '');
-			var tipoPergunta = $("input[id=tipoPergunta" + id + "]").val();
-			if (tipoPergunta == 1) {
-				var perguntarespostas = $("input[name=respostapergunta" + id
-						+ "]");
-				var p = 0;
-				for (p = 0; p < perguntarespostas.length; p++) {
-					$("#" + idHidden).val(
-							$("#" + idHidden).val()
-									+ perguntarespostas[p].value);
-				}
-			} else if (tipoPergunta == 2) {
-				var perguntarespostas = $("input[name=respostapergunta" + id
-						+ "]:checked");
-				for (var p = 0; p < perguntarespostas.length; p++) {
-					$("#" + idHidden).val(
-							$("#" + idHidden).val()
-									+ perguntarespostas[p].value);
-					console.info($("#" + idHidden).val());
-				}
-			} else if (tipoPergunta == 3) {
-				var perguntarespostas = $("textarea[name=respostapergunta" + id
-						+ "]");
-				var p = 0;
-				for (p = 0; p < perguntarespostas.length; p++) {
-					$("#" + idHidden).val(
-							$("#" + idHidden).val()
-									+ perguntarespostas[p].value);
-				}
-			} else if (tipoPergunta == 4) {
-				var perguntarespostas = $(
-						"input[type=radio][name=respostapergunta" + id
-								+ "]:checked").val();
-				$("#" + idHidden).val(
-						$("#" + idHidden).val() + perguntarespostas);
-			}
-
-		}
+		var alterarRespostas = $("input[name=respostaObjeto]");
+		
+		/* TESTANDO FUNCAO - POST - INICIO */
+		$
+				.post(
+						"/gestao-projetos/painel/respostasprojeto/consultarReeducando?idReeducando="
+								+ idReeducando + "&idProjeto=" + idProjeto + "&tipo=" + tipo,
+								function(respostasReeducando) {	
+									if (respostasReeducando.length > 0) {
+										$(respostasReeducando).each(function(r){
+											if(respostaStatus == "F"){
+												//alert("Resposta Status é F !!!");
+											}else if(respostaStatus == "S" || respostaStatus == ""){
+											//for(var i = 0; i < respostas.length; i++){
+												var idHidden = respostas[r].id;
+												//console.info("respostas[i].id:" + respostas[r].id);
+												//console.info("respostasReeducando[i].id:" + respostasReeducando[r].id);
+												
+												//console.info("respostas[r].id:" + respostas[r].id);
+												//console.info("respostasReeducando[r].id:" + respostasReeducando[r].id);
+											var id = idHidden.replace('idresposta','');
+												console.info("id:" + id);
+												var tipoPergunta = $("input[id=tipoPergunta"+id+"]").val();
+												if(tipoPergunta == 1){
+													var perguntarespostas = $("input[name=respostapergunta"+id+"]");
+													var p = 0;
+														for(p = 0; p < perguntarespostas.length; p++){
+															$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#"+respostasReeducando[r].id);
+														}
+												}else if(tipoPergunta == 2){
+													var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
+														for(var p = 0; p < perguntarespostas.length; p++){
+															$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#"+respostasReeducando[r].id);
+															console.info($("#"+idHidden).val());
+														}
+												}else if(tipoPergunta == 3){
+													var perguntarespostas = $("textarea[name=respostapergunta"+id+"]");
+													var p = 0;
+														for(p = 0; p < perguntarespostas.length; p++){
+															$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#"+respostasReeducando[r].id);
+														}
+												}else if(tipoPergunta == 4){
+													var perguntarespostas = $("input[type=radio][name=respostapergunta"+id+"]:checked").val();
+													$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas+"#"+respostasReeducando[r].id);
+												}
+												
+												
+											//}
+											
+											$("#modalRespostaSalva").modal({
+												keyboard : false,
+												backdrop : 'static'
+											});
+										}
+											
+										});
+									}else{
+										if(respostaStatus == "F"){
+											//alert("Resposta Status é F !!!");
+										}else if(respostaStatus == "S" || respostaStatus == ""){
+										for(var i = 0; i < respostas.length; i++){
+											var idHidden = respostas[i].id;
+										var id = idHidden.replace('idresposta','');
+											console.info("id:" + id);
+											var tipoPergunta = $("input[id=tipoPergunta"+id+"]").val();
+											if(tipoPergunta == 1){
+												var perguntarespostas = $("input[name=respostapergunta"+id+"]");
+												var p = 0;
+													for(p = 0; p < perguntarespostas.length; p++){
+														$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#0");
+													}
+											}else if(tipoPergunta == 2){
+												var perguntarespostas = $("input[name=respostapergunta"+id+"]:checked");
+													for(var p = 0; p < perguntarespostas.length; p++){
+														$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#0");
+														console.info($("#"+idHidden).val());
+													}
+											}else if(tipoPergunta == 3){
+												var perguntarespostas = $("textarea[name=respostapergunta"+id+"]");
+												var p = 0;
+													for(p = 0; p < perguntarespostas.length; p++){
+														$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas[p].value+"#0");
+													}
+											}else if(tipoPergunta == 4){
+												var perguntarespostas = $("input[type=radio][name=respostapergunta"+id+"]:checked").val();
+												$("#"+idHidden).val($("#"+idHidden).val()+perguntarespostas+"#0");
+											}
+											
+											
+										}
+										
+										$("#modalRespostaSalva").modal({
+											keyboard : false,
+											backdrop : 'static'
+										});
+									}
+									
+									}
+								});
+		
+		/* TESTANDO FUNCAO - POST - FIM */
+		
+		
+	}
+	
+	function submitForm(){
 		$("#formResposta").submit();
-
+	}
+	
+	function salvarForm(){
+		var msg = "S";
+		$("#respostaStatus").val(msg);
+		submitForm();
+	}
+	
+	function salvarFinalizarForm(){
+		var msg = "F";
+		$("#respostaStatus").val("F");
+		submitForm();
 	}
 	
 	function consultarReeducando() {
 		var idReeducando = $("#reeducando").val();
 		var idProjeto = '<c:out value = "${questionario.projeto.id}"/>';
+		$("#idProjeto").val(idProjeto);
 		var tipo = '<c:out value = "${status}"/>';
 		$
 				.post(
 						"/gestao-projetos/painel/respostasprojeto/consultarReeducando?idReeducando="
 								+ idReeducando + "&idProjeto=" + idProjeto + "&tipo=" + tipo,
-						function(respostas) {
-							if (respostas.length > 0) {
-							$(respostas).each(function(r){
-								if(respostas[r].pergunta.tipoPergunta.id == 1){
-									$("#respostasunica"+respostas[r].pergunta.id).val(respostas[r].descricaoResposta);
-								}else if(respostas[r].pergunta.tipoPergunta.id == 2){
-									for(var a = 0; a < respostas[r].pergunta.alternativas.length; a++){
-										if(respostas[r].pergunta.alternativas[a].descricaoAlternativa == respostas[r].descricaoResposta){
-									$("#multipla"+respostas[r].pergunta.alternativas[a].id).attr("checked","checked");
+						function(respostasReeducando) {
+							if (respostasReeducando.length > 0) {
+							$(respostasReeducando).each(function(r){
+								if(respostasReeducando[r].pergunta.tipoPergunta.id == 1){
+									$("#respostasunica"+respostasReeducando[r].pergunta.id).val(respostasReeducando[r].descricaoResposta);
+									if(respostasReeducando[r].respostaStatus == "F"){
+										$("#respostasunica"+respostasReeducando[r].pergunta.id).attr('readonly', true);
+										$("#respostaStatus").val("F");
+									}
+								}else if(respostasReeducando[r].pergunta.tipoPergunta.id == 2){
+									for(var a = 0; a < respostasReeducando[r].pergunta.alternativas.length; a++){
+										if(respostasReeducando[r].pergunta.alternativas[a].descricaoAlternativa == respostasReeducando[r].descricaoResposta){
+									$("#multipla"+respostasReeducando[r].pergunta.alternativas[a].id).attr("checked","checked");
+										}
+										if(respostasReeducando[r].respostaStatus == "F"){
+											$("#multipla"+respostasReeducando[r].pergunta.alternativas[a].id).attr('disabled','disabled');
+											$("#respostaStatus").val("F");
 										}
 									}
-								}else if(respostas[r].pergunta.tipoPergunta.id == 3){
-									$("#texto"+respostas[r].pergunta.id).html(respostas[r].descricaoResposta);
-								}else if(respostas[r].pergunta.tipoPergunta.id == 4){
-									for(var a = 0; a < respostas[r].pergunta.alternativas.length; a++){
-										if(respostas[r].pergunta.alternativas[a].descricaoAlternativa == respostas[r].descricaoResposta){
-									$("#alternativa"+respostas[r].pergunta.alternativas[a].id).attr("checked","checked");
+								}else if(respostasReeducando[r].pergunta.tipoPergunta.id == 3){
+									$("#texto"+respostasReeducando[r].pergunta.id).html(respostasReeducando[r].descricaoResposta);
+									if(respostasReeducando[r].respostaStatus == "F"){
+										$("#texto"+respostasReeducando[r].pergunta.id).attr('readonly', true);
+										$("#respostaStatus").val("F");
+									}
+								}else if(respostasReeducando[r].pergunta.tipoPergunta.id == 4){
+									for(var a = 0; a < respostasReeducando[r].pergunta.alternativas.length; a++){
+										if(respostasReeducando[r].pergunta.alternativas[a].descricaoAlternativa == respostasReeducando[r].descricaoResposta){
+									$("#alternativa"+respostasReeducando[r].pergunta.alternativas[a].id).attr("checked","checked");
+										}
+										if(respostasReeducando[r].respostaStatus == "F"){
+											$("#alternativa"+respostasReeducando[r].pergunta.alternativas[a].id).attr('disabled','disabled');
+											$("#respostaStatus").val("F");
 										}
 									}
 								}
@@ -93,6 +195,29 @@
 </script>
 </head>
 <body>
+<!-- MODAL RESPOSTA SALVA INICIO -->
+	<div class="modal fade" id="modalRespostaSalva" tabindex="-1"
+		role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">O que deseja fazer?</h4>
+				</div>
+				<div class="modal-body">
+					<p>Escolha uma opção:</p>
+				</div>
+				<div class="modal-footer">
+					<a onclick="salvarForm();"
+						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Salvar Resposta</a> <a
+						onclick="salvarFinalizarForm();"
+						style="background-color: #4DC1FF; color: #fff; border-color: #4DC1FF"
+						class="btn btn-default">Salvar e Finalizar Resposta</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL RESPOSTA SALVA FIM -->
 	<div class="section">
 		<div class="container">
 			<h4 class="title-screen">Resposta - Questionário Projeto:
@@ -111,8 +236,8 @@
 					</div>
 				</div>
 				<div class="row">
-					<input type="hidden" name="idProjeto"
-						value="${questionario.projeto.id}">
+					<input type="hidden" name="idProjeto" value="${questionario.projeto.id}">
+					<input type="hidden" id="idResposta" name="idResposta" value="">
 					<!-- Reeducando - Resposta - INICIO -->
 						<div class="form-group col-md-4">
 							<label for="reeducando">Reeducando:</label> <select
@@ -129,6 +254,8 @@
 						</div>
 				<!-- Reeducando - Resposta - FIM -->
 					<input type="hidden" name="tipo" value="${status}">
+					<input type="hidden" name="respostaObjeto" id="respostaObjeto" value="${respostas}">
+					<input type="hidden" id="respostaStatus" name="respostaStatus" value="">
 					<!-- forEach -->
 					<c:forEach items="${questionario.perguntas}" var="pergunta" varStatus="index">
 				<c:choose>

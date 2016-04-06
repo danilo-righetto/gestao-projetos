@@ -83,9 +83,9 @@ public class RespostaAcaoController {
 	}
 	
 	@RequestMapping("salvarResposta")
-	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String tipo, String respostaStatus, Long idResposta){
+	public String salvarResposta(String []respostas,Long idAcao,HttpSession session, Long reeducando, String tipo, String respostaStatus){
 		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
-		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,tipo,respostaStatus,idResposta);
+		respostaAcaoService.salvarRespostaAcao(respostas,idAcao,usuarioSessao,reeducando,tipo,respostaStatus);
 		return "redirect:/painel/";
 	}
 	

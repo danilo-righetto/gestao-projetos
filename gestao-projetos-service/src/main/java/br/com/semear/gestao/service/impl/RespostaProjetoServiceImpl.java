@@ -77,8 +77,12 @@ public class RespostaProjetoServiceImpl implements RespostaProjetoService {
 				Pergunta pergunta = questionarioService.buscarPerguntaPorIdProjetoEiDPergunta(idPergunta,idProjeto);
 				String descricaoResposta = "";
 				descricaoResposta = respostaArray[1];
+				Long idResposta = Long.valueOf(respostaArray[2]);
 				
 				RespostaEntity resposta = new RespostaEntity();
+				if(idResposta != 0){
+					resposta.setId(idResposta);
+				}
 				resposta.setProjeto(parseService.parseToEntity(new Projeto(idProjeto)));
 				resposta.setDataCadastro(Calendar.getInstance());
 				resposta.setDescricaoResposta(descricaoResposta);

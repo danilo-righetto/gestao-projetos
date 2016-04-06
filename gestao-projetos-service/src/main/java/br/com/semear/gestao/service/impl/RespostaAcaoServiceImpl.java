@@ -49,7 +49,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 	private QuestionarioAcaoService questionarioAcaoService;
 
 	@Override
-	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo, String respostaStatus, Long idResposta) {
+	public void salvarRespostaAcao(String[] respostas, Long idAcao, Usuario usuario, Long reeducando, String tipo, String respostaStatus) {
 		if(respostas != null && respostas.length > 0 && idAcao != null){
 			for(int i =0; i < respostas.length;i++){
 				String[] respostaArray = respostas[i].split("#");
@@ -57,7 +57,7 @@ public class RespostaAcaoServiceImpl implements RespostaAcaoService {
 				PerguntaAcao pergunta = questionarioAcaoService.buscarPerguntaPorIdAcaoEiDPergunta(idPergunta,idAcao);
 				String descricaoResposta = "";
 				descricaoResposta = respostaArray[1];
-				idResposta = Long.valueOf(respostaArray[2]);
+				Long idResposta = Long.valueOf(respostaArray[2]);
 				
 				RespostaAcaoEntity respostaAcao = new RespostaAcaoEntity();
 				if(idResposta != 0){
