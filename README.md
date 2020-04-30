@@ -1,7 +1,7 @@
 ## gestao-projetos
 Sistema em desenvolvimento para realizar a gestão de projetos.
 
-##Sub-pacotes
+## Sub-pacotes
 
 * gestao-projetos-dao
 * gestao-projetos-model
